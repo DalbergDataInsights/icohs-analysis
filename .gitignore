@@ -1,0 +1,8 @@
+data/*
+/SPRINT_1/*
+*.csv
+*old*
+~*
+/static/*
+.ipynb_checkpoints*
+viz/tableau/*
