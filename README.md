@@ -4,16 +4,16 @@
 
 
 
-##### DHIS2 API 
+## DHIS2 API 
 
 This repository contains python implementation of DHIS2 API for data download.
 
-## Requirments & Run
+### Requirments & Run
 ```
 python dhis_api.py
 ```
 
-## How to use (Temporary)
+### How to use (Temporary)
 
 The following variables should be changed in the code depending in your requirements. This is a temporary fix and will be automated:
 
