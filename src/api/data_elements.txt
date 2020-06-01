@@ -1,0 +1,74 @@
+106a: Care & Treatment (ART)
+106a: Laboratory Services
+106a: PEP & PrEP
+106a: Tuberculosis & Laprosy Services
+All Data Elements: HMIS 004
+All Data Elements: HMIS 016
+All Data Elements: HMIS 017
+All Data Elements: HMIS 019
+All Data Elements: HMIS 020
+All Data Elements: HMIS 033b
+All Data Elements: HMIS 097b
+All Data Elements: HMIS 100
+All Data Elements: HMIS 101
+All Data Elements: HMIS 102
+All Data Elements: HMIS 104
+All Data Elements: HMIS 105
+All Data Elements: HMIS 105a
+All data elements: HMIS 105C
+All Data Elements: HMIS 106a
+All Data Elements: HMIS 107
+All Data Elements: HMIS 108
+All Data Elements: HMIS 108a
+All Data Elements: HMIS 110
+All Data Elements: HMIS 111
+All Data Elements: HMIS 127b
+All Data Elements: HMIS 128b
+All Data Elements: HMIS MAL 002
+Community: ICCM
+Community: Stock
+Community: VHT
+IPD: Blood Transfusion
+IPD: Cases and Deaths by Conditon
+IPD: Census & Referrals
+IPD: Mental Health & Risk Behaviors
+IPD: Nutrition
+IPD: Radiology & Imaging
+IPD: Surgical Procedures
+IPD: TB Screening
+OPD: Antenatal
+OPD: Attendance & Referral
+OPD: Cardiovascular
+OPD: Child Health & Immunisation
+OPD: Disabilities, Physiotheraphy, Occupational & Speech and Language Conditions
+OPD: Emergency Medical Services
+OPD: Epidemic-Prone Diseases
+OPD: Essential Medicines and Supplies
+OPD: Exposed Infants Diagnosis
+OPD: Family Planning & Contraceptives
+OPD: Hepatitis
+OPD: HIV Testing Services(HTS)
+OPD: Injuries
+OPD: Lab Services - AMR Surveillance
+OPD: Lab Services - Client Visits & Specimen Collection
+OPD: Lab Services - Specimen Referral Testing
+OPD: Lab Services - Specimen Rejection
+OPD: Maternal Conditions
+OPD: Maternity & Postnatal
+OPD: Neglected Tropical Diseases (NTDs)
+OPD: Neonatal Diseases
+OPD: Neurological and Mental Conditions
+OPD: Non Communicable Diseases
+OPD: Nutrition
+OPD: Oral, ENT and Eye Conditions
+OPD: Other Infectious/Communicable Diseases
+OPD: Outreaches, Meetings and Supervision
+OPD: Safe Male Circumcision (SMC)
+OPD: Specialised
+OPD: Tuberculosis & Laprosy Services
+Population Estimates
+Visceral Leishmaniasis
+Weekly  Surveillance: Cases and Deaths
+Weekly  Surveillance: eMTCT, Malaria, TB and Stock
+Weekly  Surveillance: IDSR
+
