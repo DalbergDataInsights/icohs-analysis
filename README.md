@@ -18,7 +18,8 @@ python dhis_api.py
 The following variables should be changed in the code depending in your requirements. This is a temporary fix and will be automated:
 
 
-1. dataElement name:  set a data element name you want to download data for. List of the data elements
+1. dataElement name:  set a data element name you want to download data for. Find the available  <a href="src/api/data_elements.txt">Data elements</a>
+
 ```python
   data_element_name = '105-AN01a'     #----- code line 103 
   ```
