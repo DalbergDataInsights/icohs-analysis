@@ -1,0 +1,75 @@
+[
+    {
+        "name": "Indicators",
+        "MNCH":
+        [
+            {
+                "description": "Number of women who attended 1st Antenatal visit",
+                "identifier": "ANC1",
+                "name": "ANC1",
+                "value": "105-AN01a. ANC 1st Visit for women"
+            },
+            {
+                "description": "Number of women who attended 4th Antenatal visit",
+                "identifier": "ANC4",
+                "name": "ANC4",
+                "value": "105-AN02. ANC 4th Visit for women"
+            },
+			{
+                "description": "Total deliveries",
+                "identifier": "total_deliveries",
+                "name": "total_deliveries",
+                "value": "105-MA04a. Deliveries in unit - Total"
+            
+            },
+            {
+                "description": "Total live deliveries",
+                "identifier": "live_deliveries",
+                "name": "live_deliveries",
+                "value": "105-MA04b1. Deliveries in unit -Live births - Total"
+            
+            },
+            {
+                "description": "Total fresh still birth deliveries",
+                "identifier": "still_births",
+                "name": "still_births",
+                "value": "105-MA04c1. Deliveries in unit - Fresh still birth - Total"
+            },
+            {
+                "description": "Total Macerated still birth deliveries",
+                "identifier": "Macerated_still_births",
+                "name": "Macerated_still_births",
+                "value": "1105-MA04d1. Deliveries in unit - Macerated still birth - Total"
+            },
+            {
+                "description": "Total number of mothers who attended postnatal",
+                "identifier": "PNC",
+                "name": "PNC",
+                "value": "105-PN01a. Post Natal Attendances - Mother"
+            },
+            {
+                "description": "Total number of maternity admissions",
+                "identifier": "MAT",
+                "name": "MAT",
+                "value": "105-MA01. Admissions"
+            },
+            {
+                "description": "Total new born deaths that happen within 1 week of delivery",
+                "identifier": "1week_new_born_deaths",
+                "name": "1week_new_born_deaths",
+                "value": "105-MA11. Newborn deaths (0-7 days)"
+            }
+        ],
+        "data":
+        [
+            {
+                "description": "Path to MNCH data",
+                "identifier": "mnch_data",
+                "name": "mnch_data",
+                "type": "string",
+                "value": "/data/ANC3.csv"
+            }
+            
+        ]
+    }
+]
