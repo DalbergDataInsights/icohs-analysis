@@ -131,13 +131,9 @@ if __name__ == "__main__":
         df = set_name_from_index(df, 'dataElement', auth=auth, fetch_index=True)
         df = set_name_from_index(df, 'orgUnit', index_table=org_unit_index)
         df = set_name_from_index(df, 'categoryOptionCombo', index_table=categoryOption)
+        df.to_csv("data/MNCH_ANC.csv", mode='a', header=False)
        
-        
-        appended_data.append(df)
-        
-    appended_data = pd.concat(appended_data)
-    
-    appended_data.to_csv("data.csv", mode = 'a', header = False)
+
     
 
 
