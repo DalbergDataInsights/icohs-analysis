@@ -8,14 +8,15 @@ import argparse
 username = 'm&e.unicef'
 password = 'Unicef@MoH_DHI9'
 
-CONFIG =  {
-    'api_entrypoint': 'https://hmis.health.go.ug/api/'
+CONFIG = {
+    'new_instance': 'https://hmis.health.go.ug/api/',
+    'old_instance': 'https://hmis2.health.go.ug/hmis2/api/'
 }
 
 auth = HTTPBasicAuth(username, password) 
 
 
-ENTRY = CONFIG.get('api_entrypoint')
+ENTRY = CONFIG.get('new_instance')
 
 
 def get_pageSize(resource):
@@ -37,7 +38,7 @@ def get_dataElement_id(data_element_name, page_size):
     """
 
     data_elements = pd.DataFrame(requests.get(ENTRY + f'dataElements?pageSize={page_size}', auth=auth).json().get('dataElements'))
-    return data_elements[data_elements['displayName'].str.contains(data_element_name)].values[-1][1]
+    return data_elements[data_elements['displayName'].str.contains(data_element_name)].values[-1][0]
 
 def get_dataset_id(data_element_id):
 
