@@ -124,7 +124,6 @@ if __name__ == "__main__":
     dataset_ids = ['RtEYsASU7PG']
     dataset_ids = get_resourceID_string("dataSet", dataset_ids)
 
-
     batchsize = 50
     i = 0
     writeHeader = True
