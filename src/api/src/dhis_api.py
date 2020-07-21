@@ -12,33 +12,17 @@ with open(module_json) as f:
         for p in section['credentialsEngine']:
             ENGINE[p['identifier']] = p['value']
 
-
-
 username = ENGINE['new_DHIS2_uname']
 password = ENGINE['new_DHIS2_password']
 ENTRY = ENGINE['new_DHIS2_url']
-
 auth = HTTPBasicAuth(username, password)
 
 def get_pageSize(resource):
-    """
-    Given a given resource, this function returns the number of pages 
-
-    resource: name of the resource
-    """
     page_size = requests.get(
         ENTRY + f'{resource}', auth=auth).json().get('pager').get('total')
     return page_size
 
-
 def get_dataElement_id(data_element_name, page_size):
-    """
-    Given the data element name you want to download data for,
-    this function returns its id
-
-    dataElement_name:  name of the data element to download. 
-    page_size: total number of pages 
-    """
 
     data_elements = pd.DataFrame(requests.get(
         ENTRY + f'dataElements?pageSize={page_size}', auth=auth).json().get('dataElements'))
@@ -48,15 +32,11 @@ def get_dataElement_id(data_element_name, page_size):
 def get_dataset_id(data_element_id):
     """
     Given the dataElement id, get the dataset id 
-
     """
     print(ENTRY + f'dataElements/{data_element_id}?fields=dataSetElements')
     data_set_id = [x.get('dataSet').get('id') for x in requests.get(
         ENTRY + f'dataElements/{data_element_id}?fields=dataSetElements', auth=auth).json().get('dataSetElements')]
     return data_set_id[0]
-
-
-                 
 
 
 def get_organisation_groups(dataset_id='RtEYsASU7PG'):
@@ -67,6 +47,7 @@ def get_organisation_groups(dataset_id='RtEYsASU7PG'):
         ENTRY + f'dataSets/{dataset_id}', auth=auth).json().get('organisationUnits')]
     return org_units
 
+
 def processes_facility():
     orgs = get_dhis_index_table(auth, page_size=70000, table='organisationUnits')
     orgs = orgs[orgs['displayName'].str.contains('Maternity|Clinic|HC|Hospital|Medical')]['id']
@@ -74,7 +55,6 @@ def processes_facility():
 
 
 def get_elements_groups(page_size,  resource_name):
-
     response = requests.get(
         ENTRY + f'{resource_name}?pageSize={page_size}', auth=auth)
 
@@ -120,11 +100,10 @@ if __name__ == "__main__":
         auth, page_size=10000, table='categoryOptionCombos')
 
     #dataset_id = get_dataset_id(data_element_id)
+    # TODO: Move to a config file
     dataset_id = 'RtEYsASU7PG'
     
     org_group_list = processes_facility()
-    
-
     elements_groups_list = get_elements_groups(
         get_pageSize("dataElementGroups"),  "dataElementGroups")
 
@@ -141,7 +120,7 @@ if __name__ == "__main__":
     startDate = '2020-01-01'
     endDate = '2020-07-05'
 
-    
+    #TODo move to a config file
     dataset_ids = ['RtEYsASU7PG']
     dataset_ids = get_resourceID_string("dataSet", dataset_ids)
 
@@ -150,6 +129,7 @@ if __name__ == "__main__":
     i = 0
     writeHeader = True
     
+    # This output should be overwritten by a cron job
     for i in range(0, len(org_group_list), batchsize):
         org_units_string = get_resourceID_string(
             'orgUnit', org_group_list[i:i+batchsize])
