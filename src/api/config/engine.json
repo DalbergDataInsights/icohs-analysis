@@ -1,0 +1,14 @@
+[
+    {
+        "name": "engine",
+        "engineParameters":
+        [
+            {
+                "description": "Period of data to analyse",
+                "identifier": "number_of_month",
+                "name": "Period_of_data",
+                "value": 3
+            }
+        ]
+    }
+]
