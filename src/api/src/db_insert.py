@@ -30,7 +30,6 @@ df3 = (data_df.set_index(["district","organisationunitid","year","month","Unname
 
 ########### Preprocess data for database foriegn key mapping ##########
 
-
 #Map Disrtict Id to Disrtict name for repository table foreign key
 district_df['districtname']=district_df['districtname'].str.upper()
 dist_dict = dict(zip(district_df.districtname, district_df.districtcode))
