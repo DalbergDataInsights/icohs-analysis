@@ -1,0 +1,44 @@
+[
+    {
+        "name": "credentials",
+        "credentialsEngine":
+        [
+            {
+                "description": "New DHIS2 instance username",
+                "identifier": "new_DHIS2_uname",
+                "name": "new_DHIS2_uname",
+                "value": "m&e.unicef"
+            },
+            {
+                "description": "Old DHIS2 instance username",
+                "identifier": "old_DHIS2_uname",
+                "name": "old_DHIS2_uname",
+                "value": "unicef-m&e"
+            },
+            {
+                "description": "new DHIS2 instance password",
+                "identifier": "new_DHIS2_password",
+                "name": "new_DHIS2_password",
+                "value": "Unicef@MoH_DHI9"
+            },
+            {
+                "description": "Old DHIS2 instance password",
+                "identifier": "old_DHIS2_password",
+                "name": "old_DHIS2_password",
+                "value": "CIDa@2020"
+            },
+            {
+                "description": "new DHIS2 instance url",
+                "identifier": "new_DHIS2_url",
+                "name": "new_DHIS2_url",
+                "value": "https://hmis.health.go.ug/api/"
+            },
+            {
+                "description": "Old DHIS2 instance url",
+                "identifier": "old_DHIS2_url",
+                "name": "old_DHIS2_url",
+                "value": "https://hmis2.health.go.ug/hmis2/api/"
+            }
+        ]
+    }
+]

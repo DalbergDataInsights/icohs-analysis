@@ -1,0 +1,144 @@
+[
+    {
+        "name": "data_elements",
+        "new_dataElementsGroups":
+        [
+            {
+                "description": "All Data Elements: HMIS 105 form",
+                "identifier": "HMIS_105",
+                "name": "All Data Elements: HMIS 105",
+                "value": "vPvLSIPrfnb"
+            },
+            {
+                "description": "All Data Elements: HMIS 108 form",
+                "identifier": "HMIS_108",
+                "name": "All Data Elements: HMIS 108",
+                "value": "NMFTigF3Xkt"
+            },
+            {
+                "description": "All Data Elements: HMIS 033b form",
+                "identifier": "HMIS_033b",
+                "name": "All Data Elements: HMIS 033b",
+                "value": "a8zBKLRQJqX"
+            }
+            
+        ],
+        "old_dataElementsGroups":
+        [
+            {
+                "description": "HMIS 105 OPD All data Elements form",
+                "identifier": "old_HMIS_105",
+                "name": "HMIS 105 OPD All data Elements",
+                "value": "ysG3kTEJVWT"
+            },
+            {
+                "description": "Weekly Epidemiological Surveillance Disease Group form",
+                "identifier": "Epidemiological_Surveillance",
+                "name": "All Data Elements: HMIS 108",
+                "value": "qggizIHHwbw"
+            },
+            {
+                "description": "HMIS 033b: Disease Surveillance form",
+                "identifier": "old_HMIS_033b",
+                "name": "HMIS 033b: Disease Surveillance",
+                "value": "ZLeNJLXnma1"
+            },
+            {
+                "description": "HMIS 108 IPD all Data Elements form",
+                "identifier": "old_HMIS_108",
+                "name": "HMIS 108 IPD all Data Elements",
+                "value": "MC1K9mGfHS5"
+            }
+            
+            
+        ],
+        "new_datasetIDs":
+        [
+            {
+                "description": "HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB) form",
+                "identifier": "new_HMIS 105:02-03",
+                "name": "HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",
+                "value": "ic1BSWhGOso"
+            },
+            {
+                "description": "HMIS 105:04-05 - OPD Monthly Report (HTS & SMC) form",
+                "identifier": "HMIS 105:04-05 - OPD Monthly",
+                "name": "HMIS 105:04-05 - OPD Monthly Report (HTS & SMC)",
+                "value": "nGkMm2VBT4G"
+            },
+            {
+                "description": "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) form",
+                "identifier": "HMIS 105:01 - OPD Monthly Report",
+                "name": "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition)",
+                "value": "RtEYsASU7PG"
+            },
+            {
+                "description": "HMIS 108 - IPD Monthly Report form",
+                "identifier": "HMIS 108 - IPD Monthly",
+                "name": "HMIS 108 - IPD Monthly Report",
+                "value": "EBqVAQRmiPm"
+            },
+            {
+                "description": "HMIS 033b - Weekly Epidemiological Surveillance Report form",
+                "identifier": "HMIS 033b - Weekly Epidemiological",
+                "name": "HMIS 033b - Weekly Epidemiological Surveillance Report",
+                "value": "C4oUitImBPK"
+            }
+            
+            
+        ],
+        "old_datasetIDs":
+        [
+            {
+                "description": "HMIS 105:2.1-2.7 form",
+                "identifier": "old_HMIS 105:2.1-2.7",
+                "name": "HMIS 105:2.1-2.7",
+                "value": "JbHEBdqRxze"
+            },
+            {
+                "description": "HMIS 105:2.8-2.12 form",
+                "identifier": "HMIS 105:2.8-2.12",
+                "name": "HMIS 105:2.8-2.12",
+                "value": "tZvfVXqVIHy"
+            },
+            {
+                "description": "HMIS 033b: Disease Surveillance form",
+                "identifier": "HMIS 033b: Disease Surveillance",
+                "name": "HMIS 033b: Disease Surveillance",
+                "value": "V1kJRs8CtW4"
+            },
+            {
+                "description": "HMIS 105:1 form",
+                "identifier": "HMIS 105:1",
+                "name": "HMIS 105:1",
+                "value": "XnjkPghTBX9"
+            },
+            {
+                "description": "HMIS 105:3-4 form",
+                "identifier": "HMIS 105:3-4",
+                "name": "HMIS 105:3-4",
+                "value": "NsgOqhwtYd5"
+            },
+            {
+                "description": "HMIS 105:2.1-2.7 form",
+                "identifier": "HMIS 105:2.1-2.7",
+                "name": "HMIS 105:2.1-2.7",
+                "value": "JbHEBdqRxze"
+            },
+            {
+                "description": "HMIS 108:1 form",
+                "identifier": "HMIS 108:1",
+                "name": "HMIS 108:1",
+                "value": "lWHckpTax5e"
+            },
+            {
+                "description": "HMIS 108:1 form",
+                "identifier": "HMIS 108:1",
+                "name": "HMIS 108:1",
+                "value": "lWHckpTax5e"
+            }
+            
+            
+        ]
+    }
+]
