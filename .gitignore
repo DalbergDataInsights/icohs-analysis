@@ -7,3 +7,4 @@ data/*
 .ipynb_checkpoints*
 viz/tableau/*
 config/cred.json
+data
