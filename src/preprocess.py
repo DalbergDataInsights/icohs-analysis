@@ -41,7 +41,7 @@ var_correspondance_path = ENGINE['var_correspondance_data']
 
 # Get DHIS2 data
 
-USECOLS = list(range(0, 11))
+USECOLS = list(range(0, 10))
 
 new_dhis_df = pd.read_csv(new_dhis_path, usecols=USECOLS)
 old_dhis_df = pd.read_csv(old_dhis_path, usecols=USECOLS)
