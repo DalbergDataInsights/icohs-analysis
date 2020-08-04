@@ -62,7 +62,7 @@
                 "identifier": "var_correspondance_data",
                 "name": "var_correspondance_data",
                 "type": "string",
-                "value": "data/user_input/variable_correspondance.csv"
+                "value": "config/variable_correspondance.csv"
             }
         ]
     }
