@@ -4,12 +4,12 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+autopep8 = "*"
 
 [packages]
 pandas = "*"
 psycopg2-binary = "*"
 requests = "*"
-
 numpy="*"
 scipy="*"
 json5 = "==0.9.5"
@@ -17,7 +17,6 @@ jsonschema = "==3.2.0"
 crontab="*"
 argparse="*"
 glob3="*"
-
 
 [requires]
 python_version = "3.7"
