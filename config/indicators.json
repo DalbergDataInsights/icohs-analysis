@@ -6,28 +6,28 @@
                 "identifier": "new_instance_data",
                 "name": "new_instance_data",
                 "type": "string",
-                "value": "data/new_instance.csv"
+                "value": "data/input/dhis2/new_instance.csv"
             },
             {
                 "description": "Path to facility district mapping data",
                 "identifier": "facility_dist_data",
                 "name": "facility_dist_data",
                 "type": "string",
-                "value": "data/facility_districts.csv"
+                "value": "data/input/static/facility_districts.csv"
             },
             {
                 "description": "Path to health facility data",
                 "identifier": "facility_data",
                 "name": "facility_data",
                 "type": "string",
-                "value": "data/health_facilities.csv"
+                "value": "data/input/static/health_facilities.csv"
             },
             {
                 "description": "Path to old instance data",
                 "identifier": "old_instance_data",
                 "name": "old_instance_data",
                 "type": "string",
-                "value": "data/old_instance.csv"
+                "value": "data/input/dhis2/old_instance.csv"
             },
             {
                 "description": "Path to health facility from database",
@@ -62,7 +62,7 @@
                 "identifier": "var_correspondance_data",
                 "name": "var_correspondance_data",
                 "type": "string",
-                "value": "data/variable_correspondance.csv"
+                "value": "data/user_input/variable_correspondance.csv"
             }
         ]
     }
