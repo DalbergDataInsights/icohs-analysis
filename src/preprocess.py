@@ -48,6 +48,8 @@ DTYPES = {'Unnamed: 0': int, 'dataElement': str, 'period': str, 'orgUnit': str, 
 new_dhis_df = pd.read_csv(new_dhis_path, usecols=USECOLS, dtype=DTYPES)
 old_dhis_df = pd.read_csv(old_dhis_path, usecols=USECOLS, dtype=DTYPES)
 
+# Excluding all non numeric data from the dataset
+
 new_dhis_df['value'] = pd.to_numeric(new_dhis_df['value'], errors='coerce')
 old_dhis_df['value'] = pd.to_numeric(old_dhis_df['value'], errors='coerce')
 
