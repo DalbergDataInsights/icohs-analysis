@@ -42,9 +42,11 @@ var_correspondance_path = ENGINE['var_correspondance_data']
 # Get DHIS2 data
 
 USECOLS = list(range(0, 10))
+DTYPES = {'Unnamed: 0': int, 'dataElement': str, 'period': str, 'orgUnit': str, 'categoryOptionCombo': str,
+          'attributeOptionCombo': str, 'value': object, 'storedBy': str, 'created': str, 'lastUpdated': str}
 
-new_dhis_df = pd.read_csv(new_dhis_path, usecols=USECOLS)
-old_dhis_df = pd.read_csv(old_dhis_path, usecols=USECOLS)
+new_dhis_df = pd.read_csv(new_dhis_path, usecols=USECOLS, dtype=DTYPES)
+old_dhis_df = pd.read_csv(old_dhis_path, usecols=USECOLS, dtype=DTYPES)
 
 new_dhis_df['value'] = pd.to_numeric(new_dhis_df['value'], errors='coerce')
 old_dhis_df['value'] = pd.to_numeric(old_dhis_df['value'], errors='coerce')
