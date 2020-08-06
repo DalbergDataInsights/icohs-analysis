@@ -6,7 +6,7 @@
                 "identifier": "new_instance_data",
                 "name": "new_instance_data",
                 "type": "string",
-                "value": "data/input/dhis2/new_instance.csv"
+                "value": "data/input/dhis2/new_instance_test.csv"
             },
             {
                 "description": "Path to facility district mapping data",
