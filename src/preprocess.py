@@ -304,7 +304,12 @@ def main(new_dhis_df, old_dhis_df):
     combined_df = pd.concat([old_dhis_df, new_dhis_df])
     combined_df.reset_index(drop=True, inplace=True)
 
-    # Include facilities that that not reported.
+    # TODO Here add something that looks at all facilities, period, and indics (dynamically) and have a row for each combination
+    #old_ids = set(old_dhis_df['orgUnit'].unique())
+    #new_ids = set(new_dhis_df['orgUnit'].unique())
+    #list_ids = list(new_ids.intersection(old_ids))
+
+    # I should not need that once the  reporting data is in, I should however make sure the reported data is pivotedwith the rest
     df3 = get_all_data(facilities_df)
 
     for i in combined_df['year'].unique():
@@ -326,6 +331,12 @@ def main(new_dhis_df, old_dhis_df):
     full_data = df3_unstuck.merge(combined_df, how='left', on=[
                                   'dataElement', 'orgUnit', 'year', 'month'])
     full_data['districts'] = full_data['orgUnit'].map(district_facility_map)
+    # Make that such that it looks at old and new facilities, and only takes the overlap
+    # Also grouby [dataElement,orgUnit,year,month]
+
+    # Include facilities that that not reported.
+    # Try and just delete all this?
+
     return full_data
 
 
