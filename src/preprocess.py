@@ -66,10 +66,11 @@ facilities_df = pd.read_csv(all_facilities_path)
 var_corr = pd.read_csv(var_correspondance_path)
 
 
-##################################
-#     Define data functions      #
-##################################
+#################################################
+#     Define data transformation functions      #
+#################################################
 
+# Selecting target indicators
 
 def get_new_data(data):
     new_indic_list = list(var_corr[var_corr['instance'] == 'new']['name'])
@@ -88,6 +89,23 @@ def get_old_data(data):
     old_df = old_df[['period', 'orgUnit', 'value', 'dataElement']]
     return old_df
 
+# Adding composite indicators
+
+
+def get_variable_addition_dict(df, instance):
+    '''build a dict with target vars as keys and original vars to add up as values'''
+
+    target_dict = {}
+
+    df1 = df[df['instance'] == instance]
+    df2 = df1[df1.duplicated('identifier', keep=False)]
+    df3 = df2[['identifier', 'name']]
+
+    for x in list(df3['identifier'].unique()):
+        target_dict[x] = df3[df3['identifier'] == x]['name'].tolist()
+
+    return target_dict
+
 
 def compute_indicators(df, indic_name, indicator_list):
     '''Compute new vars by summing original vars, and drop original vars '''
@@ -103,6 +121,8 @@ def compute_indicators(df, indic_name, indicator_list):
 
     return df
 
+# Transforming dates
+
 
 def date_convert(date):
     if date.find("W") == -1:
@@ -114,7 +134,7 @@ def date_convert(date):
     return x
 
 
-def process_data(df):
+def process_date(df):
     df['datetime'] = np.vectorize(date_convert)(df['period'].astype(str))
     df['year'] = df['datetime'].dt.year
     df['month'] = df['datetime'].dt.month
@@ -127,26 +147,7 @@ def process_data(df):
     df['year'] = df['year'].apply(str)
     return df
 
-
-def get_all_data(hosp_df):
-    ''' Create a dataframe for all health facilities including those that did not report'''
-    data_df = pd.DataFrame(hosp_df['id']).reset_index(drop=True)
-    data_df.set_index('id', drop=True, inplace=True)
-    columns = [("Test", "test", "test1")]
-    df1 = pd.DataFrame(np.nan, index=list(
-        range(len(hosp_df['id']))), columns=['A'])
-    df1['orgUnit'] = hosp_df['id']
-    df1.set_index('orgUnit', drop=True, inplace=True)
-    df1.columns = pd.MultiIndex.from_tuples(columns)
-    return df1
-
-
-def pack(df3, columns, hosp):
-
-    df3 = pd.DataFrame(np.nan, index=list(
-        range(len(hosp['id']))), columns=['A'])
-    df3.columns = pd.MultiIndex.from_tuples(columns)
-    return df3
+# Pivoting the data, replacing outliers, unpivoting the data
 
 
 def pivot_stack(df):
@@ -219,6 +220,10 @@ def pivot_stack_post_process(pivot):
 
     return stack
 
+##########################################
+#     Packaging the data for export      #
+##########################################
+
 
 def export_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
 
@@ -253,20 +258,7 @@ def export_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
     fac_pivot_final = fac_pivot_final.stack(level=[0])
     fac_pivot_final.to_csv('data/output/corrected_data.csv')
 
-
-def get_variable_addition_dict(df, instance):
-    '''build a dict with target vars as keys and original vars to add up as values'''
-
-    target_dict = {}
-
-    df1 = df[df['instance'] == instance]
-    df2 = df1[df1.duplicated('identifier', keep=False)]
-    df3 = df2[['identifier', 'name']]
-
-    for x in list(df3['identifier'].unique()):
-        target_dict[x] = df3[df3['identifier'] == x]['name'].tolist()
-
-    return target_dict
+    return fac_pivot_final
 
 
 def main(new_dhis_df, old_dhis_df):
@@ -281,7 +273,9 @@ def main(new_dhis_df, old_dhis_df):
     for x in list(new_var_add_dict.keys()):
         new_dhis_df = compute_indicators(new_dhis_df, x, new_var_add_dict[x])
 
-    new_dhis_df = process_data(new_dhis_df)
+    new_dhis_df = process_date(new_dhis_df)
+
+    print('new data retrieved')
 
     # Old instance
 
@@ -290,7 +284,9 @@ def main(new_dhis_df, old_dhis_df):
     for x in list(old_var_add_dict.keys()):
         old_dhis_df = compute_indicators(old_dhis_df, x, old_var_add_dict[x])
 
-    old_dhis_df = process_data(old_dhis_df)
+    old_dhis_df = process_date(old_dhis_df)
+
+    print('old data retrieved')
 
     # Renaming variables
 
@@ -304,49 +300,36 @@ def main(new_dhis_df, old_dhis_df):
     combined_df = pd.concat([old_dhis_df, new_dhis_df])
     combined_df.reset_index(drop=True, inplace=True)
 
-    # TODO Here add something that looks at all facilities, period, and indics (dynamically) and have a row for each combination
+    # Selecting only the facilities that are in both old and new
     #old_ids = set(old_dhis_df['orgUnit'].unique())
     #new_ids = set(new_dhis_df['orgUnit'].unique())
     #list_ids = list(new_ids.intersection(old_ids))
 
+    # temporary
+    df = pd.read_csv('data/input/dhis2/old/valid_ids.csv')
+    list_ids = list(df['id'].unique())
+
+    combined_df = combined_df[combined_df['orgUnit'].isin(list_ids)]
+
     # I should not need that once the  reporting data is in, I should however make sure the reported data is pivotedwith the rest
-    df3 = get_all_data(facilities_df)
 
-    for i in combined_df['year'].unique():
-        for j in combined_df['month'].unique():
-            for m in combined_df['dataElement'].unique():
-                columns = [(i, j, m)]
+    combined_df = combined_df.groupby(
+        ["year", "month", "dataElement", "orgUnit"], as_index=False).sum()
 
-                df_months = pack(df3, columns, facilities_df)
+    combined_df['districts'] = combined_df['orgUnit'].map(
+        district_facility_map)
 
-                df3 = pd.merge(df3, df_months, how='left',
-                               left_index=True, right_index=True)
-
-    df3.drop('Test', axis=1, inplace=True, level=0)
-    df3_unstuck = df3.unstack().reset_index()
-
-    df3_unstuck.drop([0], axis=1, inplace=True)
-    df3_unstuck.columns = ["year", "month", "dataElement", "orgUnit"]
-
-    full_data = df3_unstuck.merge(combined_df, how='left', on=[
-                                  'dataElement', 'orgUnit', 'year', 'month'])
-    full_data['districts'] = full_data['orgUnit'].map(district_facility_map)
-    # Make that such that it looks at old and new facilities, and only takes the overlap
-    # Also grouby [dataElement,orgUnit,year,month]
-
-    # Include facilities that that not reported.
-    # Try and just delete all this?
-
-    return full_data
+    return combined_df
 
 
 if __name__ == "__main__":
     '''Executes the functiosn defined above'''
+
     data_df = main(new_dhis_df, old_dhis_df)
     print('data import and cleaning done')
+
     # separe reports and non reports indicators
-    report_indics = ['HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Actual reports 1. National',
-                     'HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Expected reports 1. National']
+    report_indics = ['actual_105_1_reporting', 'expected_105_1_reporting']
     data_df_noreport = data_df[~data_df['dataElement'].isin(
         report_indics)].copy()
     data_df_report = data_df[data_df['dataElement'].isin(report_indics)].copy()
@@ -366,7 +349,8 @@ if __name__ == "__main__":
     stack_t_noout_iqr = pivot_stack_post_process(pivot_no_outliers_iqr)
     print('stacking of the outlier-excluded data done')
 
-    export_to_csv(data_df_noreport, stack_t_noout, stack_t_noout_iqr)
+    pivot_final = export_to_csv(
+        data_df_noreport, stack_t_noout, stack_t_noout_iqr)
     print('data concatenatation done')
 
     print(data_df.head())
