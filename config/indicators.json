@@ -6,7 +6,14 @@
                 "identifier": "new_instance_data",
                 "name": "new_instance_data",
                 "type": "string",
-                "value": "data/input/dhis2/new_instance_test.csv"
+                "value": "data/input/dhis2/june2020.csv"
+            },
+            {
+                "description": "Path to old instance data",
+                "identifier": "old_instance_data",
+                "name": "old_instance_data",
+                "type": "string",
+                "value": "data/input/dhis2/sample_data/old_instance.csv"
             },
             {
                 "description": "Path to facility district mapping data",
@@ -21,13 +28,6 @@
                 "name": "facility_data",
                 "type": "string",
                 "value": "data/input/static/health_facilities.csv"
-            },
-            {
-                "description": "Path to old instance data",
-                "identifier": "old_instance_data",
-                "name": "old_instance_data",
-                "type": "string",
-                "value": "data/input/dhis2/old_instance.csv"
             },
             {
                 "description": "Path to health facility from database",
