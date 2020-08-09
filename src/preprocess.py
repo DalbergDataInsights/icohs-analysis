@@ -251,10 +251,13 @@ def export_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
     # Puts it all together
     fac_stack_final = pd.concat(
         [data_df_report, fac_stack_final], ignore_index=True)
+    fac_stack_final = pd.melt(fac_stack_final, id_vars=['districts', 'orgUnit', 'year', 'dataElement', 'month'], value_vars=[
+                              'reported', 'value_out', 'value_noout', 'value_noout_iqr'])
+    fac_stack_final.rename(columns={'variable': 'dataset'}, inplace=True)
 
     # Create a pivot
     fac_pivot_final = fac_stack_final.pivot_table(
-        index=['districts', 'orgUnit', 'year', 'month'], columns=['dataElement'], aggfunc=max)
+        index=['districts', 'orgUnit', 'year', 'month', 'dataset'], columns=['dataElement'], aggfunc='mean')
     fac_pivot_final = fac_pivot_final.stack(level=[0])
     fac_pivot_final.to_csv('data/output/corrected_data.csv')
 
