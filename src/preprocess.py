@@ -25,11 +25,16 @@ with open(module_json) as f:
 
 startTime = datetime.datetime.now()
 
+
+def make_note(statement):
+    print(statement, str(datetime.datetime.now() - startTime))
+
 ####################
 #     Get data     #
 ####################
 
 # Data paths
+
 
 new_dhis_path = ENGINE['new_instance_data']
 old_dhis_path = ENGINE['old_instance_data']
@@ -57,6 +62,8 @@ var_corr = pd.read_csv(var_correspondance_path)
 new_dhis_df['value'] = pd.to_numeric(new_dhis_df['value'], errors='coerce')
 old_dhis_df['value'] = pd.to_numeric(old_dhis_df['value'], errors='coerce')
 
+make_note('old and new data loaded')
+
 new_report_metrics = list(var_corr[(var_corr['domain'] == 'REPORT') & (
     var_corr['instance'] == 'new')]['name'])
 old_report_metrics = list(var_corr[(var_corr['domain'] == 'REPORT') & (
@@ -68,6 +75,8 @@ for x in new_report_metrics:
 for x in old_report_metrics:
     old_dhis_report_df[x] = pd.to_numeric(
         old_dhis_report_df[x], errors='coerce')
+
+make_note('old and new reporting data loaded')
 
 #################################################
 #     Define data transformation functions      #
@@ -98,7 +107,7 @@ def get_reporting_data(df):
                  drop=True, inplace=True)
 
     # Dropping unused columns
-    cols = ['Unnamed: 0', 'Unnamed: 0.1', 'orgunitlevel1', 'orgunitlevel2', 'orgunitlevel3', 'orgunitlevel4', 'orgunitlevel5', 'organisationunitname',
+    cols = ['Unnamed: 0', 'orgunitlevel1', 'orgunitlevel2', 'orgunitlevel3', 'orgunitlevel4', 'orgunitlevel5', 'organisationunitname',
             'organisationunitcode', 'organisationunitdescription', 'periodid', 'periodname', 'periodcode', 'perioddescription']
     df.drop(cols, axis=1, inplace=True)
 
@@ -357,6 +366,13 @@ def export_broken_down_table_to_csv(data):
 
     reporting_add = add_report_columns(reporting)
 
+    # Export to csv
+
+    reporting_add.to_csv('data/output/report_data.csv')
+    with_outliers.to_csv('data/output/outlier_data.csv')
+    no_outliers_std.to_csv('data/output/std_no_outlier_data.csv')
+    no_outliers_iqr.to_csv('data/output/iqr_no_outlier_data.csv')
+
     return (reporting_add, with_outliers, no_outliers_std, no_outliers_iqr)
 
 
@@ -373,7 +389,12 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
     # Reporting data
 
     new_dhis_report_df = get_reporting_data(new_dhis_report_df)
+
+    make_note('new reporting data formatted for use')
+
     old_dhis_report_df = get_reporting_data(old_dhis_report_df)
+
+    make_note('old reporting data formatted for use')
 
     # New instance
 
@@ -387,7 +408,7 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
     new_dhis_df = pd.merge(new_dhis_df, new_dhis_report_df[[
         'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
 
-    print('new data retrieved')
+    make_note('new data retrieved')
 
     # Old instance
 
@@ -401,7 +422,7 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
     old_dhis_df = pd.merge(old_dhis_df, old_dhis_report_df[[
         'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
 
-    print('old data retrieved')
+    make_note('old data retrieved')
 
     # Renaming variables
 
@@ -443,7 +464,7 @@ if __name__ == "__main__":
 
     data_df = main(new_dhis_df, old_dhis_df,
                    new_dhis_report_df, old_dhis_report_df)
-    print('data import and cleaning done')
+    make_note('data import and cleaning done')
 
     # separe reports and non reports indicators
     report_indics = ['actual_105_1_reporting', 'expected_105_1_reporting']
@@ -454,25 +475,25 @@ if __name__ == "__main__":
     # outlier computattion on non report data
 
     pivot_outliers = pivot_stack(data_df_noreport)
-    print('data pivot for outlier exclusion done')
+    make_note('data pivot for outlier exclusion done')
 
     pivot_no_outliers = replace_outliers(pivot_outliers, cutoff=3)
-    print('first outlier exclusion process done')
+    make_note('first outlier exclusion process done')
 
     pivot_no_outliers_iqr = replace_outliers_iqr(pivot_outliers, k=3)
-    print('second outlier exclusion process done')
+    make_note('second outlier exclusion process done')
 
     stack_t_noout = pivot_stack_post_process(pivot_no_outliers)
     stack_t_noout_iqr = pivot_stack_post_process(pivot_no_outliers_iqr)
-    print('stacking of the outlier-excluded data done')
+    make_note('stacking of the outlier-excluded data done')
 
     pivot_final = export_full_table_to_csv(
         data_df_noreport, stack_t_noout, stack_t_noout_iqr)
-    print('data concatenatation done')
+    make_note('data concatenatation done')
 
     (facility_data_reporting, facility_data_with_outliers, facility_data_no_outliers_std,
      facility_data_no_outliers_iqr) = export_broken_down_table_to_csv(pivot_final)
-    print('breakdown in four tables done')
+    make_note('breakdown in four tables done')
     print(facility_data_with_outliers.head())
 
 print(datetime.datetime.now() - startTime)
