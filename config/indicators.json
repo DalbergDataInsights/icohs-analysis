@@ -6,28 +6,28 @@
                 "identifier": "new_instance_data",
                 "name": "new_instance_data",
                 "type": "string",
-                "value": "data/input/dhis2/new_instance.csv"
+                "value": "data/input/dhis2/sample/new_instance.csv"
             },
             {
                 "description": "Path to old instance data",
                 "identifier": "old_instance_data",
                 "name": "old_instance_data",
                 "type": "string",
-                "value": "data/input/dhis2/old_instance.csv"
+                "value": "data/input/dhis2/sample/old_instance.csv"
             },
             {
                 "description": "Path to new instance reporting data",
                 "identifier": "new_instance_data_report",
                 "name": "new_instance_data_report",
                 "type": "string",
-                "value": "data/input/dhis2/new_instance_report.csv"
+                "value": "data/input/dhis2/sample/new_instance_report.csv"
             },
             {
                 "description": "Path to old instance reporting data",
                 "identifier": "old_instance_data_report",
                 "name": "old_instance_data_report",
                 "type": "string",
-                "value": "data/input/dhis2/old_instance_report.csv"
+                "value": "data/input/dhis2/sample/old_instance_report.csv"
             },
             {
                 "description": "Path to facility district mapping data",
