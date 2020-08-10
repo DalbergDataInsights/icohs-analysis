@@ -264,7 +264,39 @@ def export_full_table_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr)
     return fac_pivot_final
 
 
+def parse_date(date):
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    year, month = date.split('-')
+    month = months.index(month)+1
+    return datetime.date(year=int(year), month=month, day=1)
+
+
+def get_report_types(e, a, i):
+    if i == 1:
+        y = 'reported_on_this_indic'
+    elif e == 1 and a == 1 and i != 1:
+        y = 'did_not_report_on_this_indic'
+    elif e == 1 and a != 1 and i != 1:
+        y = 'did_not_report_on_this_indic_nor_on_105_1_form'
+    elif e != 1:
+        y = 'not_expected_to_report'
+    return y
+
+
+def add_report_columns(data):
+    # TODO check the hardcodednumber of columns is sustainable
+    for x in list(data.columns[8:]):
+        data[str(x)+'_rpt'] = np.vectorize(get_report_types)(
+            data['expected_105_1_reporting'], data['actual_105_1_reporting'], data[x])
+        data.drop(x, axis=1, inplace=True)
+        data.rename(columns={str(x)+'_rpt': str(x)}, inplace=True)
+    return data
+
+
 def export_broken_down_table_to_csv(data):
+
+    data.reset_index(level=[0, 1, 2, 3, 4], col_level=1, inplace=True)
 
     # Combine the date into one column and format
 
@@ -274,10 +306,10 @@ def export_broken_down_table_to_csv(data):
 
     # Breakdown in several dfs
 
-    reporting = data[data['type'] == 'reported'].copy()
-    with_outliers = data[data['type'] == 'value_out'].copy()
-    no_outliers_std = data[data['type'] == 'value_noout'].copy()
-    no_outliers_iqr = data[data['type'] == 'value_noout_iqr'].copy()
+    reporting = data[data['dataset'] == 'reported'].copy()
+    with_outliers = data[data['dataset'] == 'value_out'].copy()
+    no_outliers_std = data[data['dataset'] == 'value_noout'].copy()
+    no_outliers_iqr = data[data['dataset'] == 'value_noout_iqr'].copy()
 
     # Add the reporting status columns
 
@@ -286,8 +318,9 @@ def export_broken_down_table_to_csv(data):
     return (reporting_add, with_outliers, no_outliers_std, no_outliers_iqr)
 
 
-(facility_data_reporting, facility_data_with_outliers, facility_data_no_outliers_std,
- facility_data_no_outliers_iqr) = clean_breakdown_data(data)
+#############################
+#     Run all functions     #
+#############################
 
 
 def main(new_dhis_df, old_dhis_df):
@@ -330,13 +363,14 @@ def main(new_dhis_df, old_dhis_df):
     combined_df.reset_index(drop=True, inplace=True)
 
     # Selecting only the facilities that are in both old and new
-    #old_ids = set(old_dhis_df['orgUnit'].unique())
-    #new_ids = set(new_dhis_df['orgUnit'].unique())
-    #list_ids = list(new_ids.intersection(old_ids))
+    old_ids = set(old_dhis_df['orgUnit'].unique())
+    new_ids = set(new_dhis_df['orgUnit'].unique())
+    list_ids = list(new_ids.intersection(old_ids))
 
-    # temporary
-    df = pd.read_csv('data/input/dhis2/old/valid_ids.csv')
-    list_ids = list(df['id'].unique())
+    # Alternative used when running tests
+    # TODO remove
+    #df = pd.read_csv('data/input/dhis2/old/valid_ids.csv')
+    #list_ids = list(df['id'].unique())
 
     combined_df = combined_df[combined_df['orgUnit'].isin(list_ids)]
 
@@ -382,11 +416,9 @@ if __name__ == "__main__":
         data_df_noreport, stack_t_noout, stack_t_noout_iqr)
     print('data concatenatation done')
 
-    # facility_data_reporting, facility_data_with_outliers, facility_data_no_outliers_std, facility_data_no_outliers_iqr = = clean_breakdown_data(data)
-# (
-    # data_df_noreport, stack_t_noout, stack_t_noout_iqr)
-    #print('data concatenatation done')
-
-    print(data_df.head())
+    (facility_data_reporting, facility_data_with_outliers, facility_data_no_outliers_std,
+     facility_data_no_outliers_iqr) = export_broken_down_table_to_csv(pivot_final)
+    print('breakdown in four tables done')
+    print(facility_data_with_outliers.head())
 
 print(datetime.datetime.now() - startTime)
