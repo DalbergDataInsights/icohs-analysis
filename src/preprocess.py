@@ -225,7 +225,7 @@ def pivot_stack_post_process(pivot):
 ##########################################
 
 
-def export_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
+def export_full_table_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
 
     fac_stack_final = pd.merge(stack_t_noreport, stack_t_noout, how='left',
                                left_on=['districts', 'orgUnit',
@@ -262,6 +262,32 @@ def export_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
     fac_pivot_final.to_csv('data/output/corrected_data.csv')
 
     return fac_pivot_final
+
+
+def export_broken_down_table_to_csv(data):
+
+    # Combine the date into one column and format
+
+    data['date'] = data['year'].astype(str) + '-' + data['month']
+    data['date'] = data.date.apply(parse_date)
+    data['date'] = pd.to_datetime(data.date)
+
+    # Breakdown in several dfs
+
+    reporting = data[data['type'] == 'reported'].copy()
+    with_outliers = data[data['type'] == 'value_out'].copy()
+    no_outliers_std = data[data['type'] == 'value_noout'].copy()
+    no_outliers_iqr = data[data['type'] == 'value_noout_iqr'].copy()
+
+    # Add the reporting status columns
+
+    reporting_add = add_report_columns(reporting)
+
+    return (reporting_add, with_outliers, no_outliers_std, no_outliers_iqr)
+
+
+(facility_data_reporting, facility_data_with_outliers, facility_data_no_outliers_std,
+ facility_data_no_outliers_iqr) = clean_breakdown_data(data)
 
 
 def main(new_dhis_df, old_dhis_df):
@@ -352,9 +378,14 @@ if __name__ == "__main__":
     stack_t_noout_iqr = pivot_stack_post_process(pivot_no_outliers_iqr)
     print('stacking of the outlier-excluded data done')
 
-    pivot_final = export_to_csv(
+    pivot_final = export_full_table_to_csv(
         data_df_noreport, stack_t_noout, stack_t_noout_iqr)
     print('data concatenatation done')
+
+    # facility_data_reporting, facility_data_with_outliers, facility_data_no_outliers_std, facility_data_no_outliers_iqr = = clean_breakdown_data(data)
+# (
+    # data_df_noreport, stack_t_noout, stack_t_noout_iqr)
+    #print('data concatenatation done')
 
     print(data_df.head())
 
