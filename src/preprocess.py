@@ -400,29 +400,37 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 
     new_dhis_df = get_new_data(new_dhis_df)
 
+    make_note('new data indicators selected')
+
     for x in list(new_var_add_dict.keys()):
         new_dhis_df = compute_indicators(new_dhis_df, x, new_var_add_dict[x])
+
+    make_note('new data additional indicators created')
 
     new_dhis_df = process_date(new_dhis_df)
 
     new_dhis_df = pd.merge(new_dhis_df, new_dhis_report_df[[
         'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
 
-    make_note('new data retrieved')
+    make_note('new data cleaned')
 
     # Old instance
 
     old_dhis_df = get_old_data(old_dhis_df)
+
+    make_note('old data indicators selected')
 
     for x in list(old_var_add_dict.keys()):
         old_dhis_df = compute_indicators(old_dhis_df, x, old_var_add_dict[x])
 
     old_dhis_df = process_date(old_dhis_df)
 
+    make_note('old data additional indicators created')
+
     old_dhis_df = pd.merge(old_dhis_df, old_dhis_report_df[[
         'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
 
-    make_note('old data retrieved')
+    make_note('old data cleaned')
 
     # Renaming variables
 
@@ -464,7 +472,7 @@ if __name__ == "__main__":
 
     data_df = main(new_dhis_df, old_dhis_df,
                    new_dhis_report_df, old_dhis_report_df)
-    make_note('data import and cleaning done')
+    make_note('full data import and cleaning done')
 
     # separe reports and non reports indicators
     report_indics = ['actual_105_1_reporting', 'expected_105_1_reporting']
