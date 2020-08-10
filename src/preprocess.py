@@ -72,6 +72,31 @@ var_corr = pd.read_csv(var_correspondance_path)
 
 # Selecting target indicators
 
+def get_reporting_data(df):
+
+    month_dict = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
+                  '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
+                  '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
+
+    df['district'] = df['orgunitlevel3'].apply(lambda x: x[:-9].upper())
+    df['district'].replace(district_name_dict, inplace=True)
+
+    df['year'] = df['periodcode'].astype('str').apply(lambda x: x[:4])
+    df['month'] = df['periodcode'].astype('str').apply(
+        lambda x: x[-2:]).replace(month_dict)
+
+    df.set_index(['districts', 'orgUnit', 'year', 'month'],
+                 drop=True, inplace=True)
+
+    cols = np.arange(0, 12)
+    df.drop(df.columns[cols], axis=1, inplace=True)
+
+    df1 = df.copy().stack(dropna=False).reset_index()
+    df1.rename(columns={0: 'value', 'level_4': 'dataElement'}, inplace=True)
+
+    return df2
+
+
 def get_new_data(data):
     new_indic_list = list(var_corr[var_corr['instance'] == 'new']['name'])
     new_df = data[data["dataElement"].isin(new_indic_list)]
