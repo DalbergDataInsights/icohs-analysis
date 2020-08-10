@@ -35,11 +35,6 @@ new_dhis_path = ENGINE['new_instance_data']
 old_dhis_path = ENGINE['old_instance_data']
 new_dhis_report_path = ENGINE['new_instance_data_report']
 old_dhis_report_path = ENGINE['old_instance_data_report']
-
-# TODO remove those two, replace by extrats from reporting data
-district_facility_path = ENGINE['facility_dist_data']
-all_facilities_path = ENGINE['facility_data']
-
 var_correspondance_path = ENGINE['var_correspondance_data']
 
 # Get DHIS2 data
@@ -51,35 +46,38 @@ DTYPES = {'Unnamed: 0': int, 'dataElement': str, 'period': str, 'orgUnit': str, 
 new_dhis_df = pd.read_csv(new_dhis_path, usecols=USECOLS, dtype=DTYPES)
 old_dhis_df = pd.read_csv(old_dhis_path, usecols=USECOLS, dtype=DTYPES)
 
-new_dhis_report_df = pd.read_csv(new_dhis_report_path)
-old_dhis_report_df = pd.read_csv(old_dhis_report_path)
+new_dhis_report_df = pd.read_csv(new_dhis_report_path, dtype='object')
+old_dhis_report_df = pd.read_csv(old_dhis_report_path, dtype='object')
 
+# Get user-input data
+
+var_corr = pd.read_csv(var_correspondance_path)
 # Excluding all non numeric data from the dataset
 
 new_dhis_df['value'] = pd.to_numeric(new_dhis_df['value'], errors='coerce')
 old_dhis_df['value'] = pd.to_numeric(old_dhis_df['value'], errors='coerce')
 
-# Get user-input data
+new_report_metrics = list(var_corr[(var_corr['domain'] == 'REPORT') & (
+    var_corr['instance'] == 'new')]['name'])
+old_report_metrics = list(var_corr[(var_corr['domain'] == 'REPORT') & (
+    var_corr['instance'] == 'old')]['name'])
 
-var_corr = pd.read_csv(var_correspondance_path)
-
-# Get static data
-# TODO: remove this, use reporting data
-
-#dist_facility = pd.read_csv(district_facility_path)
-# district_facility_map = dict(
-# zip(dist_facility.id, dist_facility.district))
-
-#facilities_df = pd.read_csv(all_facilities_path)
-
+for x in new_report_metrics:
+    new_dhis_report_df[x] = pd.to_numeric(
+        new_dhis_report_df[x], errors='coerce')
+for x in old_report_metrics:
+    old_dhis_report_df[x] = pd.to_numeric(
+        old_dhis_report_df[x], errors='coerce')
 
 #################################################
 #     Define data transformation functions      #
 #################################################
 
-# Selecting target indicators
+# Extracting reporting data, districts and facility names correspondances
+
 
 def get_reporting_data(df):
+    # TODO break down in smaller functions
 
     month_dict = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
                   '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
@@ -87,12 +85,11 @@ def get_reporting_data(df):
     district_names_dict = {'SEMBABULE': 'SSEMBABULE',
                            'MADI-OKOLLO': 'MADI OKOLLO', 'LUWEERO': 'LUWERO'}
 
+    # Cleaning the district names
     df['districts'] = df['orgunitlevel3'].apply(lambda x: x[:-9].upper())
     df['districts'].replace(district_names_dict, inplace=True)
 
-    #names_df=df[['orgunitlevel5', 'organisationunitname']].copy()
-    # names_df=names_df.drop_duplicates()
-
+    # Formatting dates
     df['year'] = df['periodcode'].astype('str').apply(lambda x: x[:4])
     df['month'] = df['periodcode'].astype('str').apply(
         lambda x: x[-2:]).replace(month_dict)
@@ -100,14 +97,19 @@ def get_reporting_data(df):
     df.set_index(['districts', 'orgUnit', 'year', 'month'],
                  drop=True, inplace=True)
 
-    cols = ['Unnamed: 0', 'orgunitlevel1', 'orgunitlevel2', 'orgunitlevel3', 'orgunitlevel4', 'orgunitlevel5', 'organisationunitname',
+    # Dropping unused columns
+    cols = ['Unnamed: 0', 'Unnamed: 0.1', 'orgunitlevel1', 'orgunitlevel2', 'orgunitlevel3', 'orgunitlevel4', 'orgunitlevel5', 'organisationunitname',
             'organisationunitcode', 'organisationunitdescription', 'periodid', 'periodname', 'periodcode', 'perioddescription']
-    df.drop(df.columns[cols], axis=1, inplace=True)
+    df.drop(cols, axis=1, inplace=True)
+
+    # renaming
 
     df1 = df.copy().stack(dropna=False).reset_index()
     df1.rename(columns={0: 'value', 'level_4': 'dataElement'}, inplace=True)
 
     return df1
+
+# Selecting target indicators
 
 
 def get_new_data(data):
@@ -265,6 +267,8 @@ def pivot_stack_post_process(pivot):
 
 def export_full_table_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr):
 
+    # TODO: break down in smaller functions
+
     fac_stack_final = pd.merge(stack_t_noreport, stack_t_noout, how='left',
                                left_on=['districts', 'orgUnit',
                                         'year', 'dataElement', 'month'],
@@ -313,9 +317,9 @@ def parse_date(date):
 def get_report_types(e, a, i):
     if i == 1:
         y = 'reported_on_this_indic'
-    elif e == 1 and a == 1 and i != 1:
+    elif e == 1 and a == 1:
         y = 'did_not_report_on_this_indic'
-    elif e == 1 and a != 1 and i != 1:
+    elif e == 1 and a != 1:
         y = 'did_not_report_on_this_indic_nor_on_105_1_form'
     elif e != 1:
         y = 'not_expected_to_report'
@@ -361,14 +365,13 @@ def export_broken_down_table_to_csv(data):
 #############################
 
 
-def main(new_dhis_df, old_dhis_df):
+def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 
     new_var_add_dict = get_variable_addition_dict(var_corr, 'new')
     old_var_add_dict = get_variable_addition_dict(var_corr, 'old')
 
     # Reporting data
 
-    # TODO: add extracttion of district and facility name table
     new_dhis_report_df = get_reporting_data(new_dhis_report_df)
     old_dhis_report_df = get_reporting_data(old_dhis_report_df)
 
@@ -406,6 +409,8 @@ def main(new_dhis_df, old_dhis_df):
 
     old_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
     new_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
+    old_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
+    new_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
 
     # concatenate old and new instance
 
@@ -420,8 +425,8 @@ def main(new_dhis_df, old_dhis_df):
 
     # Alternative used when running tests
     # TODO remove
-    # df = pd.read_csv('data/input/dhis2/old/valid_ids.csv')
-    # list_ids = list(df['id'].unique())
+    #df = pd.read_csv('data/input/dhis2/old/valid_ids.csv')
+    #list_ids = list(df['id'].unique())
 
     combined_df = combined_df[combined_df['orgUnit'].isin(list_ids)]
 
@@ -436,7 +441,8 @@ def main(new_dhis_df, old_dhis_df):
 if __name__ == "__main__":
     '''Executes the functiosn defined above'''
 
-    data_df = main(new_dhis_df, old_dhis_df)
+    data_df = main(new_dhis_df, old_dhis_df,
+                   new_dhis_report_df, old_dhis_report_df)
     print('data import and cleaning done')
 
     # separe reports and non reports indicators
