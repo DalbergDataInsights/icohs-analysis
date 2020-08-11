@@ -409,11 +409,6 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 
     new_dhis_df = process_date(new_dhis_df)
 
-    new_dhis_df = pd.merge(new_dhis_df, new_dhis_report_df[[
-        'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
-
-    make_note('new data cleaned')
-
     # Old instance
 
     old_dhis_df = get_old_data(old_dhis_df)
@@ -427,11 +422,6 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 
     make_note('old data additional indicators created')
 
-    old_dhis_df = pd.merge(old_dhis_df, old_dhis_report_df[[
-        'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
-
-    make_note('old data cleaned')
-
     # Renaming variables
 
     renaming_dict = dict(zip(var_corr.name, var_corr.identifier))
@@ -441,28 +431,43 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
     old_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
     new_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
 
+    make_note('variable names updated')
+
     # concatenate old and new instance
 
-    combined_df = pd.concat(
-        [old_dhis_df, new_dhis_df, old_dhis_report_df, new_dhis_report_df])
+    combined_df = pd.concat([old_dhis_df, new_dhis_df[['orgUnit', 'year', 'month', 'dataElement', 'value']],
+                             old_dhis_report_df, new_dhis_report_df[['orgUnit', 'year', 'month', 'dataElement', 'value']]])
     combined_df.reset_index(drop=True, inplace=True)
+
+    districts = pd.merge(combined_df['orgUnit'], old_dhis_report_df[[
+        'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
+
+    combined_df['districts'] = districts['districts']
+
+    make_note('district column added')
 
     # Selecting only the facilities that are in both old and new
     old_ids = set(old_dhis_report_df['orgUnit'].unique())
     new_ids = set(new_dhis_report_df['orgUnit'].unique())
     list_ids = list(new_ids.intersection(old_ids))
 
-    # Alternative used when running tests
     # TODO remove
-    #df = pd.read_csv('data/input/dhis2/old/valid_ids.csv')
-    #list_ids = list(df['id'].unique())
+    # Alternative used when running tests
+    #df = pd.read_csv('data/input/dhis2/valid_ids.csv')
+    #list_ids = list(df['ids'].unique())
 
-    combined_df = combined_df[combined_df['orgUnit'].isin(list_ids)]
+    series_ids = pd.Series(list_ids, name='series_ids')
+    combined_df = combined_df[combined_df['orgUnit'].isin(series_ids)]
 
-    # I should not need that once the  reporting data is in, I should however make sure the reported data is pivotedwith the rest
+    make_note('correct ids selected')
+
+    # Dealing with duplicates dates
+    # TODO optimize that part
 
     combined_df = combined_df.groupby(
-        ['districts', "year", "month", "dataElement", "orgUnit"], as_index=False).sum()
+        ["dataElement", 'districts', 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
+
+    combined_df['value'] = pd.to_numeric(combined_df['value'], errors='coerce')
 
     return combined_df
 
