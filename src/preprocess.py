@@ -354,7 +354,7 @@ def export_broken_down_table_to_csv(data):
     # Export to csv
 
     reporting_add.to_csv(ENGINE['report_data'])
-    with_outliers.to_csv(ENGINE['outlier_data')
+    with_outliers.to_csv(ENGINE['outlier_data'])
     no_outliers_std.to_csv(ENGINE['std_no_outlier_data'])
     no_outliers_iqr.to_csv(ENGINE['iqr_no_outlier_data'])
 
@@ -374,11 +374,9 @@ def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pat
     # Reporting data
 
     new_dhis_report_df = get_reporting_data(new_dhis_report_path, "new")
-
     make_note('new reporting data formatted for use')
 
     old_dhis_report_df = get_reporting_data(old_dhis_report_path, "old")
-
     make_note('old reporting data formatted for use')
 
     # New instance
@@ -387,24 +385,19 @@ def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pat
 
     for x in list(new_var_add_dict.keys()):
         new_dhis_df = compute_indicators(new_dhis_df, x, new_var_add_dict[x])
-
     make_note('new data additional indicators created')
 
     new_dhis_df = process_date(new_dhis_df)
-
     make_note('new data transformed and cleaned')
 
     # Old instance
 
     old_dhis_df = get_data(old_dhis_path, "old")
-
     for x in list(old_var_add_dict.keys()):
         old_dhis_df = compute_indicators(old_dhis_df, x, old_var_add_dict[x])
-
     make_note('old data additional indicators created')
 
     old_dhis_df = process_date(old_dhis_df)
-
     make_note('old data transformed and cleaned')
 
     # Renaming variables
@@ -415,20 +408,27 @@ def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pat
     new_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
     old_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
     new_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
-
     make_note('variable names updated')
 
     # concatenate old and new instance
 
-    combined_df = pd.concat([old_dhis_df, new_dhis_df[['orgUnit', 'year', 'month', 'dataElement', 'value']],
-                             old_dhis_report_df, new_dhis_report_df[['orgUnit', 'year', 'month', 'dataElement', 'value']]])
+    combined_df = pd.concat([old_dhis_df, new_dhis_df,
+                             old_dhis_report_df,
+                             new_dhis_report_df])
     combined_df.reset_index(drop=True, inplace=True)
+    make_note('datasets concatenated')
+
+    # Dealing with duplicates dates
+
+    combined_df = combined_df.groupby(
+        ["dataElement", 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
+    make_note('duplicate dates summed')
+
+    # Add district columns
 
     districts = pd.merge(combined_df['orgUnit'], old_dhis_report_df[[
         'orgUnit', 'districts']], how='left', left_on='orgUnit', right_on='orgUnit')
-
     combined_df['districts'] = districts['districts']
-
     make_note('district column added')
 
     # Selecting only the facilities that are in both old and new
@@ -446,11 +446,7 @@ def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pat
 
     make_note('correct ids selected')
 
-    # Dealing with duplicates dates
     # TODO optimize that part
-
-    combined_df = combined_df.groupby(
-        ["dataElement", 'districts', 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
 
     combined_df['value'] = pd.to_numeric(combined_df['value'], errors='coerce')
 
