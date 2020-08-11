@@ -368,10 +368,10 @@ def export_broken_down_table_to_csv(data):
 
     # Export to csv
 
-    reporting_add.to_csv('data/output/report_data.csv')
-    with_outliers.to_csv('data/output/outlier_data.csv')
-    no_outliers_std.to_csv('data/output/std_no_outlier_data.csv')
-    no_outliers_iqr.to_csv('data/output/iqr_no_outlier_data.csv')
+    reporting_add.to_csv(ENGINE['report_data'])
+    with_outliers.to_csv(ENGINE['outlier_data')
+    no_outliers_std.to_csv(ENGINE['std_no_outlier_data'])
+    no_outliers_iqr.to_csv(ENGINE['iqr_no_outlier_data'])
 
     return (reporting_add, with_outliers, no_outliers_std, no_outliers_iqr)
 

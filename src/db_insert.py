@@ -2,64 +2,66 @@ import csv
 import psycopg2
 import pandas as pd
 import json 
+import sys
 
-ENGINE = engine.get_engine()
-
-module_json =  'conf/indicators.json'
-with open(module_json) as f:
-    for section in json.load(f):
-        for p in section['data']:
-            ENGINE[p['identifier']] = p['value']
-
-## TODO Move this to the data processing file file
-district_df = pd.read_csv(ENGINE['districts database mapping'])
-facility_df = pd.read_csv(ENGINE['facility database mapping'])
-data_df = pd.read_csv(ENGINE['Data from the api'])
-indicator_df = pd.read_csv(ENGINE['indicators database mapping'])
-
-            
-district_name_dict = {'Sembabule':'SSEMBABULE','Madi-Okollo':'MADI OKOLLO'}
-district_df['districtname'].replace(district_name_dict,inplace=True)
-
-#tranform the data 
-df3 = (data_df.set_index(["district","organisationunitid","year","month","Unnamed: 4"])
-         .stack()
-         .reset_index(name='Value')
-         .rename(columns={'level_5':'Indicator','Unnamed: 4':'report'}))
+def get_engine(json_file, sec):
+    with open(json_file) as f:
+        ENGINE = dict((p['identifier'], p['value']) for section in json.load(f) 
+                                                    for p in section[sec])
+        return ENGINE
 
 
-########### Preprocess data for database foriegn key mapping ##########
+def pg_load_table(file_path, table_name, dname, host, port, user, pwd):
+    """
+        This fuction upload csv to a target table
+    """
+    try:
+        conn = pyscopg2.connect(dbname=dbname,host=host,port=port, user=user, password=pwd)
+        print("Connecting to Database")
+        cur = conn.cursor()
+        f = open(file_path, "r")
+
+        #Truncate the table first
+        cur.execute("Truncate{} Cascade;".format(table_name))
+        print("Truncated{}".format(table_name))
+
+        #Load table from the file 
+        cur.copy_expert("copy{} from STDIN CSV HEADER QUOTE '\"'".format(table_name),f)
+        cur.execute("commit")
+        print("Loaded data into{}".format(table_name))
+        connn.close()
+        print("DB connection closed")
+
+    except Exception as e:
+        print("Error:{}".format(str(e)))
+        sys.exit(1)
 
 
-#Map Disrtict Id to Disrtict name for repository table foreign key
-district_df['districtname']=district_df['districtname'].str.upper()
-dist_dict = dict(zip(district_df.districtname, district_df.districtcode))
-df3['districtcode']=df3['district'].map(dist_dict)
+if __name__ == "__main__":
+    ENGINE = get_engine("config/cred.json", "credentialsEngine")
 
-#Map facility Id to facility name for repository table foreign key
-facility_dict = dict(zip(facility_df.facilityname, facility_df.facilitycode))
-df3['facilitycode']=df3['organisationunitid'].map(facility_dict)
+    iqr_table = ENGINE['no_outliers_iqr']
+    std_table = ENGINE['no_outliers_std']
+    report_table = ENGINE['reporting']
+    withOutliers_table = ENGINE['with_outliers']
+    dbname = ENGINE['dbname']
+    host = ENGINE['host']
+    port = ENGINE['port']
+    user = ENGINE['Username']
+    pwd = ENGINE['password']
 
-#Map Indicator Id to Indicator name for repository table foreign key
-indicator_dict = dict(zip(indicator_df.indicatorname, indicator_df.indicatorcode))
-df3['indicatorcode']=df3['Indicator'].map(indicator_dict)
+    #csv files 
+    files_csv = get_engine("config/indicators.json", "data")
+    report_file = files_csv['report_data']
+    iqr_file = files_csv['iqr_no_outlier_data']
+    std_file = files_csv['std_no_outlier_data']
+    withOutliers_file = files_csv['outlier_data']
 
-final_df = df3[['districtcode','facilitycode', 'indicatorcode','Value',	'year','month' ,'report']]
+    pg_load_table(report_file, report_table, dbname, host, port, user, pwd)
+    pg_load_table(withOutliers_file, withOutliers_table, dbname, host, port, user, pwd)
+    pg_load_table(std_file, std_table, dbname, host, port, user, pwd)
+    pg_load_table(iqr_file, iqr_table, dbname, host, port, user, pwd)
 
-final_df.pivot_export.to_csv('data/aggregate_codes.csv')
-data_file = 'data/aggregate_codes.csv'
 
-param_dic = "host=154.72.194.185 dbname=coc_db user=ddi_unicef password=eat1@Gabfest"
 
-############### write data to the database ############################
-conn = psycopg2.connect(param_dic)
-cur = conn.cursor()
 
-with open(data_file, 'r') as f:
-    reader = csv.reader(f)
-    next(reader) # Skip the header row.
-    for row in reader:
-        cur.execute(
-        "INSERT INTO st_repository(districtcode,facilitycode,indicatorcode, value,year,month,report) VALUES (%s, %s, %s,%s, %s,%s,%s)",
-        row)
-conn.commit()
