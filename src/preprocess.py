@@ -29,12 +29,12 @@ startTime = datetime.datetime.now()
 def make_note(statement):
     print(statement, str(datetime.datetime.now() - startTime))
 
-####################
-#     Get data     #
-####################
+
+#########################################
+#     Get data in the right format      #
+#########################################
 
 # Data paths
-
 
 new_dhis_path = ENGINE['new_instance_data']
 old_dhis_path = ENGINE['old_instance_data']
@@ -42,51 +42,27 @@ new_dhis_report_path = ENGINE['new_instance_data_report']
 old_dhis_report_path = ENGINE['old_instance_data_report']
 var_correspondance_path = ENGINE['var_correspondance_data']
 
-# Get DHIS2 data
-
-USECOLS = list(range(0, 10))
-DTYPES = {'Unnamed: 0': int, 'dataElement': str, 'period': str, 'orgUnit': str, 'categoryOptionCombo': str,
-          'attributeOptionCombo': str, 'value': object, 'storedBy': str, 'created': str, 'lastUpdated': str}
-
-new_dhis_df = pd.read_csv(new_dhis_path, usecols=USECOLS, dtype=DTYPES)
-old_dhis_df = pd.read_csv(old_dhis_path, usecols=USECOLS, dtype=DTYPES)
-
-new_dhis_report_df = pd.read_csv(new_dhis_report_path, dtype='object')
-old_dhis_report_df = pd.read_csv(old_dhis_report_path, dtype='object')
-
 # Get user-input data
 
-var_corr = pd.read_csv(var_correspondance_path)
-# Excluding all non numeric data from the dataset
-
-new_dhis_df['value'] = pd.to_numeric(new_dhis_df['value'], errors='coerce')
-old_dhis_df['value'] = pd.to_numeric(old_dhis_df['value'], errors='coerce')
-
-make_note('old and new data loaded')
-
-new_report_metrics = list(var_corr[(var_corr['domain'] == 'REPORT') & (
-    var_corr['instance'] == 'new')]['name'])
-old_report_metrics = list(var_corr[(var_corr['domain'] == 'REPORT') & (
-    var_corr['instance'] == 'old')]['name'])
-
-for x in new_report_metrics:
-    new_dhis_report_df[x] = pd.to_numeric(
-        new_dhis_report_df[x], errors='coerce')
-for x in old_report_metrics:
-    old_dhis_report_df[x] = pd.to_numeric(
-        old_dhis_report_df[x], errors='coerce')
-
-make_note('old and new reporting data loaded')
-
-#################################################
-#     Define data transformation functions      #
-#################################################
+VAR_CORR = pd.read_csv(var_correspondance_path)
 
 # Extracting reporting data, districts and facility names correspondances
 
 
-def get_reporting_data(df):
+def get_reporting_data(path, instance):
     # TODO break down in smaller functions
+
+    # Get the right data
+
+    df = pd.read_csv(path, dtype='object')
+    metrics = list(VAR_CORR[(VAR_CORR['domain'] == 'REPORT') & (
+        VAR_CORR['instance'] == instance)]['name'])
+    for x in metrics:
+        df[x] = pd.to_numeric(df[x], errors='coerce')
+
+    make_note(str(instance)+' reporting data loaded')
+
+    # Cleaning the data
 
     month_dict = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
                   '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
@@ -121,22 +97,31 @@ def get_reporting_data(df):
 # Selecting target indicators
 
 
-def get_new_data(data):
-    new_indic_list = list(var_corr[var_corr['instance'] == 'new']['name'])
+USECOLS = list(range(0, 10))
+DTYPES = {'Unnamed: 0': int, 'dataElement': str, 'period': str, 'orgUnit': str, 'categoryOptionCombo': str,
+          'attributeOptionCombo': str, 'value': object, 'storedBy': str, 'created': str, 'lastUpdated': str}
+
+
+def get_data(path, instance):
+
+    data = pd.read_csv(path, usecols=USECOLS, dtype=DTYPES)
+    data['value'] = pd.to_numeric(data['value'], errors='coerce')
+
+    make_note(str(instance)+" instance data loaded")
+
+    new_indic_list = list(VAR_CORR[VAR_CORR['instance'] == instance]['name'])
     new_df = data[data["dataElement"].isin(new_indic_list)]
     new_df = pd.DataFrame(new_df.groupby(['dataElement', 'orgUnit', 'period'])[
                           'value'].sum()).reset_index()
     new_df = new_df[['period', 'orgUnit', 'value', 'dataElement']]
+
+    make_note(str(instance)+" instance data indicator subset selected")
+
     return new_df
 
-
-def get_old_data(data):
-    old_indic_list = list(var_corr[var_corr['instance'] == 'old']['name'])
-    old_df = data[data["dataElement"].isin(old_indic_list)]
-    old_df = pd.DataFrame(old_df.groupby(['dataElement', 'orgUnit', 'period'])[
-                          'value'].sum()).reset_index()
-    old_df = old_df[['period', 'orgUnit', 'value', 'dataElement']]
-    return old_df
+#################################################
+#     Define data transformation functions      #
+#################################################
 
 # Adding composite indicators
 
@@ -381,26 +366,26 @@ def export_broken_down_table_to_csv(data):
 #############################
 
 
-def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
+def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_path):
 
-    new_var_add_dict = get_variable_addition_dict(var_corr, 'new')
-    old_var_add_dict = get_variable_addition_dict(var_corr, 'old')
+    new_var_add_dict = get_variable_addition_dict(VAR_CORR, 'new')
+    old_var_add_dict = get_variable_addition_dict(VAR_CORR, 'old')
 
     # Reporting data
 
-    new_dhis_report_df = get_reporting_data(new_dhis_report_df)
+    new_dhis_report_df = get_reporting_data(new_dhis_report_path, "new")
 
     make_note('new reporting data formatted for use')
 
-    old_dhis_report_df = get_reporting_data(old_dhis_report_df)
+    old_dhis_report_df = get_reporting_data(old_dhis_report_path, "old")
 
     make_note('old reporting data formatted for use')
 
     # New instance
 
-    new_dhis_df = get_new_data(new_dhis_df)
+    new_dhis_df = get_data(new_dhis_path, "new")
 
-    make_note('new data indicators selected')
+    make_note('new data loaded')
 
     for x in list(new_var_add_dict.keys()):
         new_dhis_df = compute_indicators(new_dhis_df, x, new_var_add_dict[x])
@@ -411,9 +396,9 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 
     # Old instance
 
-    old_dhis_df = get_old_data(old_dhis_df)
+    old_dhis_df = get_data(old_dhis_path, "old")
 
-    make_note('old data indicators selected')
+    make_note('old data loaded')
 
     for x in list(old_var_add_dict.keys()):
         old_dhis_df = compute_indicators(old_dhis_df, x, old_var_add_dict[x])
@@ -424,7 +409,7 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 
     # Renaming variables
 
-    renaming_dict = dict(zip(var_corr.name, var_corr.identifier))
+    renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
 
     old_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
     new_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
@@ -475,8 +460,8 @@ def main(new_dhis_df, old_dhis_df, new_dhis_report_df, old_dhis_report_df):
 if __name__ == "__main__":
     '''Executes the functiosn defined above'''
 
-    data_df = main(new_dhis_df, old_dhis_df,
-                   new_dhis_report_df, old_dhis_report_df)
+    data_df = main(new_dhis_path, old_dhis_path,
+                   new_dhis_report_path, old_dhis_report_path)
     make_note('full data import and cleaning done')
 
     # separe reports and non reports indicators
