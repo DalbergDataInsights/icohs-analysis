@@ -385,8 +385,6 @@ def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pat
 
     new_dhis_df = get_data(new_dhis_path, "new")
 
-    make_note('new data loaded')
-
     for x in list(new_var_add_dict.keys()):
         new_dhis_df = compute_indicators(new_dhis_df, x, new_var_add_dict[x])
 
@@ -394,18 +392,20 @@ def main(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pat
 
     new_dhis_df = process_date(new_dhis_df)
 
+    make_note('new data transformed and cleaned')
+
     # Old instance
 
     old_dhis_df = get_data(old_dhis_path, "old")
 
-    make_note('old data loaded')
-
     for x in list(old_var_add_dict.keys()):
         old_dhis_df = compute_indicators(old_dhis_df, x, old_var_add_dict[x])
 
+    make_note('old data additional indicators created')
+
     old_dhis_df = process_date(old_dhis_df)
 
-    make_note('old data additional indicators created')
+    make_note('old data transformed and cleaned')
 
     # Renaming variables
 
