@@ -79,6 +79,13 @@
                 "value": "config/variable_correspondance.csv"
             },
             {
+                "description": "Path to report clean, intermediary data",
+                "identifier": "clean_tall_data",
+                "name": "clean_tall_data",
+                "type": "string",
+                "value": "data/output/clean_tall_data.csv"
+            },
+            {
                 "description": "Path to report data output",
                 "identifier": "report_data",
                 "name": "report_data",
