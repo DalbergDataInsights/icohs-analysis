@@ -1,9 +1,8 @@
 
 from datetime import datetime
 
-from src.helpers import INDICATORS
+from src.helpers import INDICATORS, make_note
 from src.pipeline import clean, process
-from src.helper import make_note
 
 START_TIME = datetime.now()
 
@@ -18,8 +17,8 @@ if __name__ == '__main__':
                              INDICATORS['new_instance_data_report'],
                              INDICATORS['old_instance_data_report'])
 
-    processed_wide_data, report_data, outlier_data,\
-    std_no_outlier_data, iqr_no_outlier_data = process.process(clean_data)
+    reporting, outlier_data, std_no_outlier_data, iqr_no_outlier_data = process.process(
+        clean_data)
 
     # recording measured time
     make_note('Pipeline done', START_TIME)
