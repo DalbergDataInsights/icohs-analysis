@@ -47,7 +47,7 @@ DTYPES = {'Unnamed: 0': int,
 
 START_TIME = datetime.now()
 
-# Extracting reporting data, districts and facility names correspondences
+# Extracting reporting data and facility names correspondences
 
 
 def get_reporting_data(path, instance):
@@ -55,8 +55,6 @@ def get_reporting_data(path, instance):
     month_dict = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
                   '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
                   '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
-    district_names_dict = {'SEMBABULE': 'SSEMBABULE',
-                           'MADI-OKOLLO': 'MADI OKOLLO', 'LUWEERO': 'LUWERO'}
 
     cols = ['Unnamed: 0',
             'orgunitlevel1',
@@ -80,11 +78,7 @@ def get_reporting_data(path, instance):
     for x in metrics:
         df[x] = pd.to_numeric(df[x], errors='coerce')
 
-    make_note(str(instance)+' reporting data loaded')
-
-    # Cleaning the district names
-    df['districts'] = df['orgunitlevel3'].apply(lambda x: x[:-9].upper())
-    df['districts'].replace(district_names_dict, inplace=True)
+    make_note(str(instance)+' reporting data loaded', START_TIME)
 
     # Formatting dates
     df['year'] = df['periodcode'].astype('str')\
@@ -93,7 +87,7 @@ def get_reporting_data(path, instance):
                                   .apply(lambda x: x[-2:])\
                                   .replace(month_dict)
     df.rename(columns={'organisationunitid': 'orgUnit'}, inplace=True)
-    df.set_index(['districts', 'orgUnit', 'year', 'month'],
+    df.set_index(['orgUnit', 'year', 'month'],
                  drop=True,
                  inplace=True)
 
@@ -102,7 +96,7 @@ def get_reporting_data(path, instance):
     df1 = df.copy()\
             .stack(dropna=False)\
             .reset_index()
-    df1.rename(columns={0: 'value', 'level_4': 'dataElement'}, inplace=True)
+    df1.rename(columns={0: 'value', 'level_3': 'dataElement'}, inplace=True)
 
     return df1
 
@@ -110,14 +104,18 @@ def get_reporting_data(path, instance):
 
 
 def get_data(path, instance):
+    data = pd.read_csv(path, usecols=USECOLS, dtype=DTYPES)
 
-    with pd.read_csv(path, usecols=USECOLS, dtype=DTYPES) as data:
-        new_indic_list = VAR_CORR[VAR_CORR['instance'] == instance]['name'].tolist()
-        new_df = data[data["dataElement"].isin(new_indic_list)] \
-                                         .reset_index(drop=True)
+    new_indic_list = VAR_CORR[VAR_CORR['instance'] == instance]['name']\
+        .tolist()
+    new_df = data[data["dataElement"].isin(new_indic_list)]\
+        .reset_index(drop=True)
+
+    del data
 
     new_df['value'] = pd.to_numeric(new_df['value'], errors='coerce')
-    new_df = new_df.groupby(['dataElement', 'orgUnit', 'period'], as_index=False).agg({'value': 'sum'})
+    new_df = new_df.groupby(
+        ['dataElement', 'orgUnit', 'period'], as_index=False).agg({'value': 'sum'})
     new_df = new_df[['period', 'orgUnit', 'value', 'dataElement']]
 
     return new_df
@@ -144,7 +142,8 @@ def compute_indicators(df, indic_name, indicator_list):
     '''Compute new vars by summing original vars, and drop original vars '''
 
     df_new = df[df['dataElement'].isin(indicator_list)]
-    df_new = df_new.groupby(['period', 'orgUnit'], as_index=False).agg({'value': 'sum'})
+    df_new = df_new.groupby(['period', 'orgUnit'],
+                            as_index=False).agg({'value': 'sum'})
     df_new['dataElement'] = indic_name
 
     df = pd.concat([df, df_new])
@@ -156,27 +155,47 @@ def compute_indicators(df, indic_name, indicator_list):
 # Transforming dates
 
 
-def date_convert(date):
-    if 'W' not in date:
-        x = pd.to_datetime(date, format='%Y%m')
-    else:
-        y, w = *date.split("W")
-        x = pd.to_datetime(f'{y} {w} 1', format='%G %V %u')
-    return x
+def process_date_monthly(df):
+
+    month_dict = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
+                  '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
+                  '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
+
+    df['weekly'] = df.period.str.find('W')
+
+    df_m = df[df['weekly'] == -1].copy()
+    df_m['year'] = df_m['period'].astype('str').apply(lambda x: x[:4])
+    df_m['month'] = df_m['period'].astype('str').apply(
+        lambda x: x[-2:]).replace(month_dict)
+    df_m.drop(['weekly', 'period'], inplace=True, axis=1)
+
+    return df_m
+
+
+def process_date_weekly(df):
+
+    month_dict = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr',
+                  5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug',
+                  9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
+
+    df['weekly'] = df.period.str.find('W')
+
+    df_w = df[df['weekly'] != -1].copy()
+    df_w[['year', 'week']] = df_w.period.str.split("W", expand=True)
+    df_w['datetime'] = pd.to_datetime(
+        df_w.year + '/' + df_w.week + '/1', format='%G/%V/%u')
+    df_w['month'] = df_w['datetime'].dt.month.replace(month_dict)
+    df_w.drop(['week', "weekly", 'datetime', 'period'], inplace=True, axis=1)
+    df_w['year'] = df_w.year.astype('str')
+
+    return df_w
 
 
 def process_date(df):
-    df['datetime'] = np.vectorize(date_convert)(df['period'].astype(str))
-    df['year'] = df['datetime'].dt.year
-    df['month'] = df['datetime'].dt.month
-    map_day = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr',
-               5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug',
-               9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
-
-    df['month'] = df['month'].map(map_day)
-    df = df.drop(['datetime', 'period'], axis=1)
-    df['year'] = df['year'].apply(str)
-    return df
+    df_m = process_date_monthly(df)
+    df_w = process_date_weekly(df)
+    df_new = pd.concat([df_m, df_w])
+    return df_new
 
 
 def add_indicators(file_path, instance):
@@ -243,16 +262,6 @@ def clean(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pa
     combined_df = combined_df.groupby(
         ["dataElement", 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
     make_note('duplicate dates summed', START_TIME)
-
-    # Add district columns
-
-    districts = pd.merge(combined_df['orgUnit'],
-                         old_dhis_report_df[['orgUnit', 'districts']],
-                         how='left',
-                         left_on='orgUnit',
-                         right_on='orgUnit')
-    combined_df['districts'] = districts['districts']
-    make_note('district column added', START_TIME)
 
     # Selecting only the facilities that are in both old and new
     old_ids = set(old_dhis_report_df['orgUnit'].tolist())  # FIXME
