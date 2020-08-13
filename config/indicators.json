@@ -72,9 +72,9 @@
                 "value": "data/indicator.csv"
             },
             {
-                "description": "Path to variable correspondance table",
-                "identifier": "var_correspondance_data",
-                "name": "var_correspondance_data",
+                "description": "Path to variable correspondence table",
+                "identifier": "var_correspondence_data",
+                "name": "var_correspondence_data",
                 "type": "string",
                 "value": "config/variable_correspondance.csv"
             },

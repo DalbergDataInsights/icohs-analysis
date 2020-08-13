@@ -1,6 +1,7 @@
-data/*
+data/*/*
 /SPRINT_1/*
 *.csv
+!config/*
 *old*
 ~*
 /static/*
