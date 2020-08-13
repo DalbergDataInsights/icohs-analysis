@@ -1,0 +1,117 @@
+﻿domain,identifier,instance,name,description,type
+EPI,bcg,new,105-CL01. BCG,Number of children under one receiving their BCG vaccine,float
+EPI,bcg,old,105-2.11 BCG,Number of children under one receiving their BCG vaccine,float
+EPI,dpt1,new,105-CL08. DPT-HepB+Hib 1,Number of children under one receiving their DPT 1 vaccine,float
+EPI,dpt1,old,105-2.11 DPT-HepB+Hib 1,Number of children under one receiving their DPT 1 vaccine,float
+EPI,dpt3,new,105-CL10. DPT-HepB+Hib 3,Number of children under one receiving their DPT 3 vaccine,float
+EPI,dpt3,old,105-2.11 DPT-HepB+Hib 3,Number of children under one receiving their DPT 3 vaccine,float
+EPI,hpv1,new,105-CL16. Measles (MR1),Number of children under one receiving their MR 1 vaccine,float
+EPI,hpv1,old,105-2.11 Measles,Number of children under one receiving their MR 1 vaccine,float
+EPI,hpv2,new,105-CL11. PCV 1,Number of children under one receiving their PCV 1 vaccine,float
+EPI,hpv2,old,105-2.11 PCV 1,Number of children under one receiving their PCV 1 vaccine,float
+EPI,mr1,new,105-CL13. PCV 3,Number of children under one receiving their PCV 3 vaccine,float
+EPI,mr1,old,105-2.11 PCV 3,Number of children under one receiving their PCV 3 vaccine,float
+EPI,pcv1,new,105-VP01. HPV1-Dose 1,Number of individuals receiving their HPV1 vaccine,float
+EPI,pcv1,old,105-2.10 HPV1-Dose 1,Number of individuals receiving their HPV1 vaccine,float
+EPI,pcv3,new,105-VP02. HPV2-Dose 2,Number of individuals receiving their HPV2 vaccine,float
+EPI,pcv3,old,105-2.10 HPV2-Dose 2,Number of individuals receiving their HPV2 vaccine,float
+EPI,td1,new,105-TD01. Td1-Dose 1,Number of individuals receiving their TD1 vaccine,float
+EPI,td1,old,105-2.9 Tetanus Immunization Dose 1,Number of individuals receiving their TD1 vaccine,float
+EPI,td2,new,105-TD02. Td2-Dose 2,Number of individuals receiving their TD2 vaccine,float
+EPI,td2,old,105-2.9 Tetanus Immunization Dose 2,Number of individuals receiving their TD2 vaccine,float
+EPI,td3,new,105-TD03. Td3-Dose 3,Number of individuals receiving their TD3 vaccine,float
+EPI,td3,old,105-2.9 Tetanus Immunization Dose 3,Number of individuals receiving their TD3 vaccine,float
+EPI,td4_5,new,105-TD04. Td4-Dose 4,Number of individuals receiving their TD4 vaccines,float
+EPI,td4_5,new,105-TD05. Td5-Dose 5,Number of individuals receiving their TD5 vaccines,float
+EPI,td4_5,old,105-2.9 Tetanus Immunization Dose 4,Number of individuals receiving their TD4 vaccines,float
+EPI,td4_5,old,105-2.9 Tetanus Immunization Dose 5,Number of individuals receiving their TD5 vaccines,float
+GENERAL,ipd_attendance,new,108-CI02. No. of admissions,Number of inpatient admissions,float
+GENERAL,ipd_attendance,old,108-1 Admissions,Number of inpatient admissions,float
+GENERAL,opd_attendance,new,105-OA01. New attendance,Number of outpatient visits,float
+GENERAL,opd_attendance,new,105-OA02. Re-attendance,Number of outpatient visits,float
+GENERAL,opd_attendance,old,105-1.1 OPD New Attendance,Number of outpatient visits,float
+GENERAL,opd_attendance,old,105-1.1 OPD Re-Attendance,Number of outpatient visits,float
+HIV,anc_initiated_hiv,new,"105-AN32. HIV+ pregnant women initiated on ART for eMTCT at any visit irrespective of when tested HIV+ (TRR, TRR+,TRR‚àö)",Number of HIV-positive pregnant women initiated on ART for eMTCT,float
+HIV,anc_initiated_hiv,old,105-2.1 HIV+ Pregnant Women initiated on ART for EMTCT (ART),Number of HIV-positive pregnant women initiated on ART for eMTCT,float
+HIV,anc_tested_hiv,new,105-AN29a. Pregnant women newly tested for HIV in this pregnancy at any ANC visit (TR & TRR) - total,Number of pregnant women newly tested for HIV,float
+HIV,anc_tested_hiv,old,105-2.1 Pregnant Women newly tested for HIV this pregnancy(TR & TRR),Number of pregnant women newly tested for HIV,float
+HIV,anc_tested_hiv_positive,new,105-AN30a. Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any ANC Visit - Total,Number of pregnant women newly tested positive for HIV,float
+HIV,anc_tested_hiv_positive,old,105-2.1 Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any visit,Number of pregnant women newly tested positive for HIV,float
+HIV,hiv_positive_linked,new,105-HT03a3. Total Linked to HIV Care,Number of HIV-positive individuals linked to care,float
+HIV,hiv_positive_linked,old,105-4 Number of clients who have been linked to care,Number of HIV-positive individuals linked to care,float
+HIV,mat_initiated_hiv,new,105-MA17. Women initiating ART in maternity - HIV+,Number of HIV-positive women initiated on ART in maternity,float
+HIV,mat_initiated_hiv,old,105-2.2 HIV+ women initiating ART in maternity,Number of HIV-positive women initiated on ART in maternity,float
+HIV,mat_tested_hiv,new,105-MA15a. Women tested for HIV in labour 1st time this Pregnancy - Total (TR & TRR),Number of pregnant women tested for HIV in labor,float
+HIV,mat_tested_hiv,new,105-MA16a. Women re-tested for HIV in labour - Total (TR & TRR),Number of pregnant women tested for HIV in labor,float
+HIV,mat_tested_hiv,old,105-2.2a Women tested for HIV in labour (1st time this Pregnancy),Number of pregnant women tested for HIV in labor,float
+HIV,mat_tested_hiv,old,105-2.2b Women tested for HIV in labour (Retest this Pregnancy),Number of pregnant women tested for HIV in labor,float
+HIV,mat_tested_hiv_positive,new,105-MA15b. Women tested for HIV in labour 1st time this Pregnancy - HIV+ (TRR),Number of pregnant women tested positive for HIV in labor,float
+HIV,mat_tested_hiv_positive,new,105-MA16b. Women re-tested for HIV in labour - HIV+ (TRR+),Number of pregnant women tested positive for HIV in labor,float
+HIV,mat_tested_hiv_positive,old,105-2.2a Women testing HIV+ in labour (1st time this Pregnancy),Number of pregnant women tested positive for HIV in labor,float
+HIV,mat_tested_hiv_positive,old,105-2.2b Women testing HIV+ in labour (Retest this Pregnancy),Number of pregnant women tested positive for HIV in labor,float
+HIV,pnc_initiated_hiv,new,105-PN05a. HIV+ women initiating ART in Postnatal - Total,Number of HIV-positive women initiated on ART in PNC,float
+HIV,pnc_initiated_hiv,old,105-2.3 HIV+ women initiating ART in PNC,Number of HIV-positive women initiated on ART in PNC,float
+HIV,pnc_tested_hiv,new,105-PN03a. Breastfeedng mothers tested for HIV 1st time during Postnatal - Total (TR & TRR),Number of breastfeeding women newly tested for HIV in PNC,float
+HIV,pnc_tested_hiv,old,105-2.3a Breastfeeding mothers tested for HIV(1st test),Number of breastfeeding women newly tested for HIV in PNC,float
+HIV,pnc_tested_hiv_positive,new,105-PN03b. Breastfeedng mothers tested for HIV 1st time during Postnatal - TRR,Number of breastfeeding women newly tested positive for HIV in PNC,float
+HIV,pnc_tested_hiv_positive,old,105-2.3a Breastfeeding mothers newly testing HIV+(1st test),Number of breastfeeding women newly tested positive for HIV in PNC,float
+HIV,pnc_tested_hiv_positive,old,105-2.3b Breastfeeding mothers newly testing HIV+(retest),Number of breastfeeding women newly tested positive for HIV in PNC,float
+HIV,tested_hiv,new,105-HT03a1. Total Tested for HIV,Number of individuals tested for HIV,float
+HIV,tested_hiv,old,105-4 Number of Individuals Tested,Number of individuals tested for HIV,float
+HIV,tested_hiv_positive,new,105-HT03a2. Total New HIV+,Number of individuals tested positive for HIV,float
+HIV,tested_hiv_positive,old,105-4 Number of Individuals who tested HIV positive,Number of individuals tested positive for HIV,float
+MAL,malaria_cases,new,033B-CD01a. Malaria (diagnosed)  - Cases,Number of individuals diagnosed for Malaria,float
+MAL,malaria_cases,old,Malaria Cases - WEP,Number of individuals diagnosed for Malaria,float
+MAL,malaria_cases_treated,new,033B-MA06. Not tested cases treated,Number of individuals treated for Malaria,float
+MAL,malaria_cases_treated,new,033B-MA07. RDT Negative Cases Treated,Number of individuals treated for Malaria,float
+MAL,malaria_cases_treated,new,033B-MA08. RDT Positive Cases Treated,Number of individuals treated for Malaria,float
+MAL,malaria_cases_treated,new,033B-MA09. Microscopy Negative Cases Treated,Number of individuals treated for Malaria,float
+MAL,malaria_cases_treated,new,033B-MA10. Microscopy Positive Cases Treated,Number of individuals treated for Malaria,float
+MAL,malaria_cases_treated,old,Malaria treated - WEP,Number of individuals treated for Malaria,float
+MAL,malaria_deaths,new,033B-CD01b. Malaria (diagnosed) - Deaths,Number of Malaria deaths,float
+MAL,malaria_deaths,old,Malaria Deaths - WEP,Number of Malaria deaths,float
+MAL,malaria_tests,new,033B-MA02. Cases Tested with RDT,Number of individuals tested for Malaria,float
+MAL,malaria_tests,new,033B-MA04. Cases Tested with Microscopy,Number of individuals tested for Malaria,float
+MAL,malaria_tests,old,Malaria tests - WEP,Number of individuals tested for Malaria,float
+MNCH,1st_anc_visits,new,105-AN01a. ANC 1st Visit for women,Number of women attending their first ANC visit,float
+MNCH,1st_anc_visits,old,105-2.1 A1:ANC 1st Visit for women,Number of women attending their first ANC visit,float
+MNCH,4th_anc_visits,new,105-AN02. ANC 4th Visit for women,Number of women attending their fourth ANC visit,float
+MNCH,4th_anc_visits,old,105-2.1 A2:ANC 4th Visit for women,Number of women attending their fourth ANC visit,float
+MNCH,births,new,105-MA04a. Deliveries in unit - Total,Number of in-facility birth,float
+MNCH,births,old,105-2.2a Deliveries in unit,Number of in-facility birth,float
+MNCH,births_fresh_stillbirth,new,105-MA04c1. Deliveries in unit - Fresh still birth - Total,Number of in-facility fresh stillbirth,float
+MNCH,births_fresh_stillbirth,old,105-2.2b Deliveries in unit(Fresh Still births),Number of in-facility fresh stillbirth,float
+MNCH,births_live,new,105-MA04b1. Deliveries in unit -Live births - Total,Number of in-facility live birth,float
+MNCH,births_live,old,105-2.2d Deliveries in unit(Live Births),Number of in-facility live birth,float
+MNCH,births_macerated_stillbirth,new,105-MA04d1. Deliveries in unit - Macerated still birth - Total,Number of in-facility macerated stillbirth,float
+MNCH,births_macerated_stillbirth,old,105-2.2c Deliveries in unit(Macerated still births),Number of in-facility macerated stillbirth,float
+MNCH,maternity_admissions,new,105-MA01. Admissions,Number of maternal admissions,float
+MNCH,maternity_admissions,old,105-2.2 Admissions,Number of maternal admissions,float
+MNCH,newborn_deaths,new,105-MA11. Newborn deaths (0-7 days),Number of newborn deaths,float
+MNCH,newborn_deaths,old,105-2.2 Newborn deaths (0-7days),Number of newborn deaths,float
+MNCH,postnatal_visits,new,105-PN01a. Post Natal Attendances - Mother,Number of post-natal visits,float
+MNCH,postnatal_visits,old,105-2.3 Postnatal Attendances,Number of post-natal visits,float
+NUT,low_weight_births,new,105-MA04d2. Deliveries in unit - Macerated still birth - less than 2.5kg,Number of low weight births,float
+NUT,low_weight_births,new,105-MA04c2. Deliveries in unit - Fresh still birth - less than 2.5kg,Number of low weight births,float
+NUT,low_weight_births,new,105-MA04b2. Deliveries in unit -Live births - less than 2.5kg,Number of low weight births,float
+NUT,low_weight_births,old,105-2.2 Babies Born with low birth weight (<2.5Kgs),Number of low weight births,float
+NUT,vitamin_a,new,105-CH01. Vit A supplement (1st Dose),Number of doses of vitamin A distributed,float
+NUT,vitamin_a,new,105-CH02. Vit A supplement (2nd Dose),Number of doses of vitamin A distributed,float
+NUT,vitamin_a,old,105-2.8 Vit A Suplement 1st Dose in Year,Number of doses of vitamin A distributed,float
+NUT,vitamin_a,old,105-2.8 Vit A Suplement 2nd Dose in theYear,Number of doses of vitamin A distributed,float
+NUT,mam_identified,new,105-NA03a1. Identified malnourished clients(<10) this month - MAM using MUAC,Number of MAM cases identified,float
+NUT,mam_identified,new,105-NA03b1. Identified malnourished clients(<10) this month - MAM using W/H or L,Number of MAM cases identified,float
+NUT,mam_identified,old,105-1.3 OPD Moderate Acute Malnutrition (MAM),Number of MAM cases identified,float
+NUT,sam_identified,new,105-NA03c1. Identified malnourished clients(<10) this month - SAM using MUAC -  Without Oedema,Number of SAM cases identified,float
+NUT,sam_identified,new,105-NA03d1. Identified malnourished clients(<10) this month - SAM using W/H or L -  Without Oedema,Number of SAM cases identified,float
+NUT,sam_identified,new,105-NA03e1. Identified malnourished clients(<10) this month - SAM With Oedema,Number of SAM cases identified,float
+NUT,sam_identified,old,105-1.3 OPD Severe Acute Malnutrition Without Oedema,Number of SAM cases identified,float
+NUT,sam_identified,old,105-1.3 OPD Severe Acute Malnutrition With Oedema,Number of SAM cases identified,float
+REPORT,actual_105_1_reporting,new,"HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Expected reports 1. National",Number of facilities actually reporting on their 105:1 form,float
+REPORT,actual_105_1_reporting,old,HMIS 105:1 Expected reports,Number of facilities actually reporting on their 105:1 form,float
+REPORT,expected_105_1_reporting,new,"HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Actual reports 1. National",Number of facilities expected to report on their 105:1 form,float
+REPORT,expected_105_1_reporting,old,HMIS 105:1 Actual reports,Number of facilities expected to report on their 105:1 form,float
+TB,tb_cases_registered,new,105-TP04. Total New and relapse TB cases registered in TB treatment unit,Number of TB cases registered in treatment unit,float
+TB,tb_cases_registered,old,105-1.3 OPD New TB cases (Bacteriologically confirmed),Number of TB cases registered in treatment unit,float
+TB,tb_cases_registered,old,105-1.3 OPD New TB cases (Clinically Diagnosed),Number of TB cases registered in treatment unit,float
+TB,tb_cases_registered,old,105-1.3 OPD New TB cases (EPTB),Number of TB cases registered in treatment unit,float
