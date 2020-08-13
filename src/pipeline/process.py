@@ -7,11 +7,10 @@
 
 # l.305 csv export
 # l.335,337 chnage sample cols
-# l.371 csv export
 # l.459 valid ids
 # engine sample path
 
-from datetime import datetime
+import datetime
 
 import numpy as np
 import pandas as pd
@@ -36,7 +35,7 @@ VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
 
 
 def pivot_stack(df):
-    pivot_outliers = df.pivot_table(index=['districts', 'orgUnit', 'dataElement'],
+    pivot_outliers = df.pivot_table(index=['orgUnit', 'dataElement'],
                                     columns=['year', 'month']).copy()
 
     pivot_outliers.rename(columns={'value': 'with_outliers'},
@@ -67,7 +66,7 @@ def replace_outliers(pivot_outliers, cutoff):
         else:
             new_values = values
 
-        pivot_no_outliers.iloc[pivot_outliers.index \
+        pivot_no_outliers.iloc[pivot_outliers.index
                                              .get_loc(x), :] = new_values.astype('float')
 
     return pivot_no_outliers
@@ -96,7 +95,8 @@ def replace_outliers_iqr(pivot_outliers, k):
         else:
             new_values = values
 
-        pivot_no_outliers.iloc[pivot_outliers.index.get_loc(x), :] = new_values.astype('float')
+        pivot_no_outliers.iloc[pivot_outliers.index.get_loc(
+            x), :] = new_values.astype('float')
 
     return pivot_no_outliers
 
@@ -114,52 +114,6 @@ def pivot_stack_post_process(pivot):
 ##########################################
 #     Packaging the data for export      #
 ##########################################
-
-
-def export_full_table_to_csv(stack_t_noreport, stack_t_noout, stack_t_noout_iqr, data_df_report):
-
-    # TODO: break down in smaller functions
-
-    fac_stack_final = pd.merge(stack_t_noreport,
-                               stack_t_noout,
-                               how='left',
-                               left_on=['districts', 'orgUnit','year', 'dataElement', 'month'],
-                               right_on=['districts', 'orgUnit', 'year', 'dataElement', 'month']) \
-                        .rename(columns={'value_x': 'value_out', 'value_y': 'value_noout'})
-
-    fac_stack_final = pd.merge(fac_stack_final,
-                               stack_t_noout_iqr,
-                               how='left',
-                               left_on=['districts', 'orgUnit','year', 'dataElement', 'month'],
-                               right_on=['districts', 'orgUnit', 'year', 'dataElement', 'month']) \
-                         .rename(columns={'value': 'value_noout_iqr'})
-
-    # Make a note of whcih facilities reported on each indicator and which didn't
-    fac_stack_final['reported'] = (fac_stack_final['value_out'] > 0).astype('int')
-
-    # Add in the reporting rate data, that did not go through theoutlier precocedure
-    data_df_report.rename(columns={'value': 'reported'}, inplace=True)
-    data_df_report.set_index(['districts', 'orgUnit', 'year', 'dataElement', 'month'],
-                             inplace=True,
-                             drop=True)
-
-    data_df_report.reset_index(inplace=True)
-
-    # Puts it all together
-    fac_stack_final = pd.concat([data_df_report, fac_stack_final],
-                                ignore_index=True)
-    fac_stack_final = pd.melt(fac_stack_final,
-                              id_vars=['districts', 'orgUnit', 'year', 'dataElement', 'month'],
-                              value_vars=['reported', 'value_out', 'value_noout', 'value_noout_iqr'])
-    fac_stack_final.rename(columns={'variable': 'dataset'}, inplace=True)
-
-    # Create a pivot
-    fac_pivot_final = fac_stack_final.pivot_table(
-        index=['districts', 'orgUnit', 'year', 'month', 'dataset'], columns=['dataElement'], aggfunc='mean')
-    fac_pivot_final = fac_pivot_final.stack(level=[0])
-    # fac_pivot_final.to_csv('data/output/processed_wide_data.csv')
-
-    return fac_pivot_final
 
 
 def parse_date(date):
@@ -186,67 +140,58 @@ def add_report_columns(data):
     data['a+e'] = (data[['expected_105_1_reporting',
                          'actual_105_1_reporting']].sum(axis=1))
 
-    cols = VAR_CORR[VAR_CORR['domain'] != 'REPORT']['identifier'].unique().tolist()
-    #sample_cols = set(cols).intersection(set(data.columns))
+    cols = VAR_CORR[VAR_CORR['domain'] !=
+                    'REPORT']['identifier'].unique().tolist()
+    # cols = set(cols).intersection(set(data.columns))  # Sample change
 
-    for x in cols:  # Sample change
+    for x in cols:
         data['i'] = data[x] * 7
         data['sum'] = data[['i', 'e', 'a+e']].sum(axis=1)
         data.drop([x, 'i'], axis=1, inplace=True)
-        sum_col = data['sum']  # .replace(value_dict)
+        sum_col = data['sum']
         data[x] = sum_col
         data.drop('sum', axis=1, inplace=True)
+
+    data.drop(['e', 'a+e'], axis=1, inplace=True)
+
     return data
 
 
-def export_broken_down_table_to_csv(data):
+def pivot_for_export(data):
 
-    data.reset_index(level=[0, 1, 2, 3, 4], col_level=1, inplace=True)
+    data_pivot = data.pivot_table(index=['orgUnit', 'year', 'month'],
+                                  columns=['dataElement'],
+                                  aggfunc='sum')
+    data_pivot.columns = data_pivot.columns.droplevel(0)
 
-    # Combine the date into one column and format
+    return data_pivot
 
-    data['date'] = data['year'].astype(str) + '-' + data['month']
-    data['date'] = data.date.apply(parse_date)
-    data['date'] = pd.to_datetime(data.date)
 
-    # Breakdown in several dfs
+def full_pivot(data, report_data):
 
-    reporting = data[data['dataset'] == 'reported'].copy()
-    with_outliers = data[data['dataset'] == 'value_out'].copy()
-    no_outliers_std = data[data['dataset'] == 'value_noout'].copy()
-    no_outliers_iqr = data[data['dataset'] == 'value_noout_iqr'].copy()
+    data_pivot = pivot_for_export(data)
+    data_report_pivot = pivot_for_export(report_data)
 
-    # Add the reporting status columns
+    data_pivot = pd.merge(data_pivot, data_report_pivot,
+                          left_index=True, right_index=True, how='left')
 
-    reporting_add = add_report_columns(reporting)
-
-    # Export to csv
-
-    # reporting_add.to_csv(ENGINE['report_data'])
-    # with_outliers.to_csv(ENGINE['outlier_data'])
-    # no_outliers_std.to_csv(ENGINE['std_no_outlier_data'])
-    # no_outliers_iqr.to_csv(ENGINE['iqr_no_outlier_data'])
-
-    reporting_add.to_csv('test.csv')
-
-    return (reporting_add, with_outliers, no_outliers_std, no_outliers_iqr)
-
+    return (data_pivot)
 
 #############################
 #     Run all functions     #
 #############################
 
+
 def process(data):
     make_note('Starting the data processing', START_TIME)
 
-    # separe reports and non reports indicators
+    # Isolate teh data requiring outlier exclusion
     report_indics = VAR_CORR[VAR_CORR['domain'] == 'REPORT']['identifier'] \
         .unique().tolist()
 
     data_df_noreport = data[~data['dataElement'].isin(report_indics)].copy()
-    data_df_report = data[data['dataElement'].isin(report_indics)].copy()
 
-    # outlier computattion on non report data
+    # outlier computation
 
     pivot_outliers = pivot_stack(data_df_noreport)
     make_note('data pivot for outlier exclusion done', START_TIME)
@@ -259,20 +204,34 @@ def process(data):
 
     stack_t_noout = pivot_stack_post_process(pivot_no_outliers)
     stack_t_noout_iqr = pivot_stack_post_process(pivot_no_outliers_iqr)
-    make_note('stacking of the outlier-excluded data done', START_TIME)
+    make_note('outlier exclusion done', START_TIME)
 
-    pivot_final = export_full_table_to_csv(
-        data_df_noreport, stack_t_noout, stack_t_noout_iqr, data_df_report)
-    make_note('data concatenatation done', START_TIME)
+    # Pivoting the data with and without outliers
 
-    (facility_data_reporting,
-    facility_data_with_outliers,
-    facility_data_no_outliers_std,
-    facility_data_no_outliers_iqr) = export_broken_down_table_to_csv(pivot_final)
+    data_df_report = data[data['dataElement'].isin(report_indics)].copy()
+
+    with_outliers = full_pivot(data_df_noreport, data_df_report)
+    no_outliers_std = full_pivot(stack_t_noout, data_df_report)
+    no_outliers_iqr = full_pivot(
+        stack_t_noout_iqr, data_df_report)
+
+    # creating the reporting table
+
+    report_flag = data_df_noreport.copy()
+    report_flag['reported'] = (report_flag['value'] > 0).astype('int')
+    report_flag.drop('value', axis=1, inplace=True)
+    report_flag.rename(columns={'reported': 'value'}, inplace=True)
+
+    reporting_original = full_pivot(report_flag, data_df_report)
+    reporting = add_report_columns(reporting_original)
+
+    reporting_add.to_csv(ENGINE['report_data'])
+    with_outliers.to_csv(ENGINE['outlier_data'])
+    no_outliers_std.to_csv(ENGINE['std_no_outlier_data'])
+    no_outliers_iqr.to_csv(ENGINE['iqr_no_outlier_data'])
     make_note('breakdown in four tables done', START_TIME)
 
-    return (pivot_final,
-            facility_data_reporting,
-            facility_data_with_outliers,
-            facility_data_no_outliers_std,
-            facility_data_no_outliers_iqr)
+    return (reporting,
+            with_outliers,
+            no_outliers_std,
+            no_outliers_iqr)
