@@ -10,4 +10,4 @@ config/cred.json
 *.pyc
 
 *.vscode
-*__pycache__
+**__pycache__
