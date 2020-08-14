@@ -5,8 +5,7 @@
 
 # For sample :
 
-# l.371 csv export
-# l.459 valid ids
+# valid ids
 # engine sample path
 
 
@@ -263,26 +262,11 @@ def clean(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pa
         ["dataElement", 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
     make_note('duplicate dates summed', START_TIME)
 
-    # Selecting only the facilities that are in both old and new
-    old_ids = set(old_dhis_report_df['orgUnit'].tolist())  # FIXME
-    new_ids = set(new_dhis_report_df['orgUnit'].tolist())
-    list_ids = list(new_ids.intersection(old_ids))
-
-    # TODO remove
-    # Alternative used when running tests
-    #df = pd.read_csv('data/input/dhis2/valid_ids.csv')
-    #list_ids = list(df['ids'].unique())
-
-    series_ids = pd.Series(list_ids, name='series_ids')
-    combined_df = combined_df[combined_df['orgUnit'].isin(series_ids)]
-
-    # END FIXME
-
-    make_note('correct ids selected', START_TIME)
-
     combined_df['value'] = pd.to_numeric(combined_df['value'], errors='coerce')
+
     # TODO: Change that to exporting the data to the NITA-U database
     combined_df.to_csv(INDICATORS["clean_tall_data"])
+
     make_note('full data import and cleaning done', START_TIME)
 
     return combined_df
