@@ -2,13 +2,10 @@
 #     Initialize file     #
 ###########################
 
-
 # For sample :
 
-# l.305 csv export
-# l.335,337 chnage sample cols
-# l.459 valid ids
-# engine sample path
+# csv export
+# sample cols
 
 import datetime
 
@@ -142,13 +139,13 @@ def add_report_columns(data):
 
     cols = VAR_CORR[VAR_CORR['domain'] !=
                     'REPORT']['identifier'].unique().tolist()
-    # cols = set(cols).intersection(set(data.columns))  # Sample change
+    # cols = set(cols).intersection(set(data.columns))  # Sample change #TODO remove
 
     for x in cols:
         data['i'] = data[x] * 7
         data['sum'] = data[['i', 'e', 'a+e']].sum(axis=1)
         data.drop([x, 'i'], axis=1, inplace=True)
-        sum_col = data['sum']
+        sum_col = data['sum'].replace(value_dict, inplace=True)
         data[x] = sum_col
         data.drop('sum', axis=1, inplace=True)
 
@@ -175,7 +172,9 @@ def full_pivot(data, report_data):
     data_pivot = pd.merge(data_pivot, data_report_pivot,
                           left_index=True, right_index=True, how='left')
 
-    return (data_pivot)
+    columns = sorted(data_pivot.columns)
+
+    return data_pivot[columns]
 
 #############################
 #     Run all functions     #
@@ -224,11 +223,13 @@ def process(data):
 
     reporting_original = full_pivot(report_flag, data_df_report)
     reporting = add_report_columns(reporting_original)
+    columns = sorted(reporting.columns)
+    reporting = reporting[columns]
 
-    reporting_add.to_csv(ENGINE['report_data'])
-    with_outliers.to_csv(ENGINE['outlier_data'])
-    no_outliers_std.to_csv(ENGINE['std_no_outlier_data'])
-    no_outliers_iqr.to_csv(ENGINE['iqr_no_outlier_data'])
+    reporting.to_csv(INDICATORS['report_data'])
+    with_outliers.to_csv(INDICATORS['outlier_data'])
+    no_outliers_std.to_csv(INDICATORS['std_no_outlier_data'])
+    no_outliers_iqr.to_csv(INDICATORS['iqr_no_outlier_data'])
     make_note('breakdown in four tables done', START_TIME)
 
     return (reporting,
