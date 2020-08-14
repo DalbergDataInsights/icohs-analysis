@@ -5,9 +5,7 @@
 
 # For sample :
 
-# valid ids
 # engine sample path
-
 
 import os
 import sys
@@ -44,9 +42,33 @@ DTYPES = {'Unnamed: 0': int,
           'created': str,
           'lastUpdated': str}
 
+# TODO : define period to clean based on latest API query
+
+PERIODS = ['2018Jan', '2018Feb', '2018Mar', '2018Apr',
+           '2018May', '2018Jun', '2018Jul', '2018Aug',
+           '2018Sep', '2018Oct', '2018Nov', '2018Dec',
+           '2019Jan', '2019Feb', '2019Mar', '2019Apr',
+           '2019May', '2019Jun', '2019Jul', '2019Aug',
+           '2019Sep', '2019Oct', '2019Nov', '2019Dec',
+           '2020Jan', '2020Feb', '2020Mar', '2020Apr',
+           '2020May', '2020Jun']
+
 START_TIME = datetime.now()
 
 # Extracting reporting data and facility names correspondences
+
+
+def get_path_list(instance, filetype, period):
+    paths = []
+    if type(period) is 'list':
+        for x in period:
+            path = instance+'/'+filetype+'/'+x+'.csv'
+            paths.append(path)
+    else:
+        path = instance+'/'+filetype+'/'+period+'.csv'
+        paths.append(path)
+
+    return paths
 
 
 def get_reporting_data(path, instance):
@@ -118,6 +140,10 @@ def get_data(path, instance):
     new_df = new_df[['period', 'orgUnit', 'value', 'dataElement']]
 
     return new_df
+
+# Loops through each month to get the data
+
+# def put_together_get_data ()
 
 # Adding composite indicators
 
