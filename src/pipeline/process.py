@@ -141,7 +141,7 @@ def add_report_columns(data):
     cols = VAR_CORR[VAR_CORR['domain'] !=
                     'REPORT']['identifier'].unique().tolist()
     # Sample change #TODO remove
-    #cols = set(cols).intersection(set(data.columns))
+    # cols = set(cols).intersection(set(data.columns))
 
     for x in cols:
         data['i'] = data[x] * 7
@@ -229,6 +229,7 @@ def process(data):
 
     reporting.to_csv(INDICATORS['report_data'])
     with_outliers.to_csv(INDICATORS['outlier_data'])
+    with_outliers.to_csv('test.csv')
     no_outliers_std.to_csv(INDICATORS['std_no_outlier_data'])
     no_outliers_iqr.to_csv(INDICATORS['iqr_no_outlier_data'])
     make_note('breakdown in four tables done', START_TIME)

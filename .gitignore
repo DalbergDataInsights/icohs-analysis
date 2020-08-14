@@ -12,3 +12,4 @@ config/cred.json
 
 *.vscode
 **__pycache__
+.env

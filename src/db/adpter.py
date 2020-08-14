@@ -1,23 +1,19 @@
 import psycopg2
 import psycopg2.extras
-import pandas as pd 
-import sys 
+import pandas as pd
+import sys
 import json
 import pandas.io.sql as sqlio
 from sqlalchemy import create_engine
-from dotenv import load_dotenv, find_dotenv
 import os
-
-load_dotenv(find_dotenv())
 
 
 param_dic = {
         "host"      : os.environ.get('HOST'),
-        "port"      : os.environ.get('PORT'), 
+        "port"      : os.environ.get('PORT'),
         "database"  : os.environ.get("DB"),
         "user"      : os.environ.get("USER"),
         "password"  : os.environ.get("PASSWORD")
-        
     }
 
 engine = create_engine('postgresql://'+param_dic['user']+':'+param_dic['password']+'@'+param_dic['host']+':'+param_dic['port']+'/'+param_dic['database'],echo=False)
@@ -25,7 +21,7 @@ engine = create_engine('postgresql://'+param_dic['user']+':'+param_dic['password
 
 def pg_connect(params_dic=param_dic):
     """
-        Connect to the PostgreSQL database server 
+        Connect to the PostgreSQL database server
     """
     conn = None
     try:
@@ -44,13 +40,12 @@ def pg_read_lookup(table_name, param_dic=param_dic):
     """
     conn = pg_connect(param_dic)
     query = "select * from {}".format(table_name)
-    
     df = sqlio.read_sql_query(query, conn)
     df = pd.DataFrame(df)
-    df_dict = dict(zip(df.iloc[:, 1], df.iloc[:, 0])) 
+    df_dict = dict(zip(df.iloc[:, 1], df.iloc[:, 0]))
     return df_dict
 
-   
+
 def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
     """
         This function reads all data by indicators
@@ -58,7 +53,9 @@ def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
 
     conn = pg_connect(param_dic)
 
-    if indicator:
+    indicator_query = ''
+
+    if indicator is not None:
         #"select indicatorcode from "indicator" where indicatorname = "malaria_tests";"
         indicator_code_query = f'''SELECT "indicatorcode" FROM "indicator" WHERE indicator.indicatorname LIKE '{indicator}';'''
         cursor = conn.cursor()
@@ -67,24 +64,25 @@ def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
         indicator_code = cursor.fetchone()[0]
         print(indicator_code)
         indicator_query = f"WHERE indicatorcode = '{indicator_code}'"
-   
 
-    query = f'''SELECT districtname, 
+    query = f'''SELECT districtname,
                        facilityname,
-                       indicatorname, 
-                       year_, 
-                       month_, 
-                       value 
-                FROM (SELECT * 
+                       indicatorname,
+                       year,
+                       month,
+                       value
+                FROM (SELECT *
                      FROM repository {indicator_query}) as "indicators"
-                JOIN location on location.facilitycode = location.facilitycode
-			    JOIN indicator on indicators.indicatorcode = indicator.indicatorcode;
+                LEFT JOIN location on indicators.facilitycode = location.facilitycode
+			    LEFT JOIN indicator on indicators.indicatorcode = indicator.indicatorcode;
                 '''
 
     df = pd.read_sql(query, con=conn)
+
+    df.columns = ['id', 'orgUnit', 'dataElement', 'year', 'month', 'value']
     return df
 
-def pg_write_lookup(file_path, table_name, param_dic):
+def pg_write_lookup(file_path, table_name, param_dic=param_dic):
     """
         This function upload csv to a target lookup table
     """

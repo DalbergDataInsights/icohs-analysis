@@ -17,6 +17,8 @@ jsonschema = "==3.2.0"
 crontab="*"
 argparse="*"
 glob3="*"
+sqlalchemy = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
