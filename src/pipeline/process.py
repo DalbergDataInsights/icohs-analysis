@@ -133,20 +133,21 @@ def add_report_columns(data):
                   7: 'reported_on_this_indic',
                   8: 'reported_on_this_indic',
                   1: 'did_not_report_on_this_indic'}
+
     data['e'] = data['expected_105_1_reporting'] * 9
     data['a+e'] = (data[['expected_105_1_reporting',
                          'actual_105_1_reporting']].sum(axis=1))
 
     cols = VAR_CORR[VAR_CORR['domain'] !=
                     'REPORT']['identifier'].unique().tolist()
-    # cols = set(cols).intersection(set(data.columns))  # Sample change #TODO remove
+    # Sample change #TODO remove
+    #cols = set(cols).intersection(set(data.columns))
 
     for x in cols:
         data['i'] = data[x] * 7
         data['sum'] = data[['i', 'e', 'a+e']].sum(axis=1)
         data.drop([x, 'i'], axis=1, inplace=True)
-        sum_col = data['sum'].replace(value_dict, inplace=True)
-        data[x] = sum_col
+        data[x] = data['sum'].replace(value_dict)
         data.drop('sum', axis=1, inplace=True)
 
     data.drop(['e', 'a+e'], axis=1, inplace=True)
