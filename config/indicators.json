@@ -1,6 +1,6 @@
 [
     {
-        "data": [
+        "input": [
             {
                 "description": "Path to new instance data",
                 "identifier": "new_instance_data",
@@ -30,6 +30,17 @@
                 "value": "data/input/dhis2/old_instance_report.csv"
             },
             {
+                "description": "Path to variable correspondence table",
+                "identifier": "var_correspondence_data",
+                "name": "var_correspondence_data",
+                "type": "string",
+                "value": "config/variable_correspondance.csv"
+            }
+        ]
+    },
+    {
+        "static": [
+            {
                 "description": "Path to facility district mapping data",
                 "identifier": "facility_dist_data",
                 "name": "facility_dist_data",
@@ -43,6 +54,17 @@
                 "type": "string",
                 "value": "data/input/static/health_facilities.csv"
             },
+            {
+                "description": "Path name and district mapping of facilities",
+                "identifier": "name_district_map",
+                "name": "name_district_map",
+                "type": "string",
+                "value": "data/input/static/lookup_facilities.csv"
+            }
+        ]
+    },
+    {
+        "to_classify": [
             {
                 "description": "Path to health facility from database",
                 "identifier": "facility database mapping",
@@ -70,14 +92,11 @@
                 "name": "indicators database mapping",
                 "type": "string",
                 "value": "data/indicator.csv"
-            },
-            {
-                "description": "Path to variable correspondence table",
-                "identifier": "var_correspondence_data",
-                "name": "var_correspondence_data",
-                "type": "string",
-                "value": "config/variable_correspondance.csv"
-            },
+            }
+        ]
+    },
+    {
+        "output": [
             {
                 "description": "Path to report clean, intermediary data",
                 "identifier": "clean_tall_data",
@@ -112,6 +131,13 @@
                 "name": "iqr_no_outlier_data",
                 "type": "string",
                 "value": "data/output/iqr_no_outlier_data.csv"
+            },
+            {
+                "description": "Path to missing ids data output",
+                "identifier": "missing_ids",
+                "name": "missing_ids",
+                "type": "string",
+                "value": "data/output/missing-ids.csv"
             }
         ]
     }
