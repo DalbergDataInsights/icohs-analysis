@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 
-def parse_config(config_path='config/indicators.json', config_section='data'):
+def parse_config(config_path='config/indicators.json', config_section=['input', 'static', 'to_classify', 'output']):
 
     with open(config_path) as f:
         ENGINE = {p['identifier']: p['value']
