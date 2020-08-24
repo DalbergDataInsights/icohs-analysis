@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     load_dotenv(find_dotenv())
 
-    db.pg_write_lookup('data/input/static/lookup_facilities.csv', 'location')
+    db.pg_write_lookup(INDICATORS['name_district_map'], 'location')
 
     # cleaning the data
     clean_data = clean.clean(INDICATORS['new_instance_data'],
