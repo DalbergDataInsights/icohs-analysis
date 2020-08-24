@@ -282,7 +282,7 @@ def clean(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pa
     combined_df.reset_index(drop=True, inplace=True)
     make_note('datasets concatenated', START_TIME)
 
-    # Dealing with duplicates dates
+    # Dealing with duplicates datesdue to conversion of weekly data to monthly
 
     combined_df = combined_df.groupby(
         ["dataElement", 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
@@ -290,7 +290,22 @@ def clean(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_pa
 
     combined_df['value'] = pd.to_numeric(combined_df['value'], errors='coerce')
 
-    # TODO: Change that to exporting the data to the NITA-U database
+    # Keeping only the ids from HMIS reporting data
+
+    all_report_facilities = (pd.read_csv(INDICATORS['name_district_map'])['facilitycode']
+                             .unique()
+                             .tolist())
+
+    # TODO Find a way to output excluded ids
+    # all_data_facilities = (combined_df['orgUnit']
+    # .unique()
+    # .tolist())
+
+    combined_df = combined_df[combined_df['orgUnit']
+                              .isin(all_report_facilities)]
+
+    # Export to csv
+
     combined_df.to_csv(INDICATORS["clean_tall_data"])
 
     make_note('full data import and cleaning done', START_TIME)
