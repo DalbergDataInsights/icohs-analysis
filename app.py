@@ -21,7 +21,8 @@ if __name__ == '__main__':
     files = os.listdir(INDICATORS['raw_data'])
 
     for f in files:
-        clean.clean(INDICATORS['raw_data']+f)
+        clean.clean(INDICATORS['raw_data']+f, INDICATORS['processed_data'])
+        make_note(f'Cleaning done for file {f}', START_TIME)
 
     # Processing the data
 
