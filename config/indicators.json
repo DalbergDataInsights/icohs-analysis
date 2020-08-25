@@ -60,6 +60,7 @@
                 "value": "data/input/static/lookup_facilities.csv"
             }
         ],
+
         "to_classify": [
             {
                 "description": "Path to health facility from database",
@@ -132,7 +133,7 @@
                 "name": "missing_ids",
                 "type": "string",
                 "value": "data/output/missing-ids.csv"
-            }
+             }    
         ]
     }
 ]
