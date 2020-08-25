@@ -36,9 +36,7 @@
                 "type": "string",
                 "value": "config/variable_correspondance.csv"
             }
-        ]
-    },
-    {
+        ],
         "static": [
             {
                 "description": "Path to facility district mapping data",
@@ -61,9 +59,7 @@
                 "type": "string",
                 "value": "data/input/static/lookup_facilities.csv"
             }
-        ]
-    },
-    {
+        ],
         "to_classify": [
             {
                 "description": "Path to health facility from database",
@@ -93,9 +89,7 @@
                 "type": "string",
                 "value": "data/indicator.csv"
             }
-        ]
-    },
-    {
+        ],
         "output": [
             {
                 "description": "Path to report clean, intermediary data",
