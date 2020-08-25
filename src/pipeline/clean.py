@@ -244,14 +244,21 @@ def add_indicators(file_path, instance):
 #########################
 
 
-def clean(new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_path):
+# new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_path):
+def clean(raw_path, processed_path):
     make_note('Starting the cleaning process', START_TIME)
 
     # Renaming dict
 
     renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
 
-    # New reporting data
+    # looping through all files available
+
+    files = os.listdir(raw_path)
+
+    for file in files:
+
+        # New reporting data
 
     new_dhis_report_df = get_reporting_data(new_dhis_report_path, 'new')
     new_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
