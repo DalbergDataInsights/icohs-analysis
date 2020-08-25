@@ -6,7 +6,14 @@
                 "identifier": "raw_data",
                 "name": "raw_data",
                 "type": "string",
-                "value": "data/input/dhis2/raw"
+                "value": "data/input/dhis2/raw/"
+            },
+            {
+                "description": "Path to processed  data",
+                "identifier": "processed_data",
+                "name": "processed_data",
+                "type": "string",
+                "value": "data/input/dhis2/processed/"
             },
             {
                 "description": "Path to new instance data",
