@@ -10,7 +10,6 @@
 import os
 import sys
 from datetime import datetime
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -18,6 +17,7 @@ import scipy
 from scipy import stats
 
 from src.helpers import make_note, INDICATORS
+from src.db import adpter as db
 
 
 ###################################
@@ -44,31 +44,13 @@ DTYPES = {'Unnamed: 0': int,
 
 # TODO : define period to clean based on latest API query
 
-PERIODS = ['2018Jan', '2018Feb', '2018Mar', '2018Apr',
-           '2018May', '2018Jun', '2018Jul', '2018Aug',
-           '2018Sep', '2018Oct', '2018Nov', '2018Dec',
-           '2019Jan', '2019Feb', '2019Mar', '2019Apr',
-           '2019May', '2019Jun', '2019Jul', '2019Aug',
-           '2019Sep', '2019Oct', '2019Nov', '2019Dec',
-           '2020Jan', '2020Feb', '2020Mar', '2020Apr',
-           '2020May', '2020Jun']
+FACILITY_IDS = (pd.read_csv(INDICATORS['name_district_map'])['facilitycode']
+                .unique()
+                .tolist())
 
 START_TIME = datetime.now()
 
-# Extracting reporting data and facility names correspondences
-
-
-def get_path_list(instance, filetype, period):
-    paths = []
-    if type(period) is 'list':
-        for x in period:
-            path = instance+'/'+filetype+'/'+x+'.csv'
-            paths.append(path)
-    else:
-        path = instance+'/'+filetype+'/'+period+'.csv'
-        paths.append(path)
-
-    return paths
+# Extracting reporting data
 
 
 def get_reporting_data(path, instance):
@@ -121,7 +103,7 @@ def get_reporting_data(path, instance):
 
     return df1
 
-# Selecting target indicators
+# Extracting our target data
 
 
 def get_data(path, instance):
@@ -141,12 +123,8 @@ def get_data(path, instance):
 
     return new_df
 
-# Loops through each month to get the data
-
-# def put_together_get_data ()
 
 # Adding composite indicators
-
 
 def get_variable_addition_dict(instance):
     '''build a dict with target vars as keys and original vars to add up as values'''
@@ -238,6 +216,76 @@ def add_indicators(file_path, instance):
 
     return dhis_df
 
+# Putting together cleaning steps
+
+
+def clean_raw_file(raw_path):
+    '''Take one file, checks whether it fits expected format, and clean it'''
+
+    renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
+
+    # Check file name format
+
+    f = raw_path.split('/')[-1]
+    instance = f.split('_')[0]
+    datatype = f.split('_')[1]
+
+    assert datatype in [
+        'main', 'report'], f'Unexpected data type in file name for {f}: file should be of the format [instance_datatype_YYYYMmm], e.g. new_main_2020Apr'
+
+    assert instance in [
+        'new', 'old'], f'Unexpected dhis2 instance in file name for {f}: file should be of the format [instance_datatype_YYYYMmm], e.g. new_main_2020Apr'
+
+    # import file and get to standard format
+
+    if datatype == 'main':
+        df = add_indicators(raw_path, instance)
+    elif datatype == 'report':
+        df = get_reporting_data(raw_path, instance)
+
+    assert df['year']\
+        .nunique() == 1, f'Data for several years found in file {f}'
+    assert df['month']\
+        .nunique() == 1, f'Data for several months found in file {f}'
+
+    make_note(f'data imported for file {f}', START_TIME)
+
+    # cleaning formatted table
+
+    df['dataElement'].replace(renaming_dict, inplace=True)
+    df.reset_index(drop=True, inplace=True)
+    df = df\
+        .groupby(["dataElement", 'orgUnit', "year", "month"], as_index=False)\
+        .agg({'value': 'sum'})
+    df['value'] = pd.to_numeric(df['value'], errors='coerce')
+
+    df = df[df['orgUnit'].isin(FACILITY_IDS)]
+
+    return df
+
+
+def insert_clean_data(clean_df, raw_path):
+
+    # TODO : Clarify how these function will be affected by the fact we process one file at a time
+
+    f = raw_path.split('/')[-1]
+    f_short = f[-4]
+
+    pd.DataFrame(clean_df['dataElement'].unique())\
+        .to_csv('data/temp/indicators')
+    db.pg_write_lookup('data/temp/', 'indicator')
+
+    indicator_map = db.pg_read_lookup('indicator')
+    clean_df['dataElement'] = clean_df['dataElement'].map(indicator_map)
+
+    clean_df[['orgUnit', 'dataElement', 'year', 'month', 'value']].to_csv(
+        f'data/temp/{f_short}_clean.csv', index=False, header=False)
+
+    db.pg_write_table(f'data/temp/{f_short}_clean.csv', 'repository')
+
+
+def move_csv_files(raw_path, processed_path):
+    os.rename(raw_path, processed_path)
 
 #########################
 #     Run functions     #
@@ -246,75 +294,14 @@ def add_indicators(file_path, instance):
 
 # new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_path):
 def clean(raw_path, processed_path):
-    make_note('Starting the cleaning process', START_TIME)
 
-    # Renaming dict
+    file_name = raw_path.split('/')[-1]
+    make_note(f'Starting the cleaning process for {file_name}', START_TIME)
 
-    renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
+    clean_df = clean_raw_file(raw_path)
 
-    # looping through all files available
+    insert_clean_data(clean_df, raw_path)
 
-    files = os.listdir(raw_path)
-
-    for file in files:
-
-        # New reporting data
-
-    new_dhis_report_df = get_reporting_data(new_dhis_report_path, 'new')
-    new_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
-    make_note('new reporting data formatted for use', START_TIME)
-
-    # New instance
-
-    new_dhis_df = add_indicators(new_dhis_path, 'new')
-    new_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
-
-    # Old reporting data
-
-    old_dhis_report_df = get_reporting_data(old_dhis_report_path, 'old')
-    old_dhis_report_df['dataElement'].replace(renaming_dict, inplace=True)
-    make_note('old reporting data formatted for use', START_TIME)
-
-    # Old instance
-    old_dhis_df = add_indicators(old_dhis_path, 'old')
-    old_dhis_df['dataElement'].replace(renaming_dict, inplace=True)
-
-    # concatenate old and new instance
-
-    combined_df = pd.concat([old_dhis_df,
-                             new_dhis_df,
-                             old_dhis_report_df,
-                             new_dhis_report_df])
-
-    combined_df.reset_index(drop=True, inplace=True)
-    make_note('datasets concatenated', START_TIME)
-
-    # Dealing with duplicates datesdue to conversion of weekly data to monthly
-
-    combined_df = combined_df.groupby(
-        ["dataElement", 'orgUnit', "year", "month"], as_index=False).agg({'value': 'sum'})
-    make_note('duplicate dates summed', START_TIME)
-
-    combined_df['value'] = pd.to_numeric(combined_df['value'], errors='coerce')
-
-    # Keeping only the ids from HMIS reporting data
-
-    all_report_facilities = (pd.read_csv(INDICATORS['name_district_map'])['facilitycode']
-                             .unique()
-                             .tolist())
-
-    # TODO Find a way to output excluded ids
-    # all_data_facilities = (combined_df['orgUnit']
-    # .unique()
-    # .tolist())
-
-    combined_df = combined_df[combined_df['orgUnit']
-                              .isin(all_report_facilities)]
-
-    # Export to csv
-
-    combined_df.to_csv(INDICATORS["clean_tall_data"])
+    move_csv_files(raw_path, processed_path)
 
     make_note('full data import and cleaning done', START_TIME)
-
-    return combined_df
