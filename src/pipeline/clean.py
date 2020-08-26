@@ -17,7 +17,10 @@ import scipy
 from scipy import stats
 
 from src.helpers import make_note, INDICATORS
-from src.db import adpter as db
+
+from dotenv import load_dotenv, find_dotenv  # NOQA: E402
+load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
+from src.db import adpter as db  # NOQA: E402
 
 
 ###################################
@@ -266,17 +269,16 @@ def clean_raw_file(raw_path):
 
 def insert_clean_data(clean_df, raw_path):
 
-    # TODO : Clarify how these function will be affected by the fact we process one file at a time
+    # TODO : Put back the commented out code clarify how these function will be affected by the fact we process one file at a time
 
     f = raw_path.split('/')[-1]
     f_short = f[-4]
 
-    pd.DataFrame(clean_df['dataElement'].unique())\
-        .to_csv('data/temp/indicators')
-    db.pg_write_lookup('data/temp/', 'indicator')
-
     indicator_map = db.pg_read_lookup('indicator')
     clean_df['dataElement'] = clean_df['dataElement'].map(indicator_map)
+
+    facility_map = db.pg_read_lookup('location')
+    clean_df['orgUnit'] = clean_df['orgUnit'].map(facility_map)
 
     clean_df[['orgUnit', 'dataElement', 'year', 'month', 'value']].to_csv(
         f'data/temp/{f_short}_clean.csv', index=False, header=False)
