@@ -9,14 +9,15 @@ import os
 
 
 param_dic = {
-        "host"      : os.environ.get('HOST'),
-        "port"      : os.environ.get('PORT'),
-        "database"  : os.environ.get("DB"),
-        "user"      : os.environ.get("USER"),
-        "password"  : os.environ.get("PASSWORD")
-    }
+    "host": os.environ.get('HOST'),
+    "port": os.environ.get('PORT'),
+    "database": os.environ.get("DB"),
+    "user": os.environ.get("USER"),
+    "password": os.environ.get("PASSWORD")
+}
 
-engine = create_engine('postgresql://'+param_dic['user']+':'+param_dic['password']+'@'+param_dic['host']+':'+param_dic['port']+'/'+param_dic['database'],echo=False)
+engine = create_engine('postgresql://'+param_dic['user']+':'+param_dic['password'] +
+                       '@'+param_dic['host']+':'+param_dic['port']+'/'+param_dic['database'], echo=False)
 
 
 def pg_connect(params_dic=param_dic):
@@ -56,7 +57,7 @@ def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
     indicator_query = ''
 
     if indicator is not None:
-        #"select indicatorcode from "indicator" where indicatorname = "malaria_tests";"
+        # "select indicatorcode from "indicator" where indicatorname = "malaria_tests";"
         indicator_code_query = f'''SELECT "indicatorcode" FROM "indicator" WHERE indicator.indicatorname LIKE '{indicator}';'''
         cursor = conn.cursor()
         cursor.execute(indicator_code_query)
@@ -81,6 +82,7 @@ def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
 
     df.columns = ['id', 'orgUnit', 'dataElement', 'year', 'month', 'value']
     return df
+
 
 def pg_write_lookup(file_path, table_name, param_dic=param_dic):
     """
@@ -113,15 +115,16 @@ def pg_write_table(file_path, table_name, param_dic=param_dic):
 
     conn = pg_connect(param_dic)
     cur = conn.cursor()
-    
+
     query = """
         COPY %s (facilitycode, indicatorcode, year, month, value) FROM STDIN WITH (FORMAT CSV)
     """
     cur.copy_expert(sql=query % table_name, file=f)
-  
+
     cur.execute("commit")
     cur.close()
-        
+
+
 def pg_delete_records(year, month, table_name, param_dic=param_dic):
     """
         Delete by year and month
@@ -135,7 +138,7 @@ def pg_delete_records(year, month, table_name, param_dic=param_dic):
     cur.execute(query, (month, year,))
     cur.execute("commit")
     cur.close()
-    
+
 
 def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     """
@@ -155,26 +158,25 @@ def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     cur.execute("commit")
     cur.close()
 
-
-
-  ###################### 
+  ######################
   #### OUTPUT FILE #####
   ######################
+
 
 def pg_final_table(file_path, table_name, engine=engine, param_dic=param_dic):
 
     conn = pg_connect(param_dic)
     cursor = conn.cursor()
 
-    #drop table if it exists 
-    cursor.execute('DROP table IF EXISTS {};'.format(table_name))  
+    # drop table if it exists
+    cursor.execute('DROP table IF EXISTS {};'.format(table_name))
     conn.commit()
-  
-    # create table 
+
+    # create table
     df = pd.read_csv(file_path)
     df.head(0).to_sql(table_name, con=engine, index=False)
 
-    #Insert data
+    # Insert data
     f = open(file_path)
     query = """
     COPY %s FROM STDIN WITH

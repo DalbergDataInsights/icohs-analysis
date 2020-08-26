@@ -2,6 +2,20 @@
     {
         "input": [
             {
+                "description": "Path to raw  data",
+                "identifier": "raw_data",
+                "name": "raw_data",
+                "type": "string",
+                "value": "data/input/dhis2/raw/"
+            },
+            {
+                "description": "Path to processed  data",
+                "identifier": "processed_data",
+                "name": "processed_data",
+                "type": "string",
+                "value": "data/input/dhis2/processed/"
+            },
+            {
                 "description": "Path to new instance data",
                 "identifier": "new_instance_data",
                 "name": "new_instance_data",
@@ -60,7 +74,6 @@
                 "value": "data/input/static/lookup_facilities.csv"
             }
         ],
-
         "to_classify": [
             {
                 "description": "Path to health facility from database",
@@ -133,7 +146,7 @@
                 "name": "missing_ids",
                 "type": "string",
                 "value": "data/output/missing-ids.csv"
-             }    
+            }
         ]
     }
 ]
