@@ -102,8 +102,8 @@ def pg_write_lookup(file_path, table_name, param_dic=param_dic):
     try:
         cur.copy_expert(sql=query % table_name, file=f)
         cur.execute("commit")
-    except:
-        print("pass")
+    except Exception as e:
+        print(e)
     cur.close()
 
 
@@ -142,14 +142,15 @@ def pg_delete_records(year, month, table_name, param_dic=param_dic):
 
 def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     """
-        This funtion deletes the months data and then inserts in new data
+        This function deletes the months data and then inserts in new data
     """
     pg_delete_records(year, month, table_name, param_dic=param_dic)
+
+    f = open(file_path, "r")
 
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    f = open(file_path, "r")
     query = """
         COPY %s (facilitycode, indicatorcode, year, month, value) FROM STDIN WITH (FORMAT CSV)
     """
