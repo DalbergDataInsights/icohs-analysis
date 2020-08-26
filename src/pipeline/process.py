@@ -185,7 +185,7 @@ def full_pivot(data, report_data):
 def process(data):
     make_note('Starting the data processing', START_TIME)
 
-    # Isolate teh data requiring outlier exclusion
+    # Isolate the data requiring outlier exclusion
     report_indics = VAR_CORR[VAR_CORR['domain'] == 'REPORT']['identifier'] \
         .unique().tolist()
 
