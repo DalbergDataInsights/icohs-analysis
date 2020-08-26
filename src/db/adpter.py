@@ -97,9 +97,11 @@ def pg_write_lookup(file_path, table_name, param_dic=param_dic):
                 HEADER
                 DELIMITER AS ','
             """
-
-    cur.copy_expert(sql=query % table_name, file=f)
-    cur.execute("commit")
+    try:
+        cur.copy_expert(sql=query % table_name, file=f)
+        cur.execute("commit")
+    except:
+        print("pass")
     cur.close()
 
 
