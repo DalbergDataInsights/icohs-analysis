@@ -32,7 +32,7 @@ from src.db import adpter as db  # NOQA: E402
 
 VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
 
-USECOLS = list(range(0, 10))
+USECOLS = list(range(0, 9))
 
 DTYPES = {'Unnamed: 0': int,
           'dataElement': str,
@@ -62,8 +62,7 @@ def get_reporting_data(path, instance):
                   '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
                   '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
 
-    cols = ['Unnamed: 0',
-            'orgunitlevel1',
+    cols = ['orgunitlevel1',
             'orgunitlevel2',
             'orgunitlevel3',
             'orgunitlevel4',
@@ -269,21 +268,26 @@ def clean_raw_file(raw_path):
 
 def insert_clean_data(clean_df, raw_path):
 
-    # TODO : Put back the commented out code clarify how these function will be affected by the fact we process one file at a time
-
     f = raw_path.split('/')[-1]
-    f_short = f[-4]
+    f_short = f[:-4]
+
+    year = int(f_short.split('_')[2][:-3])  # Added an int, need to test
+    month = f_short.split('_')[2][-3:]
 
     indicator_map = db.pg_read_lookup('indicator')
     clean_df['dataElement'] = clean_df['dataElement'].map(indicator_map)
 
-    facility_map = db.pg_read_lookup('location')
-    clean_df['orgUnit'] = clean_df['orgUnit'].map(facility_map)
-
     clean_df[['orgUnit', 'dataElement', 'year', 'month', 'value']].to_csv(
         f'data/temp/{f_short}_clean.csv', index=False, header=False)
 
-    db.pg_write_table(f'data/temp/{f_short}_clean.csv', 'repository')
+    db.pg_update_write(
+        year, month, f'data/temp/{f_short}_clean.csv', 'repository')
+
+    # BUG only the reporting files get written to the DB, not the main data ones.
+    # This is originally due to me switching the function above from pg_write_table() to db.pg_update_write()
+
+    df_test = db.pg_read_table_by_indicator()
+    make_note('test_done', START_TIME)
 
 
 def move_csv_files(raw_path, processed_path):
@@ -304,6 +308,6 @@ def clean(raw_path, processed_path):
 
     insert_clean_data(clean_df, raw_path)
 
-    move_csv_files(raw_path, processed_path)
+    #move_csv_files(raw_path, processed_path)
 
     make_note('full data import and cleaning done', START_TIME)
