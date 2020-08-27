@@ -47,7 +47,7 @@ def pg_read_lookup(table_name, param_dic=param_dic):
     return df_dict
 
 
-def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
+def pg_read_table_by_indicator(table_name, indicator=None, param_dic=param_dic):
     """
         This function reads all data by indicators
     """
@@ -73,11 +73,10 @@ def pg_read_table_by_indicator(indicator=None, param_dic=param_dic):
                        month,
                        value
                 FROM (SELECT *
-                     FROM repository {indicator_query}) as "indicators"
+                     FROM {table_name} {indicator_query}) as "indicators" 
                 LEFT JOIN location on indicators.facilitycode = location.facilitycode
 			    LEFT JOIN indicator on indicators.indicatorcode = indicator.indicatorcode;
                 '''
-
     df = pd.read_sql(query, con=conn)
 
     df.columns = ['id', 'orgUnit', 'dataElement', 'year', 'month', 'value']
@@ -116,10 +115,10 @@ def pg_write_table(file_path, table_name, param_dic=param_dic):
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    query = """
-        COPY %s (facilitycode, indicatorcode, year, month, value) FROM STDIN WITH (FORMAT CSV)
+    query = f"""
+        COPY {table_name} (facilitycode, indicatorcode, year, month, value) FROM STDIN WITH (FORMAT CSV)
     """
-    cur.copy_expert(sql=query % table_name, file=f)
+    cur.copy_expert(sql=query, file=f)
 
     cur.execute("commit")
     cur.close()
@@ -132,10 +131,10 @@ def pg_delete_records(year, month, table_name, param_dic=param_dic):
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    query = """
-        DELETE FROM repository WHERE month = %s and year = %s;
+    query = f"""
+        DELETE FROM {table_name} WHERE month = '{month}' and year = {year};
         """
-    cur.execute(query, (month, year,))
+    cur.execute(query)
     cur.execute("commit")
     cur.close()
 
@@ -144,20 +143,9 @@ def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     """
         This function deletes the months data and then inserts in new data
     """
-    pg_delete_records(year, month, table_name, param_dic=param_dic)
+    pg_delete_records(year, month, table_name, param_dic)
 
-    f = open(file_path, "r")
-
-    conn = pg_connect(param_dic)
-    cur = conn.cursor()
-
-    query = """
-        COPY %s (facilitycode, indicatorcode, year, month, value) FROM STDIN WITH (FORMAT CSV)
-    """
-
-    cur.copy_expert(sql=query % table_name, file=f)
-    cur.execute("commit")
-    cur.close()
+    pg_write_table(file_path, table_name, param_dic)
 
   ######################
   #### OUTPUT FILE #####
