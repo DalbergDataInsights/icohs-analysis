@@ -45,8 +45,6 @@ DTYPES = {'Unnamed: 0': int,
           'created': str,
           'lastUpdated': str}
 
-# TODO : define period to clean based on latest API query
-
 FACILITY_IDS = (pd.read_csv(INDICATORS['name_district_map'])['facilitycode']
                 .unique()
                 .tolist())
@@ -102,6 +100,7 @@ def get_reporting_data(path, instance):
             .stack(dropna=False)\
             .reset_index()
     df1.rename(columns={0: 'value', 'level_3': 'dataElement'}, inplace=True)
+    df1['value'] = df1['value'].fillna(0).astype(int)
 
     return df1
 
@@ -203,7 +202,7 @@ def process_date(df):
     return df_new
 
 
-def add_indicators(file_path, instance):
+def clean_add_indicators(file_path, instance):
     make_note(f'Creating additional indicators for {instance}', START_TIME)
     add_dict = get_variable_addition_dict(instance)
     dhis_df = get_data(file_path, instance)
@@ -228,27 +227,30 @@ def clean_raw_file(raw_path):
 
     # Check file name format
 
-    f = raw_path.split('/')[-1]
-    instance = f.split('_')[0]
-    datatype = f.split('_')[1]
+    f = raw_path.split('/')[-1][:-4]
+    instance, table, year, month = f.split('_')
 
-    assert datatype in [
-        'main', 'report'], f'Unexpected data type in file name for {f}: file should be of the format [instance_datatype_YYYYMmm], e.g. new_main_2020Apr'
-
-    assert instance in [
-        'new', 'old'], f'Unexpected dhis2 instance in file name for {f}: file should be of the format [instance_datatype_YYYYMmm], e.g. new_main_2020Apr'
+    assert table in ['main', 'report'],\
+        f'Unexpected data type in file name for {f}: correct format is [instance_datatype_YYYYMmm], e.g. new_main_2020Apr'
+    assert instance in ['new', 'old'],\
+        f'Unexpected dhis2 instance in file name for {f}: correct format is [instance_datatype_YYYYMmm], e.g. new_main_2020Apr'
 
     # import file and get to standard format
 
-    if datatype == 'main':
-        df = add_indicators(raw_path, instance)
-    elif datatype == 'report':
+    if table == 'main':
+        df = clean_add_indicators(raw_path, instance)
+    elif table == 'report':
         df = get_reporting_data(raw_path, instance)
 
-    assert df['year']\
-        .nunique() == 1, f'Data for several years found in file {f}'
-    assert df['month']\
-        .nunique() == 1, f'Data for several months found in file {f}'
+    assert df['year'].nunique() == 1,\
+        f'Data for several years found in file {f}'
+    assert df['month'].nunique() == 1,\
+        f'Data for several months found in file {f}'
+
+    assert int(df['year'].unique()[0]) == int(year),\
+        f'Data from a different year than what file name indicates for {f}'
+    assert df['month'].unique()[0] == month,\
+        f'Data from a different year than what file name indicates for {f}'
 
     make_note(f'data imported for file {f}', START_TIME)
 
@@ -266,48 +268,39 @@ def clean_raw_file(raw_path):
     return df
 
 
-def insert_clean_data(clean_df, raw_path):
-
-    f = raw_path.split('/')[-1]
-    f_short = f[:-4]
-
-    year = int(f_short.split('_')[2][:-3])  # Added an int, need to test
-    month = f_short.split('_')[2][-3:]
-
-    indicator_map = db.pg_read_lookup('indicator')
-    clean_df['dataElement'] = clean_df['dataElement'].map(indicator_map)
-
-    clean_df[['orgUnit', 'dataElement', 'year', 'month', 'value']].to_csv(
-        f'data/temp/{f_short}_clean.csv', index=False, header=False)
-
-    db.pg_update_write(
-        year, month, f'data/temp/{f_short}_clean.csv', 'repository')
-
-    # BUG only the reporting files get written to the DB, not the main data ones.
-    # This is originally due to me switching the function above from pg_write_table() to db.pg_update_write()
-
-    df_test = db.pg_read_table_by_indicator()
-    make_note('test_done', START_TIME)
-
-
-def move_csv_files(raw_path, processed_path):
-    os.rename(raw_path, processed_path)
-
 #########################
 #     Run functions     #
 #########################
 
 
-# new_dhis_path, old_dhis_path, new_dhis_report_path, old_dhis_report_path):
-def clean(raw_path, processed_path):
+def clean(raw_path):
 
     file_name = raw_path.split('/')[-1]
     make_note(f'Starting the cleaning process for {file_name}', START_TIME)
 
     clean_df = clean_raw_file(raw_path)
+    make_note(f'Cleaning of raw file done for {file_name}', START_TIME)
 
-    insert_clean_data(clean_df, raw_path)
+    return clean_df
 
-    #move_csv_files(raw_path, processed_path)
 
-    make_note('full data import and cleaning done', START_TIME)
+def map_to_temp(raw_path, indicator_map, clean_df):
+
+    f = raw_path.split('/')[-1]
+    f_short = f[:-4]
+    instance, table, year, month = f_short.split('_')
+
+    clean_df['dataElement'] = clean_df['dataElement'].map(indicator_map)
+
+    f_path = f'data/temp/{f_short}_clean.csv'
+
+    clean_df[['orgUnit', 'dataElement', 'year', 'month', 'value']].to_csv(
+        f_path, index=False, header=False)
+
+    make_note(f'Creation of temporary csv done for {f}', START_TIME)
+
+    return f_path, year, month, table
+
+
+def move_csv_files(raw_path, processed_path):
+    os.rename(raw_path, processed_path)
