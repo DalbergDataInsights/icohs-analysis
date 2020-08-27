@@ -140,8 +140,6 @@ def add_report_columns(data):
 
     cols = VAR_CORR[VAR_CORR['domain'] !=
                     'REPORT']['identifier'].unique().tolist()
-    # Sample change #TODO remove
-    # cols = set(cols).intersection(set(data.columns))
 
     for x in cols:
         data['i'] = data[x] * 7
@@ -182,18 +180,12 @@ def full_pivot(data, report_data):
 #############################
 
 
-def process(data):
+def process(main, report):  # CHECK NO 'DATA' LEFT
     make_note('Starting the data processing', START_TIME)
-
-    # Isolate the data requiring outlier exclusion
-    report_indics = VAR_CORR[VAR_CORR['domain'] == 'REPORT']['identifier'] \
-        .unique().tolist()
-
-    data_df_noreport = data[~data['dataElement'].isin(report_indics)].copy()
 
     # outlier computation
 
-    pivot_outliers = pivot_stack(data_df_noreport)
+    pivot_outliers = pivot_stack(main)
     make_note('data pivot for outlier exclusion done', START_TIME)
 
     pivot_no_outliers = replace_outliers(pivot_outliers, cutoff=3)
@@ -208,33 +200,24 @@ def process(data):
 
     # Pivoting the data with and without outliers
 
-    data_df_report = data[data['dataElement'].isin(report_indics)].copy()
-
-    with_outliers = full_pivot(data_df_noreport, data_df_report)
-    no_outliers_std = full_pivot(stack_t_noout, data_df_report)
-    no_outliers_iqr = full_pivot(
-        stack_t_noout_iqr, data_df_report)
+    with_outliers = full_pivot(main, report)
+    no_outliers_std = full_pivot(stack_t_noout, report)
+    no_outliers_iqr = full_pivot(stack_t_noout_iqr, report)
 
     # creating the reporting table
 
-    report_flag = data_df_noreport.copy()
+    report_flag = main
     report_flag['reported'] = (report_flag['value'] > 0).astype('int')
     report_flag.drop('value', axis=1, inplace=True)
     report_flag.rename(columns={'reported': 'value'}, inplace=True)
 
-    reporting_original = full_pivot(report_flag, data_df_report)
+    reporting_original = full_pivot(report_flag, report)
     reporting = add_report_columns(reporting_original)
     columns = sorted(reporting.columns)
     reporting = reporting[columns]
 
     reporting.to_csv(INDICATORS['report_data'])
     with_outliers.to_csv(INDICATORS['outlier_data'])
-    with_outliers.to_csv('test.csv')
     no_outliers_std.to_csv(INDICATORS['std_no_outlier_data'])
     no_outliers_iqr.to_csv(INDICATORS['iqr_no_outlier_data'])
     make_note('breakdown in four tables done', START_TIME)
-
-    return (reporting,
-            with_outliers,
-            no_outliers_std,
-            no_outliers_iqr)
