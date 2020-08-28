@@ -213,8 +213,6 @@ def clean_add_indicators(file_path, instance):
 
     dhis_df = process_date(dhis_df)
 
-    make_note(f'Data transformed and cleaned for {instance}', START_TIME)
-
     return dhis_df
 
 # Putting together cleaning steps
@@ -265,6 +263,9 @@ def clean_raw_file(raw_path):
 
     df = df[df['orgUnit'].isin(FACILITY_IDS)]
 
+    if table == 'report':
+        df['value'] = (df['value'] > 0).astype('int')
+
     return df
 
 
@@ -284,13 +285,13 @@ def clean(raw_path):
     return clean_df
 
 
-def map_to_temp(raw_path, indicator_map, clean_df):
+def map_to_temp(raw_path, map, clean_df):
 
     f = raw_path.split('/')[-1]
     f_short = f[:-4]
     instance, table, year, month = f_short.split('_')
 
-    clean_df['dataElement'] = clean_df['dataElement'].map(indicator_map)
+    clean_df['dataElement'] = clean_df['dataElement'].map(map)
 
     f_path = f'data/temp/{f_short}_clean.csv'
 
