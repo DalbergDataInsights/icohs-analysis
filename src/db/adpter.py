@@ -34,6 +34,8 @@ def pg_connect(params_dic=param_dic):
         sys.exit(1)
     return conn
 
+# READ
+
 
 def pg_read_lookup(table_name, param_dic=param_dic):
     """
@@ -66,6 +68,8 @@ def pg_read_table_by_indicator(table_name, indicator=None, param_dic=param_dic):
         print(indicator_code)
         indicator_query = f"WHERE indicatorcode = '{indicator_code}'"
 
+    # TODO : change name to code
+
     query = f'''SELECT districtname,
                        facilityname,
                        indicatorname,
@@ -82,28 +86,94 @@ def pg_read_table_by_indicator(table_name, indicator=None, param_dic=param_dic):
     df.columns = ['id', 'orgUnit', 'dataElement', 'year', 'month', 'value']
     return df
 
+# WRITE AND UPDDATE
+
 
 def pg_write_lookup(file_path, table_name, param_dic=param_dic):
     """
-        This function upload csv to a target lookup table
+        Check if any new indicators/facilities were added and upload new ones to a target lookup table
     """
-    f = open(file_path, "r")
+    # Check the status of teh lookup table in the database, compare with latest user input
 
     conn = pg_connect(param_dic)
-    cur = conn.cursor()
 
-    query = """
-            COPY %s FROM STDIN WITH
-                CSV
-                HEADER
-                DELIMITER AS ','
-            """
-    try:
-        cur.copy_expert(sql=query % table_name, file=f)
+    df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
+    df_new = pd.read_csv(file_path)
+
+    # TODO review that inelegant piece of code
+
+    if table_name == 'indicator':
+        col1 = 'indicatorname'
+        col2 = '0'
+    elif table_name == 'location':
+        col1 = 'facilitycode'
+        col2 = col1
+
+    current = set(df_current[col1].unique())
+    new = set(df_new[col2].unique())
+    add = new.difference(current)
+
+    # If any additions, add to the lookup
+
+    if len(add) > 0:
+        # TODO : delete this to_csv step, and revise teh query accordingly
+        # TODO : Double check this will only add what I need and note try to replace what is there
+
+        df_add = df_new[df_new[col2].isin(add)]
+        file_path_add = f'{file_path[:-4]}_addition.csv'
+
+        df_add.to_csv(file_path_add, index=False)
+
+        cur = conn.cursor()
+        f = open(file_path_add, "r")
+
+        query = """
+                COPY %s FROM STDIN WITH
+                    CSV
+                    HEADER
+                    DELIMITER AS ','
+                """
+        try:
+            cur.copy_expert(sql=query % table_name, file=f)
+            cur.execute("commit")
+        except Exception as e:
+            print(e)
+        cur.close()
+
+        os.remove(file_path_add)
+
+
+def pg_delete_lookup(file_path, table_name, param_dic=param_dic):
+    """
+        Check if any new indicators/facilities were remove and delete those from target lookup table
+    """
+
+    conn = pg_connect(param_dic)
+
+    df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
+    df_new = pd.read_csv(file_path)
+
+    # TODO review that inelegant piece of code
+
+    if table_name == 'indicator':
+        col1 = 'indicatorname'
+        col2 = '0'
+    elif table_name == 'location':
+        col1 = 'facilitycode'
+        col2 = col1
+
+    current = set(df_current[col1].unique())
+    new = set(df_new[col2].unique())
+    remove = tuple(current.difference(new))
+
+    if len(remove) > 0:
+        cur = conn.cursor()
+
+        query = f"""DELETE FROM {table_name} WHERE {col1} in {remove};"""
+
+        cur.execute(query)
         cur.execute("commit")
-    except Exception as e:
-        print(e)
-    cur.close()
+        cur.close()
 
 
 def pg_write_table(file_path, table_name, param_dic=param_dic):
@@ -131,9 +201,8 @@ def pg_delete_records(year, month, table_name, param_dic=param_dic):
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    query = f"""
-        DELETE FROM {table_name} WHERE month = '{month}' and year = {year};
-        """
+    query = f"""DELETE FROM {table_name} WHERE month = '{month}' and year = {year};"""
+
     cur.execute(query)
     cur.execute("commit")
     cur.close()
