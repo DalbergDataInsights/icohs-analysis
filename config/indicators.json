@@ -90,18 +90,11 @@
                 "value": "data/Districts.csv"
             },
             {
-                "description": "Data from the api",
-                "identifier": "Data from the Api",
-                "name": "Data from the api",
-                "type": "string",
-                "value": "data/corrected_data_facility.csv"
-            },
-            {
                 "description": "path to Indicators database mapping",
-                "identifier": "indicators database mapping",
-                "name": "indicators database mapping",
+                "identifier": "indicators_map",
+                "name": "indicators_map",
                 "type": "string",
-                "value": "data/indicator.csv"
+                "value": "data/temp/indicator.csv"
             }
         ],
         "output": [
