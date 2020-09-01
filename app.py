@@ -60,8 +60,8 @@ if __name__ == '__main__':
                            table_name=table)
 
         # Move orginal data from the 'raw' to the 'prcessed' folder
-        # TODO Removing testing comment out
-        # clean.move_csv_files(raw_path, processed_path)
+
+        clean.move_csv_files(raw_path, processed_path)
 
         make_note(f'Cleaning and database insertion done for file {f}',
                   START_TIME)
@@ -78,8 +78,6 @@ if __name__ == '__main__':
 
     process.process(main=db.pg_read_table_by_indicator('main'),
                     report=db.pg_read_table_by_indicator('report'))
-
-    # TODO rewrite the lookup for indicators
 
     # Writing to the database
 
