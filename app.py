@@ -28,7 +28,6 @@ if __name__ == '__main__':
     db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
                        table_name='location')
 
-    # TODO: Making sure the data we need is here with an assert
     # Checking that both a reporting and a main data files are there
 
     files = os.listdir(INDICATORS['raw_data'])
