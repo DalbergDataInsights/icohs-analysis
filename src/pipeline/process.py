@@ -101,7 +101,7 @@ def replace_outliers_iqr(pivot_outliers, k):
 def pivot_stack_post_process(pivot):
     '''Stack outlier corrected data'''
 
-    stack = pivot.stack(level=[0, 1, 2], dropna=False).reset_index()
+    stack = pivot.stack(level=[0, 1, 2], dropna=True).reset_index()
     stack.rename(columns={0: 'value'}, inplace=True)
     stack.drop('type', axis=1, inplace=True)
     stack['value'] = stack['value'].astype(dtype='float64')
