@@ -49,41 +49,27 @@ def pg_read_lookup(table_name, param_dic=param_dic):
     return df_dict
 
 
-def pg_read_table_by_indicator(table_name, indicator=None, param_dic=param_dic):
+def pg_read_table_by_indicator(table_name, param_dic=param_dic):
     """
         This function reads all data by indicators
     """
 
     conn = pg_connect(param_dic)
 
-    indicator_query = ''
+    # TODO : change name to code  and clarify bug
 
-    if indicator is not None:
-        # "select indicatorcode from "indicator" where indicatorname = "malaria_tests";"
-        indicator_code_query = f'''SELECT "indicatorcode" FROM "indicator" WHERE indicator.indicatorname LIKE '{indicator}';'''
-        cursor = conn.cursor()
-        cursor.execute(indicator_code_query)
-
-        indicator_code = cursor.fetchone()[0]
-        print(indicator_code)
-        indicator_query = f"WHERE indicatorcode = '{indicator_code}'"
-
-    # TODO : change name to code
-
-    query = f'''SELECT districtname,
-                       facilityname,
+    query = f'''SELECT facilitycode,
                        indicatorname,
                        year,
                        month,
                        value
                 FROM (SELECT *
-                     FROM {table_name} {indicator_query}) as "indicators" 
-                LEFT JOIN location on indicators.facilitycode = location.facilitycode
-			    LEFT JOIN indicator on indicators.indicatorcode = indicator.indicatorcode;
+                    FROM {table_name}) as "tempdata" 
+			        LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode;
                 '''
     df = pd.read_sql(query, con=conn)
 
-    df.columns = ['id', 'orgUnit', 'dataElement', 'year', 'month', 'value']
+    df.columns = ['orgUnit', 'dataElement', 'year', 'month', 'value']
     return df
 
 # WRITE AND UPDDATE
