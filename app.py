@@ -28,11 +28,15 @@ if __name__ == '__main__':
     db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
                        table_name='location')
 
-    # Checking that both a reporting and a main data files are there
+    # Adding the population data
 
-    files = os.listdir(INDICATORS['raw_data'])
+    clean.clean_pop_to_temp(INDICATORS['pop'])
+
+    db.pg_update_pop(file_path='data/temp/pop.csv')
 
     # cleaning the data and writing it to the database file by file
+
+    files = os.listdir(INDICATORS['raw_data'])
 
     for f in files:
 
