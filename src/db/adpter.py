@@ -111,20 +111,20 @@ def pg_write_lookup(file_path, table_name, param_dic=param_dic):
         df_add.to_csv(file_path_add, index=False)
 
         cur = conn.cursor()
-        f = open(file_path_add, "r")
 
-        query = """
-                COPY %s FROM STDIN WITH
-                    CSV
-                    HEADER
-                    DELIMITER AS ','
-                """
-        try:
-            cur.copy_expert(sql=query % table_name, file=f)
-            cur.execute("commit")
-        except Exception as e:
-            print(e)
-        cur.close()
+        with open(file_path_add, "r") as f:
+            query = """
+                    COPY %s FROM STDIN WITH
+                        CSV
+                        HEADER
+                        DELIMITER AS ','
+                    """
+            try:
+                cur.copy_expert(sql=query % table_name, file=f)
+                cur.execute("commit")
+            except Exception as e:
+                print(e)
+            cur.close()
 
         os.remove(file_path_add)
 
@@ -201,6 +201,25 @@ def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     pg_delete_records(year, month, table_name, param_dic)
 
     pg_write_table(file_path, table_name, param_dic)
+
+
+def pg_update_pop(file_path, param_dic=param_dic):
+
+    f = open(file_path, "r")
+
+    conn = pg_connect(param_dic)
+    cur = conn.cursor()
+
+    delete_query = f"""DELETE FROM pop;"""
+    cur.execute(delete_query)
+
+    write_query = f"""
+        COPY pop (DistrictName, year, Male, Female, Total, Age) FROM STDIN WITH (FORMAT CSV)
+    """
+    cur.copy_expert(sql=write_query, file=f)
+
+    cur.execute("commit")
+    cur.close()
 
   ######################
   #### OUTPUT FILE #####
