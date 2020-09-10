@@ -273,6 +273,25 @@ def clean_raw_file(raw_path):
 #     Run functions     #
 #########################
 
+def clean_pop_to_temp(pop_path):
+
+    pop = pd.read_csv(pop_path)
+
+    district_name_dict = {'SEMBABULE': 'SSEMBABULE',
+                          'MADI-OKOLLO': 'MADI OKOLLO', 'LUWEERO': 'LUWERO'}
+    pop['District'] = pop['District'].apply(lambda x: x.upper())
+    pop['District'].replace(district_name_dict, inplace=True)
+
+    pop['Age'] = pop['Single Years'].apply(
+        lambda x: ' '.join(x.split(' ')[:1]))
+    pop['Age'].replace({'80+': '80'}, inplace=True)
+    pop['Age'] = pop['Age'].astype('int')
+
+    pop.drop(['Single Years', 'Year2', 'FY'], axis=1, inplace=True)
+
+    pop[['District', 'Year', 'Male', 'Female', 'Total', 'Age']].to_csv(
+        'data/temp/pop.csv', index=False, header=False)
+
 
 def clean(raw_path):
 
