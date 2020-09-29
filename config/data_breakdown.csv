@@ -1,0 +1,235 @@
+,name,instance,domain,identifier,display_name,type,index,breakdown
+0,105-CL01. BCG,new,EPI,bcg,BCG vaccines administered,float,105-CL01. BCG,"['1-4Yrs, Outreach' '1-4Yrs, Static' '5-14Yrs, Outreach' '5-14Yrs, Static'
+ '<1Yr, Outreach' '<1Yr, Static']"
+1,105-2.11 BCG,old,EPI,bcg,BCG vaccines administered,float,105-2.11 BCG,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
+ '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
+ 'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
+ 'Under 1, Static, Female' 'Under 1, Static, Male']"
+2,105-CL08. DPT-HepB+Hib 1,new,EPI,dpt1,DPT1 vaccines administered,float,105-CL08. DPT-HepB+Hib 1,"['1-4Yrs, Outreach' '1-4Yrs, Static' '5-14Yrs, Outreach' '5-14Yrs, Static'
+ '<1Yr, Outreach' '<1Yr, Static']"
+3,105-2.11 DPT-HepB+Hib 1,old,EPI,dpt1,DPT1 vaccines administered,float,105-2.11 DPT-HepB+Hib 1,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
+ '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
+ 'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
+ 'Under 1, Static, Female' 'Under 1, Static, Male']"
+4,105-CL10. DPT-HepB+Hib 3,new,EPI,dpt3,DPT3 vaccines administered,float,105-CL10. DPT-HepB+Hib 3,"['1-4Yrs, Outreach' '1-4Yrs, Static' '5-14Yrs, Outreach' '5-14Yrs, Static'
+ '<1Yr, Outreach' '<1Yr, Static']"
+5,105-2.11 DPT-HepB+Hib 3,old,EPI,dpt3,DPT3 vaccines administered,float,105-2.11 DPT-HepB+Hib 3,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
+ '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
+ 'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
+ 'Under 1, Static, Female' 'Under 1, Static, Male']"
+6,105-CL16. Measles (MR1),new,EPI,mr1,HPV1 vaccines administered,float,105-CL16. Measles (MR1),"['1-4Yrs, Outreach' '1-4Yrs, Static' '5-14Yrs, Outreach' '5-14Yrs, Static'
+ '<1Yr, Outreach' '<1Yr, Static']"
+7,105-2.11 Measles,old,EPI,mr1,HPV1 vaccines administered,float,105-2.11 Measles,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
+ '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
+ 'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
+ 'Under 1, Static, Female' 'Under 1, Static, Male']"
+8,105-CL11. PCV 1,new,EPI,pcv1,HPV2 vaccines administered,float,105-CL11. PCV 1,"['1-4Yrs, Outreach' '1-4Yrs, Static' '5-14Yrs, Outreach' '5-14Yrs, Static'
+ '<1Yr, Outreach' '<1Yr, Static']"
+9,105-2.11 PCV 1,old,EPI,pcv1,HPV2 vaccines administered,float,105-2.11 PCV 1,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
+ '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
+ 'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
+ 'Under 1, Static, Female' 'Under 1, Static, Male']"
+10,105-CL13. PCV 3,new,EPI,pcv3,MR1 vaccines administered,float,105-CL13. PCV 3,"['1-4Yrs, Outreach' '1-4Yrs, Static' '5-14Yrs, Outreach' '5-14Yrs, Static'
+ '<1Yr, Outreach' '<1Yr, Static']"
+11,105-2.11 PCV 3,old,EPI,pcv3,MR1 vaccines administered,float,105-2.11 PCV 3,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
+ '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
+ 'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
+ 'Under 1, Static, Female' 'Under 1, Static, Male']"
+12,105-VP01. HPV1-Dose 1,new,EPI,hpv1,PCV1 vaccines administered,float,105-VP01. HPV1-Dose 1,['Community' 'Facility' 'School']
+13,105-2.10 HPV1-Dose 1,old,EPI,hpv1,PCV1 vaccines administered,float,105-2.10 HPV1-Dose 1,"['Community, 15 Years and above' 'Community, 9-14 Years'
+ 'School, 10 Years' 'School, 11 Years' 'School, 12 Years'
+ 'School, 13 Years' 'School, 14 Years' 'School, 9 Years']"
+14,105-VP02. HPV2-Dose 2,new,EPI,hpv2,PCV3 vaccines administered,float,105-VP02. HPV2-Dose 2,['Community' 'Facility' 'School']
+15,105-2.10 HPV2-Dose 2,old,EPI,hpv2,PCV3 vaccines administered,float,105-2.10 HPV2-Dose 2,"['Community, 15 Years and above' 'Community, 9-14 Years'
+ 'School, 10 Years' 'School, 11 Years' 'School, 12 Years'
+ 'School, 13 Years' 'School, 14 Years' 'School, 9 Years']"
+16,105-TD01. Td1-Dose 1,new,EPI,td1,TD1 vaccines administered,float,105-TD01. Td1-Dose 1,"['Non-Pregnant Women, Outreach' 'Non-Pregnant Women, School'
+ 'Non-Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+17,105-2.9 Tetanus Immunization Dose 1,old,EPI,td1,TD1 vaccines administered,float,105-2.9 Tetanus Immunization Dose 1,"['Immunization in School, Outreach' 'Non Pregnant Women, Outreach'
+ 'Non Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+18,105-TD02. Td2-Dose 2,new,EPI,td2,TD2 vaccines administered,float,105-TD02. Td2-Dose 2,"['Non-Pregnant Women, Outreach' 'Non-Pregnant Women, School'
+ 'Non-Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+19,105-2.9 Tetanus Immunization Dose 2,old,EPI,td2,TD2 vaccines administered,float,105-2.9 Tetanus Immunization Dose 2,"['Immunization in School, Outreach' 'Non Pregnant Women, Outreach'
+ 'Non Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+20,105-TD03. Td3-Dose 3,new,EPI,td3,TD3 vaccines administered,float,105-TD03. Td3-Dose 3,"['Non-Pregnant Women, Outreach' 'Non-Pregnant Women, School'
+ 'Non-Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+21,105-2.9 Tetanus Immunization Dose 3,old,EPI,td3,TD3 vaccines administered,float,105-2.9 Tetanus Immunization Dose 3,"['Immunization in School, Outreach' 'Non Pregnant Women, Outreach'
+ 'Non Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+22,105-TD04. Td4-Dose 4,new,EPI,td4_5,TD4-5 vaccines administered,float,105-TD04. Td4-Dose 4,"['Non-Pregnant Women, Outreach' 'Non-Pregnant Women, School'
+ 'Non-Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+23,105-TD05. Td5-Dose 5,new,EPI,td4_5,TD4-5 vaccines administered,float,105-TD05. Td5-Dose 5,"['Non-Pregnant Women, Outreach' 'Non-Pregnant Women, School'
+ 'Non-Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+24,105-2.9 Tetanus Immunization Dose 4,old,EPI,td4_5,TD4-5 vaccines administered,float,105-2.9 Tetanus Immunization Dose 4,"['Immunization in School, Outreach' 'Non Pregnant Women, Outreach'
+ 'Non Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+25,105-2.9 Tetanus Immunization Dose 5,old,EPI,td4_5,TD4-5 vaccines administered,float,105-2.9 Tetanus Immunization Dose 5,"['Immunization in School, Outreach' 'Non Pregnant Women, Outreach'
+ 'Non Pregnant Women, Static' 'Pregnant Women, Outreach'
+ 'Pregnant Women, Static']"
+26,108-CI02. No. of admissions,new,GENERAL,ipd_attendance,inpatient admissions,float,108-CI02. No. of admissions,"['AcuteCareUnit' 'ENT' 'Emergency Ward' 'Eye' 'FemaleMedical'
+ 'FemaleSurgical' 'Gynaecology' 'Intensive Care Unit (ICU)' 'MaleMedical'
+ 'MaleSurgical' 'Maternity_Obstetric' 'Nutrition' 'Orthopaedic'
+ 'Other wards' 'Paediatrics' 'Palliative' 'Psychiatric' 'TB']"
+27,108-1 Admissions,old,GENERAL,ipd_attendance,inpatient admissions,float,108-1 Admissions,"['Acute Care unit ' 'ENT ward' 'Emergency ward' 'Eye ward'
+ 'Female medical ward' 'Female surgical ward' 'Gynaecology ward'
+ 'Intensive care ward' 'Male medical ward' 'Male surgical ward'
+ 'Maternity ward' 'Nutrition ward' 'Orthopaedic ward' 'Other wards'
+ 'Paediatric ward' 'Palliative ward' 'Psychiatric ward' 'TB ward']"
+28,105-OA01. New attendance,new,GENERAL,opd_attendance,outpatient visits,float,105-OA01. New attendance,"['0-28Dys, Female' '0-28Dys, Male' '10-19Yrs, Female' '10-19Yrs, Male'
+ '20+Yrs, Female' '20+Yrs, Male' '29Dys-4Yrs, Female' '29Dys-4Yrs, Male'
+ '5-9Yrs, Female' '5-9Yrs, Male']"
+29,105-OA02. Re-attendance,new,GENERAL,opd_attendance,outpatient visits,float,105-OA02. Re-attendance,"['0-28Dys, Female' '0-28Dys, Male' '10-19Yrs, Female' '10-19Yrs, Male'
+ '20+Yrs, Female' '20+Yrs, Male' '29Dys-4Yrs, Female' '29Dys-4Yrs, Male'
+ '5-9Yrs, Female' '5-9Yrs, Male']"
+30,105-1.1 OPD New Attendance,old,GENERAL,opd_attendance,outpatient visits,float,105-1.1 OPD New Attendance,"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+31,105-1.1 OPD Re-Attendance,old,GENERAL,opd_attendance,outpatient visits,float,105-1.1 OPD Re-Attendance,"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+32,"105-AN32. HIV+ pregnant women initiated on ART for eMTCT at any visit irrespective of when tested HIV+ (TRR, TRR+,TRR‚àö)",new,HIV,anc_initiated_hiv,HIV-positive pregnant women initiated on ART,float,"105-AN32. HIV+ pregnant women initiated on ART for eMTCT at any visit irrespective of when tested HIV+ (TRR, TRR+,TRR‚àö)",['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+33,105-2.1 HIV+ Pregnant Women initiated on ART for EMTCT (ART),old,HIV,anc_initiated_hiv,HIV-positive pregnant women initiated on ART,float,105-2.1 HIV+ Pregnant Women initiated on ART for EMTCT (ART),['default']
+34,105-AN29a. Pregnant women newly tested for HIV in this pregnancy at any ANC visit (TR & TRR) - total,new,HIV,anc_tested_hiv,pregnant women newly tested for HIV,float,105-AN29a. Pregnant women newly tested for HIV in this pregnancy at any ANC visit (TR & TRR) - total,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+35,105-2.1 Pregnant Women newly tested for HIV this pregnancy(TR & TRR),old,HIV,anc_tested_hiv,pregnant women newly tested for HIV,float,105-2.1 Pregnant Women newly tested for HIV this pregnancy(TR & TRR),['10-19 Years' '20-24 Years' '>=25 Years']
+36,105-AN30a. Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any ANC Visit - Total,new,HIV,anc_tested_hiv_positive,pregnant women newly tested positive for HIV,float,105-AN30a. Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any ANC Visit - Total,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+37,105-2.1 Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any visit,old,HIV,anc_tested_hiv_positive,pregnant women newly tested positive for HIV,float,105-2.1 Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any visit,['10-19 Years' '20-24 Years' '>=25 Years']
+38,105-HT03a3. Total Linked to HIV Care,new,HIV,hiv_positive_linked,HIV-positive individuals linked to care,float,105-HT03a3. Total Linked to HIV Care,"['15-19Yrs, Female' '15-19Yrs, Male' '20-24Yrs, Female' '20-24Yrs, Male'
+ '25-29Yrs, Female' '25-29Yrs, Male' '30-34Yrs, Female' '30-34Yrs, Male'
+ '35-39Yrs, Female' '35-39Yrs, Male' '40-44Yrs, Female' '40-44Yrs, Male'
+ '45-49Yrs, Female' '45-49Yrs, Male' '50+Yrs, Female' '50+Yrs, Male']"
+39,105-4 Number of clients who have been linked to care,old,HIV,hiv_positive_linked,HIV-positive individuals linked to care,float,105-4 Number of clients who have been linked to care,"['10-<15 Years, Female' '10-<15 Years, Male' '15-<19 Years, Female'
+ '15-<19 Years, Male' '18 Mths-<5 Years, Female' '18 Mths-<5 Years, Male'
+ '19-<49 Years, Female' '19-<49 Years, Male' '5-<10 Years, Female'
+ '5-<10 Years, Male' '>49 Years, Female' '>49 Years, Male']"
+40,105-MA17. Women initiating ART in maternity - HIV+,new,HIV,mat_initiated_hiv,HIV-positive women initiated on ART in maternity,float,105-MA17. Women initiating ART in maternity - HIV+,['default']
+41,105-2.2 HIV+ women initiating ART in maternity,old,HIV,mat_initiated_hiv,HIV-positive women initiated on ART in maternity,float,105-2.2 HIV+ women initiating ART in maternity,['default']
+42,105-MA15a. Women tested for HIV in labour 1st time this Pregnancy - Total (TR & TRR),new,HIV,mat_tested_hiv,pregnant women tested for HIV in labor,float,105-MA15a. Women tested for HIV in labour 1st time this Pregnancy - Total (TR & TRR),['default']
+43,105-MA16a. Women re-tested for HIV in labour - Total (TR & TRR),new,HIV,mat_tested_hiv,pregnant women tested for HIV in labor,float,105-MA16a. Women re-tested for HIV in labour - Total (TR & TRR),['default']
+44,105-2.2a Women tested for HIV in labour (1st time this Pregnancy),old,HIV,mat_tested_hiv,pregnant women tested for HIV in labor,float,105-2.2a Women tested for HIV in labour (1st time this Pregnancy),['default']
+45,105-2.2b Women tested for HIV in labour (Retest this Pregnancy),old,HIV,mat_tested_hiv,pregnant women tested for HIV in labor,float,105-2.2b Women tested for HIV in labour (Retest this Pregnancy),['default']
+46,105-MA15b. Women tested for HIV in labour 1st time this Pregnancy - HIV+ (TRR),new,HIV,mat_tested_hiv_positive,pregnant women tested positive for HIV in labor,float,105-MA15b. Women tested for HIV in labour 1st time this Pregnancy - HIV+ (TRR),['default']
+47,105-MA16b. Women re-tested for HIV in labour - HIV+ (TRR+),new,HIV,mat_tested_hiv_positive,pregnant women tested positive for HIV in labor,float,105-MA16b. Women re-tested for HIV in labour - HIV+ (TRR+),['default']
+48,105-2.2a Women testing HIV+ in labour (1st time this Pregnancy),old,HIV,mat_tested_hiv_positive,pregnant women tested positive for HIV in labor,float,105-2.2a Women testing HIV+ in labour (1st time this Pregnancy),['default']
+49,105-2.2b Women testing HIV+ in labour (Retest this Pregnancy),old,HIV,mat_tested_hiv_positive,pregnant women tested positive for HIV in labor,float,105-2.2b Women testing HIV+ in labour (Retest this Pregnancy),['default']
+50,105-PN05a. HIV+ women initiating ART in Postnatal - Total,new,HIV,pnc_initiated_hiv,HIV-positive women initiated on ART in PNC,float,105-PN05a. HIV+ women initiating ART in Postnatal - Total,['default']
+51,105-2.3 HIV+ women initiating ART in PNC,old,HIV,pnc_initiated_hiv,HIV-positive women initiated on ART in PNC,float,105-2.3 HIV+ women initiating ART in PNC,['default']
+52,105-PN03a. Breastfeedng mothers tested for HIV 1st time during Postnatal - Total (TR & TRR),new,HIV,pnc_tested_hiv,breastfeeding women newly tested for HIV in PNC,float,105-PN03a. Breastfeedng mothers tested for HIV 1st time during Postnatal - Total (TR & TRR),['default']
+53,105-2.3a Breastfeeding mothers tested for HIV(1st test),old,HIV,pnc_tested_hiv,breastfeeding women newly tested for HIV in PNC,float,105-2.3a Breastfeeding mothers tested for HIV(1st test),['default']
+54,105-PN03b. Breastfeedng mothers tested for HIV 1st time during Postnatal - TRR,new,HIV,pnc_tested_hiv_positive,breastfeeding women newly tested HIV positive in PNC,float,105-PN03b. Breastfeedng mothers tested for HIV 1st time during Postnatal - TRR,['default']
+55,105-2.3a Breastfeeding mothers newly testing HIV+(1st test),old,HIV,pnc_tested_hiv_positive,breastfeeding women newly tested HIV positive in PNC,float,105-2.3a Breastfeeding mothers newly testing HIV+(1st test),['default']
+56,105-2.3b Breastfeeding mothers newly testing HIV+(retest),old,HIV,pnc_tested_hiv_positive,breastfeeding women newly tested HIV positive in PNC,float,105-2.3b Breastfeeding mothers newly testing HIV+(retest),['default']
+57,105-HT03a1. Total Tested for HIV,new,HIV,tested_hiv,individuals tested for HIV,float,105-HT03a1. Total Tested for HIV,"['1-4Yrs, Female' '1-4Yrs, Male' '10-14Yrs, Female' '10-14Yrs, Male'
+ '15-19Yrs, Female' '15-19Yrs, Male' '20-24Yrs, Female' '20-24Yrs, Male'
+ '25-29Yrs, Female' '25-29Yrs, Male' '30-34Yrs, Female' '30-34Yrs, Male'
+ '35-39Yrs, Female' '35-39Yrs, Male' '40-44Yrs, Female' '40-44Yrs, Male'
+ '45-49Yrs, Female' '45-49Yrs, Male' '5-9Yrs, Female' '5-9Yrs, Male'
+ '50+Yrs, Female' '50+Yrs, Male' '<1Yr, Female' '<1Yr, Male']"
+58,105-4 Number of Individuals Tested,old,HIV,tested_hiv,individuals tested for HIV,float,105-4 Number of Individuals Tested,"['10-<15 Years, Female' '10-<15 Years, Male' '15-<19 Years, Female'
+ '15-<19 Years, Male' '18 Mths-<5 Years, Female' '18 Mths-<5 Years, Male'
+ '19-<49 Years, Female' '19-<49 Years, Male' '5-<10 Years, Female'
+ '5-<10 Years, Male' '>49 Years, Female' '>49 Years, Male']"
+59,105-HT03a2. Total New HIV+,new,HIV,tested_hiv_positive,individuals tested positive for HIV,float,105-HT03a2. Total New HIV+,"['10-14Yrs, Female' '15-19Yrs, Female' '15-19Yrs, Male' '20-24Yrs, Female'
+ '20-24Yrs, Male' '25-29Yrs, Female' '25-29Yrs, Male' '30-34Yrs, Female'
+ '30-34Yrs, Male' '35-39Yrs, Female' '35-39Yrs, Male' '40-44Yrs, Female'
+ '40-44Yrs, Male' '45-49Yrs, Female' '45-49Yrs, Male' '50+Yrs, Female'
+ '50+Yrs, Male']"
+60,105-4 Number of Individuals who tested HIV positive,old,HIV,tested_hiv_positive,individuals tested positive for HIV,float,105-4 Number of Individuals who tested HIV positive,"['10-<15 Years, Female' '10-<15 Years, Male' '15-<19 Years, Female'
+ '15-<19 Years, Male' '18 Mths-<5 Years, Female' '18 Mths-<5 Years, Male'
+ '19-<49 Years, Female' '19-<49 Years, Male' '5-<10 Years, Female'
+ '5-<10 Years, Male' '>49 Years, Female' '>49 Years, Male']"
+61,033B-CD01a. Malaria (diagnosed)  - Cases,new,MAL,malaria_cases,individuals diagnosed with Malaria,float,033B-CD01a. Malaria (diagnosed)  - Cases,['default']
+62,Malaria Cases - WEP,old,MAL,malaria_cases,individuals diagnosed with Malaria,float,Malaria Cases - WEP,['default']
+63,033B-MA06. Not tested cases treated,new,MAL,malaria_cases_treated,individuals treated for Malaria,float,033B-MA06. Not tested cases treated,['default']
+64,033B-MA07. RDT Negative Cases Treated,new,MAL,malaria_cases_treated,individuals treated for Malaria,float,033B-MA07. RDT Negative Cases Treated,['default']
+65,033B-MA08. RDT Positive Cases Treated,new,MAL,malaria_cases_treated,individuals treated for Malaria,float,033B-MA08. RDT Positive Cases Treated,['default']
+66,033B-MA09. Microscopy Negative Cases Treated,new,MAL,malaria_cases_treated,individuals treated for Malaria,float,033B-MA09. Microscopy Negative Cases Treated,['default']
+67,033B-MA10. Microscopy Positive Cases Treated,new,MAL,malaria_cases_treated,individuals treated for Malaria,float,033B-MA10. Microscopy Positive Cases Treated,['default']
+68,Malaria treated - WEP,old,MAL,malaria_cases_treated,individuals treated for Malaria,float,Malaria treated - WEP,"['Microscopy Negative Cases Treated' 'Microscopy Positive Cases Treated'
+ 'Not Tested Cases Treated' 'RDT Negative Cases Treated'
+ 'RDT Positive Cases Treated']"
+69,033B-CD01b. Malaria (diagnosed) - Deaths,new,MAL,malaria_deaths,malaria deaths,float,033B-CD01b. Malaria (diagnosed) - Deaths,['default']
+70,Malaria Deaths - WEP,old,MAL,malaria_deaths,malaria deaths,float,Malaria Deaths - WEP,['default']
+71,033B-MA02. Cases Tested with RDT,new,MAL,malaria_tests,individuals tested for Malaria,float,033B-MA02. Cases Tested with RDT,['default']
+72,033B-MA04. Cases Tested with Microscopy,new,MAL,malaria_tests,individuals tested for Malaria,float,033B-MA04. Cases Tested with Microscopy,['default']
+73,Malaria tests - WEP,old,MAL,malaria_tests,individuals tested for Malaria,float,Malaria tests - WEP,"['Microscopy Positive Cases' 'Microscopy Tested Cases' 'RDT Positve Cases'
+ 'RDT Tested Cases' 'Suspected Malaria (fever)']"
+74,105-AN01a. ANC 1st Visit for women,new,MNCH,1st_anc_visits,women attending their first ANC visit,float,105-AN01a. ANC 1st Visit for women,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+75,105-2.1 A1:ANC 1st Visit for women,old,MNCH,1st_anc_visits,women attending their first ANC visit,float,105-2.1 A1:ANC 1st Visit for women,['10-19 Years' '20-24 Years' '>=25 Years']
+76,105-AN02. ANC 4th Visit for women,new,MNCH,4th_anc_visits,women attending their fourth ANC visit,float,105-AN02. ANC 4th Visit for women,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+77,105-2.1 A2:ANC 4th Visit for women,old,MNCH,4th_anc_visits,women attending their fourth ANC visit,float,105-2.1 A2:ANC 4th Visit for women,['10-19 Years' '20-24 Years' '>=25 Years']
+78,105-MA04a. Deliveries in unit - Total,new,MNCH,births,in-facility births,float,105-MA04a. Deliveries in unit - Total,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+79,105-2.2a Deliveries in unit,old,MNCH,births,in-facility births,float,105-2.2a Deliveries in unit,['10-19 Years' '20-24 Years' '>=25 Years']
+80,105-MA04c1. Deliveries in unit - Fresh still birth - Total,new,MNCH,births_fresh_stillbirth,in-facility fresh stillbirths,float,105-MA04c1. Deliveries in unit - Fresh still birth - Total,['default']
+81,105-2.2b Deliveries in unit(Fresh Still births),old,MNCH,births_fresh_stillbirth,in-facility fresh stillbirths,float,105-2.2b Deliveries in unit(Fresh Still births),['default']
+82,105-MA04b1. Deliveries in unit -Live births - Total,new,MNCH,births_live,in-facility live births,float,105-MA04b1. Deliveries in unit -Live births - Total,['default']
+83,105-2.2d Deliveries in unit(Live Births),old,MNCH,births_live,in-facility live births,float,105-2.2d Deliveries in unit(Live Births),['default']
+84,105-MA04d1. Deliveries in unit - Macerated still birth - Total,new,MNCH,births_macerated_stillbirth,in-facility macerated stillbirths,float,105-MA04d1. Deliveries in unit - Macerated still birth - Total,['default']
+85,105-2.2c Deliveries in unit(Macerated still births),old,MNCH,births_macerated_stillbirth,in-facility macerated stillbirths,float,105-2.2c Deliveries in unit(Macerated still births),['default']
+86,105-MA01. Admissions,new,MNCH,maternity_admissions,maternal admissions,float,105-MA01. Admissions,['default']
+87,105-2.2 Admissions,old,MNCH,maternity_admissions,maternal admissions,float,105-2.2 Admissions,['default']
+88,105-MA11. Newborn deaths (0-7 days),new,MNCH,newborn_deaths,newborn deaths,float,105-MA11. Newborn deaths (0-7 days),['default']
+89,105-2.2 Newborn deaths (0-7days),old,MNCH,newborn_deaths,newborn deaths,float,105-2.2 Newborn deaths (0-7days),['default']
+90,105-PN01a. Post Natal Attendances - Mother,new,MNCH,postnatal_visits,post-natal visits,float,105-PN01a. Post Natal Attendances - Mother,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs']
+91,105-2.3 Postnatal Attendances,old,MNCH,postnatal_visits,post-natal visits,float,105-2.3 Postnatal Attendances,"['10-19 Years' '20-24 Years' '6 Days' '6 Hours' '6 Months' '6 Weeks'
+ '>=25 Years']"
+92,105-MA04d2. Deliveries in unit - Macerated still birth - less than 2.5kg,new,NUT,low_weight_births,low weight births,float,105-MA04d2. Deliveries in unit - Macerated still birth - less than 2.5kg,['default']
+93,105-MA04c2. Deliveries in unit - Fresh still birth - less than 2.5kg,new,NUT,low_weight_births,low weight births,float,105-MA04c2. Deliveries in unit - Fresh still birth - less than 2.5kg,['default']
+94,105-MA04b2. Deliveries in unit -Live births - less than 2.5kg,new,NUT,low_weight_births,low weight births,float,105-MA04b2. Deliveries in unit -Live births - less than 2.5kg,['default']
+95,105-2.2 Babies Born with low birth weight (<2.5Kgs),old,NUT,low_weight_births,low weight births,float,105-2.2 Babies Born with low birth weight (<2.5Kgs),['default']
+96,105-CH01. Vit A supplement (1st Dose),new,NUT,vitamin_a,doses of vitamin A distributed,float,105-CH01. Vit A supplement (1st Dose),"['Outreach, Female, 12-59Mths' 'Outreach, Female, 6-11Mths'
+ 'Outreach, Male, 12-59Mths' 'Outreach, Male, 6-11Mths'
+ 'School, Female, 12-59Mths' 'School, Female, 6-11Mths'
+ 'School, Male, 12-59Mths' 'School, Male, 6-11Mths'
+ 'Static, Female, 12-59Mths' 'Static, Female, 6-11Mths'
+ 'Static, Male, 12-59Mths' 'Static, Male, 6-11Mths']"
+97,105-CH02. Vit A supplement (2nd Dose),new,NUT,vitamin_a,doses of vitamin A distributed,float,105-CH02. Vit A supplement (2nd Dose),"['Outreach, Female, 12-59Mths' 'Outreach, Female, 6-11Mths'
+ 'Outreach, Male, 12-59Mths' 'Outreach, Male, 6-11Mths'
+ 'School, Female, 12-59Mths' 'School, Female, 6-11Mths'
+ 'School, Male, 12-59Mths' 'School, Male, 6-11Mths'
+ 'Static, Female, 12-59Mths' 'Static, Female, 6-11Mths'
+ 'Static, Male, 12-59Mths' 'Static, Male, 6-11Mths']"
+98,105-2.8 Vit A Suplement 1st Dose in Year,old,NUT,vitamin_a,doses of vitamin A distributed,float,105-2.8 Vit A Suplement 1st Dose in Year,"['12-59 Months, Female' '12-59 Months, Male' '6-11 Months, Female'
+ '6-11 Months, Male']"
+99,105-2.8 Vit A Suplement 2nd Dose in theYear,old,NUT,vitamin_a,doses of vitamin A distributed,float,105-2.8 Vit A Suplement 2nd Dose in theYear,"['12-59 Months, Female' '12-59 Months, Male' '6-11 Months, Female'
+ '6-11 Months, Male']"
+100,105-NA03a1. Identified malnourished clients(<10) this month - MAM using MUAC,new,NUT,mam_identified,MAM cases identified,float,105-NA03a1. Identified malnourished clients(<10) this month - MAM using MUAC,"['24-59Mths, Female' '24-59Mths, Male' '5-9Yrs, Female' '5-9Yrs, Male'
+ '6-23Mths, Female' '6-23Mths, Male']"
+101,105-NA03b1. Identified malnourished clients(<10) this month - MAM using W/H or L,new,NUT,mam_identified,MAM cases identified,float,105-NA03b1. Identified malnourished clients(<10) this month - MAM using W/H or L,"['0-5Mths, Female' '0-5Mths, Male' '24-59Mths, Female' '24-59Mths, Male'
+ '5-9Yrs, Female' '5-9Yrs, Male' '6-23Mths, Female' '6-23Mths, Male']"
+102,105-1.3 OPD Moderate Acute Malnutrition (MAM),old,NUT,mam_identified,MAM cases identified,float,105-1.3 OPD Moderate Acute Malnutrition (MAM),"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+103,105-NA03c1. Identified malnourished clients(<10) this month - SAM using MUAC -  Without Oedema,new,NUT,sam_identified,SAM cases identified,float,105-NA03c1. Identified malnourished clients(<10) this month - SAM using MUAC -  Without Oedema,"['24-59Mths, Female' '24-59Mths, Male' '5-9Yrs, Female' '5-9Yrs, Male'
+ '6-23Mths, Female' '6-23Mths, Male']"
+104,105-NA03d1. Identified malnourished clients(<10) this month - SAM using W/H or L -  Without Oedema,new,NUT,sam_identified,SAM cases identified,float,105-NA03d1. Identified malnourished clients(<10) this month - SAM using W/H or L -  Without Oedema,"['0-5Mths, Female' '0-5Mths, Male' '24-59Mths, Female' '24-59Mths, Male'
+ '5-9Yrs, Female' '5-9Yrs, Male' '6-23Mths, Female' '6-23Mths, Male']"
+105,105-NA03e1. Identified malnourished clients(<10) this month - SAM With Oedema,new,NUT,sam_identified,SAM cases identified,float,105-NA03e1. Identified malnourished clients(<10) this month - SAM With Oedema,"['0-5Mths, Female' '0-5Mths, Male' '24-59Mths, Female' '24-59Mths, Male'
+ '5-9Yrs, Female' '5-9Yrs, Male' '6-23Mths, Female' '6-23Mths, Male']"
+106,105-1.3 OPD Severe Acute Malnutrition Without Oedema,old,NUT,sam_identified,SAM cases identified,float,105-1.3 OPD Severe Acute Malnutrition Without Oedema,"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+107,105-1.3 OPD Severe Acute Malnutrition With Oedema,old,NUT,sam_identified,SAM cases identified,float,105-1.3 OPD Severe Acute Malnutrition With Oedema,"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+108,"HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Expected reports 1. National",new,REPORT,expected_105_1_reporting,facilities expected to report on their 105:1 form,float,"HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Expected reports 1. National",[]
+109,HMIS 105:1 Expected reports,old,REPORT,expected_105_1_reporting,facilities expected to report on their 105:1 form,float,HMIS 105:1 Expected reports,[]
+110,"HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Actual reports 1. National",new,REPORT,actual_105_1_reporting,facilities actually reporting on their 105:1 form,float,"HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Actual reports 1. National",[]
+111,HMIS 105:1 Actual reports,old,REPORT,actual_105_1_reporting,facilities actually reporting on their 105:1 form,float,HMIS 105:1 Actual reports,[]
+112,105-TP04. Total New and relapse TB cases registered in TB treatment unit,new,TB,tb_cases_registered,TB cases registered in treatment unit,float,105-TP04. Total New and relapse TB cases registered in TB treatment unit,"['10-14Yrs, Female' '10-14Yrs, Male' '15-19Yrs, Female' '15-19Yrs, Male'
+ '20+Yrs, Female' '20+Yrs, Male' '5-9Yrs, Female' '5-9Yrs, Male'
+ '<5Yrs, Female' '<5Yrs, Male']"
+113,105-1.3 OPD New TB cases (Bacteriologically confirmed),old,TB,tb_cases_registered,TB cases registered in treatment unit,float,105-1.3 OPD New TB cases (Bacteriologically confirmed),"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+114,105-1.3 OPD New TB cases (Clinically Diagnosed),old,TB,tb_cases_registered,TB cases registered in treatment unit,float,105-1.3 OPD New TB cases (Clinically Diagnosed),"['0-28 Days, Female' '0-28 Days, Male' '29 Days-4 Years, Female'
+ '29 Days-4 Years, Male' '5-59 Years, Female' '5-59 Years, Male'
+ '60andAbove Years, Female' '60andAbove Years, Male']"
+115,105-1.3 OPD New TB cases (EPTB),old,TB,tb_cases_registered,TB cases registered in treatment unit,float,105-1.3 OPD New TB cases (EPTB),"['29 Days-4 Years, Female' '29 Days-4 Years, Male' '5-59 Years, Female'
+ '5-59 Years, Male' '60andAbove Years, Female' '60andAbove Years, Male']"
