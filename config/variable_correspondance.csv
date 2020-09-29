@@ -1,12 +1,12 @@
 ﻿name,instance,domain,identifier,display_name,type,breakdown_select
-105-CL01. BCG,new,EPI,bcg,BCG vaccines administered,float,"u1,u1_out,u1_stat"
-105-2.11 BCG,old,EPI,bcg,BCG vaccines administered,float,"u1,u1_out,u1_stat"
-105-CL08. DPT-HepB+Hib 1,new,EPI,dpt1,DPT1 vaccines administered,float,
-105-2.11 DPT-HepB+Hib 1,old,EPI,dpt1,DPT1 vaccines administered,float,
-105-CL10. DPT-HepB+Hib 3,new,EPI,dpt3,DPT3 vaccines administered,float,
-105-2.11 DPT-HepB+Hib 3,old,EPI,dpt3,DPT3 vaccines administered,float,
-105-CL16. Measles (MR1),new,EPI,mr1,HPV1 vaccines administered,float,
-105-2.11 Measles,old,EPI,mr1,HPV1 vaccines administered,float,
+105-CL01. BCG,new,EPI,bcg,BCG vaccines administered,float,"uone,uone_out,uone_stat"
+105-2.11 BCG,old,EPI,bcg,BCG vaccines administered,float,"uone,uone_out,uone_stat"
+105-CL08. DPT-HepB+Hib 1,new,EPI,dpt1,DPT1 vaccines administered,float,"uone,uone_out,uone_stat"
+105-2.11 DPT-HepB+Hib 1,old,EPI,dpt1,DPT1 vaccines administered,float,"uone,uone_out,uone_stat"
+105-CL10. DPT-HepB+Hib 3,new,EPI,dpt3,DPT3 vaccines administered,float,"uone,uone_out,uone_stat"
+105-2.11 DPT-HepB+Hib 3,old,EPI,dpt3,DPT3 vaccines administered,float,"uone,uone_out,uone_stat"
+105-CL16. Measles (MR1),new,EPI,mr1,HPV1 vaccines administered,float,"uone,uone_out,uone_stat"
+105-2.11 Measles,old,EPI,mr1,HPV1 vaccines administered,float,"uone,uone_out,uone_stat"
 105-CL11. PCV 1,new,EPI,pcv1,HPV2 vaccines administered,float,
 105-2.11 PCV 1,old,EPI,pcv1,HPV2 vaccines administered,float,
 105-CL13. PCV 3,new,EPI,pcv3,MR1 vaccines administered,float,
