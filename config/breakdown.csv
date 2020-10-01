@@ -1,0 +1,172 @@
+,index,instance,domain
+0,"1-4 Yrs, Outreach, Female",old,EPI
+1,"1-4 Yrs, Outreach, Male",old,EPI
+2,"1-4 Yrs, Static, Female",old,EPI
+3,"1-4 Yrs, Static, Male",old,EPI
+4,"Under 1, Outreach, Female",old,EPI
+5,"Under 1, Outreach, Male",old,EPI
+6,"Under 1, Static, Female",old,EPI
+7,"Under 1, Static, Male",old,EPI
+8,"Community, 15 Years and above",old,EPI
+9,"Community, 9-14 Years",old,EPI
+10,"School, 10 Years",old,EPI
+11,"School, 11 Years",old,EPI
+12,"School, 12 Years",old,EPI
+13,"School, 13 Years",old,EPI
+14,"School, 14 Years",old,EPI
+15,"School, 9 Years",old,EPI
+16,"Immunization in School, Outreach",old,EPI
+17,"Non Pregnant Women, Outreach",old,EPI
+18,"Non Pregnant Women, Static",old,EPI
+19,"Pregnant Women, Outreach",old,EPI
+20,"Pregnant Women, Static",old,EPI
+21,Acute Care unit ,old,GENERAL
+22,ENT ward,old,GENERAL
+23,Emergency ward,old,GENERAL
+24,Eye ward,old,GENERAL
+25,Female medical ward,old,GENERAL
+26,Female surgical ward,old,GENERAL
+27,Gynaecology ward,old,GENERAL
+28,Intensive care ward,old,GENERAL
+29,Male medical ward,old,GENERAL
+30,Male surgical ward,old,GENERAL
+31,Maternity ward,old,GENERAL
+32,Nutrition ward,old,GENERAL
+33,Orthopaedic ward,old,GENERAL
+34,Other wards,old,GENERAL
+35,Paediatric ward,old,GENERAL
+36,Palliative ward,old,GENERAL
+37,Psychiatric ward,old,GENERAL
+38,TB ward,old,GENERAL
+39,"0-28 Days, Female",old,TB
+40,"0-28 Days, Male",old,TB
+41,"29 Days-4 Years, Female",old,TB
+42,"29 Days-4 Years, Male",old,TB
+43,"5-59 Years, Female",old,TB
+44,"5-59 Years, Male",old,TB
+45,"60andAbove Years, Female",old,TB
+46,"60andAbove Years, Male",old,TB
+47,default,old,NUT
+48,10-19 Years,old,MNCH
+49,20-24 Years,old,MNCH
+50,>=25 Years,old,MNCH
+51,"10-<15 Years, Female",old,HIV
+52,"10-<15 Years, Male",old,HIV
+53,"15-<19 Years, Female",old,HIV
+54,"15-<19 Years, Male",old,HIV
+55,"18 Mths-<5 Years, Female",old,HIV
+56,"18 Mths-<5 Years, Male",old,HIV
+57,"19-<49 Years, Female",old,HIV
+58,"19-<49 Years, Male",old,HIV
+59,"5-<10 Years, Female",old,HIV
+60,"5-<10 Years, Male",old,HIV
+61,">49 Years, Female",old,HIV
+62,">49 Years, Male",old,HIV
+63,Microscopy Negative Cases Treated,old,MAL
+64,Microscopy Positive Cases Treated,old,MAL
+65,Not Tested Cases Treated,old,MAL
+66,RDT Negative Cases Treated,old,MAL
+67,RDT Positive Cases Treated,old,MAL
+68,Microscopy Positive Cases,old,MAL
+69,Microscopy Tested Cases,old,MAL
+70,RDT Positve Cases,old,MAL
+71,RDT Tested Cases,old,MAL
+72,Suspected Malaria (fever),old,MAL
+73,6 Days,old,MNCH
+74,6 Hours,old,MNCH
+75,6 Months,old,MNCH
+76,6 Weeks,old,MNCH
+77,"12-59 Months, Female",old,NUT
+78,"12-59 Months, Male",old,NUT
+79,"6-11 Months, Female",old,NUT
+80,"6-11 Months, Male",old,NUT
+81,"1-4Yrs, Outreach",new,EPI
+82,"1-4Yrs, Static",new,EPI
+83,"5-14Yrs, Outreach",new,EPI
+84,"5-14Yrs, Static",new,EPI
+85,"<1Yr, Outreach",new,EPI
+86,"<1Yr, Static",new,EPI
+87,Community,new,EPI
+88,Facility,new,EPI
+89,School,new,EPI
+90,"Non-Pregnant Women, Outreach",new,EPI
+91,"Non-Pregnant Women, School",new,EPI
+92,"Non-Pregnant Women, Static",new,EPI
+93,"Pregnant Women, Outreach",new,EPI
+94,"Pregnant Women, Static",new,EPI
+95,AcuteCareUnit,new,GENERAL
+96,ENT,new,GENERAL
+97,Emergency Ward,new,GENERAL
+98,Eye,new,GENERAL
+99,FemaleMedical,new,GENERAL
+100,FemaleSurgical,new,GENERAL
+101,Gynaecology,new,GENERAL
+102,Intensive Care Unit (ICU),new,GENERAL
+103,MaleMedical,new,GENERAL
+104,MaleSurgical,new,GENERAL
+105,Maternity_Obstetric,new,GENERAL
+106,Nutrition,new,GENERAL
+107,Orthopaedic,new,GENERAL
+108,Other wards,new,GENERAL
+109,Paediatrics,new,GENERAL
+110,Palliative,new,GENERAL
+111,Psychiatric,new,GENERAL
+112,TB,new,GENERAL
+113,"0-28Dys, Female",new,GENERAL
+114,"0-28Dys, Male",new,GENERAL
+115,"10-19Yrs, Female",new,GENERAL
+116,"10-19Yrs, Male",new,GENERAL
+117,"20+Yrs, Female",new,TB
+118,"20+Yrs, Male",new,TB
+119,"29Dys-4Yrs, Female",new,GENERAL
+120,"29Dys-4Yrs, Male",new,GENERAL
+121,"5-9Yrs, Female",new,TB
+122,"5-9Yrs, Male",new,TB
+123,15-19Yrs,new,MNCH
+124,20-24Yrs,new,MNCH
+125,25-49Yrs,new,MNCH
+126,50+Yrs,new,MNCH
+127,<15Yrs,new,MNCH
+128,"15-19Yrs, Female",new,TB
+129,"15-19Yrs, Male",new,TB
+130,"20-24Yrs, Female",new,HIV
+131,"20-24Yrs, Male",new,HIV
+132,"25-29Yrs, Female",new,HIV
+133,"25-29Yrs, Male",new,HIV
+134,"30-34Yrs, Female",new,HIV
+135,"30-34Yrs, Male",new,HIV
+136,"35-39Yrs, Female",new,HIV
+137,"35-39Yrs, Male",new,HIV
+138,"40-44Yrs, Female",new,HIV
+139,"40-44Yrs, Male",new,HIV
+140,"45-49Yrs, Female",new,HIV
+141,"45-49Yrs, Male",new,HIV
+142,"50+Yrs, Female",new,HIV
+143,"50+Yrs, Male",new,HIV
+144,default,new,NUT
+145,"1-4Yrs, Female",new,HIV
+146,"1-4Yrs, Male",new,HIV
+147,"10-14Yrs, Female",new,TB
+148,"10-14Yrs, Male",new,TB
+149,"<1Yr, Female",new,HIV
+150,"<1Yr, Male",new,HIV
+151,"Outreach, Female, 12-59Mths",new,NUT
+152,"Outreach, Female, 6-11Mths",new,NUT
+153,"Outreach, Male, 12-59Mths",new,NUT
+154,"Outreach, Male, 6-11Mths",new,NUT
+155,"School, Female, 12-59Mths",new,NUT
+156,"School, Female, 6-11Mths",new,NUT
+157,"School, Male, 12-59Mths",new,NUT
+158,"School, Male, 6-11Mths",new,NUT
+159,"Static, Female, 12-59Mths",new,NUT
+160,"Static, Female, 6-11Mths",new,NUT
+161,"Static, Male, 12-59Mths",new,NUT
+162,"Static, Male, 6-11Mths",new,NUT
+163,"24-59Mths, Female",new,NUT
+164,"24-59Mths, Male",new,NUT
+165,"6-23Mths, Female",new,NUT
+166,"6-23Mths, Male",new,NUT
+167,"0-5Mths, Female",new,NUT
+168,"0-5Mths, Male",new,NUT
+169,"<5Yrs, Female",new,TB
+170,"<5Yrs, Male",new,TB

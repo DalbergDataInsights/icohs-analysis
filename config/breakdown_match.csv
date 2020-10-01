@@ -1,0 +1,93 @@
+﻿identifier_sum,identifier_base,breakdown,domain,instance
+,acutecare,AcuteCareUnit,GENERAL,new
+,ent,ENT,GENERAL,new
+,emergency,Emergency Ward,GENERAL,new
+,eye,Eye,GENERAL,new
+,female_medical,FemaleMedical,GENERAL,new
+,female_surgical,FemaleSurgical,GENERAL,new
+,gynaecology,Gynaecology,GENERAL,new
+,intensivecare,Intensive Care Unit (ICU),GENERAL,new
+,male_medical,MaleMedical,GENERAL,new
+,male_surgical,MaleSurgical,GENERAL,new
+,maternity,Maternity_Obstetric,GENERAL,new
+,nutrition,Nutrition,GENERAL,new
+,orthopaedic,Orthopaedic,GENERAL,new
+,other,Other wards,GENERAL,new
+,paediatrics,Paediatrics,GENERAL,new
+,palliative,Palliative,GENERAL,new
+,psychiatric,Psychiatric,GENERAL,new
+,tb,TB,GENERAL,new
+,acutecare,Acute Care unit ,GENERAL,old
+,ent,ENT ward,GENERAL,old
+,emergency,Emergency ward,GENERAL,old
+,eye,Eye ward,GENERAL,old
+,female_medical,Female medical ward,GENERAL,old
+,female_surgical,Female surgical ward,GENERAL,old
+,gynaecology,Gynaecology ward,GENERAL,old
+,intensivecare,Intensive care ward,GENERAL,old
+,male_medical,Male medical ward,GENERAL,old
+,male_surgical,Male surgical ward,GENERAL,old
+,maternity,Maternity ward,GENERAL,old
+,nutrition,Nutrition ward,GENERAL,old
+,orthopaedic,Orthopaedic ward,GENERAL,old
+,other,Other wards,GENERAL,old
+,paediatrics,Paediatric ward,GENERAL,old
+,palliative,Palliative ward,GENERAL,old
+,psychiatric,Psychiatric ward,GENERAL,old
+,tb,TB ward,GENERAL,old
+1to4,1-4_outreach,"1-4Yrs, Outreach",EPI,new
+1to4,1-4_static,"1-4Yrs, Static",EPI,new
+u1,u1_static,"<1Yr, Outreach",EPI,new
+u1,u1_outreach,"<1Yr, Static",EPI,new
+all-hpv,community,Community,EPI,new
+all-hpv,school,School,EPI,new
+all-td,nonpregnant_outreach,"Non-Pregnant Women, Outreach",EPI,new
+all-td,nonpregnant_static,"Non-Pregnant Women, Static",EPI,new
+all-td,pregnant_outreach,"Pregnant Women, Outreach",EPI,new
+all-td,pregnant_static,"Pregnant Women, Static",EPI,new
+1to4,1-4_outreach,"1-4 Yrs, Outreach, Female",EPI,old
+1to4,1-4_static,"1-4 Yrs, Static, Female",EPI,old
+1to4,1-4_outreach,"1-4 Yrs, Outreach, Male",EPI,old
+1to4,1-4_static,"1-4 Yrs, Static, Male",EPI,old
+u1,u1_static,"Under 1, Outreach, Female",EPI,old
+u1,u1_outreach,"Under 1, Static, Female",EPI,old
+u1,u1_static,"Under 1, Outreach, Male",EPI,old
+u1,u1_outreach,"Under 1, Static, Male",EPI,old
+all-hpv,community,"Community, 15 Years and above",EPI,old
+all-hpv,community,"Community, 9-14 Years",EPI,old
+all-hpv,school,"School, 10 Years",EPI,old
+all-hpv,school,"School, 11 Years",EPI,old
+all-hpv,school,"School, 12 Years",EPI,old
+all-hpv,school,"School, 13 Years",EPI,old
+all-hpv,school,"School, 14 Years",EPI,old
+all-hpv,school,"School, 9 Years",EPI,old
+all-td,nonpregnant_outreach,"Non Pregnant Women, Outreach",EPI,old
+all-td,nonpregnant_static,"Non Pregnant Women, Static",EPI,old
+all-td,pregnant_outreach,"Pregnant Women, Outreach",EPI,old
+all-td,pregnant_static,"Pregnant Women, Static",EPI,old
+,female_a5,"20+Yrs, Female",TB,new
+,male_a5,"20+Yrs, Male",TB,new
+,female_a5,"5-9Yrs, Female",TB,new
+,male_a5,"5-9Yrs, Male",TB,new
+,female_a5,"15-19Yrs, Female",TB,new
+,male_a5,"15-19Yrs, Male",TB,new
+,female_a5,"10-14Yrs, Female",TB,new
+,male_a5,"10-14Yrs, Male",TB,new
+,female_u5,"<5Yrs, Female",TB,new
+,male_u5,"<5Yrs, Male",TB,new
+,female_a5,"60andAbove Years, Female",TB,old
+,male_a5,"60andAbove Years, Male",TB,old
+,female_a5,"5-59 Years, Female",TB,old
+,male_a5,"5-59 Years, Male",TB,old
+,female_u5,"0-28 Days, Female",TB,old
+,male_u5,"0-28 Days, Male",TB,old
+,female_u5,"29 Days-4 Years, Female",TB,old
+,male_u5,"29 Days-4 Years, Male",TB,old
+,u20,15-19Yrs,MNCH,new
+,20-25,20-24Yrs,MNCH,new
+,a25,25-49Yrs,MNCH,new
+,a25,50+Yrs,MNCH,new
+,u20,<15Yrs,MNCH,new
+,u20,10-19 Years,MNCH,old
+,20-25,20-24 Years,MNCH,old
+,a25,>=25 Years,MNCH,old
