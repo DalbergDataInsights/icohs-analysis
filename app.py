@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
         # Move orginal data from the 'raw' to the 'prcessed' folder
 
-        clean.move_csv_files(raw_path, processed_path)
+        #clean.move_csv_files(raw_path, processed_path)
 
         make_note(f'Cleaning and database insertion done for file {f}',
                   START_TIME)
