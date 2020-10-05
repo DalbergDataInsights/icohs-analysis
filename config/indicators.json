@@ -49,6 +49,13 @@
                 "name": "var_correspondence_data",
                 "type": "string",
                 "value": "config/variable_correspondance.csv"
+            },
+            {
+                "description": "Path to disaggregate correspondence table",
+                "identifier": "breakdown_correspondence_data",
+                "name": "breakdown_correspondence_data",
+                "type": "string",
+                "value": "config/breakdown_correspondance.csv"
             }
         ],
         "static": [
