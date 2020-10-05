@@ -31,6 +31,7 @@ from src.db import adpter as db  # NOQA: E402
 # Get user-input data
 
 VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
+BREAK_CORR = pd.read_csv(INDICATORS['breakdown_correspondence_data'])
 
 USECOLS = list(range(0, 9))
 
@@ -118,9 +119,13 @@ def get_data(path, instance):
     del data
 
     new_df['value'] = pd.to_numeric(new_df['value'], errors='coerce')
+
+    # TODO Check this groupby for breakdown addition
+
     new_df = new_df.groupby(
-        ['dataElement', 'orgUnit', 'period'], as_index=False).agg({'value': 'sum'})
-    new_df = new_df[['period', 'orgUnit', 'value', 'dataElement']]
+        ['dataElement', 'orgUnit', 'period', 'categoryOptionCombo'], as_index=False).agg({'value': 'sum'})
+    new_df = new_df[['period', 'orgUnit', 'value',
+                     'dataElement', 'categoryOptionCombo']]
 
     return new_df
 
@@ -133,7 +138,7 @@ def get_variable_addition_dict(instance):
     target_dict = {}
 
     df = VAR_CORR[VAR_CORR['instance'] == instance]
-    df = df[df.duplicated('identifier', keep=False)]
+    df = df[df.duplicated('identifier', keep=False)]  # Only keep duplicates
     df = df[['identifier', 'name']]
 
     for x in df['identifier'].unique().tolist():
@@ -142,17 +147,68 @@ def get_variable_addition_dict(instance):
     return target_dict
 
 
-def compute_indicators(df, indic_name, indicator_list):
+def get_variable_breakdown_dict(instance):
+    '''build a dict nested dictionnary matching identifiers to variables and breakdown'''
+
+    var = VAR_CORR[VAR_CORR['instance']
+                   == instance][['identifier', 'name', 'breakdown']]
+
+    # Get the list of new identifier
+
+    out_indics = []
+
+    df = var.drop_duplicates('identifier').set_index('identifier')
+
+    for x in df.index:
+        if df.loc[x, 'breakdown'] is not np.nan:
+            for y in df.loc[x, 'breakdown'].split(","):
+                z = x + '__' + y
+                out_indics.append(z)
+        else:
+            out_indics.append(x)
+
+    # Have an if None condition
+
+    corr = {}
+
+    bdw = BREAK_CORR[BREAK_CORR['instance']
+                     == instance][['identifier', 'breakdown']]
+
+    for x in out_indics:
+
+        indic = x.split("__")[0]
+
+        print(x)
+
+        try:
+            breakdown = x.split("__")[1]
+
+            corr[x] = {'indics': var[var['identifier'] == indic]['name'].tolist(),
+                       'breakdowns': bdw[bdw['identifier'] == breakdown]['breakdown'].tolist()}
+        except IndexError:
+            corr[x] = {'indics': var[var['identifier'] == indic]['name'].tolist(),
+                       'breakdowns': []}
+
+    return corr
+
+
+def compute_indicators(df_in, df_out, indic_name, group_dict):
     '''Compute new vars by summing original vars, and drop original vars '''
 
-    df_new = df[df['dataElement'].isin(indicator_list)]
+    df_new = df_in[df_in['dataElement'].isin(group_dict['indics'])]
+
+    if group_dict['breakdowns'] != []:
+        df_new = df_new[df_new['categoryOptionCombo'].isin(
+            group_dict['breakdowns'])]
+
     df_new = df_new.groupby(['period', 'orgUnit'],
                             as_index=False).agg({'value': 'sum'})
+
     df_new['dataElement'] = indic_name
 
-    df = pd.concat([df, df_new])
+    df = pd.concat([df_out, df_new])
     df.reset_index(drop=True, inplace=True)
-    df = df[~df['dataElement'].isin(indicator_list)]
+    # df = df[~df['dataElement'].isin(group_dict['indics'])]
 
     return df
 
@@ -203,17 +259,23 @@ def process_date(df):
 
 
 def clean_add_indicators(file_path, instance):
+
     make_note(f'Creating additional indicators for {instance}', START_TIME)
-    add_dict = get_variable_addition_dict(instance)
+    #add_dict = get_variable_addition_dict(instance)
+
+    add_dict = get_variable_breakdown_dict(instance)
+
     dhis_df = get_data(file_path, instance)
 
+    df = pd.DataFrame(columns=dhis_df.columns)
+
     for indicator in add_dict.keys():
-        dhis_df = compute_indicators(
-            dhis_df, indicator, add_dict.get(indicator))
+        df = compute_indicators(
+            dhis_df, df, indicator, add_dict.get(indicator))
 
-    dhis_df = process_date(dhis_df)
+    df = process_date(df)
 
-    return dhis_df
+    return df
 
 # Putting together cleaning steps
 
@@ -221,7 +283,9 @@ def clean_add_indicators(file_path, instance):
 def clean_raw_file(raw_path):
     '''Take one file, checks whether it fits expected format, and clean it'''
 
-    renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
+    # TODO check what is up with that renaming thing - I thinkI dont need it
+
+    #renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
 
     # Check file name format
 
@@ -254,8 +318,11 @@ def clean_raw_file(raw_path):
 
     # cleaning formatted table
 
-    df['dataElement'].replace(renaming_dict, inplace=True)
+    #df['dataElement'].replace(renaming_dict, inplace=True)
     df.reset_index(drop=True, inplace=True)
+
+    # TODO Check this groupby for breakdown addition
+
     df = df\
         .groupby(["dataElement", 'orgUnit', "year", "month"], as_index=False)\
         .agg({'value': 'sum'})
