@@ -19,8 +19,6 @@ if __name__ == '__main__':
 
     # Adding any new indiactors/facilities to the lookup table
 
-    # TODO add a fucntion that rewrites that properly
-
     pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
         INDICATORS['indicators_map'])
 
@@ -32,7 +30,7 @@ if __name__ == '__main__':
 
     # Adding the population data
 
-    clean.clean_pop_to_temp(INDICATORS['pop'])
+    clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
 
     db.pg_update_pop(file_path='data/temp/pop.csv')
 
@@ -51,8 +49,6 @@ if __name__ == '__main__':
 
         # Send it to a temporary csv
 
-        # TODO UNDRSTAND WHY THE MAPPING DOESNT WORK FOR REPORTING DATA
-
         (temp_csv_path,
          year,
          month,
@@ -69,7 +65,7 @@ if __name__ == '__main__':
 
         # Move orginal data from the 'raw' to the 'prcessed' folder
 
-        #clean.move_csv_files(raw_path, processed_path)
+        clean.move_csv_files(raw_path, processed_path)
 
         make_note(f'Cleaning and database insertion done for file {f}',
                   START_TIME)
