@@ -285,8 +285,6 @@ def clean_raw_file(raw_path):
 
     # TODO check what is up with that renaming thing - I thinkI dont need it
 
-    #renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
-
     # Check file name format
 
     f = raw_path.split('/')[-1][:-4]
@@ -303,6 +301,8 @@ def clean_raw_file(raw_path):
         df = clean_add_indicators(raw_path, instance)
     elif table == 'report':
         df = get_reporting_data(raw_path, instance)
+        renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
+        df['dataElement'].replace(renaming_dict, inplace=True)
 
     assert df['year'].nunique() == 1,\
         f'Data for several years found in file {f}'
@@ -318,7 +318,6 @@ def clean_raw_file(raw_path):
 
     # cleaning formatted table
 
-    #df['dataElement'].replace(renaming_dict, inplace=True)
     df.reset_index(drop=True, inplace=True)
 
     # TODO Check this groupby for breakdown addition
@@ -356,7 +355,9 @@ def clean_pop_to_temp(pop_path):
 
     pop.drop(['Single Years', 'Year2', 'FY'], axis=1, inplace=True)
 
-    pop[['District', 'Year', 'Male', 'Female', 'Total', 'Age']].to_csv(
+    pop = pop.groupby(['District', 'Year'], as_index=False).sum()
+
+    pop[['District', 'Year', 'Male', 'Female', 'Total']].to_csv(
         'data/temp/pop.csv', index=False, header=False)
 
 
