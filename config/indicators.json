@@ -86,6 +86,13 @@
                 "name": "pop",
                 "type": "string",
                 "value": "data/input/static/demographics/UBOS_pop_proj_2015-25.csv"
+            },
+            {
+                "description": "Path to UBOS population data percentages",
+                "identifier": "pop_perc",
+                "name": "pop_perc",
+                "type": "string",
+                "value": "data/input/static/demographics/population_percentages.csv"
             }
         ],
         "to_classify": [
