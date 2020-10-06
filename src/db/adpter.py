@@ -216,7 +216,7 @@ def pg_update_pop(file_path, param_dic=param_dic):
     cur.execute(delete_query)
 
     write_query = f"""
-        COPY pop (DistrictName, year, Male, Female, Total) FROM STDIN WITH (FORMAT CSV)
+        COPY pop (DistrictName, year, Male, Female, Total, childbearing_age, pregnants, not_pregnant, births, u1, u5, u15, suspect_tb) FROM STDIN WITH (FORMAT CSV)
     """
     cur.copy_expert(sql=write_query, file=f)
 
