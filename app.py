@@ -1,6 +1,6 @@
 
 from src.pipeline import clean, process
-from src.helpers import INDICATORS, make_note
+from src.helpers import INDICATORS, make_note, get_unique_indics
 import os
 import pandas as pd
 import numpy as np
@@ -19,8 +19,10 @@ if __name__ == '__main__':
 
     # Adding any new indiactors/facilities to the lookup table
 
-    pd.DataFrame(VAR_CORR['identifier']
-                 .unique()).to_csv(INDICATORS['indicators_map'])
+    # TODO add a fucntion that rewrites that properly
+
+    pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
+        INDICATORS['indicators_map'])
 
     db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
                        table_name='indicator')
@@ -48,6 +50,8 @@ if __name__ == '__main__':
         df = clean.clean(raw_path=raw_path)
 
         # Send it to a temporary csv
+
+        # TODO UNDRSTAND WHY THE MAPPING DOESNT WORK FOR REPORTING DATA
 
         (temp_csv_path,
          year,
