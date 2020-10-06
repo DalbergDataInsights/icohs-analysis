@@ -178,8 +178,6 @@ def get_variable_breakdown_dict(instance):
 
         indic = x.split("__")[0]
 
-        print(x)
-
         try:
             breakdown = x.split("__")[1]
 
@@ -208,7 +206,6 @@ def compute_indicators(df_in, df_out, indic_name, group_dict):
 
     df = pd.concat([df_out, df_new])
     df.reset_index(drop=True, inplace=True)
-    # df = df[~df['dataElement'].isin(group_dict['indics'])]
 
     return df
 
@@ -338,8 +335,7 @@ def clean_raw_file(raw_path):
 #########################
 #     Run functions     #
 #########################
-
-def clean_pop_to_temp(pop_path):
+def clean_pop_to_temp(pop_path, pop_perc_path):
 
     pop = pd.read_csv(pop_path)
 
@@ -357,8 +353,14 @@ def clean_pop_to_temp(pop_path):
 
     pop = pop.groupby(['District', 'Year'], as_index=False).sum()
 
-    pop[['District', 'Year', 'Male', 'Female', 'Total']].to_csv(
-        'data/temp/pop.csv', index=False, header=False)
+    pop = pop[['District', 'Year', 'Male', 'Female', 'Total']]
+
+    perc = pd.read_csv(pop_perc_path).set_index('metric')
+
+    for x in perc.index:
+        pop[x] = pop['Total']*(perc.loc[x, 'percentage']/100)
+
+    pop.to_csv('data/temp/pop.csv', index=False, header=False)
 
 
 def clean(raw_path):
