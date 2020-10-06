@@ -76,6 +76,8 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 
 
 def pg_write_lookup(file_path, table_name, param_dic=param_dic):
+
+    # TODO Check for bug when asssing idicators
     """
         Check if any new indicators/facilities were added and upload new ones to a target lookup table
     """
@@ -214,7 +216,7 @@ def pg_update_pop(file_path, param_dic=param_dic):
     cur.execute(delete_query)
 
     write_query = f"""
-        COPY pop (DistrictName, year, Male, Female, Total, Age) FROM STDIN WITH (FORMAT CSV)
+        COPY pop (DistrictName, year, Male, Female, Total) FROM STDIN WITH (FORMAT CSV)
     """
     cur.copy_expert(sql=write_query, file=f)
 
