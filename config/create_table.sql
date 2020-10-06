@@ -26,7 +26,14 @@ CREATE TABLE Pop(
 	Male int,
 	Female int,
 	Total int,
-	Age smallint,
+	childbearing_age float,
+	pregnants float,
+	not_pregnant float,
+	births float,
+	u1 float,
+	u5 float,
+	u15 float,
+	suspect_tb float,
 	CONSTRAINT Pop_pk PRIMARY KEY (ID)
 );
 
