@@ -13,3 +13,4 @@ config/cred.json
 *.vscode
 **__pycache__
 .env
+tester.py
