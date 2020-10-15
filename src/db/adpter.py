@@ -37,7 +37,7 @@ def pg_connect(params_dic=param_dic):
 # READ
 
 
-def pg_read_lookup(table_name, param_dic=param_dic, getdict=True):
+def pg_read_lookup(table_name, getdict=True, param_dic=param_dic):
     """
         This table reads data from the lookup tables
     """

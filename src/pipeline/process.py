@@ -109,22 +109,68 @@ def pivot_stack_post_process(pivot):
     return stack
 
 
-def compute_outliers(pivot, policy, location):
+def add_info_and_format(data, location, columns=['id', 'facility_id', 'facility_name', 'date', 'dataElement', 'value']):
+
+    # create date and delete year and month
+
+    data['date'] = data['year'].astype(str)\
+        + '-' + data['month']
+    data.drop(columns=['year', 'month'], inplace=True)
+    data['date'] = data.date.apply(format_date)
+
+    # add facility_name and district
+
+    data = pd.merge(data, location,
+                    left_on='orgUnit', right_on='facilitycode', how='left')
+
+    # rename cols
+
+    data = data.reset_index().rename(
+        columns={'orgUnit': 'facility_id', 'facilityname': 'facility_name', 'districtname': 'id'})
+
+    return data[columns]
+
+
+def compute_outliers_stack(pivot, policy, location):
     if policy == 'std':
         pivot_processed = replace_outliers(pivot, cutoff=3)
     elif policy == 'iqr':
         pivot_processed = replace_outliers_iqr(pivot, k=3)
 
     stack = pivot_stack_post_process(pivot_processed)
-    pivot_export = full_pivot(stack, location)
+
+    stack = add_info_and_format(stack, location)
 
     make_note(f'{policy} outlier exclusion process done', START_TIME)
 
-    return pivot_export
+    return stack
 
-##########################################
-#     Packaging the data for export      #
-##########################################
+
+def full_pivot_for_export(data, index=['id', 'facility_id', 'facility_name', 'date']):
+
+    data_pivot = data.pivot_table(index=index,
+                                  columns=['dataElement'],
+                                  aggfunc='sum')
+    data_pivot.columns = data_pivot.columns.droplevel(0)
+
+    return data_pivot
+
+###################################
+#     Create the report data      #
+###################################
+
+
+def add_report_to_pivot(data_pivot, report, location):
+
+    report = add_info_and_format(report, location)
+
+    report_pivot = full_pivot_for_export(report)
+
+    full_pivot = pd.merge(report_pivot, data_pivot,  how='left',
+                          left_index=True,
+                          right_index=True)
+
+    return full_pivot
 
 
 def add_report_columns(data):
@@ -154,68 +200,83 @@ def add_report_columns(data):
         data[x] = data['sum'].replace(value_dict)
         data.drop('sum', axis=1, inplace=True)
 
-    data.drop(['e', 'a+e'], axis=1, inplace=True)
+    data.drop(columns=['e', 'a+e'], inplace=True)
 
     return data
 
 
-def create_reporting_pivot(main, report, location):
+def create_reporting_pivot(pivot, report, location):
 
-    main['reported'] = (main['value'] > 0).astype('int')
-    main.drop('value', axis=1, inplace=True)
-    main.rename(columns={'reported': 'value'}, inplace=True)
+    full_pivot = add_report_to_pivot(pivot, report, location)
 
-    reporting = full_pivot(main, location, for_report=True, report_data=report)
-    reporting = add_report_columns(reporting)
-    reporting.drop(columns=['expected_105_1_reporting',
-                            'actual_105_1_reporting'], inplace=True)
+    for c in full_pivot.columns:
+        full_pivot[c] = (full_pivot[c] > 0).astype('int')
+
+    # main.drop('value', axis=1, inplace=True)
+    # main.rename(columns={'reported': 'report'}, inplace=True)
+    #reporting = full_pivot(main, location, report_data=report)
+
+    report = add_report_columns(full_pivot)
+    report.drop(columns=['expected_105_1_reporting',
+                         'actual_105_1_reporting'], inplace=True)
 
     make_note('Reporting done', START_TIME)
 
-    return reporting
+    return report
 
 
-def pivot_for_export(data):
+# def pivot_for_export(data):
 
-    data_pivot = data.pivot_table(index=['orgUnit', 'year', 'month'],
-                                  columns=['dataElement'],
-                                  aggfunc='sum')
-    data_pivot.columns = data_pivot.columns.droplevel(0)
+#     data_pivot = data.pivot_table(index=['orgUnit', 'year', 'month'],
+#                                   columns=['dataElement'],
+#                                   aggfunc='sum')
+#     data_pivot.columns = data_pivot.columns.droplevel(0)
 
-    return data_pivot
+#     return data_pivot
 
 
-def full_pivot(data, location, for_report=False, *report_data):
+# def full_pivot(data, location, **report_data):
 
-    data_pivot = pivot_for_export(data)
+#     data_pivot = pivot_for_export(data)
 
-    if for_report == True:
-        data_report_pivot = pivot_for_export(report_data)
-        data_pivot = pd.merge(data_pivot, data_report_pivot,
-                              left_index=True, right_index=True, how='left')
+#     if report_data != {} and isinstance(report_data['report_data'], pd.DataFrame):
 
-    columns = sorted(data_pivot.columns)
+#         data_report_pivot = pivot_for_export(report_data['report_data'])
+#         data_pivot = pd.merge(data_pivot, data_report_pivot,
+#                               left_index=True, right_index=True, how='left')
 
-    data_pivot = data_pivot.reset_index()
+#     columns = sorted(data_pivot.columns)
 
-    # Create date and delete year and month
+#     data_pivot = data_pivot.reset_index()
 
-    data_pivot['date'] = data_pivot['year'].astype(str)\
-        + '-' + data_pivot['month']
-    data_pivot.drop(columns=['year', 'month'], inplace=True)
-    data_pivot['date'] = data_pivot.date.apply(format_date)
+#     # Create date and delete year and month
 
-    # add facility_name and district
+#     data_pivot['date'] = data_pivot['year'].astype(str)\
+#         + '-' + data_pivot['month']
+#     data_pivot.drop(columns=['year', 'month'], inplace=True)
+#     data_pivot['date'] = data_pivot.date.apply(format_date)
 
-    data_pivot = pd.merge(data_pivot, location,
-                          left_on='orgUnit', right_on='facilitycode', how='left')
+#     # add facility_name and district
 
-    data_pivot = data_pivot.reset_index().rename(
-        columns={'orgUnit': 'facility_id', 'facilityname': 'facility_name', 'districtname': 'id'})
+#     data_pivot = pd.merge(data_pivot, location,
+#                           left_on='orgUnit', right_on='facilitycode', how='left')
 
-    columns = ['id', 'date', 'facility_id', 'facility_name'] + columns
+#     data_pivot = data_pivot.reset_index().rename(
+#         columns={'orgUnit': 'facility_id', 'facilityname': 'facility_name', 'districtname': 'id'})
 
-    return data_pivot[columns]
+#     columns = ['id', 'date', 'facility_id', 'facility_name'] + columns
+
+#     return data_pivot[columns]
+
+
+###############################
+#     Create final stack      #
+###############################
+
+def add_to_final_stack(final_stack, input_stack, policy):
+    input_stack['dataElement'] = input_stack['dataElement'] + f'__{policy}'
+    final_stack = pd.concat([final_stack, input_stack])
+    return final_stack
 
 #############################
 #     Run all functions     #
@@ -226,24 +287,40 @@ def process(main, report, location):
     make_note('Starting the data processing', START_TIME)
 
     pivot_outliers = pivot_stack(main)
-    with_outliers = full_pivot(main, location)
+
     make_note('data pivot for outlier exclusion done', START_TIME)
 
     # outlier computations
 
-    #no_outliers_std = compute_outliers(pivot_outliers, 'std', location)
-    #no_outliers_iqr = compute_outliers(pivot_outliers, 'iqr', location)
+    # with add_info_and_format(main, location) as outliers_stack:
+    outliers_stack = add_info_and_format(main, location)
+    outliers = full_pivot_for_export(outliers_stack)
+    stack = pd.DataFrame(columns=outliers_stack.columns)
+    stack = add_to_final_stack(stack, outliers_stack, 'outliers')
+    del outliers_stack
+
+    # std_stack = compute_outliers_stack(pivot_outliers, 'std', location)
+    # std = full_pivot_for_export(std_stack)
+    # stack = add_to_final_stack(stack, std_stack, 'std')
+    # del std_stack
+
+    # iqr_stack = compute_outliers_stack(pivot_outliers, 'iqr', location)
+    # iqr = full_pivot_for_export(iqr_stack)
+    # stack = add_to_final_stack(stack, iqr_stack, 'iqr')
+    # del iqr_stack
+
     make_note('outlier exclusion done', START_TIME)
 
     # creating the reporting table
 
-    reporting = create_reporting_pivot(main, report, location)
+    report = create_reporting_pivot(outliers, report, location)
 
-    print(reporting.head())
+    # TODO unpivot report and add to stack
 
-    #reporting.to_csv(INDICATORS['report_data'], index=False)
-    #with_outliers.to_csv(INDICATORS['outlier_data'], index=False)
-    #no_outliers_std.to_csv(INDICATORS['std_no_outlier_data'], index=False)
-    #no_outliers_iqr.to_csv(INDICATORS['iqr_no_outlier_data'], index=False)
+    report.to_csv(INDICATORS['report_data'], index=False)
+    outliers.to_csv(INDICATORS['outlier_data'], index=False)
+    #std.to_csv(INDICATORS['std_no_outlier_data'], index=False)
+    #iqr.to_csv(INDICATORS['iqr_no_outlier_data'], index=False)
+    stack.to_csv(INDICATORS["tall_data"], index=False)
 
     make_note('breakdown in four tables done', START_TIME)
