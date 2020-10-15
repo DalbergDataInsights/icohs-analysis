@@ -5,3 +5,4 @@ from src.db import adpter as db  # NOQA: E402
 df = db.pg_read_lookup('location', getdict=False)
 
 print(df.head())
+

@@ -1,0 +1,117 @@
+﻿identifier,breakdown,instance,domain
+1-4_outreach,"1-4 Yrs, Outreach, Female",old,EPI
+1-4_static,"1-4 Yrs, Static, Female",old,EPI
+1-4_outreach,"1-4 Yrs, Outreach, Male",old,EPI
+1-4_static,"1-4 Yrs, Static, Male",old,EPI
+1-4_outreach,"1-4Yrs, Outreach",new,EPI
+1-4_static,"1-4Yrs, Static",new,EPI
+u1_outreach,"<1Yr, Outreach",new,EPI
+u1_static,"<1Yr, Static",new,EPI
+u1_all,"<1Yr, Outreach",new,EPI
+u1_all,"<1Yr, Static",new,EPI
+u1_all,"Under 1, Outreach, Female",old,EPI
+u1_all,"Under 1, Static, Female",old,EPI
+u1_all,"Under 1, Outreach, Male",old,EPI
+u1_all,"Under 1, Static, Male",old,EPI
+u1_outreach,"Under 1, Outreach, Female",old,EPI
+u1_static,"Under 1, Static, Female",old,EPI
+u1_outreach,"Under 1, Outreach, Male",old,EPI
+u1_static,"Under 1, Static, Male",old,EPI
+community,Community,new,EPI
+school,School,new,EPI
+all-hpv,Community,new,EPI
+all-hpv,School,new,EPI
+community,"Community, 15 Years and above",old,EPI
+community,"Community, 9-14 Years",old,EPI
+school,"School, 10 Years",old,EPI
+school,"School, 11 Years",old,EPI
+school,"School, 12 Years",old,EPI
+school,"School, 13 Years",old,EPI
+school,"School, 14 Years",old,EPI
+school,"School, 9 Years",old,EPI
+all-hpv,"Community, 15 Years and above",old,EPI
+all-hpv,"Community, 9-14 Years",old,EPI
+all-hpv,"School, 10 Years",old,EPI
+all-hpv,"School, 11 Years",old,EPI
+all-hpv,"School, 12 Years",old,EPI
+all-hpv,"School, 13 Years",old,EPI
+all-hpv,"School, 14 Years",old,EPI
+all-hpv,"School, 9 Years",old,EPI
+nonpregnant_outreach,"Non-Pregnant Women, Outreach",new,EPI
+nonpregnant_static,"Non-Pregnant Women, Static",new,EPI
+pregnant_outreach,"Pregnant Women, Outreach",new,EPI
+pregnant_static,"Pregnant Women, Static",new,EPI
+nonpregnant_outreach,"Non Pregnant Women, Outreach",old,EPI
+nonpregnant_static,"Non Pregnant Women, Static",old,EPI
+pregnant_outreach,"Pregnant Women, Outreach",old,EPI
+pregnant_static,"Pregnant Women, Static",old,EPI
+nonpregnant,"Non-Pregnant Women, Outreach",new,EPI
+nonpregnant,"Non-Pregnant Women, Static",new,EPI
+pregnant,"Pregnant Women, Outreach",new,EPI
+pregnant,"Pregnant Women, Static",new,EPI
+community,"Non Pregnant Women, Outreach",old,EPI
+nonpregnant,"Non Pregnant Women, Static",old,EPI
+pregnant,"Pregnant Women, Outreach",old,EPI
+pregnant,"Pregnant Women, Static",old,EPI
+acutecare,AcuteCareUnit,new,GENERAL
+ent,ENT,new,GENERAL
+emergency,Emergency Ward,new,GENERAL
+eye,Eye,new,GENERAL
+female_medical,FemaleMedical,new,GENERAL
+female_surgical,FemaleSurgical,new,GENERAL
+gynaecology,Gynaecology,new,GENERAL
+intensivecare,Intensive Care Unit (ICU),new,GENERAL
+male_medical,MaleMedical,new,GENERAL
+male_surgical,MaleSurgical,new,GENERAL
+maternity,Maternity_Obstetric,new,GENERAL
+nutrition,Nutrition,new,GENERAL
+orthopaedic,Orthopaedic,new,GENERAL
+other,Other wards,new,GENERAL
+paediatrics,Paediatrics,new,GENERAL
+palliative,Palliative,new,GENERAL
+psychiatric,Psychiatric,new,GENERAL
+tb,TB,new,GENERAL
+acutecare,Acute Care unit ,old,GENERAL
+ent,ENT ward,old,GENERAL
+emergency,Emergency ward,old,GENERAL
+eye,Eye ward,old,GENERAL
+female_medical,Female medical ward,old,GENERAL
+female_surgical,Female surgical ward,old,GENERAL
+gynaecology,Gynaecology ward,old,GENERAL
+intensivecare,Intensive care ward,old,GENERAL
+male_medical,Male medical ward,old,GENERAL
+male_surgical,Male surgical ward,old,GENERAL
+maternity,Maternity ward,old,GENERAL
+nutrition,Nutrition ward,old,GENERAL
+orthopaedic,Orthopaedic ward,old,GENERAL
+other,Other wards,old,GENERAL
+paediatrics,Paediatric ward,old,GENERAL
+palliative,Palliative ward,old,GENERAL
+psychiatric,Psychiatric ward,old,GENERAL
+tb,TB ward,old,GENERAL
+female_a5,"20+Yrs, Female",new,TB
+male_a5,"20+Yrs, Male",new,TB
+female_a5,"5-9Yrs, Female",new,TB
+male_a5,"5-9Yrs, Male",new,TB
+female_a5,"15-19Yrs, Female",new,TB
+male_a5,"15-19Yrs, Male",new,TB
+female_a5,"10-14Yrs, Female",new,TB
+male_a5,"10-14Yrs, Male",new,TB
+female_u5,"<5Yrs, Female",new,TB
+male_u5,"<5Yrs, Male",new,TB
+female_a5,"60andAbove Years, Female",old,TB
+male_a5,"60andAbove Years, Male",old,TB
+female_a5,"5-59 Years, Female",old,TB
+male_a5,"5-59 Years, Male",old,TB
+female_u5,"0-28 Days, Female",old,TB
+male_u5,"0-28 Days, Male",old,TB
+female_u5,"29 Days-4 Years, Female",old,TB
+male_u5,"29 Days-4 Years, Male",old,TB
+u20,15-19Yrs,new,MNCH
+20-25,20-24Yrs,new,MNCH
+a25,25-49Yrs,new,MNCH
+a25,50+Yrs,new,MNCH
+u20,<15Yrs,new,MNCH
+u20,10-19 Years,old,MNCH
+20-25,20-24 Years,old,MNCH
+a25,>=25 Years,old,MNCH

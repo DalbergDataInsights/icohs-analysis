@@ -13,7 +13,8 @@ import numpy as np
 import pandas as pd
 from scipy.stats import stats
 
-from src.helpers import INDICATORS, make_note, format_date
+from src.helpers import INDICATORS, make_note, get_unique_indics, format_date
+
 
 #################################################
 #                    CONSTANTS                  #
@@ -190,8 +191,7 @@ def add_report_columns(data):
     data['a+e'] = (data[['expected_105_1_reporting',
                          'actual_105_1_reporting']].sum(axis=1))
 
-    cols = VAR_CORR[VAR_CORR['domain'] !=
-                    'REPORT']['identifier'].unique().tolist()
+    cols = get_unique_indics(VAR_CORR)
 
     for x in cols:
         data['i'] = data[x] * 7

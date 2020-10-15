@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import pandas as pd
 
 
 def parse_config(config_path='config/indicators.json', config_section=['input', 'static', 'to_classify', 'output']):
@@ -34,6 +35,29 @@ def make_note(statement, start_time):
 
 INDICATORS = parse_config()
 
+def get_unique_indics(var_corr, excl_domain=None):
+
+    indics = []
+
+    if excl_domain is not None:
+        var_corr = var_corr[var_corr['domain'] != 'REPORT']
+
+    var_corr['breakdown'] = var_corr['breakdown'].astype(str)
+
+    for i in var_corr.index:
+        suf = list(var_corr.loc[i, 'breakdown'].split(","))
+        iden = var_corr.loc[i, 'identifier']
+        if suf[0] != 'nan':
+            for s in suf:
+                y = iden + "__" + s
+                indics.append(y)
+        else:
+            y = iden
+            indics.append(y)
+
+    out = list(set(indics))
+
+    return out
 
 def format_date(date):
     dates = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -43,3 +67,4 @@ def format_date(date):
     month_order = str(dates.index(month)+1)
     month_order = '0' + month_order if len(month_order) == 1 else month_order
     return year + '-' + month_order + '-01'
+
