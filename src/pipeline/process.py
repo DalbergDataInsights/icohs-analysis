@@ -154,7 +154,9 @@ def full_pivot_for_export(data, index=['id', 'facility_id', 'facility_name', 'da
                                   aggfunc='sum')
     data_pivot.columns = data_pivot.columns.droplevel(0)
 
-    return data_pivot
+    columns = sorted(data_pivot.columns)
+
+    return data_pivot[columns]
 
 ###################################
 #     Create the report data      #
@@ -182,10 +184,10 @@ def add_report_columns(data):
                   11: 2,
                   10: 1,
                   0: 0,
-                  17: 3,
-                  7: 3,
-                  8: 3,
-                  1: 2}
+                  17: -1,
+                  7: -1,
+                  8: -1,
+                  1: -1}
 
     data['e'] = data['expected_105_1_reporting'] * 9
     data['a+e'] = (data[['expected_105_1_reporting',
@@ -212,10 +214,6 @@ def create_reporting_pivot(pivot, report, location):
     for c in full_pivot.columns:
         full_pivot[c] = (full_pivot[c] > 0).astype('int')
 
-    # main.drop('value', axis=1, inplace=True)
-    # main.rename(columns={'reported': 'report'}, inplace=True)
-    #reporting = full_pivot(main, location, report_data=report)
-
     report = add_report_columns(full_pivot)
     report.drop(columns=['expected_105_1_reporting',
                          'actual_105_1_reporting'], inplace=True)
@@ -225,53 +223,19 @@ def create_reporting_pivot(pivot, report, location):
     return report
 
 
-# def pivot_for_export(data):
+def stack_reporting(pivot):
+    '''Stack outlier corrected data'''
 
-#     data_pivot = data.pivot_table(index=['orgUnit', 'year', 'month'],
-#                                   columns=['dataElement'],
-#                                   aggfunc='sum')
-#     data_pivot.columns = data_pivot.columns.droplevel(0)
+    stack = pivot.stack().reset_index()
+    stack.rename(columns={0: 'value', 'level_4': 'dataElement'}, inplace=True)
+    stack['value'] = stack['value'].astype(dtype='float64')
 
-#     return data_pivot
-
-
-# def full_pivot(data, location, **report_data):
-
-#     data_pivot = pivot_for_export(data)
-
-#     if report_data != {} and isinstance(report_data['report_data'], pd.DataFrame):
-
-#         data_report_pivot = pivot_for_export(report_data['report_data'])
-#         data_pivot = pd.merge(data_pivot, data_report_pivot,
-#                               left_index=True, right_index=True, how='left')
-
-#     columns = sorted(data_pivot.columns)
-
-#     data_pivot = data_pivot.reset_index()
-
-#     # Create date and delete year and month
-
-#     data_pivot['date'] = data_pivot['year'].astype(str)\
-#         + '-' + data_pivot['month']
-#     data_pivot.drop(columns=['year', 'month'], inplace=True)
-#     data_pivot['date'] = data_pivot.date.apply(format_date)
-
-#     # add facility_name and district
-
-#     data_pivot = pd.merge(data_pivot, location,
-#                           left_on='orgUnit', right_on='facilitycode', how='left')
-
-#     data_pivot = data_pivot.reset_index().rename(
-#         columns={'orgUnit': 'facility_id', 'facilityname': 'facility_name', 'districtname': 'id'})
-
-#     columns = ['id', 'date', 'facility_id', 'facility_name'] + columns
-
-#     return data_pivot[columns]
-
+    return stack
 
 ###############################
 #     Create final stack      #
 ###############################
+
 
 def add_to_final_stack(final_stack, input_stack, policy):
     input_stack['dataElement'] = input_stack['dataElement'] + f'__{policy}'
@@ -292,35 +256,40 @@ def process(main, report, location):
 
     # outlier computations
 
-    # with add_info_and_format(main, location) as outliers_stack:
     outliers_stack = add_info_and_format(main, location)
+
     outliers = full_pivot_for_export(outliers_stack)
     stack = pd.DataFrame(columns=outliers_stack.columns)
     stack = add_to_final_stack(stack, outliers_stack, 'outliers')
     del outliers_stack
 
-    # std_stack = compute_outliers_stack(pivot_outliers, 'std', location)
-    # std = full_pivot_for_export(std_stack)
-    # stack = add_to_final_stack(stack, std_stack, 'std')
-    # del std_stack
+    std_stack = compute_outliers_stack(pivot_outliers, 'std', location)
+    std = full_pivot_for_export(std_stack)
+    stack = add_to_final_stack(stack, std_stack, 'std')
+    del std_stack
 
-    # iqr_stack = compute_outliers_stack(pivot_outliers, 'iqr', location)
-    # iqr = full_pivot_for_export(iqr_stack)
-    # stack = add_to_final_stack(stack, iqr_stack, 'iqr')
-    # del iqr_stack
+    iqr_stack = compute_outliers_stack(pivot_outliers, 'iqr', location)
+    iqr = full_pivot_for_export(iqr_stack)
+    stack = add_to_final_stack(stack, iqr_stack, 'iqr')
+    del iqr_stack
 
     make_note('outlier exclusion done', START_TIME)
 
     # creating the reporting table
 
     report = create_reporting_pivot(outliers, report, location)
+    report_stack = stack_reporting(report)
+    stack = add_to_final_stack(stack, report_stack, 'report')
+    del report_stack
 
-    # TODO unpivot report and add to stack
+    # Exportng
 
-    report.to_csv(INDICATORS['report_data'], index=False)
-    outliers.to_csv(INDICATORS['outlier_data'], index=False)
-    #std.to_csv(INDICATORS['std_no_outlier_data'], index=False)
-    #iqr.to_csv(INDICATORS['iqr_no_outlier_data'], index=False)
+    # TODO Export to DB)
+
+    report.to_csv(INDICATORS['report_data'])
+    outliers.to_csv(INDICATORS['outlier_data'])
+    std.to_csv(INDICATORS['std_no_outlier_data'])
+    iqr.to_csv(INDICATORS['iqr_no_outlier_data'])
     stack.to_csv(INDICATORS["tall_data"], index=False)
 
     make_note('breakdown in four tables done', START_TIME)
