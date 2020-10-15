@@ -1,6 +1,6 @@
 
 from src.pipeline import clean, process
-from src.helpers import INDICATORS, make_note
+from src.helpers import INDICATORS, make_note, get_unique_indics
 import os
 import pandas as pd
 import numpy as np
@@ -19,8 +19,8 @@ if __name__ == '__main__':
 
     # Adding any new indiactors/facilities to the lookup table
 
-    pd.DataFrame(VAR_CORR['identifier']
-                 .unique()).to_csv(INDICATORS['indicators_map'])
+    pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
+        INDICATORS['indicators_map'])
 
     db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
                        table_name='indicator')
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     # Adding the population data
 
-    clean.clean_pop_to_temp(INDICATORS['pop'])
+    clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
 
     db.pg_update_pop(file_path='data/temp/pop.csv')
 
@@ -81,7 +81,8 @@ if __name__ == '__main__':
     # Processing the data
 
     process.process(main=db.pg_read_table_by_indicator('main'),
-                    report=db.pg_read_table_by_indicator('report'))
+                    report=db.pg_read_table_by_indicator('report'),
+                    location=db.pg_read_lookup('location', getdict=False))
 
     # Writing to the database
 

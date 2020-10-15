@@ -37,7 +37,7 @@ def pg_connect(params_dic=param_dic):
 # READ
 
 
-def pg_read_lookup(table_name, param_dic=param_dic):
+def pg_read_lookup(table_name, getdict=True, param_dic=param_dic):
     """
         This table reads data from the lookup tables
     """
@@ -45,8 +45,11 @@ def pg_read_lookup(table_name, param_dic=param_dic):
     query = "select * from {}".format(table_name)
     df = sqlio.read_sql_query(query, conn)
     df = pd.DataFrame(df)
-    df_dict = dict(zip(df.iloc[:, 1], df.iloc[:, 0]))
-    return df_dict
+
+    if getdict is True:
+        df = dict(zip(df.iloc[:, 1], df.iloc[:, 0]))
+
+    return df
 
 
 def pg_read_table_by_indicator(table_name, param_dic=param_dic):
@@ -76,6 +79,8 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 
 
 def pg_write_lookup(file_path, table_name, param_dic=param_dic):
+
+    # TODO Check for bug when asssing idicators
     """
         Check if any new indicators/facilities were added and upload new ones to a target lookup table
     """
@@ -214,7 +219,7 @@ def pg_update_pop(file_path, param_dic=param_dic):
     cur.execute(delete_query)
 
     write_query = f"""
-        COPY pop (DistrictName, year, Male, Female, Total, Age) FROM STDIN WITH (FORMAT CSV)
+        COPY pop (DistrictName, year, Male, Female, Total, childbearing_age, pregnants, not_pregnant, births, u1, u5, u15, suspect_tb) FROM STDIN WITH (FORMAT CSV)
     """
     cur.copy_expert(sql=write_query, file=f)
 

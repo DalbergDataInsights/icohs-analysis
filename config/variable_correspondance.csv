@@ -1,30 +1,30 @@
-﻿name,instance,domain,identifier,display_name,type,breakdown_select,remark
-105-CL01. BCG,new,EPI,bcg,BCG vaccines administered,float,"u1,u1_static,u1_outreach",
-105-2.11 BCG,old,EPI,bcg,BCG vaccines administered,float,"u1,u1_static,u1_outreach",
-105-CL08. DPT-HepB+Hib 1,new,EPI,dpt1,DPT1 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-2.11 DPT-HepB+Hib 1,old,EPI,dpt1,DPT1 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-CL10. DPT-HepB+Hib 3,new,EPI,dpt3,DPT3 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-2.11 DPT-HepB+Hib 3,old,EPI,dpt3,DPT3 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-CL16. Measles (MR1),new,EPI,mr1,MR1 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-2.11 Measles,old,EPI,mr1,MR1 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-CL11. PCV 1,new,EPI,pcv1,PCV1 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-2.11 PCV 1,old,EPI,pcv1,PCV1 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-CL13. PCV 3,new,EPI,pcv3,PCV3 vaccines administered,float,"u1,u1_static,u1_outreach",
-105-2.11 PCV 3,old,EPI,pcv3,PCV3 vaccines administered,float,"u1,u1_static,u1_outreach",
+name,instance,domain,identifier,display_name,type,breakdown,target
+105-CL01. BCG,new,EPI,bcg,BCG vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-2.11 BCG,old,EPI,bcg,BCG vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-CL08. DPT-HepB+Hib 1,new,EPI,dpt1,DPT1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-2.11 DPT-HepB+Hib 1,old,EPI,dpt1,DPT1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-CL10. DPT-HepB+Hib 3,new,EPI,dpt3,DPT3 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-2.11 DPT-HepB+Hib 3,old,EPI,dpt3,DPT3 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-CL16. Measles (MR1),new,EPI,mr1,MR1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-2.11 Measles,old,EPI,mr1,MR1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-CL11. PCV 1,new,EPI,pcv1,PCV1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-2.11 PCV 1,old,EPI,pcv1,PCV1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-CL13. PCV 3,new,EPI,pcv3,PCV3 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
+105-2.11 PCV 3,old,EPI,pcv3,PCV3 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
 105-VP01. HPV1-Dose 1,new,EPI,hpv1,HPV1 vaccines administered,float,"all-hpv,community,school",
 105-2.10 HPV1-Dose 1,old,EPI,hpv1,HPV1 vaccines administered,float,"all-hpv,community,school",
 105-VP02. HPV2-Dose 2,new,EPI,hpv2,HPV2 vaccines administered,float,"all-hpv,community,school",
 105-2.10 HPV2-Dose 2,old,EPI,hpv2,HPV2 vaccines administered,float,"all-hpv,community,school",
-105-TD01. Td1-Dose 1,new,EPI,td1,TD1 vaccines administered,float,,
-105-2.9 Tetanus Immunization Dose 1,old,EPI,td1,TD1 vaccines administered,float,,
-105-TD02. Td2-Dose 2,new,EPI,td2,TD2 vaccines administered,float,,
-105-2.9 Tetanus Immunization Dose 2,old,EPI,td2,TD2 vaccines administered,float,,
-105-TD03. Td3-Dose 3,new,EPI,td3,TD3 vaccines administered,float,,
-105-2.9 Tetanus Immunization Dose 3,old,EPI,td3,TD3 vaccines administered,float,,
-105-TD04. Td4-Dose 4,new,EPI,td4_5,TD4-5 vaccines administered,float,,
-105-TD05. Td5-Dose 5,new,EPI,td4_5,TD4-5 vaccines administered,float,,
-105-2.9 Tetanus Immunization Dose 4,old,EPI,td4_5,TD4-5 vaccines administered,float,,
-105-2.9 Tetanus Immunization Dose 5,old,EPI,td4_5,TD4-5 vaccines administered,float,,
+105-TD01. Td1-Dose 1,new,EPI,td1,TD1 vaccines administered,float,"pregnant,nonpregnant",
+105-2.9 Tetanus Immunization Dose 1,old,EPI,td1,TD1 vaccines administered,float,"pregnant,nonpregnant",
+105-TD02. Td2-Dose 2,new,EPI,td2,TD2 vaccines administered,float,"pregnant,nonpregnant",
+105-2.9 Tetanus Immunization Dose 2,old,EPI,td2,TD2 vaccines administered,float,"pregnant,nonpregnant",
+105-TD03. Td3-Dose 3,new,EPI,td3,TD3 vaccines administered,float,"pregnant,nonpregnant",
+105-2.9 Tetanus Immunization Dose 3,old,EPI,td3,TD3 vaccines administered,float,"pregnant,nonpregnant",
+105-TD04. Td4-Dose 4,new,EPI,td4_5,TD4-5 vaccines administered,float,"pregnant,nonpregnant",
+105-TD05. Td5-Dose 5,new,EPI,td4_5,TD4-5 vaccines administered,float,"pregnant,nonpregnant",
+105-2.9 Tetanus Immunization Dose 4,old,EPI,td4_5,TD4-5 vaccines administered,float,"pregnant,nonpregnant",
+105-2.9 Tetanus Immunization Dose 5,old,EPI,td4_5,TD4-5 vaccines administered,float,"pregnant,nonpregnant",
 108-CI02. No. of admissions,new,GENERAL,ipd_attendance,inpatient admissions,float,,
 108-1 Admissions,old,GENERAL,ipd_attendance,inpatient admissions,float,,
 105-OA01. New attendance,new,GENERAL,opd_attendance,outpatient visits,float,,
