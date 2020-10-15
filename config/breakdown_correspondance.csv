@@ -128,3 +128,19 @@ mnch_all,<15Yrs,new,MNCH
 mnch_all,10-19 Years,old,MNCH
 mnch_all,20-24 Years,old,MNCH
 mnch_all,>=25 Years,old,MNCH
+u5,"Outreach, Female, 12-59Mths",new,NUT
+u5,"Outreach, Female, 6-11Mths",new,NUT
+u5,"Outreach, Male, 12-59Mths",new,NUT
+u5,"Outreach, Male, 6-11Mths",new,NUT
+u5,"School, Female, 12-59Mths",new,NUT
+u5,"School, Female, 6-11Mths",new,NUT
+u5,"School, Male, 12-59Mths",new,NUT
+u5,"School, Male, 6-11Mths",new,NUT
+u5,"Static, Female, 12-59Mths",new,NUT
+u5,"Static, Female, 6-11Mths",new,NUT
+u5,"Static, Male, 12-59Mths",new,NUT
+u5,"Static, Male, 6-11Mths",new,NUT
+u5,"12-59 Months, Female",old,NUT
+u5,"12-59 Months, Male",old,NUT
+u5,"6-11 Months, Female",old,NUT
+u5,"6-11 Months, Male",old,NUT
