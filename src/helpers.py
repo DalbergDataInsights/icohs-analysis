@@ -35,7 +35,6 @@ def make_note(statement, start_time):
 
 INDICATORS = parse_config()
 
-
 def get_unique_indics(var_corr, excl_domain=None):
 
     indics = []
@@ -59,3 +58,13 @@ def get_unique_indics(var_corr, excl_domain=None):
     out = list(set(indics))
 
     return out
+
+def format_date(date):
+    dates = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    assert len(dates) == 12
+    year, month = date.split('-')
+    month_order = str(dates.index(month)+1)
+    month_order = '0' + month_order if len(month_order) == 1 else month_order
+    return year + '-' + month_order + '-01'
+

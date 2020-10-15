@@ -37,7 +37,7 @@ def pg_connect(params_dic=param_dic):
 # READ
 
 
-def pg_read_lookup(table_name, param_dic=param_dic):
+def pg_read_lookup(table_name, getdict=True, param_dic=param_dic):
     """
         This table reads data from the lookup tables
     """
@@ -45,8 +45,11 @@ def pg_read_lookup(table_name, param_dic=param_dic):
     query = "select * from {}".format(table_name)
     df = sqlio.read_sql_query(query, conn)
     df = pd.DataFrame(df)
-    df_dict = dict(zip(df.iloc[:, 1], df.iloc[:, 0]))
-    return df_dict
+
+    if getdict is True:
+        df = dict(zip(df.iloc[:, 1], df.iloc[:, 0]))
+
+    return df
 
 
 def pg_read_table_by_indicator(table_name, param_dic=param_dic):

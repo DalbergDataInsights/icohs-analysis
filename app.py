@@ -17,71 +17,73 @@ if __name__ == '__main__':
 
     make_note('Starting the pipeline', START_TIME)
 
-    # Adding any new indiactors/facilities to the lookup table
+    # # Adding any new indiactors/facilities to the lookup table
 
     pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
         INDICATORS['indicators_map'])
 
-    db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
-                       table_name='indicator')
 
-    db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
-                       table_name='location')
+    # db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
+    #                    table_name='indicator')
 
-    # Adding the population data
+    # db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
+    #                    table_name='location')
 
+    # # Adding the population data
+    
     clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
 
-    db.pg_update_pop(file_path='data/temp/pop.csv')
+    # db.pg_update_pop(file_path='data/temp/pop.csv')
 
-    # cleaning the data and writing it to the database file by file
+    # # cleaning the data and writing it to the database file by file
 
-    files = os.listdir(INDICATORS['raw_data'])
+    # files = os.listdir(INDICATORS['raw_data'])
 
-    for f in files:
+    # for f in files:
 
-        raw_path = INDICATORS['raw_data']+f
-        processed_path = INDICATORS['processed_data']+f
+    #     raw_path = INDICATORS['raw_data']+f
+    #     processed_path = INDICATORS['processed_data']+f
 
-        # Clean the data
+    #     # Clean the data
 
-        df = clean.clean(raw_path=raw_path)
+    #     df = clean.clean(raw_path=raw_path)
 
-        # Send it to a temporary csv
+    #     # Send it to a temporary csv
 
-        (temp_csv_path,
-         year,
-         month,
-         table) = clean.map_to_temp(raw_path=raw_path,
-                                    map=db.pg_read_lookup('indicator'),
-                                    clean_df=df)
+    #     (temp_csv_path,
+    #      year,
+    #      month,
+    #      table) = clean.map_to_temp(raw_path=raw_path,
+    #                                 map=db.pg_read_lookup('indicator'),
+    #                                 clean_df=df)
 
-        # Write the clean data to the database
+    #     # Write the clean data to the database
 
-        db.pg_update_write(year=year,
-                           month=month,
-                           file_path=temp_csv_path,
-                           table_name=table)
+    #     db.pg_update_write(year=year,
+    #                        month=month,
+    #                        file_path=temp_csv_path,
+    #                        table_name=table)
 
-        # Move orginal data from the 'raw' to the 'prcessed' folder
+    #     # Move orginal data from the 'raw' to the 'prcessed' folder
 
-        clean.move_csv_files(raw_path, processed_path)
+    #     clean.move_csv_files(raw_path, processed_path)
 
-        make_note(f'Cleaning and database insertion done for file {f}',
-                  START_TIME)
+    #     make_note(f'Cleaning and database insertion done for file {f}',
+    #               START_TIME)
 
-    # Removing any redundant indicatirs/facilities from the lookup tables
+    # # Removing any redundant indicatirs/facilities from the lookup tables
 
-    db.pg_delete_lookup(file_path=INDICATORS['indicators_map'],
-                        table_name='indicator')
+    # db.pg_delete_lookup(file_path=INDICATORS['indicators_map'],
+    #                     table_name='indicator')
 
-    db.pg_delete_lookup(file_path=INDICATORS['name_district_map'],
-                        table_name='location')
+    # db.pg_delete_lookup(file_path=INDICATORS['name_district_map'],
+    #                     table_name='location')
 
     # Processing the data
 
     process.process(main=db.pg_read_table_by_indicator('main'),
-                    report=db.pg_read_table_by_indicator('report'))
+                    report=db.pg_read_table_by_indicator('report'),
+                    location=db.pg_read_lookup('location', getdict=False))
 
     # Writing to the database
 

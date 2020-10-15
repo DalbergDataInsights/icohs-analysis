@@ -1,4 +1,4 @@
-﻿name,instance,domain,identifier,display_name,type,breakdown,target
+name,instance,domain,identifier,display_name,type,breakdown,target
 105-CL01. BCG,new,EPI,bcg,BCG vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
 105-2.11 BCG,old,EPI,bcg,BCG vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
 105-CL08. DPT-HepB+Hib 1,new,EPI,dpt1,DPT1 vaccines administered,float,"u1_all,u1_static,u1_outreach",u1
