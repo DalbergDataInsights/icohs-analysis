@@ -115,3 +115,16 @@ u20,<15Yrs,new,MNCH
 u20,10-19 Years,old,MNCH
 20-25,20-24 Years,old,MNCH
 a25,>=25 Years,old,MNCH
+a20,20-24Yrs,new,MNCH
+a20,25-49Yrs,new,MNCH
+a20,50+Yrs,new,MNCH
+a20,20-24 Years,old,MNCH
+a20,>=25 Years,old,MNCH
+mnch_all,15-19Yrs,new,MNCH
+mnch_all,20-24Yrs,new,MNCH
+mnch_all,25-49Yrs,new,MNCH
+mnch_all,50+Yrs,new,MNCH
+mnch_all,<15Yrs,new,MNCH
+mnch_all,10-19 Years,old,MNCH
+mnch_all,20-24 Years,old,MNCH
+mnch_all,>=25 Years,old,MNCH

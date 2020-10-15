@@ -111,6 +111,17 @@
 105-TP04. Total New and relapse TB cases registered in TB treatment unit,"['10-14Yrs, Female' '10-14Yrs, Male' '15-19Yrs, Female' '15-19Yrs, Male'
  '20+Yrs, Female' '20+Yrs, Male' '5-9Yrs, Female' '5-9Yrs, Male'
  '<5Yrs, Female' '<5Yrs, Male']",new
+105-MA14a. Mothers who initiated breastfeeding within the 1st hour after delivery - Total,['default'],new
+105-MA13. Maternal deaths,['15-19Yrs' '20-24Yrs' '25-49Yrs' '50+Yrs' '<15Yrs'],new
+105-CD05. Sexually Transmitted Infection due to Sexual Gender Based Violence,"['10-19Yrs, Female' '10-19Yrs, Male' '20+Yrs, Female' '20+Yrs, Male'
+ '29Dys-4Yrs, Female' '29Dys-4Yrs, Male' '5-9Yrs, Female' '5-9Yrs, Male']",new
+105-CD06. Other Sexually Transmitted Infections,"['10-19Yrs, Female' '10-19Yrs, Male' '20+Yrs, Female' '20+Yrs, Male'
+ '29Dys-4Yrs, Female' '29Dys-4Yrs, Male' '5-9Yrs, Female' '5-9Yrs, Male']",new
+105-IN03. Injuries due to Gender based violence,"['0-28Dys, Female' '0-28Dys, Male' '10-19Yrs, Female' '10-19Yrs, Male'
+ '20+Yrs, Female' '20+Yrs, Male' '29Dys-4Yrs, Female' '29Dys-4Yrs, Male'
+ '5-9Yrs, Female' '5-9Yrs, Male']",new
+105-MC01. Abortions due to Gender-Based Violence (GBV),"['10-19Yrs, Female' '20+Yrs, Female']",new
+105-MC02. Abortions due to other causes,"['10-19Yrs, Female' '20+Yrs, Female']",new
 105-2.11 BCG,"['1-4 Yrs, Outreach, Female' '1-4 Yrs, Outreach, Male'
  '1-4 Yrs, Static, Female' '1-4 Yrs, Static, Male'
  'Under 1, Outreach, Female' 'Under 1, Outreach, Male'
@@ -232,3 +243,10 @@ HMIS 105:1 Actual reports,[],old
 105-1.3 OPD New TB cases (EPTB),"['0-28 Days, Male' '29 Days-4 Years, Female' '29 Days-4 Years, Male'
  '5-59 Years, Female' '5-59 Years, Male' '60andAbove Years, Female'
  '60andAbove Years, Male']",old
+105-2.2 No. of mothers who initiated breastfeeding within the 1st hour after delivery (Total),['default'],old
+105-2.2 OPD Maternal deaths,['10-19 Years' '20-24 Years' '>=25 Years'],old
+105-1.3 OPD Sexually Transmitted Infection Due To SGBV,[],old
+105-1.3 OPD Other Sexually Transmitted Infections,[],old
+105-1.3 OPD Injuries Due To Gender Based Violence,[],old
+105-1.3 OPD Abortions Due To Gender Based Violence (GBV),[],old
+105-1.3 OPD Abortions Due To Other Causes,[],old
