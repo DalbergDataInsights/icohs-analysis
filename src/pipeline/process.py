@@ -127,7 +127,7 @@ def add_info_and_format(data, location, columns=['id', 'facility_id', 'facility_
     # rename cols
 
     data = data.reset_index().rename(
-        columns={'orgUnit': 'facility_id', 'facilityname': 'facility_name', 'districtname': 'id'})
+        columns={'orgUnit': 'facility_id', 'facilityname': 'facility_name', 'districtname': 'district_name'})
 
     return data[columns]
 
