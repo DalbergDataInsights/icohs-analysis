@@ -110,7 +110,7 @@ def pivot_stack_post_process(pivot):
     return stack
 
 
-def add_info_and_format(data, location, columns=['id', 'facility_id', 'facility_name', 'date', 'dataElement', 'value']):
+def add_info_and_format(data, location, columns=['district_name', 'facility_id', 'facility_name', 'date', 'dataElement', 'value']):
 
     # create date and delete year and month
 
@@ -147,7 +147,7 @@ def compute_outliers_stack(pivot, policy, location):
     return stack
 
 
-def full_pivot_for_export(data, index=['id', 'facility_id', 'facility_name', 'date']):
+def full_pivot_for_export(data, index=['district_name', 'facility_id', 'facility_name', 'date']):
 
     data_pivot = data.pivot_table(index=index,
                                   columns=['dataElement'],

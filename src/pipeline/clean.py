@@ -393,4 +393,10 @@ def map_to_temp(raw_path, map, clean_df):
 
 
 def move_csv_files(raw_path, processed_path):
+
+    try:
+        os.remove(processed_path)
+    except Exception:
+        pass
+
     os.rename(raw_path, processed_path)
