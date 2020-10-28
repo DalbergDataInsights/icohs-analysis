@@ -1,0 +1,897 @@
+[
+    {
+        "indicator": "OPD attendance",
+        "function": "sum",
+        "elements": [
+            "opd_attendance"
+        ],
+        "view": "number of outpatient visits",
+        "group": "GENERAL"
+    },
+    {
+        "indicator": "IPD attendance",
+        "function": "sum",
+        "elements": [
+            "ipd_attendance"
+        ],
+        "view": "number of inpatient admissions",
+        "group": "GENERAL"
+    },
+    {
+        "indicator": "OPD attendance (per 1000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "opd_attendance"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_thousand"
+                ]
+            }
+        },
+        "view": "number of outpatient visits per thousand inhabitants",
+        "group": "GENERAL"
+    },
+    {
+        "indicator": "1st ANC Visits",
+        "function": "sum",
+        "elements": [
+            "1st_anc_visits"
+        ],
+        "view": "number of women attending their first ANC visit",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "4th ANC Visits",
+        "function": "sum",
+        "elements": [
+            "4th_anc_visits"
+        ],
+        "view": "number of women attending their fourth ANC visit",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Maternity Admissions",
+        "function": "sum",
+        "elements": [
+            "maternity_admissions"
+        ],
+        "view": "number of maternal admissions",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Deliveries in unit",
+        "function": "sum",
+        "elements": [
+            "births"
+        ],
+        "view": "number of in-facility births",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Deliveries in unit - live",
+        "function": "sum",
+        "elements": [
+            "births_live"
+        ],
+        "view": "number of in-facility live births",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Deliveries in unit - fresh stillbirth",
+        "function": "sum",
+        "elements": [
+            "births_fresh_stillbirth"
+        ],
+        "view": "number of in-facility fresh stillbirths",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Deliveries in unit - macerated stillbirth",
+        "function": "sum",
+        "elements": [
+            "births_macerated_stillbirth"
+        ],
+        "view": "number of in-facility macerated stillbirths",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Newborn deaths",
+        "function": "sum",
+        "elements": [
+            "newborn_deaths"
+        ],
+        "view": "number of newborn deaths",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Postnatal Visits",
+        "function": "sum",
+        "elements": [
+            "postnatal_visits"
+        ],
+        "view": "number of post-natal visits",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Mothers breastfeeding after delivery",
+        "function": "sum",
+        "elements": [
+            "breastfed_1st_hour"
+        ],
+        "view": "number of mothers breastfeeding within the first hour after delivery",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Maternal deaths (under 20)",
+        "function": "sum",
+        "elements": [
+            "maternal_deaths__u20"
+        ],
+        "view": "number of maternal deaths (mothers over twenty years old)",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Maternal deaths (above 20)",
+        "function": "sum",
+        "elements": [
+            "maternal_deaths__a20"
+        ],
+        "view": "number of maternal deaths (mothers under twenty years old)",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "Maternal deaths (all)",
+        "function": "sum",
+        "elements": [
+            "maternal_deaths__mnch_all"
+        ],
+        "view": "number of maternal deaths (all)",
+        "group": "MNCH"
+    },
+    {
+        "indicator": "STI cases related to SGBV",
+        "function": "sum",
+        "elements": [
+            "sti_gbv"
+        ],
+        "view": "number of sexually transmitted infections related to sexual gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "STI cases not related to SGBV",
+        "function": "sum",
+        "elements": [
+            "sti_other"
+        ],
+        "view": "number of sexually transmitted infections not related to sexual gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "Injuries related to GBV",
+        "function": "sum",
+        "elements": [
+            "injuries_gbv"
+        ],
+        "view": "number of injuries related to gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "Abortions related to GBV",
+        "function": "sum",
+        "elements": [
+            "abortions_gbv"
+        ],
+        "view": "number of abortions related to gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "Abortions not related to GBV",
+        "function": "sum",
+        "elements": [
+            "abortions_other"
+        ],
+        "view": "number of abortions not related to gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "BCG doses to U1 (all)",
+        "function": "sum",
+        "elements": [
+            "bcg__u1_all"
+        ],
+        "view": "number of children under one receiving their BCG vaccine",
+        "group": "EPI"
+    },
+    {
+        "indicator": "BCG doses to U1 (outreach)",
+        "function": "sum",
+        "elements": [
+            "bcg__u1_outreach"
+        ],
+        "view": "number of children under one receiving their BCG vaccine (outreach)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "BCG doses to U1 (static)",
+        "function": "sum",
+        "elements": [
+            "bcg__u1_static"
+        ],
+        "view": "number of children under one receiving their BCG vaccine (static)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT1 doses to U1 (all)",
+        "function": "sum",
+        "elements": [
+            "dpt1__u1_all"
+        ],
+        "view": "number of children under one receiving their DPT1 vaccine",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT1 doses to U1 (outreach)",
+        "function": "sum",
+        "elements": [
+            "dpt1__u1_outreach"
+        ],
+        "view": "number of children under one receiving their DPT1 vaccine (outreach)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT1 doses to U1 (static)",
+        "function": "sum",
+        "elements": [
+            "dpt1__u1_static"
+        ],
+        "view": "number of children under one receiving their DPT1 vaccine (static)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT3 doses to U1 (all)",
+        "function": "sum",
+        "elements": [
+            "dpt3__u1_all"
+        ],
+        "view": "number of children under one receiving their DPT3 vaccine",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT3 doses to U1 (outreach)",
+        "function": "sum",
+        "elements": [
+            "dpt3__u1_outreach"
+        ],
+        "view": "number of children under one receiving their DPT3 vaccine (outreach)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT3 doses to U1 (static)",
+        "function": "sum",
+        "elements": [
+            "dpt3__u1_static"
+        ],
+        "view": "number of children under one receiving their DPT3 vaccine (static)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "HPV1 doses to U1 (school)",
+        "function": "sum",
+        "elements": [
+            "hpv1__school"
+        ],
+        "view": "number of girls receiving their HPV1 vaccine (school)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "HPV1 doses to girls (all)",
+        "function": "sum",
+        "elements": [
+            "hpv1__all-hpv"
+        ],
+        "view": "number of girls receiving their HPV1 vaccine (all)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "HPV1 doses to girls (community)",
+        "function": "sum",
+        "elements": [
+            "hpv1__community"
+        ],
+        "view": "number of girls receiving their HPV1 vaccine (community)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "HPV2 doses to girls (school)",
+        "function": "sum",
+        "elements": [
+            "hpv2__school"
+        ],
+        "view": "number of girls receiving their HPV2 vaccine (school)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "HPV2 doses to girls (all)",
+        "function": "sum",
+        "elements": [
+            "hpv2__all-hpv"
+        ],
+        "view": "number of girls receiving their HPV2 vaccine (all)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "HPV2 doses to girls (community)",
+        "function": "sum",
+        "elements": [
+            "hpv2__community"
+        ],
+        "view": "number of girls receiving their HPV2 vaccine (community)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "MR1 doses to U1 (all)",
+        "function": "sum",
+        "elements": [
+            "mr1__u1_all"
+        ],
+        "view": "number of children under one receiving their MR1  vaccine",
+        "group": "EPI"
+    },
+    {
+        "indicator": "MR1 doses to U1 (outreach)",
+        "function": "sum",
+        "elements": [
+            "mr1__u1_outreach"
+        ],
+        "view": "number of children under one receiving their MR1  vaccine (outreach)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "MR1 doses to U1 (static)",
+        "function": "sum",
+        "elements": [
+            "mr1__u1_static"
+        ],
+        "view": "number of children under one receiving their MR1  vaccine (static)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV1 doses to U1 (all)",
+        "function": "sum",
+        "elements": [
+            "pcv1__u1_all"
+        ],
+        "view": "number of children under one receiving their PCV1 vaccine",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV1 doses to U1 (outreach)",
+        "function": "sum",
+        "elements": [
+            "pcv1__u1_outreach"
+        ],
+        "view": "number of children under one receiving their PCV1 vaccine (outreach)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV1 doses to U1 (static)",
+        "function": "sum",
+        "elements": [
+            "pcv1__u1_static"
+        ],
+        "view": "number of children under one receiving their PCV1 vaccine (static)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV3 doses to U1 (all)",
+        "function": "sum",
+        "elements": [
+            "pcv3__u1_all"
+        ],
+        "view": "number of children under one receiving their PCV3 vaccine",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV3 doses to U1 (outreach)",
+        "function": "sum",
+        "elements": [
+            "pcv3__u1_outreach"
+        ],
+        "view": "number of children under one receiving their PCV3 vaccine (outreach)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV3 doses to U1 (static)",
+        "function": "sum",
+        "elements": [
+            "pcv3__u1_static"
+        ],
+        "view": "number of children under one receiving their PCV3 vaccine (static)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD1 doses (nonpregnant)",
+        "function": "sum",
+        "elements": [
+            "td1__nonpregnant"
+        ],
+        "view": "number of women receiving their TD1 vaccine (nonpregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD1 doses (pregnant)",
+        "function": "sum",
+        "elements": [
+            "td1__pregnant"
+        ],
+        "view": "number of women receiving their TD1 vaccine (pregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD2 doses (nonpregnant)",
+        "function": "sum",
+        "elements": [
+            "td2__nonpregnant"
+        ],
+        "view": "number of women receiving their TD2 vaccine (nonpregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD2 doses (pregnant)",
+        "function": "sum",
+        "elements": [
+            "td2__pregnant"
+        ],
+        "view": "number of women receiving their TD2 vaccine (pregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD3 doses (nonpregnant)",
+        "function": "sum",
+        "elements": [
+            "td3__nonpregnant"
+        ],
+        "view": "number of women receiving their TD3 vaccine (nonpregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD3 doses (pregnant)",
+        "function": "sum",
+        "elements": [
+            "td3__pregnant"
+        ],
+        "view": "number of women receiving their TD3 vaccine (pregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD4-5 doses (nonpregnant)",
+        "function": "sum",
+        "elements": [
+            "td4_5__nonpregnant"
+        ],
+        "view": "number of women receiving their TD4-5 vaccine (nonpregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "TD4-5 doses (pregnant)",
+        "function": "sum",
+        "elements": [
+            "td4_5__pregnant"
+        ],
+        "view": "number of women receiving their TD4-5 vaccine (pregnant)",
+        "group": "EPI"
+    },
+    {
+        "indicator": "BCG coverage (all)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "bcg__u1_all"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u1"
+                ]
+            }
+        },
+        "view": "BCG vaccine coverage of children under one",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT1 coverage (all)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "dpt1__u1_all"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u1"
+                ]
+            }
+        },
+        "view": "DPT1 vaccine coverage of children under one\r",
+        "group": "EPI"
+    },
+    {
+        "indicator": "DPT3 coverage (all)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "dpt3__u1_all"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u1"
+                ]
+            }
+        },
+        "view": "DPT3 vaccine coverage of children under one\r",
+        "group": "EPI"
+    },
+    {
+        "indicator": "MR1 coverage (all)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "mr1__u1_all"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u1"
+                ]
+            }
+        },
+        "view": "MR1 vaccine coverage of children under one",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV1 coverage (all)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "pcv1__u1_all"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u1"
+                ]
+            }
+        },
+        "view": "PCV1 vaccine coverage of children under one",
+        "group": "EPI"
+    },
+    {
+        "indicator": "PCV3 coverage (all)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "pcv3__u1_all"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u1"
+                ]
+            }
+        },
+        "view": "PCV3 vaccine coverage of children under one",
+        "group": "EPI"
+    },
+    {
+        "indicator": "Tested HIV",
+        "function": "sum",
+        "elements": [
+            "tested_hiv"
+        ],
+        "view": "number of individuals tested for HIV",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Tested HIV positive",
+        "function": "sum",
+        "elements": [
+            "tested_hiv_positive"
+        ],
+        "view": "number of individuals tested positive for HIV",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Tested HIV positive (per 1000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "tested_hiv_positive"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_thousand"
+                ]
+            }
+        },
+        "view": "number of individuals tested positive for HIV per thousand inhabitants",
+        "group": "HIV"
+    },
+    {
+        "indicator": "HIV positive linked to care",
+        "function": "sum",
+        "elements": [
+            "hiv_positive_linked"
+        ],
+        "view": "number of HIV-positive individuals linked to care",
+        "group": "HIV"
+    },
+    {
+        "indicator": "ANC tested HIV",
+        "function": "sum",
+        "elements": [
+            "anc_tested_hiv"
+        ],
+        "view": "number of pregnant women newly tested for HIV in ANC",
+        "group": "HIV"
+    },
+    {
+        "indicator": "ANC tested HIV positive",
+        "function": "sum",
+        "elements": [
+            "anc_tested_hiv_positive"
+        ],
+        "view": "number of pregnant women newly tested positive for HIV in ANC",
+        "group": "HIV"
+    },
+    {
+        "indicator": "ANC initiated on ART",
+        "function": "sum",
+        "elements": [
+            "anc_initiated_hiv"
+        ],
+        "view": "number of HIV-positive pregnant women initiated on ART in ANC",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Mat tested HIV",
+        "function": "sum",
+        "elements": [
+            "mat_tested_hiv"
+        ],
+        "view": "number of pregnant women tested for HIV in maternity",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Mat tested HIV positive",
+        "function": "sum",
+        "elements": [
+            "mat_tested_hiv_positive"
+        ],
+        "view": "number of pregnant women tested positive for HIV in maternity",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Mat initiated on ART",
+        "function": "sum",
+        "elements": [
+            "mat_initiated_hiv"
+        ],
+        "view": "number of HIV-positive women initiated on ART in maternity",
+        "group": "HIV"
+    },
+    {
+        "indicator": "PNC tested HIV",
+        "function": "sum",
+        "elements": [
+            "pnc_tested_hiv"
+        ],
+        "view": "number of breastfeeding women newly tested for HIV in PNC",
+        "group": "HIV"
+    },
+    {
+        "indicator": "PNC tested HIV positive",
+        "function": "sum",
+        "elements": [
+            "pnc_tested_hiv_positive"
+        ],
+        "view": "number of breastfeeding women newly tested HIV positive in PNC",
+        "group": "HIV"
+    },
+    {
+        "indicator": "PNC initiated on ART",
+        "function": "sum",
+        "elements": [
+            "pnc_initiated_hiv"
+        ],
+        "view": "number of HIV-positive women initiated on ART in PNC",
+        "group": "HIV"
+    },
+    {
+        "indicator": "TB cases registered",
+        "function": "sum",
+        "elements": [
+            "tb_cases_registered"
+        ],
+        "view": "number of TB cases registered in treatment unit",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered (per 100 000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "tb_cases_registered"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_hundred_thousand"
+                ]
+            }
+        },
+        "view": "number of TB cases registered in treatment unit per hundred thousand inhabitants",
+        "group": "TB"
+    },
+    {
+        "indicator": "Malaria deaths",
+        "function": "sum",
+        "elements": [
+            "malaria_deaths"
+        ],
+        "view": "number of deaths due to Malaria",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria cases treated",
+        "function": "sum",
+        "elements": [
+            "malaria_cases_treated"
+        ],
+        "view": "number of individuals treated for Malaria",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria cases",
+        "function": "sum",
+        "elements": [
+            "malaria_cases"
+        ],
+        "view": "number of individuals diagnosed with Malaria",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria cases (per 1000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "malaria_cases"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_thousand"
+                ]
+            }
+        },
+        "view": "number of individuals diagnosed with Malaria per thousand inhabitants",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria tests",
+        "function": "sum",
+        "elements": [
+            "malaria_tests"
+        ],
+        "view": "number of individuals tested for Malaria",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Doses of vitamin A (1st & 2nd)",
+        "function": "sum",
+        "elements": [
+            "vitamin_a"
+        ],
+        "view": "number of first and second doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "Doses of vitamin A (1st)",
+        "function": "sum",
+        "elements": [
+            "vitamin_a1"
+        ],
+        "view": "number of first doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "Doses of vitamin A (2nd)",
+        "function": "sum",
+        "elements": [
+            "vitamin_a2"
+        ],
+        "view": "number of second doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "SAM cases identified",
+        "function": "sum",
+        "elements": [
+            "sam_identified"
+        ],
+        "view": "number of SAM cases identified",
+        "group": "NUT"
+    },
+    {
+        "indicator": "SAM cases identified (per 100 000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "sam_identified"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_hundred_thousand"
+                ]
+            }
+        },
+        "view": "number of SAM cases identified per hundred thousand inhabitants",
+        "group": "NUT"
+    },
+    {
+        "indicator": "MAM cases identified",
+        "function": "sum",
+        "elements": [
+            "mam_identified"
+        ],
+        "view": "number of MAM cases identified",
+        "group": "NUT"
+    },
+    {
+        "indicator": "Low weight births",
+        "function": "sum",
+        "elements": [
+            "low_weight_births"
+        ],
+        "view": "number of low weight births",
+        "group": "NUT"
+    }
+]

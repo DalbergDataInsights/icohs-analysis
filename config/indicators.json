@@ -56,6 +56,13 @@
                 "name": "breakdown_correspondence_data",
                 "type": "string",
                 "value": "config/breakdown_correspondance.csv"
+            },
+            {
+                "description": "Path to viz config file",
+                "identifier": "viz_config",
+                "name": "viz_config",
+                "type": "string",
+                "value": "config/viz_config.json"
             }
         ],
         "static": [

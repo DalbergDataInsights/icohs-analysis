@@ -30,9 +30,11 @@ if __name__ == '__main__':
 
     # Adding the population data
 
-    clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
+    # FIXME : Broken for some unknown reason
 
-    db.pg_update_pop(file_path='data/temp/pop.csv')
+    # clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
+
+    # db.pg_update_pop(file_path='data/temp/pop.csv')
 
     # cleaning the data and writing it to the database file by file
 
@@ -53,7 +55,7 @@ if __name__ == '__main__':
          year,
          month,
          table) = clean.map_to_temp(raw_path=raw_path,
-                                    map=db.pg_read_lookup('indicator'),
+                                    map=db.pg_read('indicator'),
                                     clean_df=df)
 
         # Write the clean data to the database
@@ -82,7 +84,7 @@ if __name__ == '__main__':
 
     process.process(main=db.pg_read_table_by_indicator('main'),
                     report=db.pg_read_table_by_indicator('report'),
-                    location=db.pg_read_lookup('location', getdict=False))
+                    location=db.pg_read('location', getdict=False))
 
     # Writing to the database
 
@@ -100,3 +102,5 @@ if __name__ == '__main__':
 
     # recording measured time
     make_note('Pipeline done', START_TIME)
+
+    # OPtional
