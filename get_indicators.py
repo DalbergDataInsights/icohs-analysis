@@ -32,17 +32,18 @@ def prep_pop(pop, df):
         df[['district_name', 'facility_id']]\
         .drop_duplicates()\
         .groupby('district_name', as_index=False)\
-        .count()
+        .count()\
+        .rename(columns={'facility_id': 'count'})
 
     new_pop = pd.merge(pop, fcount,
                        how='left',
                        left_on='district_name',
                        right_on='district_name')
 
-    for c in new_pop.columns[3:-2]:
-        new_pop[c] = new_pop[c]/new_pop['facility_id']
+    for c in new_pop.columns[3:-1]:
+        new_pop[c] = new_pop[c]/new_pop['count']
 
-    new_pop = new_pop.drop(columns=new_pop.columns[-1:1])
+    new_pop = new_pop[new_pop.columns[1:-1]]
 
     return new_pop
 
@@ -95,11 +96,23 @@ for i in CONFIG:
 
         total = get_value_indic(outlier, formula.get("denominator")).sum()
         weight = denominator/total
-
         outlier[f'{i.get("indicator")} -- weight'] = weight
 
+        weighted_ratio = value * weight
+        outlier[f'{i.get("indicator")} -- weighted_ratio'] = weighted_ratio
 
-outlier.to_csv('test_indicator_add.csv')
 
-# FIXME : check why facility_id_x
+# outlier.to_csv('test_indicator_add.csv')
+
+cols = ['date', 'DPT3 coverage (all)', 'DPT3 coverage (all) -- weight',
+        'DPT3 coverage (all) -- weighted_ratio']
+
+check = outlier[cols].groupby('date').agg(
+    {cols[1]: 'mean', cols[2]: 'sum', cols[3]: 'sum'})
+
+check['actual ratio'] = check[cols[3]]/check[cols[2]]
+
+print(check.loc['2019-10-01', '2019-11-01', '2019-12-01'])
+
+
 # FIXME : check if we have interest to have the wright be done not for each date but per date
