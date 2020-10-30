@@ -286,10 +286,10 @@ def process(main, report, location):
 
     # TODO Export to DB)
 
-    report.to_csv(INDICATORS['report_data'])
-    outliers.to_csv(INDICATORS['outlier_data'])
-    std.to_csv(INDICATORS['std_no_outlier_data'])
-    iqr.to_csv(INDICATORS['iqr_no_outlier_data'])
+    report.to_csv(INDICATORS['rep_data'])
+    outliers.to_csv(INDICATORS['out_data'])
+    std.to_csv(INDICATORS['std_data'])
+    iqr.to_csv(INDICATORS['iqr_data'])
     stack.to_csv(INDICATORS["tall_data"], index=False)
 
     make_note('breakdown in four tables done', START_TIME)

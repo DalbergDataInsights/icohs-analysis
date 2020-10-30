@@ -1,18 +1,9 @@
-import pandas as pd
+cols = ['date', 'DPT3 coverage (all) -- weight',
+        'DPT3 coverage (all) -- weighted_ratio']
 
+check = outlier[cols].groupby('date').sum()
 
-df = pd.read_csv("data/output/report_data.csv").set_index(
-    ['id', 'facility_id', 'facility_name', 'date'])
+check['actual ratio'] = check[cols[2]]/check[cols[1]]
 
-
-def stack_reporting(pivot):
-    '''Stack outlier corrected data'''
-
-    stack = pivot.stack().reset_index()
-    stack.rename(columns={0: 'value', 'level_4': 'dataElement'}, inplace=True)
-    stack['value'] = stack['value'].astype(dtype='float64')
-
-    return stack
-
-
-print(stack_reporting(df).head())
+print(check.loc[['2019-10-01', '2019-11-01', '2019-12-01']])
+print(check.loc[['2020-06-01', '2020-07-01', '2020-08-01']])
