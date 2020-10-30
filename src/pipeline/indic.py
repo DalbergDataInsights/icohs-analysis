@@ -113,7 +113,7 @@ def transform_to_indic(df, pop, name):
     else:
         df = get_indicators(df)
 
-    df.to_csv(INDICATORS[f'{name}_indic'])
+    df.to_csv(INDICATORS[f'{name}_indic'],index=False)
 
 
 def pass_on_config():
