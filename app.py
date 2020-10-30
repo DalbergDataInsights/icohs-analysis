@@ -118,3 +118,5 @@ if __name__ == '__main__':
 
     report = db.pg_read('report_output', getdict=False)
     indic.transform_to_indic(report, pop, 'rep')
+
+    indic.pass_on_config()

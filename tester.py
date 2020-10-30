@@ -1,9 +1,8 @@
-cols = ['date', 'DPT3 coverage (all) -- weight',
-        'DPT3 coverage (all) -- weighted_ratio']
+from src.helpers import INDICATORS
+import json
+import pandas as pd
 
-check = outlier[cols].groupby('date').sum()
+with open(INDICATORS['viz_config'], 'r') as f:
+    CONFIG_DF = pd.read_json(f)
 
-check['actual ratio'] = check[cols[2]]/check[cols[1]]
-
-print(check.loc[['2019-10-01', '2019-11-01', '2019-12-01']])
-print(check.loc[['2020-06-01', '2020-07-01', '2020-08-01']])
+print('Done')

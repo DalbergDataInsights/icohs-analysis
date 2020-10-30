@@ -12,8 +12,7 @@ from src.db import adpter as db  # NOQA: E402
 #     Define data transformation functions      #
 #################################################
 
-
-with open(INDICATORS['viz_config'], 'r') as f:
+with open(INDICATORS['indic_config'], 'r') as f:
     CONFIG = json.load(f)
 
 ##############################
@@ -115,3 +114,13 @@ def transform_to_indic(df, pop, name):
         df = get_indicators(df)
 
     df.to_csv(INDICATORS[f'{name}_indic'])
+
+
+def pass_on_config():
+
+    with open(INDICATORS['indic_config'], 'r') as f:
+        df = pd.read_json(f)
+
+    df = df.drop(columns='elements')
+
+    df.to_csv(INDICATORS['viz_config'], index=False)
