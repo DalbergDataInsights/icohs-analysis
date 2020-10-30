@@ -92,8 +92,8 @@ def get_indicators(df, report=False):
                 weight = denominator/total
                 weighted_ratio = value * weight
 
-                df[f'{i.get("indicator")} -- weight'] = weight
-                df[f'{i.get("indicator")} -- weighted_ratio'] = weighted_ratio
+                df[f'{i.get("indicator")}__weight'] = weight
+                df[f'{i.get("indicator")}__weighted_ratio'] = weighted_ratio
 
     df = df.drop(columns=cols)
 
