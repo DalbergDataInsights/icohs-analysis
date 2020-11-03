@@ -15,10 +15,6 @@ from src.db import adpter as db  # NOQA: E402
 with open(INDICATORS['indic_config'], 'r') as f:
     CONFIG = json.load(f)
 
-##############################
-#     Support functions      #
-##############################
-
 
 def add_pop(pop, df):
 
@@ -101,12 +97,15 @@ def get_indicators(df, report=False):
 
     return df
 
+
 #########################
 #     Run function      #
 #########################
 
 
 def transform_to_indic(df, pop, name):
+
+    df = df.fillna(0)
 
     df = add_pop(pop, df)
 

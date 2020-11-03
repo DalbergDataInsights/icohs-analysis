@@ -859,26 +859,6 @@
         "group": "NUT"
     },
     {
-        "indicator": "1st doses of vitamin A to U5 (per 1000)",
-        "function": "ratio",
-        "elements": {
-            "numerator": {
-                "function": "sum",
-                "elements": [
-                    "vitamin_a1"
-                ]
-            },
-            "denominator": {
-                "function": "sum",
-                "elements": [
-                    "per_thousand"
-                ]
-            }
-        },
-        "view": "number of first doses of vitamin A administered to children under five per thousand inhabitants",
-        "group": "NUT"
-    },
-    {
         "indicator": "2nd doses of vitamin A to U5",
         "function": "single",
         "elements": [
@@ -905,26 +885,6 @@
             }
         },
         "view": "coverage of second doses of vitamin A distribution to children under five",
-        "group": "NUT"
-    },
-    {
-        "indicator": "2nd doses of vitamin A to U5 (per 1000)",
-        "function": "ratio",
-        "elements": {
-            "numerator": {
-                "function": "sum",
-                "elements": [
-                    "vitamin_a2"
-                ]
-            },
-            "denominator": {
-                "function": "sum",
-                "elements": [
-                    "per_thousand"
-                ]
-            }
-        },
-        "view": "number of second doses of vitamin A administered to children under five per thousand inhabitants",
         "group": "NUT"
     },
     {
