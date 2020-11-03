@@ -146,12 +146,12 @@
         "group": "MNCH"
     },
     {
-        "indicator": "Maternal deaths (all)",
+        "indicator": "Maternal deaths",
         "function": "single",
         "elements": [
             "maternal_deaths__mnch_all"
         ],
-        "view": "number of maternal deaths (all)",
+        "view": "number of maternal deaths",
         "group": "MNCH"
     },
     {
@@ -200,7 +200,7 @@
         "group": "FP"
     },
     {
-        "indicator": "BCG doses to U1 (all)",
+        "indicator": "BCG doses to U1",
         "function": "single",
         "elements": [
             "bcg__u1_all"
@@ -227,7 +227,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "DPT1 doses to U1 (all)",
+        "indicator": "DPT1 doses to U1",
         "function": "single",
         "elements": [
             "dpt1__u1_all"
@@ -254,7 +254,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "DPT3 doses to U1 (all)",
+        "indicator": "DPT3 doses to U1",
         "function": "single",
         "elements": [
             "dpt3__u1_all"
@@ -290,12 +290,12 @@
         "group": "EPI"
     },
     {
-        "indicator": "HPV1 doses to girls (all)",
+        "indicator": "HPV1 doses to girls",
         "function": "single",
         "elements": [
             "hpv1__all-hpv"
         ],
-        "view": "number of girls receiving their HPV1 vaccine (all)",
+        "view": "number of girls receiving their HPV1 vaccine",
         "group": "EPI"
     },
     {
@@ -317,12 +317,12 @@
         "group": "EPI"
     },
     {
-        "indicator": "HPV2 doses to girls (all)",
+        "indicator": "HPV2 doses to girls",
         "function": "single",
         "elements": [
             "hpv2__all-hpv"
         ],
-        "view": "number of girls receiving their HPV2 vaccine (all)",
+        "view": "number of girls receiving their HPV2 vaccine",
         "group": "EPI"
     },
     {
@@ -335,7 +335,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "MR1 doses to U1 (all)",
+        "indicator": "MR1 doses to U1",
         "function": "single",
         "elements": [
             "mr1__u1_all"
@@ -362,7 +362,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "PCV1 doses to U1 (all)",
+        "indicator": "PCV1 doses to U1",
         "function": "single",
         "elements": [
             "pcv1__u1_all"
@@ -389,7 +389,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "PCV3 doses to U1 (all)",
+        "indicator": "PCV3 doses to U1",
         "function": "single",
         "elements": [
             "pcv3__u1_all"
@@ -488,7 +488,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "BCG coverage (all)",
+        "indicator": "BCG doses to U1 (coverage)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -508,7 +508,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "DPT1 coverage (all)",
+        "indicator": "DPT1 doses to U1 (coverage)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -524,11 +524,11 @@
                 ]
             }
         },
-        "view": "DPT1 vaccine coverage of children under one\r",
+        "view": "DPT1 vaccine coverage of children under one",
         "group": "EPI"
     },
     {
-        "indicator": "DPT3 coverage (all)",
+        "indicator": "DPT3 doses to U1 (coverage)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -544,11 +544,11 @@
                 ]
             }
         },
-        "view": "DPT3 vaccine coverage of children under one\r",
+        "view": "DPT3 vaccine coverage of children under one",
         "group": "EPI"
     },
     {
-        "indicator": "MR1 coverage (all)",
+        "indicator": "MR1 doses to U1 (coverage)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -568,7 +568,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "PCV1 coverage (all)",
+        "indicator": "PCV1 doses to U1 (coverage)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -588,7 +588,7 @@
         "group": "EPI"
     },
     {
-        "indicator": "PCV3 coverage (all)",
+        "indicator": "PCV3 doses to U1 (coverage)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -821,7 +821,7 @@
         "group": "MAL"
     },
     {
-        "indicator": "Doses of vitamin A (1st & 2nd)",
+        "indicator": "1st & 2nd doses of vitamin A to U5",
         "function": "single",
         "elements": [
             "vitamin_a"
@@ -830,7 +830,7 @@
         "group": "NUT"
     },
     {
-        "indicator": "Doses of vitamin A (1st)",
+        "indicator": "1st doses of vitamin A to U5",
         "function": "single",
         "elements": [
             "vitamin_a1"
@@ -839,12 +839,92 @@
         "group": "NUT"
     },
     {
-        "indicator": "Doses of vitamin A (2nd)",
+        "indicator": "1st doses of vitamin A to U5 (coverage)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "vitamin_a1"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u5"
+                ]
+            }
+        },
+        "view": "coverage of first doses of vitamin A distribution to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "1st doses of vitamin A to U5 (per 1000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "vitamin_a1"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_thousand"
+                ]
+            }
+        },
+        "view": "number of first doses of vitamin A administered to children under five per thousand inhabitants",
+        "group": "NUT"
+    },
+    {
+        "indicator": "2nd doses of vitamin A to U5",
         "function": "single",
         "elements": [
             "vitamin_a2"
         ],
         "view": "number of second doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "2nd doses of vitamin A to U5 (coverage)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "vitamin_a2"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "u5"
+                ]
+            }
+        },
+        "view": "coverage of second doses of vitamin A distribution to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "2nd doses of vitamin A to U5 (per 1000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "vitamin_a2"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_thousand"
+                ]
+            }
+        },
+        "view": "number of second doses of vitamin A administered to children under five per thousand inhabitants",
         "group": "NUT"
     },
     {
@@ -877,6 +957,26 @@
         "group": "NUT"
     },
     {
+        "indicator": "SAM cases identified (per 1000 U5)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "sam_identified"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "per_thousand_u5"
+                ]
+            }
+        },
+        "view": "number of SAM cases identified per thousand children under five",
+        "group": "NUT"
+    },
+    {
         "indicator": "MAM cases identified",
         "function": "single",
         "elements": [
@@ -892,6 +992,26 @@
             "low_weight_births"
         ],
         "view": "number of low weight births",
+        "group": "NUT"
+    },
+    {
+        "indicator": "Low weight births (incidence)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "low_weight_births"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "births"
+                ]
+            }
+        },
+        "view": "incidence of low weight births among all births",
         "group": "NUT"
     }
 ]

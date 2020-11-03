@@ -22,6 +22,8 @@ with open(INDICATORS['indic_config'], 'r') as f:
 
 def add_pop(pop, df):
 
+    # TODO Work from orginal pop files
+
     pop = pop[pop.columns[1:]]
 
     df['year'] = pd.to_datetime(df['date']).dt.year
@@ -113,7 +115,7 @@ def transform_to_indic(df, pop, name):
     else:
         df = get_indicators(df)
 
-    df.to_csv(INDICATORS[f'{name}_indic'],index=False)
+    df.to_csv(INDICATORS[f'{name}_indic'], index=False)
 
 
 def pass_on_config():
