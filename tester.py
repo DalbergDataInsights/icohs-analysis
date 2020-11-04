@@ -1,8 +1,15 @@
-from src.helpers import INDICATORS
-import json
 import pandas as pd
 
-with open(INDICATORS['viz_config'], 'r') as f:
-    CONFIG_DF = pd.read_json(f)
+l1 = ['a', 'b', 'c']
+l2 = ['a']
 
-print('Done')
+df = pd.DataFrame(columns=l1)
+
+c = 1
+
+if f'{c}' not in df.columns:
+    print('not here')
+elif f'{c}' in df.columns:
+    print('here')
+else:
+    print('error')

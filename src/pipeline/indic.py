@@ -83,20 +83,27 @@ def get_indicators(df, report=False):
                 formula = i.get("elements")
 
                 denominator = get_value_indic(df, formula.get("denominator"))
-                value = get_value_indic(
-                    df, formula.get("numerator"))/denominator
+                value = get_value_indic(df,
+                                        formula.get("numerator"))/denominator
                 total = get_value_indic(df, formula.get("denominator")).sum()
 
                 weight = denominator/total
                 weighted_ratio = value * weight
 
-                df[f'{i.get("indicator")}__weight'] = weight
-                df[f'{i.get("indicator")}__weighted_ratio'] = weighted_ratio
+                df[f'{i.get("indicator")}__weighted_ratio'] = weighted_ratio*10000000
+
+                # TODO Makesure this is will be flexible enough if we have more complex denominators
+
+                weight_name = '_'.join(formula
+                                       .get("denominator")
+                                       .get("elements"))
+
+                if f'{weight_name}__weight' not in df.columns:
+                    df[f'{weight_name}__weight'] = weight*10000000
 
     df = df.drop(columns=cols)
 
     return df
-
 
 #########################
 #     Run function      #

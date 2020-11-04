@@ -917,7 +917,7 @@
         "group": "NUT"
     },
     {
-        "indicator": "SAM cases identified (per 1000 U5)",
+        "indicator": "SAM cases identified (per 100 000 U5)",
         "function": "ratio",
         "elements": {
             "numerator": {
@@ -929,11 +929,11 @@
             "denominator": {
                 "function": "sum",
                 "elements": [
-                    "per_thousand_u5"
+                    "per_hundred_thousand_u5"
                 ]
             }
         },
-        "view": "number of SAM cases identified per thousand children under five",
+        "view": "number of SAM cases identified per hundred thousand children under five",
         "group": "NUT"
     },
     {
