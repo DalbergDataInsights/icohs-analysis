@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 
 
-def parse_config(config_path='config/indicators.json', config_section=['input', 'static', 'to_classify', 'output']):
+def parse_config(config_path='config/paths.json', config_section=['input', 'static', 'to_classify', 'output']):
 
     with open(config_path) as f:
 
@@ -15,7 +15,7 @@ def parse_config(config_path='config/indicators.json', config_section=['input', 
     return ENGINE
 
 
-def parse_config1(config_path='config/indicators.json', config_section=['input', 'static', 'to_classify', 'output']):
+def parse_config1(config_path='config/paths.json', config_section=['input', 'static', 'to_classify', 'output']):
 
     with open(config_path) as f:
         for section in json.load(f):
@@ -34,6 +34,7 @@ def make_note(statement, start_time):
 
 
 INDICATORS = parse_config()
+
 
 def get_unique_indics(var_corr, excl_domain=None):
 
@@ -59,6 +60,7 @@ def get_unique_indics(var_corr, excl_domain=None):
 
     return out
 
+
 def format_date(date):
     dates = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -67,4 +69,3 @@ def format_date(date):
     month_order = str(dates.index(month)+1)
     month_order = '0' + month_order if len(month_order) == 1 else month_order
     return year + '-' + month_order + '-01'
-

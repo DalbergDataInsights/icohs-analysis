@@ -37,7 +37,7 @@ def pg_connect(params_dic=param_dic):
 # READ
 
 
-def pg_read_lookup(table_name, getdict=True, param_dic=param_dic):
+def pg_read(table_name, getdict=True, param_dic=param_dic):
     """
         This table reads data from the lookup tables
     """
@@ -208,18 +208,31 @@ def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     pg_write_table(file_path, table_name, param_dic)
 
 
-def pg_update_pop(file_path, param_dic=param_dic):
+def pg_update_pop(file_path, cols, param_dic=param_dic):
 
     f = open(file_path, "r")
 
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    delete_query = f"""DELETE FROM pop;"""
-    cur.execute(delete_query)
+    drop_query = f"""DROP table pop;"""
+    cur.execute(drop_query)
+
+    col_string = " float8 NULL, ".join(cols.split(", "))
+
+    create_query = f"""CREATE table pop (
+        id serial NOT NULL,
+	    district_name varchar(255) NOT NULL,
+	    "year" int2 NULL,
+	    male int4 NULL,
+	    female int4 NULL,
+	    total int4 NULL,
+        {col_string} float8 NULL);"""
+
+    cur.execute(create_query)
 
     write_query = f"""
-        COPY pop (DistrictName, year, Male, Female, Total, childbearing_age, pregnants, not_pregnant, births, u1, u5, u15, suspect_tb) FROM STDIN WITH (FORMAT CSV)
+        COPY pop (district_name, year, male, female, total, {cols}) FROM STDIN WITH (FORMAT CSV)
     """
     cur.copy_expert(sql=write_query, file=f)
 

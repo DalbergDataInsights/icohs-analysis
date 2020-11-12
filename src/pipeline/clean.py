@@ -13,8 +13,6 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
-import scipy
-from scipy import stats
 
 from src.helpers import make_note, INDICATORS
 
@@ -360,7 +358,12 @@ def clean_pop_to_temp(pop_path, pop_perc_path):
     for x in perc.index:
         pop[x] = pop['Total']*(perc.loc[x, 'percentage']/100)
 
+    for c in ['childbearing_age', 'pregnant', 'not_pregnant', 'birth', 'u1', 'u5', 'u15', 'girl_10']:
+        pop[c] = pop[c]/12
+
     pop.to_csv('data/temp/pop.csv', index=False, header=False)
+
+    return ", ".join(perc.index)
 
 
 def clean(raw_path):

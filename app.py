@@ -1,5 +1,5 @@
 
-from src.pipeline import clean, process
+from src.pipeline import clean, process, indic
 from src.helpers import INDICATORS, make_note, get_unique_indics
 import os
 import pandas as pd
@@ -15,7 +15,7 @@ VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
 
 if __name__ == '__main__':
 
-    make_note('Starting the pipeline', START_TIME)
+    # make_note('Starting the pipeline', START_TIME)
 
     # Adding any new indiactors/facilities to the lookup table
 
@@ -30,9 +30,9 @@ if __name__ == '__main__':
 
     # Adding the population data
 
-    clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
+    cols = clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
 
-    db.pg_update_pop(file_path='data/temp/pop.csv')
+    db.pg_update_pop('data/temp/pop.csv', cols)
 
     # cleaning the data and writing it to the database file by file
 
@@ -53,7 +53,7 @@ if __name__ == '__main__':
          year,
          month,
          table) = clean.map_to_temp(raw_path=raw_path,
-                                    map=db.pg_read_lookup('indicator'),
+                                    map=db.pg_read('indicator'),
                                     clean_df=df)
 
         # Write the clean data to the database
@@ -70,7 +70,7 @@ if __name__ == '__main__':
         make_note(f'Cleaning and database insertion done for file {f}',
                   START_TIME)
 
-    # Removing any redundant indicatirs/facilities from the lookup tables
+    # Removing any redundant indicators/facilities from the lookup tables
 
     db.pg_delete_lookup(file_path=INDICATORS['indicators_map'],
                         table_name='indicator')
@@ -78,25 +78,43 @@ if __name__ == '__main__':
     db.pg_delete_lookup(file_path=INDICATORS['name_district_map'],
                         table_name='location')
 
-    # Processing the data
+    # Processing the data (creating outliers excluded and report tables)
 
     process.process(main=db.pg_read_table_by_indicator('main'),
                     report=db.pg_read_table_by_indicator('report'),
-                    location=db.pg_read_lookup('location', getdict=False))
+                    location=db.pg_read('location', getdict=False))
 
     # Writing to the database
 
-    db.pg_final_table(file_path=INDICATORS['report_data'],
+    db.pg_final_table(file_path=INDICATORS['rep_data'],
                       table_name='report_output')
 
-    db.pg_final_table(file_path=INDICATORS['outlier_data'],
+    db.pg_final_table(file_path=INDICATORS['out_data'],
                       table_name='outlier_output')
 
-    db.pg_final_table(file_path=INDICATORS['std_no_outlier_data'],
+    db.pg_final_table(file_path=INDICATORS['std_data'],
                       table_name='std_no_outlier_output')
 
-    db.pg_final_table(file_path=INDICATORS['iqr_no_outlier_data'],
+    db.pg_final_table(file_path=INDICATORS['iqr_data'],
                       table_name='iqr_no_outlier_output')
 
     # recording measured time
     make_note('Pipeline done', START_TIME)
+
+    # Optional transformation to indicators (sealed from the rest on purpose)
+
+    pop = db.pg_read('pop', getdict=False)
+
+    outlier = db.pg_read('outlier_output', getdict=False)
+    indic.transform_to_indic(outlier, pop, 'out')
+
+    std = db.pg_read('std_no_outlier_output', getdict=False)
+    indic.transform_to_indic(std, pop, 'std')
+
+    iqr = db.pg_read('iqr_no_outlier_output', getdict=False)
+    indic.transform_to_indic(iqr, pop, 'iqr')
+
+    report = db.pg_read('report_output', getdict=False)
+    indic.transform_to_indic(report, pop, 'rep')
+
+    indic.pass_on_config()
