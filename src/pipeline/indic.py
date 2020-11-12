@@ -85,12 +85,13 @@ def get_indicators(df, report=False):
                 denominator = get_value_indic(df, formula.get("denominator"))
                 value = get_value_indic(df,
                                         formula.get("numerator"))/denominator
-                total = get_value_indic(df, formula.get("denominator")).sum()
+                total = np.nansum(get_value_indic(
+                    df, formula.get("denominator")))
 
                 weight = denominator/total
                 weighted_ratio = value * weight
 
-                df[f'{i.get("indicator")}__weighted_ratio'] = weighted_ratio*10000000
+                df[f'{i.get("indicator")}__weighted_ratio'] = weighted_ratio*int(10e6)
 
                 # TODO Makesure this is will be flexible enough if we have more complex denominators
 
@@ -99,7 +100,7 @@ def get_indicators(df, report=False):
                                        .get("elements"))
 
                 if f'{weight_name}__weight' not in df.columns:
-                    df[f'{weight_name}__weight'] = weight*10000000
+                    df[f'{weight_name}__weight'] = weight*int(10e9)
 
     df = df.drop(columns=cols)
 
@@ -112,14 +113,17 @@ def get_indicators(df, report=False):
 
 def transform_to_indic(df, pop, name):
 
-    df = df.fillna(0)
-
     df = add_pop(pop, df)
 
     if name == 'rep':
         df = get_indicators(df, report=True)
     else:
         df = get_indicators(df)
+
+    df = df.fillna(0)
+
+    for col in df.columns[4:]:
+        df[col] = round(df[col]).astype(int)
 
     df.to_csv(INDICATORS[f'{name}_indic'], index=False)
 

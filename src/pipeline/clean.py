@@ -13,8 +13,6 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
-import scipy
-from scipy import stats
 
 from src.helpers import make_note, INDICATORS
 
