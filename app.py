@@ -32,9 +32,9 @@ if __name__ == '__main__':
 
     # FIXME : Broken for some unknown reason
 
-    # clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
+    # cols = clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
 
-    # db.pg_update_pop(file_path='data/temp/pop.csv')
+    # db.pg_update_pop('data/temp/pop.csv', cols)
 
     # cleaning the data and writing it to the database file by file
 

@@ -967,7 +967,7 @@
             "denominator": {
                 "function": "sum",
                 "elements": [
-                    "births"
+                    "births_estimated"
                 ]
             }
         },

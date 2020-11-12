@@ -18,8 +18,6 @@ with open(INDICATORS['indic_config'], 'r') as f:
 
 def add_pop(pop, df):
 
-    # TODO Work from orginal pop files
-
     pop = pop[pop.columns[1:]]
 
     df['year'] = pd.to_datetime(df['date']).dt.year
@@ -44,9 +42,6 @@ def add_pop(pop, df):
 
     for c in pop.columns[2:]:
         df[c] = df[c]/df['count']
-
-    for c in ['childbearing_age', 'pregnant', 'not_pregnant', 'birth', 'u1', 'u5', 'u15']:
-        df[c] = df[c]/12
 
     return df
 
@@ -133,6 +128,13 @@ def pass_on_config():
     with open(INDICATORS['indic_config'], 'r') as f:
         df = pd.read_json(f)
 
-    df = df.drop(columns='elements')
+    denominator_df = df[df.function == 'ratio']
+    df['denominator'] = ''
+
+    for x in denominator_df.index:
+        df.loc[x, 'denominator'] = next(iter(df.loc[x, 'elements']
+                                             .get('denominator')
+                                             .get('elements')))
+    #df = df.sort_values(by=['group', 'indicator'])
 
     df.to_csv(INDICATORS['viz_config'], index=False)
