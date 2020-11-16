@@ -15,91 +15,95 @@ VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
 
 if __name__ == '__main__':
 
-    # make_note('Starting the pipeline', START_TIME)
+    # # make_note('Starting the pipeline', START_TIME)
 
-    # Adding any new indiactors/facilities to the lookup table
+    # # Adding any new indiactors/facilities to the lookup table
 
-    pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
-        INDICATORS['indicators_map'])
+    # pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
+    #     INDICATORS['indicators_map'])
 
-    db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
-                       table_name='indicator')
+    # db.pg_update_dataelements(file_path=INDICATORS['indicators_map'],
+    #                           table_name='indicator')
 
-    db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
-                       table_name='location')
+    # db.pg_update_dataelements(file_path=INDICATORS['name_district_map'],
+    #                           table_name='location')
 
-    # Adding the population data
+    # # db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
+    # #                    table_name='indicator')
 
-    cols = clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
+    # # db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
+    # #                    table_name='location')
 
-    db.pg_update_pop('data/temp/pop.csv', cols)
+    # # db.pg_delete_lookup(file_path=INDICATORS['indicators_map'],
+    # #                     table_name='indicator')
 
-    # cleaning the data and writing it to the database file by file
+    # # db.pg_delete_lookup(file_path=INDICATORS['name_district_map'],
+    # #                     table_name='location')
 
-    files = os.listdir(INDICATORS['raw_data'])
+    # # Adding the population data
 
-    for f in files:
+    # cols = clean.clean_pop_to_temp(INDICATORS['pop'], INDICATORS['pop_perc'])
 
-        raw_path = INDICATORS['raw_data']+f
-        processed_path = INDICATORS['processed_data']+f
+    # db.pg_update_pop('data/temp/pop.csv', cols)
 
-        # Clean the data
+    # # cleaning the data and writing it to the database file by file
 
-        df = clean.clean(raw_path=raw_path)
+    # files = os.listdir(INDICATORS['raw_data'])
 
-        # Send it to a temporary csv
+    # for f in files:
 
-        (temp_csv_path,
-         year,
-         month,
-         table) = clean.map_to_temp(raw_path=raw_path,
-                                    map=db.pg_read('indicator'),
-                                    clean_df=df)
+    #     raw_path = INDICATORS['raw_data']+f
+    #     processed_path = INDICATORS['processed_data']+f
 
-        # Write the clean data to the database
+    #     # Clean the data
 
-        db.pg_update_write(year=year,
-                           month=month,
-                           file_path=temp_csv_path,
-                           table_name=table)
+    #     df = clean.clean(raw_path=raw_path)
 
-        # Move orginal data from the 'raw' to the 'prcessed' folder
+    #     # Send it to a temporary csv
 
-        clean.move_csv_files(raw_path, processed_path)
+    #     (temp_csv_path,
+    #      year,
+    #      month,
+    #      table) = clean.map_to_temp(raw_path=raw_path,
+    #                                 map=db.pg_read('indicator'),
+    #                                 clean_df=df)
 
-        make_note(f'Cleaning and database insertion done for file {f}',
-                  START_TIME)
+    #     # Write the clean data to the database
 
-    # Removing any redundant indicators/facilities from the lookup tables
+    #     db.pg_update_write(year=year,
+    #                        month=month,
+    #                        file_path=temp_csv_path,
+    #                        table_name=table)
 
-    db.pg_delete_lookup(file_path=INDICATORS['indicators_map'],
-                        table_name='indicator')
+    #     # Move orginal data from the 'raw' to the 'prcessed' folder
 
-    db.pg_delete_lookup(file_path=INDICATORS['name_district_map'],
-                        table_name='location')
+    #     clean.move_csv_files(raw_path, processed_path)
 
-    # Processing the data (creating outliers excluded and report tables)
+    #     make_note(f'Cleaning and database insertion done for file {f}',
+    #               START_TIME)
 
-    process.process(main=db.pg_read_table_by_indicator('main'),
-                    report=db.pg_read_table_by_indicator('report'),
-                    location=db.pg_read('location', getdict=False))
+    # # Processing the data (creating outliers excluded and report tables)
 
-    # Writing to the database
+    # process.process(main=db.pg_read_table_by_indicator('main'),
+    #                 report=db.pg_read_table_by_indicator('report'),
+    #                 location=db.pg_read('location', getdict=False))
 
-    db.pg_final_table(file_path=INDICATORS['rep_data'],
-                      table_name='report_output')
+    # # Writing to the database
 
-    db.pg_final_table(file_path=INDICATORS['out_data'],
-                      table_name='outlier_output')
+    # db.pg_final_table(file_path=INDICATORS['rep_data'],
+    #                   table_name='report_output')
 
-    db.pg_final_table(file_path=INDICATORS['std_data'],
-                      table_name='std_no_outlier_output')
+    # db.pg_final_table(file_path=INDICATORS['out_data'],
+    #                   table_name='outlier_output')
 
-    db.pg_final_table(file_path=INDICATORS['iqr_data'],
-                      table_name='iqr_no_outlier_output')
+    # db.pg_final_table(file_path=INDICATORS['std_data'],
+    #                   table_name='std_no_outlier_output')
 
-    # recording measured time
-    make_note('Pipeline done', START_TIME)
+    # db.pg_final_table(file_path=INDICATORS['iqr_data'],
+    #                   table_name='iqr_no_outlier_output')
+
+    # # recording measured time
+    # make_note('Pipeline done', START_TIME)
 
     # Optional transformation to indicators (sealed from the rest on purpose)
 

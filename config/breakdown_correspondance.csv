@@ -89,32 +89,45 @@ paediatrics,Paediatric ward,old,GENERAL
 palliative,Palliative ward,old,GENERAL
 psychiatric,Psychiatric ward,old,GENERAL
 tb,TB ward,old,GENERAL
-female_a5,"20+Yrs, Female",new,TB
-male_a5,"20+Yrs, Male",new,TB
-female_a5,"5-9Yrs, Female",new,TB
-male_a5,"5-9Yrs, Male",new,TB
-female_a5,"15-19Yrs, Female",new,TB
-male_a5,"15-19Yrs, Male",new,TB
-female_a5,"10-14Yrs, Female",new,TB
-male_a5,"10-14Yrs, Male",new,TB
-female_u5,"<5Yrs, Female",new,TB
-male_u5,"<5Yrs, Male",new,TB
-female_a5,"60andAbove Years, Female",old,TB
-male_a5,"60andAbove Years, Male",old,TB
-female_a5,"5-59 Years, Female",old,TB
-male_a5,"5-59 Years, Male",old,TB
-female_u5,"0-28 Days, Female",old,TB
-male_u5,"0-28 Days, Male",old,TB
-female_u5,"29 Days-4 Years, Female",old,TB
-male_u5,"29 Days-4 Years, Male",old,TB
+tb_female_a5,"20+Yrs, Female",new,TB
+tb_male_a5,"20+Yrs, Male",new,TB
+tb_female_a5,"5-9Yrs, Female",new,TB
+tb_male_a5,"5-9Yrs, Male",new,TB
+tb_female_a5,"15-19Yrs, Female",new,TB
+tb_male_a5,"15-19Yrs, Male",new,TB
+tb_female_a5,"10-14Yrs, Female",new,TB
+tb_male_a5,"10-14Yrs, Male",new,TB
+tb_female_u5,"<5Yrs, Female",new,TB
+tb_male_u5,"<5Yrs, Male",new,TB
+tb_female_a5,"60andAbove Years, Female",old,TB
+tb_male_a5,"60andAbove Years, Male",old,TB
+tb_female_a5,"5-59 Years, Female",old,TB
+tb_male_a5,"5-59 Years, Male",old,TB
+tb_female_u5,"0-28 Days, Female",old,TB
+tb_male_u5,"0-28 Days, Male",old,TB
+tb_female_u5,"29 Days-4 Years, Female",old,TB
+tb_male_u5,"29 Days-4 Years, Male",old,TB
+tb_all,"20+Yrs, Female",new,TB
+tb_all,"20+Yrs, Male",new,TB
+tb_all,"5-9Yrs, Female",new,TB
+tb_all,"5-9Yrs, Male",new,TB
+tb_all,"15-19Yrs, Female",new,TB
+tb_all,"15-19Yrs, Male",new,TB
+tb_all,"10-14Yrs, Female",new,TB
+tb_all,"10-14Yrs, Male",new,TB
+tb_all,"<5Yrs, Female",new,TB
+tb_all,"<5Yrs, Male",new,TB
+tb_all,"60andAbove Years, Female",old,TB
+tb_all,"60andAbove Years, Male",old,TB
+tb_all,"5-59 Years, Female",old,TB
+tb_all,"5-59 Years, Male",old,TB
+tb_all,"0-28 Days, Female",old,TB
+tb_all,"0-28 Days, Male",old,TB
+tb_all,"29 Days-4 Years, Female",old,TB
+tb_all,"29 Days-4 Years, Male",old,TB
 u20,15-19Yrs,new,MNCH
-20-25,20-24Yrs,new,MNCH
-a25,25-49Yrs,new,MNCH
-a25,50+Yrs,new,MNCH
 u20,<15Yrs,new,MNCH
 u20,10-19 Years,old,MNCH
-20-25,20-24 Years,old,MNCH
-a25,>=25 Years,old,MNCH
 a20,20-24Yrs,new,MNCH
 a20,25-49Yrs,new,MNCH
 a20,50+Yrs,new,MNCH
@@ -128,19 +141,96 @@ mnch_all,<15Yrs,new,MNCH
 mnch_all,10-19 Years,old,MNCH
 mnch_all,20-24 Years,old,MNCH
 mnch_all,>=25 Years,old,MNCH
-u5,"Outreach, Female, 12-59Mths",new,NUT
-u5,"Outreach, Female, 6-11Mths",new,NUT
-u5,"Outreach, Male, 12-59Mths",new,NUT
-u5,"Outreach, Male, 6-11Mths",new,NUT
-u5,"School, Female, 12-59Mths",new,NUT
-u5,"School, Female, 6-11Mths",new,NUT
-u5,"School, Male, 12-59Mths",new,NUT
-u5,"School, Male, 6-11Mths",new,NUT
-u5,"Static, Female, 12-59Mths",new,NUT
-u5,"Static, Female, 6-11Mths",new,NUT
-u5,"Static, Male, 12-59Mths",new,NUT
-u5,"Static, Male, 6-11Mths",new,NUT
-u5,"12-59 Months, Female",old,NUT
-u5,"12-59 Months, Male",old,NUT
-u5,"6-11 Months, Female",old,NUT
-u5,"6-11 Months, Male",old,NUT
+nutrition_all,"Outreach, Female, 12-59Mths",new,NUT
+nutrition_all,"Outreach, Female, 6-11Mths",new,NUT
+nutrition_all,"Outreach, Male, 12-59Mths",new,NUT
+nutrition_all,"Outreach, Male, 6-11Mths",new,NUT
+nutrition_all,"School, Female, 12-59Mths",new,NUT
+nutrition_all,"School, Female, 6-11Mths",new,NUT
+nutrition_all,"School, Male, 12-59Mths",new,NUT
+nutrition_all,"School, Male, 6-11Mths",new,NUT
+nutrition_all,"Static, Female, 12-59Mths",new,NUT
+nutrition_all,"Static, Female, 6-11Mths",new,NUT
+nutrition_all,"Static, Male, 12-59Mths",new,NUT
+nutrition_all,"Static, Male, 6-11Mths",new,NUT
+nutrition_all,"12-59 Months, Female",old,NUT
+nutrition_all,"12-59 Months, Male",old,NUT
+nutrition_all,"6-11 Months, Female",old,NUT
+nutrition_all,"6-11 Months, Male",old,NUT
+nutrition_female,"Outreach, Female, 12-59Mths",new,NUT
+nutrition_female,"Outreach, Female, 6-11Mths",new,NUT
+nutrition_male,"Outreach, Male, 12-59Mths",new,NUT
+nutrition_male,"Outreach, Male, 6-11Mths",new,NUT
+nutrition_female,"School, Female, 12-59Mths",new,NUT
+nutrition_female,"School, Female, 6-11Mths",new,NUT
+nutrition_male,"School, Male, 12-59Mths",new,NUT
+nutrition_male,"School, Male, 6-11Mths",new,NUT
+nutrition_female,"Static, Female, 12-59Mths",new,NUT
+nutrition_female,"Static, Female, 6-11Mths",new,NUT
+nutrition_male,"Static, Male, 12-59Mths",new,NUT
+nutrition_male,"Static, Male, 6-11Mths",new,NUT
+nutrition_female,"12-59 Months, Female",old,NUT
+nutrition_male,"12-59 Months, Male",old,NUT
+nutrition_female,"6-11 Months, Female",old,NUT
+nutrition_male,"6-11 Months, Male",old,NUT
+fp_emergency_all,CBDs,new,FP
+fp_emergency_all,Outreach,new,FP
+fp_emergency_all,Unit,new,FP
+fp_emergency_all,No. Dispensed by CBD,old,FP
+fp_emergency_all,No. Disp. At Outreach,old,FP
+fp_emergency_all,No. Dispensed at Unit,old,FP
+fp_contraception_all,"15-19Yrs, New",new,FP
+fp_contraception_all,"15-19Yrs, Revisits",new,FP
+fp_contraception_all,"20-24Yrs, New",new,FP
+fp_contraception_all,"20-24Yrs, Revisits",new,FP
+fp_contraception_all,"25-49Yrs, New",new,FP
+fp_contraception_all,"25-49Yrs, Revisits",new,FP
+fp_contraception_all,"50+Yrs, New",new,FP
+fp_contraception_all,"50+Yrs, Revisits",new,FP
+fp_contraception_all,"<15Yrs, New",new,FP
+fp_contraception_all,"<15Yrs, Revisits",new,FP
+fp_contraception_all,"New Users, 10-19 Years",old,FP
+fp_contraception_all,"New Users, 20-24 Years",old,FP
+fp_contraception_all,"New Users, >=25 Years",old,FP
+fp_contraception_all,"Revisits, 10-19 Years",old,FP
+fp_contraception_all,"Revisits, 20-24 Years",old,FP
+fp_contraception_all,"Revisits, >=25 Years",old,FP
+fp_contraception_u20,"15-19Yrs, New",new,FP
+fp_contraception_u20,"15-19Yrs, Revisits",new,FP
+fp_contraception_u20,"<15Yrs, New",new,FP
+fp_contraception_u20,"<15Yrs, Revisits",new,FP
+fp_contraception_u20,"New Users, 10-19 Years",old,FP
+fp_contraception_u20,"Revisits, 10-19 Years",old,FP
+fp_contraception_a20,"20-24Yrs, New",new,FP
+fp_contraception_a20,"20-24Yrs, Revisits",new,FP
+fp_contraception_a20,"25-49Yrs, New",new,FP
+fp_contraception_a20,"25-49Yrs, Revisits",new,FP
+fp_contraception_a20,"50+Yrs, New",new,FP
+fp_contraception_a20,"50+Yrs, Revisits",new,FP
+fp_contraception_a20,"Revisits, 20-24 Years",old,FP
+fp_contraception_a20,"Revisits, >=25 Years",old,FP
+fp_stds_all,"29 Days-4 Years, Male",old,FP
+fp_stds_all,"5-59 Years, Female",old,FP
+fp_stds_all,"5-59 Years, Male",old,FP
+fp_stds_all,"60andAbove Years, Female",old,FP
+fp_stds_all,"60andAbove Years, Male",old,FP
+fp_stds_all,"10-19Yrs, Male",new,FP
+fp_stds_all,"20+Yrs, Female",new,FP
+fp_stds_all,"20+Yrs, Male",new,FP
+fp_stds_all,"29Dys-4Yrs, Female",new,FP
+fp_stds_all,"29Dys-4Yrs, Male",new,FP
+fp_stds_all,"5-9Yrs, Female",new,FP
+fp_stds_all,"5-9Yrs, Male",new,FP
+fp_stds_male,"29 Days-4 Years, Male",old,FP
+fp_stds_female,"5-59 Years, Female",old,FP
+fp_stds_male,"5-59 Years, Male",old,FP
+fp_stds_female,"60andAbove Years, Female",old,FP
+fp_stds_male,"60andAbove Years, Male",old,FP
+fp_stds_female,"10-19Yrs, Female",new,FP
+fp_stds_male,"10-19Yrs, Male",new,FP
+fp_stds_female,"20+Yrs, Female",new,FP
+fp_stds_male,"20+Yrs, Male",new,FP
+fp_stds_female,"29Dys-4Yrs, Female",new,FP
+fp_stds_male,"29Dys-4Yrs, Male",new,FP
+fp_stds_female,"5-9Yrs, Female",new,FP
+fp_stds_male,"5-9Yrs, Male",new,FP

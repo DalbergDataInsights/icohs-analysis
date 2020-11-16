@@ -78,7 +78,7 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 # WRITE AND UPDDATE
 
 
-def pg_write_lookup(file_path, table_name, param_dic=param_dic):
+def pg_update_dataelements(file_path, table_name, param_dic=param_dic):
 
     # TODO Check for bug when asssing idicators
     """
@@ -87,6 +87,7 @@ def pg_write_lookup(file_path, table_name, param_dic=param_dic):
     # Check the status of teh lookup table in the database, compare with latest user input
 
     conn = pg_connect(param_dic)
+    cur = conn.cursor()
 
     df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
     df_new = pd.read_csv(file_path)
@@ -96,75 +97,90 @@ def pg_write_lookup(file_path, table_name, param_dic=param_dic):
     if table_name == 'indicator':
         col1 = 'indicatorname'
         col2 = '0'
+        to_update = 'indicatorcode'
     elif table_name == 'location':
         col1 = 'facilitycode'
         col2 = col1
+        to_update = 'facilitycode'
 
     current = set(df_current[col1].unique())
     new = set(df_new[col2].unique())
+
+    # Check for new data elements - if any additions, add to the lookup
+
     add = new.difference(current)
-
-    # If any additions, add to the lookup
-
     if len(add) > 0:
-        # TODO : delete this to_csv step, and revise teh query accordingly
-        # TODO : Double check this will only add what I need and note try to replace what is there
 
         df_add = df_new[df_new[col2].isin(add)]
-        file_path_add = f'{file_path[:-4]}_addition.csv'
+        df_add = df_add[[df_add.columns[-1]]]
 
-        df_add.to_csv(file_path_add, index=False)
-
-        cur = conn.cursor()
-
-        with open(file_path_add, "r") as f:
-            query = """
-                    COPY %s FROM STDIN WITH
-                        CSV
-                        HEADER
-                        DELIMITER AS ','
-                    """
-            try:
-                cur.copy_expert(sql=query % table_name, file=f)
+        try:
+            i = df_current.indicatorcode.astype(int).max()+1
+            for x in df_add.index:
+                sql = f"INSERT INTO {table_name} VALUES ('{i}','{df_add.loc[x,df_add.columns[-1]]}');"
+                cur.execute(sql)
                 cur.execute("commit")
-            except Exception as e:
-                print(e)
-            cur.close()
+                i = i+1
 
-        os.remove(file_path_add)
+        except Exception as e:
+            print(e)
 
+    # Now check for redundant data elements
 
-def pg_delete_lookup(file_path, table_name, param_dic=param_dic):
-    """
-        Check if any new indicators/facilities were remove and delete those from target lookup table
-    """
+    remove = current.difference(new)
+    df_remove = df_current[df_current[col1].isin(remove)]
+    codes_remove = tuple(df_remove[to_update].unique())
 
-    conn = pg_connect(param_dic)
-
-    df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
-    df_new = pd.read_csv(file_path)
-
-    # TODO review that inelegant piece of code
-
-    if table_name == 'indicator':
-        col1 = 'indicatorname'
-        col2 = '0'
-    elif table_name == 'location':
-        col1 = 'facilitycode'
-        col2 = col1
-
-    current = set(df_current[col1].unique())
-    new = set(df_new[col2].unique())
-    remove = tuple(current.difference(new))
+    # then drop from main table whatver missing indicators
 
     if len(remove) > 0:
-        cur = conn.cursor()
 
-        query = f"""DELETE FROM {table_name} WHERE {col1} in {remove};"""
+        query = f"""DELETE FROM main WHERE {to_update} in {codes_remove};"""
 
         cur.execute(query)
         cur.execute("commit")
-        cur.close()
+
+        # then dropfrom the indicator table
+
+        query = f"""DELETE FROM {table_name} WHERE {to_update} in {codes_remove};"""
+
+        cur.execute(query)
+        cur.execute("commit")
+
+    cur.close()
+
+
+# def pg_delete_lookup(file_path, table_name, param_dic=param_dic):
+#     """
+#         Check if any new indicators/facilities were remove and delete those from target lookup table
+#     """
+
+#     conn = pg_connect(param_dic)
+
+#     df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
+#     df_new = pd.read_csv(file_path)
+
+#     # TODO review that inelegant piece of code
+
+#     if table_name == 'indicator':
+#         col1 = 'indicatorname'
+#         col2 = '0'
+#     elif table_name == 'location':
+#         col1 = 'facilitycode'
+#         col2 = col1
+
+#     current = set(df_current[col1].unique())
+#     new = set(df_new[col2].unique())
+#     remove = tuple(current.difference(new))
+
+#     if len(remove) > 0:
+#         cur = conn.cursor()
+
+#         query = f"""DELETE FROM {table_name} WHERE {col1} in {remove};"""
+
+#         cur.execute(query)
+#         cur.execute("commit")
+#         cur.close()
 
 
 def pg_write_table(file_path, table_name, param_dic=param_dic):

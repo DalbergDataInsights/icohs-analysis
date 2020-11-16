@@ -133,7 +133,7 @@
         "elements": [
             "maternal_deaths__u20"
         ],
-        "view": "number of maternal deaths (mothers over twenty years old)",
+        "view": "number of maternal deaths (mothers under twenty years old)",
         "group": "MNCH"
     },
     {
@@ -142,7 +142,7 @@
         "elements": [
             "maternal_deaths__a20"
         ],
-        "view": "number of maternal deaths (mothers under twenty years old)",
+        "view": "number of maternal deaths (mothers over twenty years old)",
         "group": "MNCH"
     },
     {
@@ -158,7 +158,7 @@
         "indicator": "STI cases related to SGBV",
         "function": "single",
         "elements": [
-            "sti_gbv"
+            "sti_gbv__fp_stds_all"
         ],
         "view": "number of sexually transmitted infections related to sexual gender-based violence",
         "group": "FP"
@@ -167,9 +167,45 @@
         "indicator": "STI cases not related to SGBV",
         "function": "single",
         "elements": [
-            "sti_other"
+            "sti_other__fp_stds_all"
         ],
         "view": "number of sexually transmitted infections not related to sexual gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "STI cases related to SGBV (female)",
+        "function": "single",
+        "elements": [
+            "sti_gbv__fp_stds_female"
+        ],
+        "view": "number of sexually transmitted infections related to sexual gender-based violence for women",
+        "group": "FP"
+    },
+    {
+        "indicator": "STI cases not related to SGBV (female)",
+        "function": "single",
+        "elements": [
+            "sti_other__fp_stds_female"
+        ],
+        "view": "number of sexually transmitted infections not related to sexual gender-based violence for women",
+        "group": "FP"
+    },
+    {
+        "indicator": "STI cases related to SGBV (male)",
+        "function": "single",
+        "elements": [
+            "sti_gbv__fp_stds_male"
+        ],
+        "view": "number of sexually transmitted infections related to sexual gender-based violence for men",
+        "group": "FP"
+    },
+    {
+        "indicator": "STI cases not related to SGBV (male)",
+        "function": "single",
+        "elements": [
+            "sti_other__fp_stds_male"
+        ],
+        "view": "number of sexually transmitted infections not related to sexual gender-based violence for men",
         "group": "FP"
     },
     {
@@ -197,6 +233,221 @@
             "abortions_other"
         ],
         "view": "number of abortions not related to gender-based violence",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral emergency contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_emergency__fp_emergency_all"
+        ],
+        "view": "number of women using oral emergency contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using female condoms",
+        "function": "single",
+        "elements": [
+            "contraceptives_female_condom__fp_contraception_all"
+        ],
+        "view": "number of women using female condoms",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using injectable contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_injectable__fp_contraception_all"
+        ],
+        "view": "number of women using injectable contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using iuds",
+        "function": "single",
+        "elements": [
+            "contraceptives_iuds__fp_contraception_all"
+        ],
+        "view": "number of women using IUDs",
+        "group": "FP"
+    },
+    {
+        "indicator": "men using male condoms",
+        "function": "single",
+        "elements": [
+            "contraceptives_male_condom__fp_contraception_all"
+        ],
+        "view": "number of men using male condoms",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using natural contraception methods",
+        "function": "single",
+        "elements": [
+            "contraceptives_natural__fp_contraception_all"
+        ],
+        "view": "number of women using natural contraception methods",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral contraceptives",
+        "function": "sum",
+        "elements": [
+            "contraceptives_oral_lofemenal__fp_contraception_all",
+            "contraceptives_oral_microgynon__fp_contraception_all",
+            "contraceptives_oral_other__fp_contraception_all",
+            "contraceptives_oral_ovrette__fp_contraception_all",
+            "contraceptives_oral_other__fp_contraception_all"
+        ],
+        "view": "number of women using oral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral Lo-femenal contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_lofemenal__fp_contraception_all"
+        ],
+        "view": "number of women using oral Lo-femenal contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral microgynon contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_microgynon__fp_contraception_all"
+        ],
+        "view": "number of women using oral Microgynon contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral levonogesteral contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_other__fp_contraception_all"
+        ],
+        "view": "number of women using oral Levonogesteral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral ovrette contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_ovrette__fp_contraception_all"
+        ],
+        "view": "number of women using oral Ovrette contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using other oral contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_other_method__fp_contraception_all"
+        ],
+        "view": "number of women using other oral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using female condoms (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_female_condom__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using female condoms",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using injectable contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_injectable__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using injectable contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using iuds (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_iuds__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using IUDs",
+        "group": "FP"
+    },
+    {
+        "indicator": "men using male condoms (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_male_condom__fp_contraception_u20"
+        ],
+        "view": "number of men under twenty years old using male condoms",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using natural contraception methods (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_natural__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using natural contraception methods",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral contraceptives (under 20)",
+        "function": "sum",
+        "elements": [
+            "contraceptives_oral_lofemenal__fp_contraception_u20",
+            "contraceptives_oral_microgynon__fp_contraception_u20",
+            "contraceptives_oral_other__fp_contraception_u20",
+            "contraceptives_oral_ovrette__fp_contraception_u20",
+            "contraceptives_oral_other__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using oral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral Lo-femenal contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_lofemenal__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using oral Lo-femenal contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral microgynon contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_microgynon__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using oral Microgynon contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral levonogesteral contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_other__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using oral Levonogesteral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using oral ovrette contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_ovrette__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using oral Ovrette contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "women using other oral contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_other_method__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using other oral contraceptives",
         "group": "FP"
     },
     {
@@ -736,10 +987,122 @@
         "group": "HIV"
     },
     {
-        "indicator": "TB cases registered",
+        "indicator": "HIV-exposed infants receiving ARV",
         "function": "single",
         "elements": [
-            "tb_cases_registered"
+            "hei_given_arv"
+        ],
+        "view": "number of HIV-exposed infants receiving ARV",
+        "group": "HIV"
+    },
+    {
+        "indicator": "HIV-positive mothers aware of their status before ANC1",
+        "function": "single",
+        "elements": [
+            "hiv_positive_mother_before_anc"
+        ],
+        "view": "number of HIV-positive mothers aware of their status before their first ANC visit",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Mothers tested for HIV",
+        "function": "sum",
+        "elements": [
+            "anc_tested_hiv",
+            "mat_tested_hiv",
+            "pnc_tested_hiv"
+        ],
+        "view": "number of mothers newly tested for HIV",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Mothers tested HIV-positive",
+        "function": "sum",
+        "elements": [
+            "anc_tested_hiv_positive",
+            "mat_tested_hiv_positive",
+            "pnc_tested_hiv_positive"
+        ],
+        "view": "number of mothers newly tested HIV-positive",
+        "group": "HIV"
+    },
+    {
+        "indicator": "Mothers initiated on ART",
+        "function": "sum",
+        "elements": [
+            "anc_initiated_hiv",
+            "mat_initiated_hiv",
+            "pnc_initiated_hiv"
+        ],
+        "view": "number of HIV-positive mothers initiated on ART",
+        "group": "HIV"
+    },
+    {
+        "indicator": "HIV-positive mothers initiated on ART (incidence)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "anc_initiated_hiv",
+                    "mat_initiated_hiv",
+                    "pnc_initiated_hiv"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "hiv_positive_mother_before_anc",
+                    "mat_tested_hiv_positive",
+                    "anc_tested_hiv_positive",
+                    "pnc_tested_hiv_positive"
+                ]
+            }
+        },
+        "view": "Percentage of all HIV-positive mothers initiated on ART",
+        "group": "HIV"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit (females over five)",
+        "function": "single",
+        "elements": [
+            "tb_cases_registered__tb_female_a5"
+        ],
+        "view": "number of TB cases registered in treatment unit (females over five)",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit (males over five)",
+        "function": "single",
+        "elements": [
+            "tb_cases_registered__tb_male_a5"
+        ],
+        "view": "number of TB cases registered in treatment unit (males over five)",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit (females under five)",
+        "function": "single",
+        "elements": [
+            "tb_cases_registered__tb_female_u5"
+        ],
+        "view": "number of TB cases registered in treatment unit (females under five)",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit (males under five)",
+        "function": "single",
+        "elements": [
+            "tb_cases_registered__tb_male_u5"
+        ],
+        "view": "number of TB cases registered in treatment unit (males under five)",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit",
+        "function": "single",
+        "elements": [
+            "tb_cases_registered__tb_all"
         ],
         "view": "number of TB cases registered in treatment unit",
         "group": "TB"
@@ -751,7 +1114,7 @@
             "numerator": {
                 "function": "sum",
                 "elements": [
-                    "tb_cases_registered"
+                    "tb_cases_registered__tb_all"
                 ]
             },
             "denominator": {
@@ -765,21 +1128,12 @@
         "group": "TB"
     },
     {
-        "indicator": "Malaria deaths",
+        "indicator": "Malaria tests",
         "function": "single",
         "elements": [
-            "malaria_deaths"
+            "malaria_tests"
         ],
-        "view": "number of deaths due to Malaria",
-        "group": "MAL"
-    },
-    {
-        "indicator": "Malaria cases treated",
-        "function": "single",
-        "elements": [
-            "malaria_cases_treated"
-        ],
-        "view": "number of individuals treated for Malaria",
+        "view": "number of individuals tested for Malaria",
         "group": "MAL"
     },
     {
@@ -812,30 +1166,95 @@
         "group": "MAL"
     },
     {
-        "indicator": "Malaria tests",
+        "indicator": "Malaria cases treated",
         "function": "single",
         "elements": [
-            "malaria_tests"
+            "malaria_cases_treated"
         ],
-        "view": "number of individuals tested for Malaria",
+        "view": "number of individuals treated for Malaria",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria cases treated (incidence)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "sum",
+                "elements": [
+                    "malaria_cases_treated"
+                ]
+            },
+            "denominator": {
+                "function": "sum",
+                "elements": [
+                    "malaria_cases"
+                ]
+            }
+        },
+        "view": "Percentage of individuals diagnosed with Malaria heving received treatment",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria deaths",
+        "function": "single",
+        "elements": [
+            "malaria_deaths"
+        ],
+        "view": "number of deaths due to Malaria",
         "group": "MAL"
     },
     {
         "indicator": "1st & 2nd doses of vitamin A to U5",
         "function": "single",
         "elements": [
-            "vitamin_a"
+            "vitamin_a__nutrition_all"
         ],
         "view": "number of first and second doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "1st & 2nd doses of vitamin A to female U5",
+        "function": "single",
+        "elements": [
+            "vitamin_a__nutrition_female"
+        ],
+        "view": "number of first and second doses of vitamin A administered to girls under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "1st & 2nd doses of vitamin A to male U5",
+        "function": "single",
+        "elements": [
+            "vitamin_a__nutrition_male"
+        ],
+        "view": "number of first and second doses of vitamin A administered to boys under five",
         "group": "NUT"
     },
     {
         "indicator": "1st doses of vitamin A to U5",
         "function": "single",
         "elements": [
-            "vitamin_a1"
+            "vitamin_a1__nutrition_all"
         ],
         "view": "number of first doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "1st doses of vitamin A to female U5",
+        "function": "single",
+        "elements": [
+            "vitamin_a1__nutrition_female"
+        ],
+        "view": "number of first doses of vitamin A administered to girls under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "1st doses of vitamin A to male U5",
+        "function": "single",
+        "elements": [
+            "vitamin_a1__nutrition_male"
+        ],
+        "view": "number of first doses of vitamin A administered to boys under five",
         "group": "NUT"
     },
     {
@@ -845,7 +1264,7 @@
             "numerator": {
                 "function": "sum",
                 "elements": [
-                    "vitamin_a1"
+                    "vitamin_a1__nutrition_all"
                 ]
             },
             "denominator": {
@@ -862,9 +1281,27 @@
         "indicator": "2nd doses of vitamin A to U5",
         "function": "single",
         "elements": [
-            "vitamin_a2"
+            "vitamin_a2__nutrition_all"
         ],
         "view": "number of second doses of vitamin A administered to children under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "2nd doses of vitamin A to female U5",
+        "function": "single",
+        "elements": [
+            "vitamin_a2__nutrition_female"
+        ],
+        "view": "number of second doses of vitamin A administered to girls under five",
+        "group": "NUT"
+    },
+    {
+        "indicator": "2nd doses of vitamin A to male U5",
+        "function": "single",
+        "elements": [
+            "vitamin_a2__nutrition_male"
+        ],
+        "view": "number of second doses of vitamin A administered to boys under five",
         "group": "NUT"
     },
     {
@@ -874,7 +1311,7 @@
             "numerator": {
                 "function": "sum",
                 "elements": [
-                    "vitamin_a2"
+                    "vitamin_a2__nutrition_all"
                 ]
             },
             "denominator": {
