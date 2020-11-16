@@ -132,9 +132,10 @@ def pass_on_config():
     df['denominator'] = ''
 
     for x in denominator_df.index:
-        df.loc[x, 'denominator'] = next(iter(df.loc[x, 'elements']
-                                             .get('denominator')
-                                             .get('elements')))
-    #df = df.sort_values(by=['group', 'indicator'])
+        df.loc[x, 'denominator'] = "+".join(df.loc[x, 'elements']
+                                            .get('denominator')
+                                            .get('elements'))
+
+    df = df.drop(columns='elements')
 
     df.to_csv(INDICATORS['viz_config'], index=False)
