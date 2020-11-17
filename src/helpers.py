@@ -69,3 +69,7 @@ def format_date(date):
     month_order = str(dates.index(month)+1)
     month_order = '0' + month_order if len(month_order) == 1 else month_order
     return year + '-' + month_order + '-01'
+
+
+def cap_string(string, cap):
+    return (string[:cap] + '..') if len(string) > cap else string

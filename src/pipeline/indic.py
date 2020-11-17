@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import json
-from src.helpers import INDICATORS
+from src.helpers import INDICATORS, cap_string
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
@@ -92,16 +92,15 @@ def get_indicators(df, report=False):
                 weight = denominator/total
                 weighted_ratio = value * weight
 
-                df[f'{i.get("indicator")}__weighted_ratio'] = weighted_ratio*int(10e6)
+                df[f'{cap_string(i.get("indicator"),50)}__wr'] = weighted_ratio*int(10e6)
 
-                # TODO Makesure this is will be flexible enough if we have more complex denominators
+                weight_name = cap_string('_'.join(formula
+                                                  .get("denominator")
+                                                  .get("elements")),
+                                         50)
 
-                weight_name = '_'.join(formula
-                                       .get("denominator")
-                                       .get("elements"))
-
-                if f'{weight_name}__weight' not in df.columns:
-                    df[f'{weight_name}__weight'] = weight*int(10e9)
+                if f'{weight_name}__w' not in df.columns:
+                    df[f'{weight_name}__w'] = weight*int(10e9)
 
     df = df.drop(columns=cols)
 
