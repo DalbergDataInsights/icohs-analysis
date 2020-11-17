@@ -272,7 +272,7 @@
         "group": "FP"
     },
     {
-        "indicator": "men using male condoms",
+        "indicator": "Men using male condoms",
         "function": "single",
         "elements": [
             "contraceptives_male_condom__fp_contraception_all"
@@ -374,7 +374,7 @@
         "group": "FP"
     },
     {
-        "indicator": "men using male condoms (under 20)",
+        "indicator": "Men using male condoms (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_male_condom__fp_contraception_u20"
@@ -1056,7 +1056,7 @@
                 ]
             }
         },
-        "view": "Percentage of all HIV-positive mothers initiated on ART",
+        "view": "Percentage of newly diagnosed HIV-positive mothers initiated on ART",
         "group": "HIV"
     },
     {
