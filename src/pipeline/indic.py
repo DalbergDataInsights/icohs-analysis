@@ -69,11 +69,17 @@ def get_indicators(df, report=False):
 
         if report == False:
 
-            if i.get("function") == "sum":
+            if i.get("function") == "nansum":
+
                 value = get_value_indic(df, i)
                 df[i.get("indicator")] = value
 
             elif i.get("function") == "ratio":
+
+                print(i.get("indicator"))
+
+                if i.get("indicator") == "HIV-positive mothers initiated on ART (incidence)":
+                    print('stop here')
 
                 formula = i.get("elements")
 
@@ -132,7 +138,7 @@ def pass_on_config():
     df['denominator'] = ''
 
     for x in denominator_df.index:
-        df.loc[x, 'denominator'] = "+".join(df.loc[x, 'elements']
+        df.loc[x, 'denominator'] = "_".join(df.loc[x, 'elements']
                                             .get('denominator')
                                             .get('elements'))
 

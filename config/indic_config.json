@@ -22,13 +22,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "opd_attendance"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "per_thousand"
                 ]
@@ -236,7 +236,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral emergency contraceptives",
+        "indicator": "Women using oral emergency contraceptives",
         "function": "single",
         "elements": [
             "contraceptives_emergency__fp_emergency_all"
@@ -245,7 +245,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using female condoms",
+        "indicator": "Women using female condoms",
         "function": "single",
         "elements": [
             "contraceptives_female_condom__fp_contraception_all"
@@ -254,7 +254,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using injectable contraceptives",
+        "indicator": "Women using injectable contraceptives",
         "function": "single",
         "elements": [
             "contraceptives_injectable__fp_contraception_all"
@@ -263,7 +263,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using iuds",
+        "indicator": "Women using iuds",
         "function": "single",
         "elements": [
             "contraceptives_iuds__fp_contraception_all"
@@ -281,7 +281,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using natural contraception methods",
+        "indicator": "Women using natural contraception methods",
         "function": "single",
         "elements": [
             "contraceptives_natural__fp_contraception_all"
@@ -290,20 +290,19 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral contraceptives",
-        "function": "sum",
+        "indicator": "Women using oral contraceptives",
+        "function": "nansum",
         "elements": [
             "contraceptives_oral_lofemenal__fp_contraception_all",
             "contraceptives_oral_microgynon__fp_contraception_all",
             "contraceptives_oral_other__fp_contraception_all",
-            "contraceptives_oral_ovrette__fp_contraception_all",
-            "contraceptives_oral_other__fp_contraception_all"
+            "contraceptives_oral_ovrette__fp_contraception_all"
         ],
         "view": "number of women using oral contraceptives",
         "group": "FP"
     },
     {
-        "indicator": "women using oral Lo-femenal contraceptives",
+        "indicator": "Women using oral lo-femenal contraceptives",
         "function": "single",
         "elements": [
             "contraceptives_oral_lofemenal__fp_contraception_all"
@@ -312,7 +311,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral microgynon contraceptives",
+        "indicator": "Women using oral microgynon contraceptives",
         "function": "single",
         "elements": [
             "contraceptives_oral_microgynon__fp_contraception_all"
@@ -321,16 +320,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral levonogesteral contraceptives",
-        "function": "single",
-        "elements": [
-            "contraceptives_oral_other__fp_contraception_all"
-        ],
-        "view": "number of women using oral Levonogesteral contraceptives",
-        "group": "FP"
-    },
-    {
-        "indicator": "women using oral ovrette contraceptives",
+        "indicator": "Women using oral ovrette contraceptives",
         "function": "single",
         "elements": [
             "contraceptives_oral_ovrette__fp_contraception_all"
@@ -339,16 +329,25 @@
         "group": "FP"
     },
     {
-        "indicator": "women using other oral contraceptives",
+        "indicator": "Women using other oral contraceptives",
         "function": "single",
         "elements": [
-            "contraceptives_other_method__fp_contraception_all"
+            "contraceptives_oral_other__fp_contraception_all"
         ],
         "view": "number of women using other oral contraceptives",
         "group": "FP"
     },
     {
-        "indicator": "women using female condoms (under 20)",
+        "indicator": "Women using other contraception methods",
+        "function": "single",
+        "elements": [
+            "contraceptives_other_method__fp_contraception_all"
+        ],
+        "view": "number of women using other contraception methods",
+        "group": "FP"
+    },
+    {
+        "indicator": "Women using female condoms (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_female_condom__fp_contraception_u20"
@@ -357,7 +356,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using injectable contraceptives (under 20)",
+        "indicator": "Women using injectable contraceptives (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_injectable__fp_contraception_u20"
@@ -366,7 +365,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using iuds (under 20)",
+        "indicator": "Women using iuds (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_iuds__fp_contraception_u20"
@@ -384,7 +383,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using natural contraception methods (under 20)",
+        "indicator": "Women using natural contraception methods (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_natural__fp_contraception_u20"
@@ -393,20 +392,19 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral contraceptives (under 20)",
-        "function": "sum",
+        "indicator": "Women using oral contraceptives (under 20)",
+        "function": "nansum",
         "elements": [
             "contraceptives_oral_lofemenal__fp_contraception_u20",
             "contraceptives_oral_microgynon__fp_contraception_u20",
             "contraceptives_oral_other__fp_contraception_u20",
-            "contraceptives_oral_ovrette__fp_contraception_u20",
-            "contraceptives_oral_other__fp_contraception_u20"
+            "contraceptives_oral_ovrette__fp_contraception_u20"
         ],
         "view": "number of women under twenty years old using oral contraceptives",
         "group": "FP"
     },
     {
-        "indicator": "women using oral Lo-femenal contraceptives (under 20)",
+        "indicator": "Women using oral lo-femenal contraceptives (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_oral_lofemenal__fp_contraception_u20"
@@ -415,7 +413,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral microgynon contraceptives (under 20)",
+        "indicator": "Women using oral microgynon contraceptives (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_oral_microgynon__fp_contraception_u20"
@@ -424,16 +422,7 @@
         "group": "FP"
     },
     {
-        "indicator": "women using oral levonogesteral contraceptives (under 20)",
-        "function": "single",
-        "elements": [
-            "contraceptives_oral_other__fp_contraception_u20"
-        ],
-        "view": "number of women under twenty years old using oral Levonogesteral contraceptives",
-        "group": "FP"
-    },
-    {
-        "indicator": "women using oral ovrette contraceptives (under 20)",
+        "indicator": "Women using oral ovrette contraceptives (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_oral_ovrette__fp_contraception_u20"
@@ -442,12 +431,21 @@
         "group": "FP"
     },
     {
-        "indicator": "women using other oral contraceptives (under 20)",
+        "indicator": "Women using other oral contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_other__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using other oral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "Women using other contraception methods (under 20)",
         "function": "single",
         "elements": [
             "contraceptives_other_method__fp_contraception_u20"
         ],
-        "view": "number of women under twenty years old using other oral contraceptives",
+        "view": "number of women under twenty years old using other contraception methods",
         "group": "FP"
     },
     {
@@ -743,13 +741,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "bcg__u1_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u1"
                 ]
@@ -763,13 +761,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "dpt1__u1_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u1"
                 ]
@@ -783,13 +781,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "dpt3__u1_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u1"
                 ]
@@ -803,13 +801,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "mr1__u1_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u1"
                 ]
@@ -823,13 +821,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "pcv1__u1_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u1"
                 ]
@@ -843,13 +841,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "pcv3__u1_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u1"
                 ]
@@ -881,13 +879,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "tested_hiv_positive"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "per_thousand"
                 ]
@@ -1006,7 +1004,7 @@
     },
     {
         "indicator": "Mothers tested for HIV",
-        "function": "sum",
+        "function": "nansum",
         "elements": [
             "anc_tested_hiv",
             "mat_tested_hiv",
@@ -1017,7 +1015,7 @@
     },
     {
         "indicator": "Mothers tested HIV-positive",
-        "function": "sum",
+        "function": "nansum",
         "elements": [
             "anc_tested_hiv_positive",
             "mat_tested_hiv_positive",
@@ -1028,7 +1026,7 @@
     },
     {
         "indicator": "Mothers initiated on ART",
-        "function": "sum",
+        "function": "nansum",
         "elements": [
             "anc_initiated_hiv",
             "mat_initiated_hiv",
@@ -1042,7 +1040,7 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "anc_initiated_hiv",
                     "mat_initiated_hiv",
@@ -1050,9 +1048,8 @@
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
-                    "hiv_positive_mother_before_anc",
                     "mat_tested_hiv_positive",
                     "anc_tested_hiv_positive",
                     "pnc_tested_hiv_positive"
@@ -1112,13 +1109,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "tb_cases_registered__tb_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "per_hundred_thousand"
                 ]
@@ -1150,13 +1147,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "malaria_cases"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "per_thousand"
                 ]
@@ -1179,13 +1176,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "malaria_cases_treated"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "malaria_cases"
                 ]
@@ -1262,13 +1259,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "vitamin_a1__nutrition_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u5"
                 ]
@@ -1309,13 +1306,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "vitamin_a2__nutrition_all"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "u5"
                 ]
@@ -1338,13 +1335,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "sam_identified"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "per_hundred_thousand"
                 ]
@@ -1358,13 +1355,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "sam_identified"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "per_hundred_thousand_u5"
                 ]
@@ -1396,13 +1393,13 @@
         "function": "ratio",
         "elements": {
             "numerator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "low_weight_births"
                 ]
             },
             "denominator": {
-                "function": "sum",
+                "function": "nansum",
                 "elements": [
                     "births_estimated"
                 ]

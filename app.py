@@ -105,20 +105,20 @@ if __name__ == '__main__':
     # # recording measured time
     # make_note('Pipeline done', START_TIME)
 
-    # # Optional transformation to indicators (sealed from the rest on purpose)
+    # Optional transformation to indicators (sealed from the rest on purpose)
 
-    # pop = db.pg_read('pop', getdict=False)
+    pop = db.pg_read('pop', getdict=False)
 
-    # outlier = db.pg_read('outlier_output', getdict=False)
-    # indic.transform_to_indic(outlier, pop, 'out')
+    outlier = db.pg_read('outlier_output', getdict=False)
+    indic.transform_to_indic(outlier, pop, 'out')
 
-    # std = db.pg_read('std_no_outlier_output', getdict=False)
-    # indic.transform_to_indic(std, pop, 'std')
+    std = db.pg_read('std_no_outlier_output', getdict=False)
+    indic.transform_to_indic(std, pop, 'std')
 
-    # iqr = db.pg_read('iqr_no_outlier_output', getdict=False)
-    # indic.transform_to_indic(iqr, pop, 'iqr')
+    iqr = db.pg_read('iqr_no_outlier_output', getdict=False)
+    indic.transform_to_indic(iqr, pop, 'iqr')
 
-    # report = db.pg_read('report_output', getdict=False)
-    # indic.transform_to_indic(report, pop, 'rep')
+    report = db.pg_read('report_output', getdict=False)
+    indic.transform_to_indic(report, pop, 'rep')
 
     indic.pass_on_config()
