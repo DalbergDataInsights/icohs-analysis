@@ -290,18 +290,6 @@
         "group": "FP"
     },
     {
-        "indicator": "Women using oral contraceptives",
-        "function": "nansum",
-        "elements": [
-            "contraceptives_oral_lofemenal__fp_contraception_all",
-            "contraceptives_oral_microgynon__fp_contraception_all",
-            "contraceptives_oral_other__fp_contraception_all",
-            "contraceptives_oral_ovrette__fp_contraception_all"
-        ],
-        "view": "number of women using oral contraceptives",
-        "group": "FP"
-    },
-    {
         "indicator": "Women using oral lo-femenal contraceptives",
         "function": "single",
         "elements": [
@@ -326,24 +314,6 @@
             "contraceptives_oral_ovrette__fp_contraception_all"
         ],
         "view": "number of women using oral Ovrette contraceptives",
-        "group": "FP"
-    },
-    {
-        "indicator": "Women using other oral contraceptives",
-        "function": "single",
-        "elements": [
-            "contraceptives_oral_other__fp_contraception_all"
-        ],
-        "view": "number of women using other oral contraceptives",
-        "group": "FP"
-    },
-    {
-        "indicator": "Women using other contraception methods",
-        "function": "single",
-        "elements": [
-            "contraceptives_other_method__fp_contraception_all"
-        ],
-        "view": "number of women using other contraception methods",
         "group": "FP"
     },
     {
@@ -392,18 +362,6 @@
         "group": "FP"
     },
     {
-        "indicator": "Women using oral contraceptives (under 20)",
-        "function": "nansum",
-        "elements": [
-            "contraceptives_oral_lofemenal__fp_contraception_u20",
-            "contraceptives_oral_microgynon__fp_contraception_u20",
-            "contraceptives_oral_other__fp_contraception_u20",
-            "contraceptives_oral_ovrette__fp_contraception_u20"
-        ],
-        "view": "number of women under twenty years old using oral contraceptives",
-        "group": "FP"
-    },
-    {
         "indicator": "Women using oral lo-femenal contraceptives (under 20)",
         "function": "single",
         "elements": [
@@ -428,24 +386,6 @@
             "contraceptives_oral_ovrette__fp_contraception_u20"
         ],
         "view": "number of women under twenty years old using oral Ovrette contraceptives",
-        "group": "FP"
-    },
-    {
-        "indicator": "Women using other oral contraceptives (under 20)",
-        "function": "single",
-        "elements": [
-            "contraceptives_oral_other__fp_contraception_u20"
-        ],
-        "view": "number of women under twenty years old using other oral contraceptives",
-        "group": "FP"
-    },
-    {
-        "indicator": "Women using other contraception methods (under 20)",
-        "function": "single",
-        "elements": [
-            "contraceptives_other_method__fp_contraception_u20"
-        ],
-        "view": "number of women under twenty years old using other contraception methods",
         "group": "FP"
     },
     {
@@ -1096,6 +1036,26 @@
         "group": "TB"
     },
     {
+        "indicator": "TB cases registered in treatment unit (males)",
+        "function": "nansum",
+        "elements": [
+            "tb_cases_registered__tb_male_u5",
+            "tb_cases_registered__tb_male_a5"
+        ],
+        "view": "number of TB cases registered in treatment unit (males)",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit (females)",
+        "function": "nansum",
+        "elements": [
+            "tb_cases_registered__tb_female_u5",
+            "tb_cases_registered__tb_female_a5"
+        ],
+        "view": "number of TB cases registered in treatment unit (females)",
+        "group": "TB"
+    },
+    {
         "indicator": "TB cases registered in treatment unit",
         "function": "single",
         "elements": [
@@ -1169,26 +1129,6 @@
             "malaria_cases_treated"
         ],
         "view": "number of individuals treated for Malaria",
-        "group": "MAL"
-    },
-    {
-        "indicator": "Malaria cases treated (incidence)",
-        "function": "ratio",
-        "elements": {
-            "numerator": {
-                "function": "nansum",
-                "elements": [
-                    "malaria_cases_treated"
-                ]
-            },
-            "denominator": {
-                "function": "nansum",
-                "elements": [
-                    "malaria_cases"
-                ]
-            }
-        },
-        "view": "Percentage of individuals diagnosed with Malaria having received treatment",
         "group": "MAL"
     },
     {
