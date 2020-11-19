@@ -1096,6 +1096,26 @@
         "group": "TB"
     },
     {
+        "indicator": "TB cases registered in treatment unit (males)",
+        "function": "nansum",
+        "elements": [
+            "tb_cases_registered__tb_male_u5",
+            "tb_cases_registered__tb_male_a5"
+        ],
+        "view": "number of TB cases registered in treatment unit (males)",
+        "group": "TB"
+    },
+    {
+        "indicator": "TB cases registered in treatment unit (females)",
+        "function": "nansum",
+        "elements": [
+            "tb_cases_registered__tb_female_u5",
+            "tb_cases_registered__tb_female_a5"
+        ],
+        "view": "number of TB cases registered in treatment unit (females)",
+        "group": "TB"
+    },
+    {
         "indicator": "TB cases registered in treatment unit",
         "function": "single",
         "elements": [
