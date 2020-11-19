@@ -284,8 +284,6 @@ def process(main, report, location):
 
     # Exportng
 
-    # TODO Export to DB)
-
     report.to_csv(INDICATORS['rep_data'])
     outliers.to_csv(INDICATORS['out_data'])
     std.to_csv(INDICATORS['std_data'])
