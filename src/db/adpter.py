@@ -1,10 +1,11 @@
 import psycopg2
 import psycopg2.extras
+import sqlite3
 import pandas as pd
 import sys
 import json
 import pandas.io.sql as sqlio
-from sqlalchemy import create_engine
+from sqlalchemy import types, create_engine
 import os
 
 
@@ -67,7 +68,7 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
                        month,
                        value
                 FROM (SELECT *
-                    FROM {table_name}) as "tempdata" 
+                    FROM {table_name}) as "tempdata"
 			        LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode;
                 '''
     df = pd.read_sql(query, con=conn)
@@ -148,39 +149,6 @@ def pg_update_dataelements(file_path, table_name, param_dic=param_dic):
         cur.execute("commit")
 
     cur.close()
-
-
-# def pg_delete_lookup(file_path, table_name, param_dic=param_dic):
-#     """
-#         Check if any new indicators/facilities were remove and delete those from target lookup table
-#     """
-
-#     conn = pg_connect(param_dic)
-
-#     df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
-#     df_new = pd.read_csv(file_path)
-
-#     # TODO review that inelegant piece of code
-
-#     if table_name == 'indicator':
-#         col1 = 'indicatorname'
-#         col2 = '0'
-#     elif table_name == 'location':
-#         col1 = 'facilitycode'
-#         col2 = col1
-
-#     current = set(df_current[col1].unique())
-#     new = set(df_new[col2].unique())
-#     remove = tuple(current.difference(new))
-
-#     if len(remove) > 0:
-#         cur = conn.cursor()
-
-#         query = f"""DELETE FROM {table_name} WHERE {col1} in {remove};"""
-
-#         cur.execute(query)
-#         cur.execute("commit")
-#         cur.close()
 
 
 def pg_write_table(file_path, table_name, param_dic=param_dic):
@@ -284,3 +252,29 @@ def pg_final_table(file_path, table_name, engine=engine, param_dic=param_dic):
     cursor.copy_expert(sql=query % table_name, file=f)
     conn.commit()
     cursor.close()
+
+
+def output_to_test_sqlite(df, table_name, engine_url):
+
+    df['date'] = pd.to_datetime(df['date'])
+
+    engine = create_engine(engine_url, echo=False)
+
+    type_dict = {key: types.Integer() for key in df.columns[4:]}
+    type_dict['district_name'] = types.VARCHAR(length=200)
+    type_dict['facility_id'] = types.VARCHAR(length=200)
+    type_dict['facility_name'] = types.VARCHAR(length=500)
+    type_dict['date'] = types.Date()
+
+    df.to_sql(table_name, con=engine, chunksize=10000,
+              dtype=type_dict, if_exists='replace', index=False)
+
+
+def config_to_test_sqlite(df, engine_url):
+
+    engine = create_engine(engine_url, echo=False)
+
+    type_dict = {key: types.VARCHAR(length=300) for key in df.columns}
+
+    df.to_sql('config', con=engine, chunksize=10000,
+              dtype=type_dict, if_exists='replace', index=False)
