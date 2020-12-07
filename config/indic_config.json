@@ -1065,7 +1065,7 @@
         "group": "TB"
     },
     {
-        "indicator": "TB cases registered (per 100 000)",
+        "indicator": "TB cases registered in treatment unit (per 100 000)",
         "function": "ratio",
         "elements": {
             "numerator": {
