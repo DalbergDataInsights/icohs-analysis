@@ -15,7 +15,7 @@ VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
 
 if __name__ == '__main__':
 
-    # make_note('Starting the pipeline', START_TIME)
+    make_note('Starting the pipeline', START_TIME)
 
     # Adding any new indiactors/facilities to the lookup table
 
@@ -27,18 +27,6 @@ if __name__ == '__main__':
 
     db.pg_update_dataelements(file_path=INDICATORS['name_district_map'],
                               table_name='location')
-
-    # db.pg_write_lookup(file_path=INDICATORS['indicators_map'],
-    #                    table_name='indicator')
-
-    # db.pg_write_lookup(file_path=INDICATORS['name_district_map'],
-    #                    table_name='location')
-
-    # db.pg_delete_lookup(file_path=INDICATORS['indicators_map'],
-    #                     table_name='indicator')
-
-    # db.pg_delete_lookup(file_path=INDICATORS['name_district_map'],
-    #                     table_name='location')
 
     # Adding the population data
 
