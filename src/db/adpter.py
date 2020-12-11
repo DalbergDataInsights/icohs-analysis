@@ -79,76 +79,45 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 # WRITE AND UPDDATE
 
 
-def pg_update_dataelements(file_path, table_name, param_dic=param_dic):
-
-    # TODO Check for bug when asssing idicators
-    """
-        Check if any new indicators/facilities were added and upload new ones to a target lookup table
-    """
-    # Check the status of teh lookup table in the database, compare with latest user input
+def pg_update_indicator(dataelements, param_dic=param_dic):
+    '''Checks whether any changes were made to the list of data elements , if so wipes the data clean'''
 
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    df_current = pd.read_sql("SELECT * FROM %s" % table_name, conn)
-    df_new = pd.read_csv(file_path)
+    current = pd.read_sql("SELECT * FROM indicator", conn)
 
-    # TODO review that inelegant piece of code
+    changed = set(current['indicatorname']
+                  ).symmetric_difference(set(dataelements))
 
-    if table_name == 'indicator':
-        col1 = 'indicatorname'
-        col2 = '0'
-        to_update = 'indicatorcode'
-    elif table_name == 'location':
-        col1 = 'facilitycode'
-        col2 = col1
-        to_update = 'facilitycode'
-
-    current = set(df_current[col1].unique())
-    new = set(df_new[col2].unique())
-
-    # Check for new data elements - if any additions, add to the lookup
-
-    add = new.difference(current)
-    if len(add) > 0:
-
-        df_add = df_new[df_new[col2].isin(add)]
-        df_add = df_add[[df_add.columns[-1]]]
+    if len(changed) > 0:
 
         try:
-            i = df_current.indicatorcode.astype(int).max()+1
-            for x in df_add.index:
-                sql = f"INSERT INTO {table_name} VALUES ('{i}','{df_add.loc[x,df_add.columns[-1]]}');"
-                cur.execute(sql)
+
+            queries = ["DELETE FROM main",
+                       "DELETE FROM report",
+                       "DELETE FROM indicator"]
+
+            for q in queries:
+                cur.execute(q)
                 cur.execute("commit")
-                i = i+1
+
+            df = pd.DataFrame(dataelements)\
+                .sort_values(0, ignore_index=True)\
+                .reset_index()\
+                .rename(columns={'index': 'indicatorcode', 0: 'indicatorname'})
+
+            df.to_sql('indicator', con=engine, if_exists='append', index=False)
 
         except Exception as e:
             print(e)
 
-    # Now check for redundant data elements
-
-    remove = current.difference(new)
-    df_remove = df_current[df_current[col1].isin(remove)]
-    codes_remove = tuple(df_remove[to_update].unique())
-
-    # then drop from main table whatver missing indicators
-
-    if len(remove) > 0:
-
-        query = f"""DELETE FROM main WHERE {to_update} in {codes_remove};"""
-
-        cur.execute(query)
-        cur.execute("commit")
-
-        # then dropfrom the indicator table
-
-        query = f"""DELETE FROM {table_name} WHERE {to_update} in {codes_remove};"""
-
-        cur.execute(query)
-        cur.execute("commit")
-
     cur.close()
+
+
+def pg_update_location(file_path, param_dic=param_dic):
+
+    print('check')
 
 
 def pg_write_table(file_path, table_name, param_dic=param_dic):

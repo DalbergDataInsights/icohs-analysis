@@ -1,0 +1,1464 @@
+[
+    {
+        "identifier": "1st_anc_visits",
+        "new": [
+            "105-AN01a. ANC 1st Visit for women"
+        ],
+        "old": [
+            "105-2.1 A1:ANC 1st Visit for women"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "4th_anc_visits",
+        "new": [
+            "105-AN02. ANC 4th Visit for women"
+        ],
+        "old": [
+            "105-2.1 A2:ANC 4th Visit for women"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "abortions_gbv",
+        "new": [
+            "105-MC01. Abortions due to Gender-Based Violence (GBV)"
+        ],
+        "old": [
+            "105-1.3 OPD Abortions Due To Gender Based Violence (GBV) "
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "abortions_other",
+        "new": [
+            "105-MC02. Abortions due to other causes"
+        ],
+        "old": [
+            "105-1.3 OPD Abortions Due To Other Causes "
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "actual_105_1_reporting",
+        "new": [
+            "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Actual reports 1. National"
+        ],
+        "old": [
+            "HMIS 105:1 Actual reports"
+        ],
+        "breakdown": [],
+        "domain": "REPORT"
+    },
+    {
+        "identifier": "anc_initiated_hiv",
+        "new": [
+            "105-AN32. HIV+ pregnant women initiated on ART for eMTCT at any visit irrespective of when tested HIV+ (TRR, TRR+,TRR\u201a\u00e0\u00f6)"
+        ],
+        "old": [
+            "105-2.1 HIV+ Pregnant Women initiated on ART for EMTCT (ART)"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "anc_tested_hiv",
+        "new": [
+            "105-AN29a. Pregnant women newly tested for HIV in this pregnancy at any ANC visit (TR & TRR) - total"
+        ],
+        "old": [
+            "105-2.1 Pregnant Women newly tested for HIV this pregnancy(TR & TRR)"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "anc_tested_hiv_positive",
+        "new": [
+            "105-AN30a. Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any ANC Visit - Total"
+        ],
+        "old": [
+            "105-2.1 Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any visit"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "bcg",
+        "new": [
+            "105-CL01. BCG"
+        ],
+        "old": [
+            "105-2.11 BCG"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "bcg__u1_outreach",
+        "new": [
+            "105-CL01. BCG"
+        ],
+        "old": [
+            "105-2.11 BCG"
+        ],
+        "breakdown": [
+            "u1_outreach"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "bcg__u1_static",
+        "new": [
+            "105-CL01. BCG"
+        ],
+        "old": [
+            "105-2.11 BCG"
+        ],
+        "breakdown": [
+            "u1_static"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "births",
+        "new": [
+            "105-MA04a. Deliveries in unit - Total"
+        ],
+        "old": [
+            "105-2.2a Deliveries in unit"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "births_fresh_stillbirth",
+        "new": [
+            "105-MA04c1. Deliveries in unit - Fresh still birth - Total"
+        ],
+        "old": [
+            "105-2.2b Deliveries in unit(Fresh Still births)"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "births_live",
+        "new": [
+            "105-MA04b1. Deliveries in unit -Live births - Total"
+        ],
+        "old": [
+            "105-2.2d Deliveries in unit(Live Births)"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "births_macerated_stillbirth",
+        "new": [
+            "105-MA04d1. Deliveries in unit - Macerated still birth - Total"
+        ],
+        "old": [
+            "105-2.2c Deliveries in unit(Macerated still births)"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "breastfed_1st_hour",
+        "new": [
+            "105-MA14a. Mothers who initiated breastfeeding within the 1st hour after delivery - Total"
+        ],
+        "old": [
+            "105-2.2 No. of mothers who initiated breastfeeding within the 1st hour after delivery (Total)"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "contraceptives_emergency__fp_emergency_all",
+        "new": [
+            "105-CT05. Oral Emergency contraceptives"
+        ],
+        "old": [
+            "105-2.6 Emergency contraceptives "
+        ],
+        "breakdown": [
+            "fp_emergency_all"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_female_condom__fp_contraception_a20",
+        "new": [
+            "105-FP19. Female Condoms"
+        ],
+        "old": [
+            "105-2.5 Female Condom"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_female_condom",
+        "new": [
+            "105-FP19. Female Condoms"
+        ],
+        "old": [
+            "105-2.5 Female Condom"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_female_condom__fp_contraception_u20",
+        "new": [
+            "105-FP19. Female Condoms"
+        ],
+        "old": [
+            "105-2.5 Female Condom"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_injectable__fp_contraception_a20",
+        "new": [
+            "105-FP06. Injectable DMPA(IM)3 months",
+            "105-FP07. Injectable DMPA(SC) 3 months",
+            "105-FP08. Injection 2 months",
+            "105-FP09. Injection 1 month"
+        ],
+        "old": [
+            "105-2.5 Injectable"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_injectable",
+        "new": [
+            "105-FP06. Injectable DMPA(IM)3 months",
+            "105-FP07. Injectable DMPA(SC) 3 months",
+            "105-FP08. Injection 2 months",
+            "105-FP09. Injection 1 month"
+        ],
+        "old": [
+            "105-2.5 Injectable"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_injectable__fp_contraception_u20",
+        "new": [
+            "105-FP06. Injectable DMPA(IM)3 months",
+            "105-FP07. Injectable DMPA(SC) 3 months",
+            "105-FP08. Injection 2 months",
+            "105-FP09. Injection 1 month"
+        ],
+        "old": [
+            "105-2.5 Injectable"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_iuds__fp_contraception_a20",
+        "new": [
+            "105-FP13. IUD-Copper-T",
+            "105-FP14. IUD-Hormonal"
+        ],
+        "old": [
+            "105-2.5 IUDs "
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_iuds",
+        "new": [
+            "105-FP13. IUD-Copper-T",
+            "105-FP14. IUD-Hormonal"
+        ],
+        "old": [
+            "105-2.5 IUDs "
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_iuds__fp_contraception_u20",
+        "new": [
+            "105-FP13. IUD-Copper-T",
+            "105-FP14. IUD-Hormonal"
+        ],
+        "old": [
+            "105-2.5 IUDs "
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_male_condom__fp_contraception_a20",
+        "new": [
+            "105-FP20. Male Condoms"
+        ],
+        "old": [
+            "105-2.5 Male Condom"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_male_condom",
+        "new": [
+            "105-FP20. Male Condoms"
+        ],
+        "old": [
+            "105-2.5 Male Condom"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_male_condom__fp_contraception_u20",
+        "new": [
+            "105-FP20. Male Condoms"
+        ],
+        "old": [
+            "105-2.5 Male Condom"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_natural__fp_contraception_a20",
+        "new": [
+            "105-FP15. FAM-SDM method",
+            "105-FP16. FAM-LAM",
+            "105-FP17. FAM-Two Days Method"
+        ],
+        "old": [
+            "105-2.5 Natural"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_natural",
+        "new": [
+            "105-FP15. FAM-SDM method",
+            "105-FP16. FAM-LAM",
+            "105-FP17. FAM-Two Days Method"
+        ],
+        "old": [
+            "105-2.5 Natural"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_natural__fp_contraception_u20",
+        "new": [
+            "105-FP15. FAM-SDM method",
+            "105-FP16. FAM-LAM",
+            "105-FP17. FAM-Two Days Method"
+        ],
+        "old": [
+            "105-2.5 Natural"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_lofemenal__fp_contraception_a20",
+        "new": [
+            "105-FP01. Oral. Lo-Femenal"
+        ],
+        "old": [
+            "105-2.5 Oral: Lo-Feminal"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_lofemenal",
+        "new": [
+            "105-FP01. Oral. Lo-Femenal"
+        ],
+        "old": [
+            "105-2.5 Oral: Lo-Feminal"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_lofemenal__fp_contraception_u20",
+        "new": [
+            "105-FP01. Oral. Lo-Femenal"
+        ],
+        "old": [
+            "105-2.5 Oral: Lo-Feminal"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_microgynon__fp_contraception_a20",
+        "new": [
+            "105-FP02. Oral. Microgynon"
+        ],
+        "old": [
+            "105-2.5 Oral: Microgynon"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_microgynon",
+        "new": [
+            "105-FP02. Oral. Microgynon"
+        ],
+        "old": [
+            "105-2.5 Oral: Microgynon"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_microgynon__fp_contraception_u20",
+        "new": [
+            "105-FP02. Oral. Microgynon"
+        ],
+        "old": [
+            "105-2.5 Oral: Microgynon"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_other__fp_contraception_a20",
+        "new": [
+            "105-FP05. Oral. Others"
+        ],
+        "old": [
+            "105-2.5 Oral : Other"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_other",
+        "new": [
+            "105-FP05. Oral. Others"
+        ],
+        "old": [
+            "105-2.5 Oral : Other"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_other__fp_contraception_u20",
+        "new": [
+            "105-FP05. Oral. Others"
+        ],
+        "old": [
+            "105-2.5 Oral : Other"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_ovrette__fp_contraception_a20",
+        "new": [
+            "105-FP03. Oral. Ovrette or another POP"
+        ],
+        "old": [
+            "105-2.5 Oral : Ovrette or Another POP"
+        ],
+        "breakdown": [
+            "fp_contraception_a20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_ovrette",
+        "new": [
+            "105-FP03. Oral. Ovrette or another POP"
+        ],
+        "old": [
+            "105-2.5 Oral : Ovrette or Another POP"
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "contraceptives_oral_ovrette__fp_contraception_u20",
+        "new": [
+            "105-FP03. Oral. Ovrette or another POP"
+        ],
+        "old": [
+            "105-2.5 Oral : Ovrette or Another POP"
+        ],
+        "breakdown": [
+            "fp_contraception_u20"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "dpt1",
+        "new": [
+            "105-CL08. DPT-HepB+Hib 1"
+        ],
+        "old": [
+            "105-2.11 DPT-HepB+Hib 1"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "dpt1__u1_outreach",
+        "new": [
+            "105-CL08. DPT-HepB+Hib 1"
+        ],
+        "old": [
+            "105-2.11 DPT-HepB+Hib 1"
+        ],
+        "breakdown": [
+            "u1_outreach"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "dpt1__u1_static",
+        "new": [
+            "105-CL08. DPT-HepB+Hib 1"
+        ],
+        "old": [
+            "105-2.11 DPT-HepB+Hib 1"
+        ],
+        "breakdown": [
+            "u1_static"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "dpt3",
+        "new": [
+            "105-CL10. DPT-HepB+Hib 3"
+        ],
+        "old": [
+            "105-2.11 DPT-HepB+Hib 3"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "dpt3__u1_outreach",
+        "new": [
+            "105-CL10. DPT-HepB+Hib 3"
+        ],
+        "old": [
+            "105-2.11 DPT-HepB+Hib 3"
+        ],
+        "breakdown": [
+            "u1_outreach"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "dpt3__u1_static",
+        "new": [
+            "105-CL10. DPT-HepB+Hib 3"
+        ],
+        "old": [
+            "105-2.11 DPT-HepB+Hib 3"
+        ],
+        "breakdown": [
+            "u1_static"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "expected_105_1_reporting",
+        "new": [
+            "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Expected reports 1. National"
+        ],
+        "old": [
+            "HMIS 105:1 Expected reports"
+        ],
+        "breakdown": [],
+        "domain": "REPORT"
+    },
+    {
+        "identifier": "hei_given_arv",
+        "new": [
+            "105-MA23a. HIV-exposed babies given ARVs - Total"
+        ],
+        "old": [
+            "105-2.2 M9: HIV-exposed babies given ARVs"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "hiv_positive_linked",
+        "new": [
+            "105-HT03a3. Total Linked to HIV Care"
+        ],
+        "old": [
+            "105-4 Number of clients who have been linked to care"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "hiv_positive_mother_before_anc",
+        "new": [
+            "105-AN33b. Pregnant Women who knew status before 1st ANC - HIV+ TRRK"
+        ],
+        "old": [
+            "105-2.1b Pregnant Women who knew status before 1st ANC (HIV+(TRRK))"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "hpv1",
+        "new": [
+            "105-VP01. HPV1-Dose 1"
+        ],
+        "old": [
+            "105-2.10 HPV1-Dose 1"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "hpv1__community",
+        "new": [
+            "105-VP01. HPV1-Dose 1"
+        ],
+        "old": [
+            "105-2.10 HPV1-Dose 1"
+        ],
+        "breakdown": [
+            "community"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "hpv1__school",
+        "new": [
+            "105-VP01. HPV1-Dose 1"
+        ],
+        "old": [
+            "105-2.10 HPV1-Dose 1"
+        ],
+        "breakdown": [
+            "school"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "hpv2",
+        "new": [
+            "105-VP02. HPV2-Dose 2"
+        ],
+        "old": [
+            "105-2.10 HPV2-Dose 2"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "hpv2__community",
+        "new": [
+            "105-VP02. HPV2-Dose 2"
+        ],
+        "old": [
+            "105-2.10 HPV2-Dose 2"
+        ],
+        "breakdown": [
+            "community"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "hpv2__school",
+        "new": [
+            "105-VP02. HPV2-Dose 2"
+        ],
+        "old": [
+            "105-2.10 HPV2-Dose 2"
+        ],
+        "breakdown": [
+            "school"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "injuries_gbv",
+        "new": [
+            "105-IN03. Injuries due to Gender based violence"
+        ],
+        "old": [
+            "105-1.3 OPD Injuries Due To Gender Based Violence "
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "ipd_attendance",
+        "new": [
+            "108-CI02. No. of admissions"
+        ],
+        "old": [
+            "108-1 Admissions"
+        ],
+        "breakdown": [],
+        "domain": "GENERAL"
+    },
+    {
+        "identifier": "low_weight_births",
+        "new": [
+            "105-MA04d2. Deliveries in unit - Macerated still birth - less than 2.5kg",
+            "105-MA04c2. Deliveries in unit - Fresh still birth - less than 2.5kg",
+            "105-MA04b2. Deliveries in unit -Live births - less than 2.5kg"
+        ],
+        "old": [
+            "105-2.2 Babies Born with low birth weight (<2.5Kgs)"
+        ],
+        "breakdown": [],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "malaria_cases",
+        "new": [
+            "033B-CD01a. Malaria (diagnosed)  - Cases"
+        ],
+        "old": [
+            "Malaria Cases - WEP"
+        ],
+        "breakdown": [],
+        "domain": "MAL"
+    },
+    {
+        "identifier": "malaria_cases_treated",
+        "new": [
+            "033B-MA06. Not tested cases treated",
+            "033B-MA07. RDT Negative Cases Treated",
+            "033B-MA08. RDT Positive Cases Treated",
+            "033B-MA09. Microscopy Negative Cases Treated",
+            "033B-MA10. Microscopy Positive Cases Treated"
+        ],
+        "old": [
+            "Malaria treated - WEP"
+        ],
+        "breakdown": [],
+        "domain": "MAL"
+    },
+    {
+        "identifier": "malaria_deaths",
+        "new": [
+            "033B-CD01b. Malaria (diagnosed) - Deaths"
+        ],
+        "old": [
+            "Malaria Deaths - WEP"
+        ],
+        "breakdown": [],
+        "domain": "MAL"
+    },
+    {
+        "identifier": "malaria_tests",
+        "new": [
+            "033B-MA02. Cases Tested with RDT",
+            "033B-MA04. Cases Tested with Microscopy"
+        ],
+        "old": [
+            "Malaria tests - WEP"
+        ],
+        "breakdown": [],
+        "domain": "MAL"
+    },
+    {
+        "identifier": "mam_identified",
+        "new": [
+            "105-NA03a1. Identified malnourished clients(<10) this month - MAM using MUAC",
+            "105-NA03b1. Identified malnourished clients(<10) this month - MAM using W/H or L"
+        ],
+        "old": [
+            "105-1.3 OPD Moderate Acute Malnutrition (MAM)"
+        ],
+        "breakdown": [],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "mat_initiated_hiv",
+        "new": [
+            "105-MA17. Women initiating ART in maternity - HIV+"
+        ],
+        "old": [
+            "105-2.2 HIV+ women initiating ART in maternity"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "mat_tested_hiv",
+        "new": [
+            "105-MA15a. Women tested for HIV in labour 1st time this Pregnancy - Total (TR & TRR)",
+            "105-MA16a. Women re-tested for HIV in labour - Total (TR & TRR)"
+        ],
+        "old": [
+            "105-2.2a Women tested for HIV in labour (1st time this Pregnancy)",
+            "105-2.2b Women tested for HIV in labour (Retest this Pregnancy)"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "mat_tested_hiv_positive",
+        "new": [
+            "105-MA15b. Women tested for HIV in labour 1st time this Pregnancy - HIV+ (TRR)",
+            "105-MA16b. Women re-tested for HIV in labour - HIV+ (TRR+)"
+        ],
+        "old": [
+            "105-2.2a Women testing HIV+ in labour (1st time this Pregnancy)",
+            "105-2.2b Women testing HIV+ in labour (Retest this Pregnancy)"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "maternal_deaths__a20",
+        "new": [
+            "105-MA13. Maternal deaths"
+        ],
+        "old": [
+            "105-2.2 OPD Maternal deaths"
+        ],
+        "breakdown": [
+            "a20"
+        ],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "maternal_deaths",
+        "new": [
+            "105-MA13. Maternal deaths"
+        ],
+        "old": [
+            "105-2.2 OPD Maternal deaths"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "maternal_deaths__u20",
+        "new": [
+            "105-MA13. Maternal deaths"
+        ],
+        "old": [
+            "105-2.2 OPD Maternal deaths"
+        ],
+        "breakdown": [
+            "u20"
+        ],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "maternity_admissions",
+        "new": [
+            "105-MA01. Admissions"
+        ],
+        "old": [
+            "105-2.2 Admissions"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "mr1",
+        "new": [
+            "105-CL16. Measles (MR1)"
+        ],
+        "old": [
+            "105-2.11 Measles"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "mr1__u1_outreach",
+        "new": [
+            "105-CL16. Measles (MR1)"
+        ],
+        "old": [
+            "105-2.11 Measles"
+        ],
+        "breakdown": [
+            "u1_outreach"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "mr1__u1_static",
+        "new": [
+            "105-CL16. Measles (MR1)"
+        ],
+        "old": [
+            "105-2.11 Measles"
+        ],
+        "breakdown": [
+            "u1_static"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "newborn_deaths",
+        "new": [
+            "105-MA11. Newborn deaths (0-7 days)"
+        ],
+        "old": [
+            "105-2.2 Newborn deaths (0-7days)"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "opd_attendance",
+        "new": [
+            "105-OA01. New attendance",
+            "105-OA02. Re-attendance"
+        ],
+        "old": [
+            "105-1.1 OPD New Attendance",
+            "105-1.1 OPD Re-Attendance"
+        ],
+        "breakdown": [],
+        "domain": "GENERAL"
+    },
+    {
+        "identifier": "pcv1",
+        "new": [
+            "105-CL11. PCV 1"
+        ],
+        "old": [
+            "105-2.11 PCV 1"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "pcv1__u1_outreach",
+        "new": [
+            "105-CL11. PCV 1"
+        ],
+        "old": [
+            "105-2.11 PCV 1"
+        ],
+        "breakdown": [
+            "u1_outreach"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "pcv1__u1_static",
+        "new": [
+            "105-CL11. PCV 1"
+        ],
+        "old": [
+            "105-2.11 PCV 1"
+        ],
+        "breakdown": [
+            "u1_static"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "pcv3",
+        "new": [
+            "105-CL13. PCV 3"
+        ],
+        "old": [
+            "105-2.11 PCV 3"
+        ],
+        "breakdown": [],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "pcv3__u1_outreach",
+        "new": [
+            "105-CL13. PCV 3"
+        ],
+        "old": [
+            "105-2.11 PCV 3"
+        ],
+        "breakdown": [
+            "u1_outreach"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "pcv3__u1_static",
+        "new": [
+            "105-CL13. PCV 3"
+        ],
+        "old": [
+            "105-2.11 PCV 3"
+        ],
+        "breakdown": [
+            "u1_static"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "pnc_initiated_hiv",
+        "new": [
+            "105-PN05a. HIV+ women initiating ART in Postnatal - Total"
+        ],
+        "old": [
+            "105-2.3 HIV+ women initiating ART in PNC"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "pnc_tested_hiv",
+        "new": [
+            "105-PN03a. Breastfeedng mothers tested for HIV 1st time during Postnatal - Total (TR & TRR)"
+        ],
+        "old": [
+            "105-2.3a Breastfeeding mothers tested for HIV(1st test)"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "pnc_tested_hiv_positive",
+        "new": [
+            "105-PN03b. Breastfeedng mothers tested for HIV 1st time during Postnatal - TRR"
+        ],
+        "old": [
+            "105-2.3a Breastfeeding mothers newly testing HIV+(1st test)",
+            "105-2.3b Breastfeeding mothers newly testing HIV+(retest)"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "postnatal_visits",
+        "new": [
+            "105-PN01a. Post Natal Attendances - Mother"
+        ],
+        "old": [
+            "105-2.3 Postnatal Attendances"
+        ],
+        "breakdown": [],
+        "domain": "MNCH"
+    },
+    {
+        "identifier": "sam_identified",
+        "new": [
+            "105-NA03c1. Identified malnourished clients(<10) this month - SAM using MUAC -  Without Oedema",
+            "105-NA03d1. Identified malnourished clients(<10) this month - SAM using W/H or L -  Without Oedema",
+            "105-NA03e1. Identified malnourished clients(<10) this month - SAM With Oedema"
+        ],
+        "old": [
+            "105-1.3 OPD Severe Acute Malnutrition Without Oedema",
+            "105-1.3 OPD Severe Acute Malnutrition With Oedema"
+        ],
+        "breakdown": [],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "sti_gbv",
+        "new": [
+            "105-CD05. Sexually Transmitted Infection due to Sexual Gender Based Violence"
+        ],
+        "old": [
+            "105-1.3 OPD Sexually Transmitted Infection Due To SGBV "
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "sti_gbv__fp_stds_female",
+        "new": [
+            "105-CD05. Sexually Transmitted Infection due to Sexual Gender Based Violence"
+        ],
+        "old": [
+            "105-1.3 OPD Sexually Transmitted Infection Due To SGBV "
+        ],
+        "breakdown": [
+            "fp_stds_female"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "sti_gbv__fp_stds_male",
+        "new": [
+            "105-CD05. Sexually Transmitted Infection due to Sexual Gender Based Violence"
+        ],
+        "old": [
+            "105-1.3 OPD Sexually Transmitted Infection Due To SGBV "
+        ],
+        "breakdown": [
+            "fp_stds_male"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "sti_other",
+        "new": [
+            "105-CD06. Other Sexually Transmitted Infections"
+        ],
+        "old": [
+            "105-1.3 OPD Other Sexually Transmitted Infections "
+        ],
+        "breakdown": [],
+        "domain": "FP"
+    },
+    {
+        "identifier": "sti_other__fp_stds_female",
+        "new": [
+            "105-CD06. Other Sexually Transmitted Infections"
+        ],
+        "old": [
+            "105-1.3 OPD Other Sexually Transmitted Infections "
+        ],
+        "breakdown": [
+            "fp_stds_female"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "sti_other__fp_stds_male",
+        "new": [
+            "105-CD06. Other Sexually Transmitted Infections"
+        ],
+        "old": [
+            "105-1.3 OPD Other Sexually Transmitted Infections "
+        ],
+        "breakdown": [
+            "fp_stds_male"
+        ],
+        "domain": "FP"
+    },
+    {
+        "identifier": "tb_cases_registered",
+        "new": [
+            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
+        ],
+        "old": [
+            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
+            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
+            "105-1.3 OPD New TB cases (EPTB)"
+        ],
+        "breakdown": [],
+        "domain": "TB"
+    },
+    {
+        "identifier": "tb_cases_registered__tb_female_a5",
+        "new": [
+            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
+        ],
+        "old": [
+            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
+            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
+            "105-1.3 OPD New TB cases (EPTB)"
+        ],
+        "breakdown": [
+            "tb_female_a5"
+        ],
+        "domain": "TB"
+    },
+    {
+        "identifier": "tb_cases_registered__tb_female_u5",
+        "new": [
+            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
+        ],
+        "old": [
+            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
+            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
+            "105-1.3 OPD New TB cases (EPTB)"
+        ],
+        "breakdown": [
+            "tb_female_u5"
+        ],
+        "domain": "TB"
+    },
+    {
+        "identifier": "tb_cases_registered__tb_male_a5",
+        "new": [
+            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
+        ],
+        "old": [
+            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
+            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
+            "105-1.3 OPD New TB cases (EPTB)"
+        ],
+        "breakdown": [
+            "tb_male_a5"
+        ],
+        "domain": "TB"
+    },
+    {
+        "identifier": "tb_cases_registered__tb_male_u5",
+        "new": [
+            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
+        ],
+        "old": [
+            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
+            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
+            "105-1.3 OPD New TB cases (EPTB)"
+        ],
+        "breakdown": [
+            "tb_male_u5"
+        ],
+        "domain": "TB"
+    },
+    {
+        "identifier": "td1__nonpregnant",
+        "new": [
+            "105-TD01. Td1-Dose 1"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 1"
+        ],
+        "breakdown": [
+            "nonpregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td1__pregnant",
+        "new": [
+            "105-TD01. Td1-Dose 1"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 1"
+        ],
+        "breakdown": [
+            "pregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td2__nonpregnant",
+        "new": [
+            "105-TD02. Td2-Dose 2"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 2"
+        ],
+        "breakdown": [
+            "nonpregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td2__pregnant",
+        "new": [
+            "105-TD02. Td2-Dose 2"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 2"
+        ],
+        "breakdown": [
+            "pregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td3__nonpregnant",
+        "new": [
+            "105-TD03. Td3-Dose 3"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 3"
+        ],
+        "breakdown": [
+            "nonpregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td3__pregnant",
+        "new": [
+            "105-TD03. Td3-Dose 3"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 3"
+        ],
+        "breakdown": [
+            "pregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td4_5__nonpregnant",
+        "new": [
+            "105-TD04. Td4-Dose 4",
+            "105-TD05. Td5-Dose 5"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 4",
+            "105-2.9 Tetanus Immunization Dose 5"
+        ],
+        "breakdown": [
+            "nonpregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "td4_5__pregnant",
+        "new": [
+            "105-TD04. Td4-Dose 4",
+            "105-TD05. Td5-Dose 5"
+        ],
+        "old": [
+            "105-2.9 Tetanus Immunization Dose 4",
+            "105-2.9 Tetanus Immunization Dose 5"
+        ],
+        "breakdown": [
+            "pregnant"
+        ],
+        "domain": "EPI"
+    },
+    {
+        "identifier": "tested_hiv",
+        "new": [
+            "105-HT03a1. Total Tested for HIV"
+        ],
+        "old": [
+            "105-4 Number of Individuals Tested"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "tested_hiv_positive",
+        "new": [
+            "105-HT03a2. Total New HIV+"
+        ],
+        "old": [
+            "105-4 Number of Individuals who tested HIV positive"
+        ],
+        "breakdown": [],
+        "domain": "HIV"
+    },
+    {
+        "identifier": "vitamin_a1",
+        "new": [
+            "105-CH01. Vit A supplement (1st Dose)"
+        ],
+        "old": [
+            "105-2.8 Vit A Suplement 1st Dose in Year"
+        ],
+        "breakdown": [],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "vitamin_a1__nutrition_female",
+        "new": [
+            "105-CH01. Vit A supplement (1st Dose)"
+        ],
+        "old": [
+            "105-2.8 Vit A Suplement 1st Dose in Year"
+        ],
+        "breakdown": [
+            "nutrition_female"
+        ],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "vitamin_a1__nutrition_male",
+        "new": [
+            "105-CH01. Vit A supplement (1st Dose)"
+        ],
+        "old": [
+            "105-2.8 Vit A Suplement 1st Dose in Year"
+        ],
+        "breakdown": [
+            "nutrition_male"
+        ],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "vitamin_a2",
+        "new": [
+            "105-CH02. Vit A supplement (2nd Dose)"
+        ],
+        "old": [
+            "105-2.8 Vit A Suplement 2nd Dose in theYear"
+        ],
+        "breakdown": [],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "vitamin_a2__nutrition_female",
+        "new": [
+            "105-CH02. Vit A supplement (2nd Dose)"
+        ],
+        "old": [
+            "105-2.8 Vit A Suplement 2nd Dose in theYear"
+        ],
+        "breakdown": [
+            "nutrition_female"
+        ],
+        "domain": "NUT"
+    },
+    {
+        "identifier": "vitamin_a2__nutrition_male",
+        "new": [
+            "105-CH02. Vit A supplement (2nd Dose)"
+        ],
+        "old": [
+            "105-2.8 Vit A Suplement 2nd Dose in theYear"
+        ],
+        "breakdown": [
+            "nutrition_male"
+        ],
+        "domain": "NUT"
+    }
+]

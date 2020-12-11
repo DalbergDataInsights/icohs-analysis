@@ -149,7 +149,7 @@
         "indicator": "Maternal deaths",
         "function": "single",
         "elements": [
-            "maternal_deaths__mnch_all"
+            "maternal_deaths"
         ],
         "view": "number of maternal deaths",
         "group": "MNCH"
@@ -158,7 +158,7 @@
         "indicator": "STI cases related to SGBV",
         "function": "single",
         "elements": [
-            "sti_gbv__fp_stds_all"
+            "sti_gbv"
         ],
         "view": "number of sexually transmitted infections related to sexual gender-based violence",
         "group": "FP"
@@ -167,7 +167,7 @@
         "indicator": "STI cases not related to SGBV",
         "function": "single",
         "elements": [
-            "sti_other__fp_stds_all"
+            "sti_other"
         ],
         "view": "number of sexually transmitted infections not related to sexual gender-based violence",
         "group": "FP"
@@ -248,7 +248,7 @@
         "indicator": "Women using female condoms",
         "function": "single",
         "elements": [
-            "contraceptives_female_condom__fp_contraception_all"
+            "contraceptives_female_condom"
         ],
         "view": "number of women using female condoms",
         "group": "FP"
@@ -257,7 +257,7 @@
         "indicator": "Women using injectable contraceptives",
         "function": "single",
         "elements": [
-            "contraceptives_injectable__fp_contraception_all"
+            "contraceptives_injectable"
         ],
         "view": "number of women using injectable contraceptives",
         "group": "FP"
@@ -266,7 +266,7 @@
         "indicator": "Women using iuds",
         "function": "single",
         "elements": [
-            "contraceptives_iuds__fp_contraception_all"
+            "contraceptives_iuds"
         ],
         "view": "number of women using IUDs",
         "group": "FP"
@@ -275,7 +275,7 @@
         "indicator": "Men using male condoms",
         "function": "single",
         "elements": [
-            "contraceptives_male_condom__fp_contraception_all"
+            "contraceptives_male_condom"
         ],
         "view": "number of men using male condoms",
         "group": "FP"
@@ -284,7 +284,7 @@
         "indicator": "Women using natural contraception methods",
         "function": "single",
         "elements": [
-            "contraceptives_natural__fp_contraception_all"
+            "contraceptives_natural"
         ],
         "view": "number of women using natural contraception methods",
         "group": "FP"
@@ -293,7 +293,7 @@
         "indicator": "Women using oral lo-femenal contraceptives",
         "function": "single",
         "elements": [
-            "contraceptives_oral_lofemenal__fp_contraception_all"
+            "contraceptives_oral_lofemenal"
         ],
         "view": "number of women using oral Lo-femenal contraceptives",
         "group": "FP"
@@ -302,7 +302,7 @@
         "indicator": "Women using oral microgynon contraceptives",
         "function": "single",
         "elements": [
-            "contraceptives_oral_microgynon__fp_contraception_all"
+            "contraceptives_oral_microgynon"
         ],
         "view": "number of women using oral Microgynon contraceptives",
         "group": "FP"
@@ -311,7 +311,7 @@
         "indicator": "Women using oral ovrette contraceptives",
         "function": "single",
         "elements": [
-            "contraceptives_oral_ovrette__fp_contraception_all"
+            "contraceptives_oral_ovrette"
         ],
         "view": "number of women using oral Ovrette contraceptives",
         "group": "FP"
@@ -389,10 +389,28 @@
         "group": "FP"
     },
     {
+        "indicator": "Women using other oral contraceptives",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_other"
+        ],
+        "view": "number of women using other oral contraceptives",
+        "group": "FP"
+    },
+    {
+        "indicator": "Women using other oral contraceptives (under 20)",
+        "function": "single",
+        "elements": [
+            "contraceptives_oral_other__fp_contraception_u20"
+        ],
+        "view": "number of women under twenty years old using other oral contraceptives",
+        "group": "FP"
+    },
+    {
         "indicator": "BCG doses to U1",
         "function": "single",
         "elements": [
-            "bcg__u1_all"
+            "bcg"
         ],
         "view": "number of children under one receiving their BCG vaccine",
         "group": "EPI"
@@ -419,7 +437,7 @@
         "indicator": "DPT1 doses to U1",
         "function": "single",
         "elements": [
-            "dpt1__u1_all"
+            "dpt1"
         ],
         "view": "number of children under one receiving their DPT1 vaccine",
         "group": "EPI"
@@ -446,7 +464,7 @@
         "indicator": "DPT3 doses to U1",
         "function": "single",
         "elements": [
-            "dpt3__u1_all"
+            "dpt3"
         ],
         "view": "number of children under one receiving their DPT3 vaccine",
         "group": "EPI"
@@ -482,7 +500,7 @@
         "indicator": "HPV1 doses to girls",
         "function": "single",
         "elements": [
-            "hpv1__all-hpv"
+            "hpv1"
         ],
         "view": "number of girls receiving their HPV1 vaccine",
         "group": "EPI"
@@ -509,7 +527,7 @@
         "indicator": "HPV2 doses to girls",
         "function": "single",
         "elements": [
-            "hpv2__all-hpv"
+            "hpv2"
         ],
         "view": "number of girls receiving their HPV2 vaccine",
         "group": "EPI"
@@ -527,7 +545,7 @@
         "indicator": "MR1 doses to U1",
         "function": "single",
         "elements": [
-            "mr1__u1_all"
+            "mr1"
         ],
         "view": "number of children under one receiving their MR1  vaccine",
         "group": "EPI"
@@ -554,7 +572,7 @@
         "indicator": "PCV1 doses to U1",
         "function": "single",
         "elements": [
-            "pcv1__u1_all"
+            "pcv1"
         ],
         "view": "number of children under one receiving their PCV1 vaccine",
         "group": "EPI"
@@ -581,7 +599,7 @@
         "indicator": "PCV3 doses to U1",
         "function": "single",
         "elements": [
-            "pcv3__u1_all"
+            "pcv3"
         ],
         "view": "number of children under one receiving their PCV3 vaccine",
         "group": "EPI"
@@ -683,7 +701,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "bcg__u1_all"
+                    "bcg"
                 ]
             },
             "denominator": {
@@ -703,7 +721,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "dpt1__u1_all"
+                    "dpt1"
                 ]
             },
             "denominator": {
@@ -723,7 +741,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "dpt3__u1_all"
+                    "dpt3"
                 ]
             },
             "denominator": {
@@ -743,7 +761,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "mr1__u1_all"
+                    "mr1"
                 ]
             },
             "denominator": {
@@ -763,7 +781,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "pcv1__u1_all"
+                    "pcv1"
                 ]
             },
             "denominator": {
@@ -783,7 +801,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "pcv3__u1_all"
+                    "pcv3"
                 ]
             },
             "denominator": {
@@ -1059,7 +1077,7 @@
         "indicator": "TB cases registered in treatment unit",
         "function": "single",
         "elements": [
-            "tb_cases_registered__tb_all"
+            "tb_cases_registered"
         ],
         "view": "number of TB cases registered in treatment unit",
         "group": "TB"
@@ -1071,7 +1089,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "tb_cases_registered__tb_all"
+                    "tb_cases_registered"
                 ]
             },
             "denominator": {
@@ -1142,27 +1160,30 @@
     },
     {
         "indicator": "1st & 2nd doses of vitamin A to U5",
-        "function": "single",
+        "function": "nansum",
         "elements": [
-            "vitamin_a__nutrition_all"
+            "vitamin_a1",
+            "vitamin_a2"
         ],
         "view": "number of first and second doses of vitamin A administered to children under five",
         "group": "NUT"
     },
     {
         "indicator": "1st & 2nd doses of vitamin A to female U5",
-        "function": "single",
+        "function": "nansum",
         "elements": [
-            "vitamin_a__nutrition_female"
+            "vitamin_a1__nutrition_female",
+            "vitamin_a2__nutrition_female"
         ],
         "view": "number of first and second doses of vitamin A administered to girls under five",
         "group": "NUT"
     },
     {
         "indicator": "1st & 2nd doses of vitamin A to male U5",
-        "function": "single",
+        "function": "nansum",
         "elements": [
-            "vitamin_a__nutrition_male"
+            "vitamin_a1__nutrition_male",
+            "vitamin_a2__nutrition_male"
         ],
         "view": "number of first and second doses of vitamin A administered to boys under five",
         "group": "NUT"
@@ -1171,7 +1192,7 @@
         "indicator": "1st doses of vitamin A to U5",
         "function": "single",
         "elements": [
-            "vitamin_a1__nutrition_all"
+            "vitamin_a1"
         ],
         "view": "number of first doses of vitamin A administered to children under five",
         "group": "NUT"
@@ -1201,7 +1222,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "vitamin_a1__nutrition_all"
+                    "vitamin_a1"
                 ]
             },
             "denominator": {
@@ -1218,7 +1239,7 @@
         "indicator": "2nd doses of vitamin A to U5",
         "function": "single",
         "elements": [
-            "vitamin_a2__nutrition_all"
+            "vitamin_a2"
         ],
         "view": "number of second doses of vitamin A administered to children under five",
         "group": "NUT"
@@ -1248,7 +1269,7 @@
             "numerator": {
                 "function": "nansum",
                 "elements": [
-                    "vitamin_a2__nutrition_all"
+                    "vitamin_a2"
                 ]
             },
             "denominator": {

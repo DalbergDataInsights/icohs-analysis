@@ -5,13 +5,15 @@ import os
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import json
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 from src.db import adpter as db  # NOQA: E402
 
 START_TIME = datetime.now()
-VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
+with open(INDICATORS['var_correspondence_data'], 'r', encoding='utf-8') as f:
+    VAR_CORR = json.load(f)
 
 if __name__ == '__main__':
 
@@ -19,14 +21,10 @@ if __name__ == '__main__':
 
     # Adding any new indiactors/facilities to the lookup table
 
-    pd.DataFrame(get_unique_indics(VAR_CORR)).to_csv(
-        INDICATORS['indicators_map'])
+    db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
 
-    db.pg_update_dataelements(file_path=INDICATORS['indicators_map'],
-                              table_name='indicator')
-
-    db.pg_update_dataelements(file_path=INDICATORS['name_district_map'],
-                              table_name='location')
+    # Not referencing any fucntion for now
+    # db.pg_update_location(file_path=INDICATORS['name_district_map'])
 
     # Adding the population data
 
@@ -76,7 +74,7 @@ if __name__ == '__main__':
                     report=db.pg_read_table_by_indicator('report'),
                     location=db.pg_read('location', getdict=False))
 
-    # Writing to the database
+    # # Writing to the database
 
     db.pg_final_table(file_path=INDICATORS['rep_data'],
                       table_name='report_output')
