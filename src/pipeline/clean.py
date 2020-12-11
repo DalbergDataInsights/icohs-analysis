@@ -13,8 +13,9 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
+import json
 
-from src.helpers import make_note, INDICATORS
+from src.helpers import make_note, INDICATORS, get_flat_list_json
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
@@ -28,7 +29,9 @@ from src.db import adpter as db  # NOQA: E402
 
 # Get user-input data
 
-VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
+with open(INDICATORS['var_correspondence_data'], 'r', encoding='utf-8') as f:
+    VAR_CORR = json.load(f)
+
 BREAK_CORR = pd.read_csv(INDICATORS['breakdown_correspondence_data'])
 
 USECOLS = list(range(0, 9))
@@ -74,8 +77,10 @@ def get_reporting_data(path, instance):
 
     # Get the right data
     df = pd.read_csv(path, dtype='object')
-    metrics = list(VAR_CORR[(VAR_CORR['domain'] == 'REPORT')
-                            & (VAR_CORR['instance'] == instance)]['name'])
+
+    var_corr_rep = [el for el in VAR_CORR if el.get('domain') == 'REPORT']
+
+    metrics = get_flat_list_json(var_corr_rep, instance)
 
     for x in metrics:
         df[x] = pd.to_numeric(df[x], errors='coerce')
@@ -109,8 +114,7 @@ def get_reporting_data(path, instance):
 def get_data(path, instance):
     data = pd.read_csv(path, usecols=USECOLS, dtype=DTYPES)
 
-    new_indic_list = VAR_CORR[VAR_CORR['instance'] == instance]['name']\
-        .tolist()
+    new_indic_list = get_flat_list_json(VAR_CORR, instance)
     new_df = data[data["dataElement"].isin(new_indic_list)]\
         .reset_index(drop=True)
 
@@ -130,60 +134,25 @@ def get_data(path, instance):
 
 # Adding composite indicators
 
-def get_variable_addition_dict(instance):
-    '''build a dict with target vars as keys and original vars to add up as values'''
-
-    target_dict = {}
-
-    df = VAR_CORR[VAR_CORR['instance'] == instance]
-    df = df[df.duplicated('identifier', keep=False)]  # Only keep duplicates
-    df = df[['identifier', 'name']]
-
-    for x in df['identifier'].unique().tolist():
-        target_dict[x] = df[df['identifier'] == x]['name'].tolist()
-
-    return target_dict
-
 
 def get_variable_breakdown_dict(instance):
     '''build a dict nested dictionnary matching identifiers to variables and breakdown'''
 
-    var = VAR_CORR[VAR_CORR['instance']
-                   == instance][['identifier', 'name', 'breakdown']]
-
-    # Get the list of new identifier
-
-    out_indics = []
-
-    df = var.drop_duplicates('identifier').set_index('identifier')
-
-    for x in df.index:
-        if df.loc[x, 'breakdown'] is not np.nan:
-            for y in df.loc[x, 'breakdown'].split(","):
-                z = x + '__' + y
-                out_indics.append(z)
-        else:
-            out_indics.append(x)
-
-    # Have an if None condition
-
     corr = {}
 
-    bdw = BREAK_CORR[BREAK_CORR['instance']
+    brk = BREAK_CORR[BREAK_CORR['instance']
                      == instance][['identifier', 'breakdown']]
 
-    for x in out_indics:
+    for el in VAR_CORR:
 
-        indic = x.split("__")[0]
+        breakdown = []
 
-        try:
-            breakdown = x.split("__")[1]
+        if len(el.get('breakdown')) > 0:
+            breakdown = brk[brk['identifier']
+                            .isin(el.get('breakdown'))]['breakdown'].tolist()
 
-            corr[x] = {'indics': var[var['identifier'] == indic]['name'].tolist(),
-                       'breakdowns': bdw[bdw['identifier'] == breakdown]['breakdown'].tolist()}
-        except IndexError:
-            corr[x] = {'indics': var[var['identifier'] == indic]['name'].tolist(),
-                       'breakdowns': []}
+        corr[el.get('identifier')] = {'indics': el.get(instance),
+                                      'breakdown': breakdown}
 
     return corr
 
@@ -193,9 +162,9 @@ def compute_indicators(df_in, df_out, indic_name, group_dict):
 
     df_new = df_in[df_in['dataElement'].isin(group_dict['indics'])]
 
-    if group_dict['breakdowns'] != []:
+    if group_dict.get('breakdown') != []:
         df_new = df_new[df_new['categoryOptionCombo'].isin(
-            group_dict['breakdowns'])]
+            group_dict.get('breakdown'))]
 
     df_new = df_new.groupby(['period', 'orgUnit'],
                             as_index=False).agg({'value': 'sum'})
@@ -256,7 +225,6 @@ def process_date(df):
 def clean_add_indicators(file_path, instance):
 
     make_note(f'Creating additional indicators for {instance}', START_TIME)
-    #add_dict = get_variable_addition_dict(instance)
 
     add_dict = get_variable_breakdown_dict(instance)
 
@@ -265,6 +233,9 @@ def clean_add_indicators(file_path, instance):
     df = pd.DataFrame(columns=dhis_df.columns)
 
     for indicator in add_dict.keys():
+
+        if indicator == 'td2__nonpregnant':
+            print('pausing')
         df = compute_indicators(
             dhis_df, df, indicator, add_dict.get(indicator))
 
@@ -273,6 +244,19 @@ def clean_add_indicators(file_path, instance):
     return df
 
 # Putting together cleaning steps
+
+
+def get_renaming_dict():
+
+    out_dict = {}
+
+    for el in VAR_CORR:
+        for m in el.get("new"):
+            out_dict[m] = el.get('identifier')
+        for m in el.get("old"):
+            out_dict[m] = el.get('identifier')
+
+    return out_dict
 
 
 def clean_raw_file(raw_path):
@@ -294,9 +278,9 @@ def clean_raw_file(raw_path):
 
     if table == 'main':
         df = clean_add_indicators(raw_path, instance)
-    elif table == 'report':
+    else:
         df = get_reporting_data(raw_path, instance)
-        renaming_dict = dict(zip(VAR_CORR.name, VAR_CORR.identifier))
+        renaming_dict = get_renaming_dict()
         df['dataElement'].replace(renaming_dict, inplace=True)
 
     assert df['year'].nunique() == 1,\

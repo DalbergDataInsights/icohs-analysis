@@ -12,6 +12,7 @@ import datetime
 import numpy as np
 import pandas as pd
 from scipy.stats import stats
+import json
 
 from src.helpers import INDICATORS, make_note, get_unique_indics, format_date
 
@@ -21,7 +22,8 @@ from src.helpers import INDICATORS, make_note, get_unique_indics, format_date
 #################################################
 
 START_TIME = datetime.datetime.now()
-VAR_CORR = pd.read_csv(INDICATORS['var_correspondence_data'])
+with open(INDICATORS['var_correspondence_data'], 'r', encoding='utf-8') as f:
+    VAR_CORR = json.load(f)
 
 
 #################################################
@@ -258,38 +260,42 @@ def process(main, report, location):
 
     outliers_stack = add_info_and_format(main, location)
 
+    # out
+
     outliers = full_pivot_for_export(outliers_stack)
     stack = pd.DataFrame(columns=outliers_stack.columns)
     stack = add_to_final_stack(stack, outliers_stack, 'outliers')
     del outliers_stack
+    outliers.to_csv(INDICATORS['out_data'])
+
+    # std
 
     std_stack = compute_outliers_stack(pivot_outliers, 'std', location)
     std = full_pivot_for_export(std_stack)
     stack = add_to_final_stack(stack, std_stack, 'std')
     del std_stack
+    std.to_csv(INDICATORS['std_data'])
+
+    # iqr
 
     iqr_stack = compute_outliers_stack(pivot_outliers, 'iqr', location)
     iqr = full_pivot_for_export(iqr_stack)
     stack = add_to_final_stack(stack, iqr_stack, 'iqr')
     del iqr_stack
+    iqr.to_csv(INDICATORS['iqr_data'])
 
     make_note('outlier exclusion done', START_TIME)
 
-    # creating the reporting table
+    # rep
 
     report = create_reporting_pivot(outliers, report, location)
     report_stack = stack_reporting(report)
     stack = add_to_final_stack(stack, report_stack, 'report')
     del report_stack
-
-    # Exportng
-
-    # TODO Export to DB)
-
     report.to_csv(INDICATORS['rep_data'])
-    outliers.to_csv(INDICATORS['out_data'])
-    std.to_csv(INDICATORS['std_data'])
-    iqr.to_csv(INDICATORS['iqr_data'])
+
+    # stack
+
     stack.to_csv(INDICATORS["tall_data"], index=False)
 
     make_note('breakdown in four tables done', START_TIME)

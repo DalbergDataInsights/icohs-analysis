@@ -20,7 +20,7 @@
                 "identifier": "var_correspondence_data",
                 "name": "var_correspondence_data",
                 "type": "string",
-                "value": "config/variable_correspondance.csv"
+                "value": "config/data_config.json"
             },
             {
                 "description": "Path to disaggregate correspondence table",
