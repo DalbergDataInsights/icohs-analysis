@@ -40,21 +40,8 @@ def get_unique_indics(var_corr, excl_domain=None):
 
     indics = []
 
-    if excl_domain is not None:
-        var_corr = var_corr[var_corr['domain'] != 'REPORT']
-
-    var_corr['breakdown'] = var_corr['breakdown'].astype(str)
-
-    for i in var_corr.index:
-        suf = list(var_corr.loc[i, 'breakdown'].split(","))
-        iden = var_corr.loc[i, 'identifier']
-        if suf[0] != 'nan':
-            for s in suf:
-                y = iden + "__" + s
-                indics.append(y)
-        else:
-            y = iden
-            indics.append(y)
+    for el in var_corr:
+        indics.append(el.get('identifier'))
 
     out = list(set(indics))
 
@@ -73,3 +60,13 @@ def format_date(date):
 
 def cap_string(string, cap):
     return (string[:cap] + '..') if len(string) > cap else string
+
+
+def get_flat_list_json(json_dict, key):
+
+    l = []
+    for el in json_dict:
+        for x in el.get(key):
+            l.append(x)
+
+    return l
