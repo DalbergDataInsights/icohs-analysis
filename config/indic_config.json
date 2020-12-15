@@ -1150,12 +1150,52 @@
         "group": "MAL"
     },
     {
+        "indicator": "Malaria cases treated (incidence)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "nansum",
+                "elements": [
+                    "malaria_cases_treated"
+                ]
+            },
+            "denominator": {
+                "function": "nansum",
+                "elements": [
+                    "malaria_cases"
+                ]
+            }
+        },
+        "view": "percentage of identified Malaria cases treated",
+        "group": "MAL"
+    },
+    {
         "indicator": "Malaria deaths",
         "function": "single",
         "elements": [
             "malaria_deaths"
         ],
         "view": "number of deaths due to Malaria",
+        "group": "MAL"
+    },
+    {
+        "indicator": "Malaria deaths (per 100 000)",
+        "function": "ratio",
+        "elements": {
+            "numerator": {
+                "function": "nansum",
+                "elements": [
+                    "malaria_deaths"
+                ]
+            },
+            "denominator": {
+                "function": "nansum",
+                "elements": [
+                    "per_hundred_thousand"
+                ]
+            }
+        },
+        "view": "number of deaths due to Malaria per hundred thousand inhabitants",
         "group": "MAL"
     },
     {
