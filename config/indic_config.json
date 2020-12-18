@@ -407,6 +407,30 @@
         "group": "FP"
     },
     {
+        "indicator": "Women using oral contraceptives - excl. Levonogesteral",
+        "function": "nansum",
+        "elements": [
+            "contraceptives_oral_other",
+            "contraceptives_oral_microgynon",
+            "contraceptives_oral_lofemenal",
+            "contraceptives_oral_ovrette"
+        ],
+        "view": "number of women using oral contraceptives  - excluding Levonogesteral",
+        "group": "FP"
+    },
+    {
+        "indicator": "Women using oral contraceptives - excl. Levonogesteral (under 20)",
+        "function": "nansum",
+        "elements": [
+            "contraceptives_oral_other",
+            "contraceptives_oral_microgynon",
+            "contraceptives_oral_lofemenal",
+            "contraceptives_oral_ovrette"
+        ],
+        "view": "number of women under twenty using oral contraceptives  - excluding Levonogesteral",
+        "group": "FP"
+    },
+    {
         "indicator": "BCG doses to U1",
         "function": "single",
         "elements": [
