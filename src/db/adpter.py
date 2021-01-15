@@ -10,24 +10,35 @@ import os
 
 
 param_dic = {
-    "host": os.environ.get('HOST'),
-    "port": os.environ.get('PORT'),
+    "host": os.environ.get("HOST"),
+    "port": os.environ.get("PORT"),
     "database": os.environ.get("DB"),
     "user": os.environ.get("USER"),
-    "password": os.environ.get("PASSWORD")
+    "password": os.environ.get("PASSWORD"),
 }
 
-engine = create_engine('postgresql://'+param_dic['user']+':'+param_dic['password'] +
-                       '@'+param_dic['host']+':'+param_dic['port']+'/'+param_dic['database'], echo=False)
+engine = create_engine(
+    "postgresql://"
+    + param_dic["user"]
+    + ":"
+    + param_dic["password"]
+    + "@"
+    + param_dic["host"]
+    + ":"
+    + param_dic["port"]
+    + "/"
+    + param_dic["database"],
+    echo=False,
+)
 
 
 def pg_connect(params_dic=param_dic):
     """
-        Connect to the PostgreSQL database server
+    Connect to the PostgreSQL database server
     """
     conn = None
     try:
-        print('Connecting to the PostgreSQL database...')
+        print("Connecting to the PostgreSQL database...")
         conn = psycopg2.connect(**params_dic)
 
     except (Exception, psycopg2.DatabaseError) as error:
@@ -35,12 +46,13 @@ def pg_connect(params_dic=param_dic):
         sys.exit(1)
     return conn
 
+
 # READ
 
 
 def pg_read(table_name, getdict=True, param_dic=param_dic):
     """
-        This table reads data from the lookup tables
+    This table reads data from the lookup tables
     """
     conn = pg_connect(param_dic)
     query = "select * from {}".format(table_name)
@@ -55,14 +67,14 @@ def pg_read(table_name, getdict=True, param_dic=param_dic):
 
 def pg_read_table_by_indicator(table_name, param_dic=param_dic):
     """
-        This function reads all data by indicators
+    This function reads all data by indicators
     """
 
     conn = pg_connect(param_dic)
 
     # TODO : change name to code  and clarify bug
 
-    query = f'''SELECT facilitycode,
+    query = f"""SELECT facilitycode,
                        indicatorname,
                        year,
                        month,
@@ -70,59 +82,73 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
                 FROM (SELECT *
                     FROM {table_name}) as "tempdata"
 			        LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode;
-                '''
+                """
     df = pd.read_sql(query, con=conn)
 
-    df.columns = ['orgUnit', 'dataElement', 'year', 'month', 'value']
+    df.columns = ["orgUnit", "dataElement", "year", "month", "value"]
     return df
+
 
 # WRITE AND UPDDATE
 
 
+def pg_create_indicator(dataelements):
+    df = (
+        pd.DataFrame(dataelements)
+        .sort_values(0, ignore_index=True)
+        .reset_index()
+        .rename(columns={"index": "indicatorcode", 0: "indicatorname"})
+    )
+
+    df.to_sql("indicator", con=engine, if_exists="append", index=False)
+
+
 def pg_update_indicator(dataelements, param_dic=param_dic):
-    '''Checks whether any changes were made to the list of data elements , if so wipes the data clean'''
+    """Checks whether any changes were made to the list of data elements , if so wipes the data clean"""
 
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    current = pd.read_sql("SELECT * FROM indicator", conn)
+    try:
+        current = pd.read_sql("SELECT * FROM indicator", conn)
+    except Exception as e:
+        print(e)
+        print(
+            "Cannot read indicator table - does it exist? Creating table from scratch."
+        )
+        current = {"indicatorname": []}
 
-    changed = set(current['indicatorname']
-                  ).symmetric_difference(set(dataelements))
+    changed = set(current["indicatorname"]).symmetric_difference(set(dataelements))
 
     if len(changed) > 0:
 
-        try:
+        tables = [
+            "main",
+            "report",
+            "indicator",
+        ]
 
-            queries = ["DELETE FROM main",
-                       "DELETE FROM report",
-                       "DELETE FROM indicator"]
+        for table in tables:
+            try:
+                cur.execute(f"DELETE FROM {table}")
+            except Exception as e:
+                print(e)
+                print(f"Cannot delete data from table {table}")
+        cur.execute("commit")
 
-            for q in queries:
-                cur.execute(q)
-                cur.execute("commit")
-
-            df = pd.DataFrame(dataelements)\
-                .sort_values(0, ignore_index=True)\
-                .reset_index()\
-                .rename(columns={'index': 'indicatorcode', 0: 'indicatorname'})
-
-            df.to_sql('indicator', con=engine, if_exists='append', index=False)
-
-        except Exception as e:
-            print(e)
+        pg_create_indicator(dataelements)
 
     cur.close()
 
 
 def pg_update_location(file_path, param_dic=param_dic):
 
-    print('check')
+    print("check")
 
 
 def pg_write_table(file_path, table_name, param_dic=param_dic):
     """
-        This function upload csv to a target table
+    This function upload csv to a target table
     """
     f = open(file_path, "r")
 
@@ -140,7 +166,7 @@ def pg_write_table(file_path, table_name, param_dic=param_dic):
 
 def pg_delete_records(year, month, table_name, param_dic=param_dic):
     """
-        Delete by year and month
+    Delete by year and month
     """
     conn = pg_connect(param_dic)
     cur = conn.cursor()
@@ -154,7 +180,7 @@ def pg_delete_records(year, month, table_name, param_dic=param_dic):
 
 def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     """
-        This function deletes the months data and then inserts in new data
+    This function deletes the months data and then inserts in new data
     """
     pg_delete_records(year, month, table_name, param_dic)
 
@@ -192,9 +218,10 @@ def pg_update_pop(file_path, cols, param_dic=param_dic):
     cur.execute("commit")
     cur.close()
 
-  ######################
-  #### OUTPUT FILE #####
-  ######################
+
+######################
+#### OUTPUT FILE #####
+######################
 
 
 def pg_final_table(file_path, table_name, engine=engine, param_dic=param_dic):
@@ -203,7 +230,7 @@ def pg_final_table(file_path, table_name, engine=engine, param_dic=param_dic):
     cursor = conn.cursor()
 
     # drop table if it exists
-    cursor.execute('DROP table IF EXISTS {};'.format(table_name))
+    cursor.execute("DROP table IF EXISTS {};".format(table_name))
     conn.commit()
 
     # create table
@@ -225,18 +252,24 @@ def pg_final_table(file_path, table_name, engine=engine, param_dic=param_dic):
 
 def output_to_test_sqlite(df, table_name, engine_url):
 
-    df['date'] = pd.to_datetime(df['date'])
+    df["date"] = pd.to_datetime(df["date"])
 
     engine = create_engine(engine_url, echo=False)
 
     type_dict = {key: types.Integer() for key in df.columns[4:]}
-    type_dict['district_name'] = types.VARCHAR(length=200)
-    type_dict['facility_id'] = types.VARCHAR(length=200)
-    type_dict['facility_name'] = types.VARCHAR(length=500)
-    type_dict['date'] = types.Date()
+    type_dict["district_name"] = types.VARCHAR(length=200)
+    type_dict["facility_id"] = types.VARCHAR(length=200)
+    type_dict["facility_name"] = types.VARCHAR(length=500)
+    type_dict["date"] = types.Date()
 
-    df.to_sql(table_name, con=engine, chunksize=10000,
-              dtype=type_dict, if_exists='replace', index=False)
+    df.to_sql(
+        table_name,
+        con=engine,
+        chunksize=10000,
+        dtype=type_dict,
+        if_exists="replace",
+        index=False,
+    )
 
 
 def config_to_test_sqlite(df, engine_url):
@@ -245,5 +278,11 @@ def config_to_test_sqlite(df, engine_url):
 
     type_dict = {key: types.VARCHAR(length=300) for key in df.columns}
 
-    df.to_sql('config', con=engine, chunksize=10000,
-              dtype=type_dict, if_exists='replace', index=False)
+    df.to_sql(
+        "config",
+        con=engine,
+        chunksize=10000,
+        dtype=type_dict,
+        if_exists="replace",
+        index=False,
+    )

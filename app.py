@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     make_note("Starting the pipeline", START_TIME)
 
-    # Adding any new indiactors/facilities to the lookup table
+    # Adding any new indicators / facilities to the lookup table
 
     db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         "iqr_no_outlier_output",
         "report_output",
     ]:
-        data = db.pg_read("outlier_output", getdict=False)
+        data = db.pg_read(output, getdict=False)
         indic.transform_to_indic(data, pop, "out")
 
     indic.pass_on_config()
