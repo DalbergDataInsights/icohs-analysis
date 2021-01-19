@@ -1,8 +1,6 @@
 from src.pipeline import clean, process, indic
 from src.helpers import INDICATORS, make_note, get_unique_indics
 import os
-import pandas as pd
-import numpy as np
 from datetime import datetime
 import json
 
@@ -17,6 +15,9 @@ with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
 
 if __name__ == "__main__":
 
+    # init
+    # db.pg_recreate_tables()
+
     make_note("Starting the pipeline", START_TIME)
 
     # Adding any new indicators / facilities to the lookup table
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
 
     # Not referencing any fucntion for now
-    # db.pg_update_location(file_path=INDICATORS['name_district_map'])
+    # db.pg_update_location(file_path=INDICATORS["name_district_map"])
 
     # Adding the population data
 

@@ -1,13 +1,11 @@
 import psycopg2
 import psycopg2.extras
-import sqlite3
 import pandas as pd
 import sys
-import json
 import pandas.io.sql as sqlio
 from sqlalchemy import types, create_engine
 import os
-
+import aiosql
 
 param_dic = {
     "host": os.environ.get("HOST"),
@@ -45,6 +43,33 @@ def pg_connect(params_dic=param_dic):
         print(error)
         sys.exit(1)
     return conn
+
+
+# INIT
+
+
+def pg_recreate_tables():
+
+    with open("./src/db/create_tables.sql", "r") as f:
+        stream = f.read()
+        queries = stream.split(";")
+    conn = pg_connect()
+    curr = conn.cursor()
+    for q in queries:
+        try:
+            print(q)
+            curr.execute(q)
+        except Exception as e:
+            print("Query execution failed")
+            print(e)
+        finally:
+            conn.commit()
+    curr.close()
+
+    # queries = aiosql.from_path("./src/db/create_tables.sql", "psycopg2")
+    # for table in ["indicator", "location", "main", "pop", "report"]:
+    #     func = getattr(queries, f"create_{table}_table")
+    #     func(conn)
 
 
 # READ
@@ -141,9 +166,25 @@ def pg_update_indicator(dataelements, param_dic=param_dic):
     cur.close()
 
 
-def pg_update_location(file_path, param_dic=param_dic):
+def pg_check_table(tablename):
+    """Given table name {str}, return {bool} with if exists status"""
+    conn = pg_connect(param_dic)
+    cur = conn.cursor()
+    cur.execute(
+        """
+        SELECT COUNT(*)
+        FROM information_schema.tables
+        WHERE table_name = '{0}'
+        """.format(
+            tablename.replace("'", "''")
+        )
+    )
+    if cur.fetchone()[0] == 1:
+        cur.close()
+        return True
 
-    print("check")
+    cur.close()
+    return False
 
 
 def pg_write_table(file_path, table_name, param_dic=param_dic):
@@ -182,8 +223,16 @@ def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     """
     This function deletes the months data and then inserts in new data
     """
+    # Check if table exists
+    if not pg_check_table(table_name):
+        # create if not
+        df = pd.read_csv(file_path, nrows=0)
+        df.to_sql(table_name, con=engine, index=False)
+
+    # delete existing month records
     pg_delete_records(year, month, table_name, param_dic)
 
+    # update table
     pg_write_table(file_path, table_name, param_dic)
 
 
@@ -194,7 +243,7 @@ def pg_update_pop(file_path, cols, param_dic=param_dic):
     conn = pg_connect(param_dic)
     cur = conn.cursor()
 
-    drop_query = f"""DROP table pop;"""
+    drop_query = f"""DROP TABLE IF EXISTS pop;"""
     cur.execute(drop_query)
 
     col_string = " float8 NULL, ".join(cols.split(", "))

@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
+black = "*"
 
 [packages]
 pandas = "*"
@@ -21,3 +22,6 @@ python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
