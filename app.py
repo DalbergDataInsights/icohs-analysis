@@ -25,7 +25,7 @@ if __name__ == "__main__":
     db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
 
     # Not referencing any fucntion for now
-    # db.pg_update_location(file_path=INDICATORS["name_district_map"])
+    db.pg_update_location(file_path=INDICATORS["name_district_map"])
 
     # Adding the population data
 

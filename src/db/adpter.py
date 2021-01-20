@@ -66,12 +66,6 @@ def pg_recreate_tables():
             conn.commit()
     curr.close()
 
-    # queries = aiosql.from_path("./src/db/create_tables.sql", "psycopg2")
-    # for table in ["indicator", "location", "main", "pop", "report"]:
-    #     func = getattr(queries, f"create_{table}_table")
-    #     func(conn)
-
-
 # READ
 
 
@@ -236,6 +230,17 @@ def pg_update_write(year, month, file_path, table_name, param_dic=param_dic):
     pg_write_table(file_path, table_name, param_dic)
 
 
+def pg_update_location(file_path, param_dic=param_dic):
+
+    locations = pd.read_sql("SELECT * FROM location;", con=engine)
+    locations_update = pd.read_csv(file_path)
+
+    new_locations = pd.merge(locations, locations_update, how="outer", indicator=True)
+    new_locations = new_locations[new_locations._merge == "right_only"]
+    new_locations = new_locations[["facilitycode", "facilityname", "districtname"]]
+    new_locations.to_sql("location", con=engine, if_exists="append", index=False)
+
+
 def pg_update_pop(file_path, cols, param_dic=param_dic):
 
     f = open(file_path, "r")
@@ -263,6 +268,8 @@ def pg_update_pop(file_path, cols, param_dic=param_dic):
         COPY pop (district_name, year, male, female, total, {cols}) FROM STDIN WITH (FORMAT CSV)
     """
     cur.copy_expert(sql=write_query, file=f)
+
+    f.close()
 
     cur.execute("commit")
     cur.close()
