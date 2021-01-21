@@ -1,11 +1,10 @@
 import json
 from datetime import datetime
-import pandas as pd
 
 
 def parse_config(
     config_path="config/paths.json",
-    config_section=["input", "static", "to_classify", "output"],
+    config_section=["input", "static", "to_classify", "output", "logs"],
 ):
 
     with open(config_path) as f:
@@ -18,6 +17,9 @@ def parse_config(
         }
 
     return ENGINE
+
+
+INDICATORS = parse_config()
 
 
 def parse_config1(
@@ -38,10 +40,12 @@ def parse_config1(
 
 
 def make_note(statement, start_time):
-    print(statement, str(datetime.now() - start_time))
-
-
-INDICATORS = parse_config()
+    log_path = INDICATORS["log_file"]
+    now = datetime.now()
+    timed_statement = statement, str(now - start_time)
+    print(timed_statement)
+    with open(log_path, "a+") as f:
+        f.write(f"{now}: {timed_statement}\n")
 
 
 def get_unique_indics(var_corr, excl_domain=None):
