@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
 
-    # Not referencing any fucntion for now
+    # Not referencing any function for now
     db.pg_update_location(file_path=INDICATORS["name_district_map"])
 
     # Adding the population data
@@ -58,7 +58,7 @@ if __name__ == "__main__":
             year=year, month=month, file_path=temp_csv_path, table_name=table
         )
 
-        # Move orginal data from the 'raw' to the 'prcessed' folder
+        # Move original data from the 'raw' to the 'processed' folder
 
         clean.move_csv_files(raw_path, processed_path)
 
@@ -94,12 +94,12 @@ if __name__ == "__main__":
     pop = db.pg_read("pop", getdict=False)
 
     for output in [
-        "outlier_output",
-        "std_no_outlier_output",
-        "iqr_no_outlier_output",
-        "report_output",
+        ("outlier_output", "out"),
+        ("std_no_outlier_output", "std"),
+        ("iqr_no_outlier_output", "iqr"),
+        ("report_output", "rep"),
     ]:
-        data = db.pg_read(output, getdict=False)
-        indic.transform_to_indic(data, pop, "out")
+        data = db.pg_read(output[0], getdict=False)
+        indic.transform_to_indic(data, pop, output[1])
 
     indic.pass_on_config()

@@ -86,12 +86,6 @@ def get_indicators(df, report=False):
 
                 print(i.get("indicator"))
 
-                if (
-                    i.get("indicator")
-                    == "HIV-positive mothers initiated on ART (incidence)"
-                ):
-                    print("stop here")
-
                 formula = i.get("elements")
 
                 denominator = get_value_indic(df, formula.get("denominator"))
