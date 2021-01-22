@@ -9,6 +9,7 @@ from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 
 from src.db import adpter as db  # NOQA: E402
+from src.api.ddi_dhis2 import Api  # NOQA: E402
 
 START_TIME = datetime.now()
 with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
@@ -16,81 +17,85 @@ with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
 
 if __name__ == "__main__":
 
-    # init
-    # db.pg_recreate_tables()
+    # # init
+    # # # db.pg_recreate_tables()
 
-    make_note("Starting the pipeline", START_TIME)
+    # make_note("Starting the pipeline", START_TIME)
 
-    # Adding any new indicators / facilities to the lookup table
+    # # Adding any new indicators / facilities to the lookup table
 
-    db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
+    # db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
 
-    # Not referencing any function for now
-    db.pg_update_location(file_path=INDICATORS["name_district_map"])
+    # # Not referencing any function for now
+    # db.pg_update_location(file_path=INDICATORS["name_district_map"])
 
-    # Adding the population data
+    # # Adding the population data
 
-    cols = clean.clean_pop_to_temp(INDICATORS["pop"], INDICATORS["pop_perc"])
+    # cols = clean.clean_pop_to_temp(INDICATORS["pop"], INDICATORS["pop_perc"])
 
-    db.pg_update_pop("data/temp/pop.csv", cols)
+    # db.pg_update_pop("data/temp/pop.csv", cols)
 
-    # cleaning the data and writing it to the database file by file
+    # # cleaning the data and writing it to the database file by file
 
-    files = os.listdir(INDICATORS["raw_data"])
+    # files = os.listdir(INDICATORS["raw_data"])
 
-    for f in files:
+    # for f in files:
 
-        raw_path = INDICATORS["raw_data"] + f
-        processed_path = INDICATORS["processed_data"] + f
+    #     raw_path = INDICATORS["raw_data"] + f
+    #     processed_path = INDICATORS["processed_data"] + f
 
-        # Clean the data
+    #     # Clean the data
 
-        df = clean.clean(raw_path=raw_path)
+    #     df = clean.clean(raw_path=raw_path)
 
-        # Send it to a temporary csv
+    #     # Send it to a temporary csv
 
-        (temp_csv_path, year, month, table) = clean.map_to_temp(
-            raw_path=raw_path, map=db.pg_read("indicator"), clean_df=df
-        )
+    #     (temp_csv_path, year, month, table) = clean.map_to_temp(
+    #         raw_path=raw_path, map=db.pg_read("indicator"), clean_df=df
+    #     )
 
-        # Write the clean data to the database
+    #     # Write the clean data to the database
 
-        db.pg_update_write(
-            year=year, month=month, file_path=temp_csv_path, table_name=table
-        )
+    #     db.pg_update_write(
+    #         year=year, month=month, file_path=temp_csv_path, table_name=table
+    #     )
 
-        # Move original data from the 'raw' to the 'processed' folder
+    #     # Move original data from the 'raw' to the 'processed' folder
 
-        clean.move_csv_files(raw_path, processed_path)
+    #     clean.move_csv_files(raw_path, processed_path)
 
-        make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
+    #     make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
 
-    # Processing the data (creating outliers excluded and report tables)
+    # # Processing the data (creating outliers excluded and report tables)
 
-    process.process(
-        main=db.pg_read_table_by_indicator("main"),
-        report=db.pg_read_table_by_indicator("report"),
-        location=db.pg_read("location", getdict=False),
-    )
+    # process.process(
+    #     main=db.pg_read_table_by_indicator("main"),
+    #     report=db.pg_read_table_by_indicator("report"),
+    #     location=db.pg_read("location", getdict=False),
+    # )
 
-    # # Writing to the database
+    # # # Writing to the database
 
-    db.pg_final_table(file_path=INDICATORS["rep_data"], table_name="report_output")
+    # db.pg_final_table(file_path=INDICATORS["rep_data"], table_name="report_output")
 
-    db.pg_final_table(file_path=INDICATORS["out_data"], table_name="outlier_output")
+    # db.pg_final_table(file_path=INDICATORS["out_data"], table_name="outlier_output")
 
-    db.pg_final_table(
-        file_path=INDICATORS["std_data"], table_name="std_no_outlier_output"
-    )
+    # db.pg_final_table(
+    #     file_path=INDICATORS["std_data"], table_name="std_no_outlier_output"
+    # )
 
-    db.pg_final_table(
-        file_path=INDICATORS["iqr_data"], table_name="iqr_no_outlier_output"
-    )
+    # db.pg_final_table(
+    #     file_path=INDICATORS["iqr_data"], table_name="iqr_no_outlier_output"
+    # )
 
-    # recording measured time
-    make_note("Pipeline done", START_TIME)
+    # Formatting for push
 
-    # Optional transformation to indicators (sealed from the rest on purpose)
+    # Push
+
+    # # recording measured time
+    # make_note("Pipeline done", START_TIME)
+
+    # # Transformation to indicators (sealed from the rest)
 
     pop = db.pg_read("pop", getdict=False)
 
@@ -104,3 +109,5 @@ if __name__ == "__main__":
         indic.transform_to_indic(data, pop, output[1])
 
     indic.pass_on_config()
+
+# Export to DHIS2

@@ -95,13 +95,12 @@ def get_indicators(df, report=False):
                 weight = denominator / total
                 weighted_ratio = value * weight
 
-                df[f'{cap_string(i.get("indicator"),50)}__wr'] = weighted_ratio * int(
-                    10e6
-                )
+                df[f'{cap_string(i.get("indicator"),60)}__wr'] = weighted_ratio * int(10e6)
 
-                weight_name = cap_string(
-                    "_".join(formula.get("denominator").get("elements")), 50
-                )
+                weight_name = cap_string('_'.join(formula
+                                                  .get("denominator")
+                                                  .get("elements")),
+                                         60)
 
                 if f"{weight_name}__w" not in df.columns:
                     df[f"{weight_name}__w"] = weight * int(10e9)

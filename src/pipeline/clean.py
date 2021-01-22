@@ -57,6 +57,8 @@ FACILITY_IDS = (
 START_TIME = datetime.now()
 
 # Extracting reporting data
+
+
 def get_reporting_data(path, instance):
 
     month_dict = {
@@ -270,8 +272,6 @@ def clean_add_indicators(file_path, instance):
 
     for indicator in add_dict.keys():
 
-        if indicator == "td2__nonpregnant":
-            print("pausing")
         df = compute_indicators(dhis_df, df, indicator, add_dict.get(indicator))
 
     df = process_date(df)
