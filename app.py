@@ -61,7 +61,8 @@ if __name__ == "__main__":
 
         clean.move_csv_files(raw_path, processed_path)
 
-        make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
+        make_note(
+            f"Cleaning and database insertion done for file {f}", START_TIME)
 
     # Processing the data (creating outliers excluded and report tables)
 
@@ -73,9 +74,11 @@ if __name__ == "__main__":
 
     # # Writing to the database
 
-    db.pg_final_table(file_path=INDICATORS["rep_data"], table_name="report_output")
+    db.pg_final_table(
+        file_path=INDICATORS["rep_data"], table_name="report_output")
 
-    db.pg_final_table(file_path=INDICATORS["out_data"], table_name="outlier_output")
+    db.pg_final_table(
+        file_path=INDICATORS["out_data"], table_name="outlier_output")
 
     db.pg_final_table(
         file_path=INDICATORS["std_data"], table_name="std_no_outlier_output"

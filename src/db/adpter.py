@@ -13,8 +13,8 @@ param_dic = {
     "host": os.environ.get('HOST'),
     "port": os.environ.get('PORT'),
     "database": os.environ.get("DB"),
-    "user": os.environ.get("USER"),
-    "password": os.environ.get("PASSWORD")
+    "user": os.environ.get("DB_USERNAME"),
+    "password": os.environ.get("DB_PASSWORD")
 }
 
 engine = create_engine('postgresql://'+param_dic['user']+':'+param_dic['password'] +

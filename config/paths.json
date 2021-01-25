@@ -43,21 +43,21 @@
                 "identifier": "name_district_map",
                 "name": "name_district_map",
                 "type": "string",
-                "value": "data/input/static/lookup_facilities.csv"
+                "value": "data/static/lookup_facilities.csv"
             },
             {
                 "description": "Path to UBOS population data projections 2015-25",
                 "identifier": "pop",
                 "name": "pop",
                 "type": "string",
-                "value": "data/input/static/demographics/UBOS_pop_proj_2015-25.csv"
+                "value": "data/static/demographics/UBOS_pop_proj_2015-25.csv"
             },
             {
                 "description": "Path to UBOS population data percentages",
                 "identifier": "pop_perc",
                 "name": "pop_perc",
                 "type": "string",
-                "value": "data/input/static/demographics/population_percentages.csv"
+                "value": "data/static/demographics/population_percentages.csv"
             }
         ],
         "output": [
