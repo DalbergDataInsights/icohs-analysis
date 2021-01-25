@@ -9,7 +9,7 @@ from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 
 from src.db import adpter as db  # NOQA: E402
-from src.api.ddi_dhis2 import Api  # NOQA: E402
+from src.api.ddi_dhis2 import Dhis  # NOQA: E402
 
 START_TIME = datetime.now()
 with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
@@ -95,9 +95,9 @@ if __name__ == "__main__":
     # # recording measured time
     # make_note("Pipeline done", START_TIME)
 
-    # # Transformation to indicators (sealed from the rest)
+    # Send off to DHIS2
 
-    pop = db.pg_read("pop", getdict=False)
+    data_element_map = db.pg_read("indicator")
 
     for output in [
         ("outlier_output", "out"),
@@ -105,9 +105,23 @@ if __name__ == "__main__":
         ("iqr_no_outlier_output", "iqr"),
         ("report_output", "rep"),
     ]:
-        data = db.pg_read(output[0], getdict=False)
-        indic.transform_to_indic(data, pop, output[1])
+        df = db.pg_read(output[0], getdict=False)
+        df = indic.transform_for_dhis2(df=df,
+                                       map=db.pg_read("indicator"))
 
-    indic.pass_on_config()
+        print('pquse')
 
-# Export to DHIS2
+        # # Transformation to indicators (sealed from the rest)
+
+        # pop = db.pg_read("pop", getdict=False)
+
+        # for output in [
+        #     ("outlier_output", "out"),
+        #     ("std_no_outlier_output", "std"),
+        #     ("iqr_no_outlier_output", "iqr"),
+        #     ("report_output", "rep"),
+        # ]:
+        #     data = db.pg_read(output[0], getdict=False)
+        #     indic.transform_to_indic(data, pop, output[1])
+
+        # indic.pass_on_config()

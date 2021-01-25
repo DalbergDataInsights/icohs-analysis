@@ -9,16 +9,16 @@ import requests
 from requests.auth import HTTPBasicAuth
 import re
 from datetime import datetime
+from io import StringIO
 
 
-class Api:
+class Dhis:
     def __init__(self, username, password, url, log_list=None):
         self.username = username
         self.password = password
         self.url = url
-        if log_list is None:
-            log_list = []
-        self.log_list = log_list
+        if log_list == None:
+            self.log_list = []
 
     def __run(self, cmd):
         args = shlex.split(cmd)
@@ -44,13 +44,29 @@ class Api:
         resource_id_string = f"{identifier}=" + resource_id_string
         return resource_id_string
 
-    def get(self, datasetID, startDate, endDate, orgUnit=None, rename=True):
+    def get_report(self, report_id, period, filepath=None):
+        cmd = """
+            {}/api/analytics.csv?dimension=dx:{}.ACTUAL_REPORTS;{}.EXPECTED_REPORTS&dimension=ou:LEVEL-5&dimension=pe:{}\
+                &displayProperty=NAME&tableLayout=true&columns=dx&rows=ou;pe&showHierarchy=true\
+            """.format(self.url, report_id, report_id, period)
+        print(cmd)
+        auth = HTTPBasicAuth(self.username, self.password)
+        response = requests.get(cmd, auth=auth)
+        dset = pd.DataFrame(pd.read_csv(StringIO(response.text)))
+        print(dset)
+        if filepath is None:
+            return dset
+        else:
+            dset.to_csv(filepath, index=False)
+        return None
+
+    def get(self, datasetID, startDate, endDate, rename=True, filename=None, orgUnit=None):
+        data = []
         writeHeader = True
         if orgUnit == None:
             orgUnit = self.get_facilities()
         else:
             orgUnit = self.to_list(orgUnit)
-
         datasetID = self.get_resourceID_string("dataSet", self.to_list(datasetID))
         startDate = self.format_date(startDate)
         endDate = self.format_date(endDate)
@@ -61,7 +77,7 @@ class Api:
                 "orgUnit", orgUnit[i: i + 50]
             )
 
-            cmd = """ curl "{}/dataValueSets?{}&{}&startDate={}&endDate={}" -H "Accept:application/json" -u {}:{}
+            cmd = """ curl -k "{}/dataValueSets?{}&{}&startDate={}&endDate={}" -H "Accept:application/json" -u {}:{}
             """.format(
                 self.url,
                 datasetID,
@@ -79,45 +95,59 @@ class Api:
 
         # TOD DO: move this part to threading
         for i in self.log_list:
+            print(i)
             if len(i) == 0:
                 continue
+
             else:
                 df = pd.DataFrame(json.loads(i).get("dataValues"))
-                if rename is False:
-                    if writeHeader is True:
-                        df.to_csv("dhis2.csv", header=True)
-                        writeHeader = False
+                if filename != None:
+                    if rename is False:
+                        if writeHeader is True:
+                            df.to_csv(filename, header=writeHeader)
+                            writeHeader = False
+                        else:
+                            df.to_csv(filename, mode="a", header=writeHeader)
                     else:
-                        df.to_csv("dhis2.csv", mode="a", header=False)
-                else:
-                    auth = HTTPBasicAuth(self.username, self.password)
-                    df = self.set_name_from_index(df, "dataElement", auth=auth)
-                    df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                    df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                        auth = HTTPBasicAuth(self.username, self.password)
+                        df = self.set_name_from_index(df, "dataElement", auth=auth)
+                        df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                        df = self.set_name_from_index(df, "organisationUnit", auth=auth)
 
-                    if writeHeader is True:
-                        df.to_csv("dhis2.csv", header=True)
-                        writeHeader = False
+                        if writeHeader is True:
+                            df.to_csv(filename, header=writeHeader)
+                            writeHeader = False
+                        else:
+                            df.to_csv(filename, mode="a", header=writeHeader)
+                    return None
+                else:
+                    if rename:
+                        auth = HTTPBasicAuth(self.username, self.password)
+                        df = self.set_name_from_index(df, "dataElement", auth=auth)
+                        df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                        df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                        data.append(df)
                     else:
-                        df.to_csv("dhis2.csv", mode="a", header=False)
+                        data.append(df)
+            return pd.concat(data)
 
     def post(self, files):
-
         files = self.to_list(files)
         pool = ThreadPool(multiprocessing.cpu_count())
 
         for filename in files:
+            print(filename)
 
-            cmd = """ curl -H "Content-Type: application/csv" --data-binary @{} "{}/dataValueSets" -u {}:{} -v \n
+            cmd = """ curl -k -H "Content-Type: application/csv" --data-binary @{} "{}/dataValueSets" -u {}:{} -v \n
             """.format(
                 filename, self.url, self.username, self.password
             )
-
+            print(cmd)
             pool.apply_async(self.__run, args=(cmd,), callback=self.log_result)
 
+        print(self.log_list)
         pool.close()
         pool.join()
-        print(self.log_list)
 
     def put(self, files):
 
@@ -125,8 +155,8 @@ class Api:
         pool = ThreadPool(multiprocessing.cpu_count())
 
         for filename in files:
-            print(filename)
-            cmd = """ curl -X PUT -H "Content-Type: application/csv" --data-binary @{} "{}/dataValueSets" -u {}:{} -v \n
+
+            cmd = """ curl -k -X PUT -H "Content-Type: application/csv" --data-binary @{} "{}/dataValueSets" -u {}:{} -v \n
             """.format(
                 filename, self.url, self.username, self.password
             )
@@ -147,7 +177,7 @@ class Api:
     def get_index_table(self, auth, table):
 
         page_size = 100000
-        response = requests.get(self.url + f"/{table}?pageSize={page_size}", auth=auth)
+        response = requests.get(self.url + f"/api/{table}?pageSize={page_size}", auth=auth)
         df = pd.DataFrame(response.json().get(table))
         return df
 
@@ -172,6 +202,9 @@ class Api:
         return df
 
     def format_date(self, date):
+        """
+        Formats date to 2020-12-02 (%Y-%m-%d) format
+        """
         if re.match(r"^\d{8}$", date):
             date = datetime.strptime(date, "%Y%m%d")
         elif re.match(r"^\d{1,2}/", date):

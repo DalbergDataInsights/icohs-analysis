@@ -2,6 +2,7 @@ import numpy as np
 import os
 import pandas as pd
 import json
+from datetime import datetime
 from src.helpers import INDICATORS, cap_string
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
@@ -129,7 +130,7 @@ def transform_to_indic(df, pop, name):
     for col in df.columns[4:]:
         df[col] = round(df[col]).astype(int)
 
-    db.output_to_test_sqlite(df, name, os.environ.get("DB_URL"))
+    db.output_to_test_sqlite(df, name, os.environ.get("SQLITE_URL"))
 
     df.to_csv(INDICATORS[f"{name}_indic"], index=False)
 
@@ -149,5 +150,33 @@ def pass_on_config():
 
     df = df.drop(columns="elements")
 
-    db.config_to_test_sqlite(df, os.environ.get("DB_URL"))
+    db.config_to_test_sqlite(df, os.environ.get("SQLITE_URL"))
     df.to_csv(INDICATORS["viz_config"], index=False)
+
+
+def transform_for_dhis2(df, map):
+
+    # stack in a tall format and renaming
+
+    df = df.set_index(['district_name', 'facility_id', 'facility_name', 'date'])
+
+    stack = df.stack(dropna=True).reset_index()
+    stack.rename(columns={0: 'value',
+                          'level_4': 'dataelement',
+                          'facility_id': 'orgunit',
+                          'date': 'period'},
+                 inplace=True)
+    stack.drop('facility_name', axis=1, inplace=True)
+
+    # Restoring proper types/format
+
+    stack['value'] = stack['value'].astype(dtype='float64')
+    stack['period'] = stack.period.astype('str').apply(lambda x: x[:4] + x[5:7])
+
+    # replace with codes and reorder columns
+
+    stack['dataelement'] = stack.dataelement.map(map)
+    stack["catoptcombo"] = 'HllvX50cXC0'
+    stack["attroptcombo"] = 'HllvX50cXC0'
+
+    return stack[["dataelement", "period", "orgunit", "catoptcombo", "attroptcombo", "value"]]
