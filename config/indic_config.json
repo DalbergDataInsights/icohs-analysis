@@ -407,7 +407,7 @@
         "group": "FP"
     },
     {
-        "indicator": "Women using oral contraceptives - excl. Levonogesteral",
+        "indicator": "Women using oral contraceptives - excl. Levono",
         "function": "nansum",
         "elements": [
             "contraceptives_oral_other",
@@ -419,7 +419,7 @@
         "group": "FP"
     },
     {
-        "indicator": "Women using oral contraceptives - excl. Levonogesteral (under 20)",
+        "indicator": "Women using oral contraceptives - excl. Levono (under 20)",
         "function": "nansum",
         "elements": [
             "contraceptives_oral_other",

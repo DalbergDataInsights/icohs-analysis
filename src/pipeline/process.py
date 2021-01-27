@@ -22,7 +22,7 @@ from src.helpers import INDICATORS, make_note, get_unique_indics, format_date
 #################################################
 
 START_TIME = datetime.datetime.now()
-with open(INDICATORS['var_correspondence_data'], 'r', encoding='utf-8') as f:
+with open(INDICATORS['data_config'], 'r', encoding='utf-8') as f:
     VAR_CORR = json.load(f)
 
 
@@ -171,7 +171,7 @@ def add_report_to_pivot(data_pivot, report, location):
 
     report_pivot = full_pivot_for_export(report)
 
-    full_pivot = pd.merge(report_pivot, data_pivot,  how='left',
+    full_pivot = pd.merge(report_pivot, data_pivot, how='left',
                           left_index=True,
                           right_index=True)
 
@@ -195,7 +195,7 @@ def add_report_columns(data):
     data['a+e'] = (data[['expected_105_1_reporting',
                          'actual_105_1_reporting']].sum(axis=1))
 
-    cols = get_unique_indics(VAR_CORR)
+    cols = get_unique_indics(VAR_CORR, excl_report=True)
 
     for x in cols:
         data['i'] = data[x] * 7

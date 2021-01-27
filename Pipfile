@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
+black = "*"
 
 [packages]
 pandas = "*"
@@ -16,9 +17,12 @@ json5 = "==0.9.5"
 jsonschema = "==3.2.0"
 crontab="*"
 argparse="*"
-glob3="*"
 sqlalchemy = "*"
 python-dotenv = "*"
+pg8000 = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

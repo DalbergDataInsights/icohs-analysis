@@ -1,29 +1,37 @@
 [
     {
+        "logs": [
+            {
+                "identifier": "log_file",
+                "name": "log_file",
+                "type": "string",
+                "value": "./pipeline.log"
+            }
+        ],
         "input": [
             {
                 "description": "Path to raw  data",
                 "identifier": "raw_data",
                 "name": "raw_data",
                 "type": "string",
-                "value": "data/input/dhis2/raw/"
+                "value": "data/input/raw/"
             },
             {
                 "description": "Path to processed  data",
                 "identifier": "processed_data",
                 "name": "processed_data",
                 "type": "string",
-                "value": "data/input/dhis2/processed/"
+                "value": "data/processed/"
             },
             {
                 "description": "Path to variable correspondence table",
-                "identifier": "var_correspondence_data",
-                "name": "var_correspondence_data",
+                "identifier": "data_config",
+                "name": "data_config",
                 "type": "string",
                 "value": "config/data_config.json"
             },
             {
-                "description": "Path to disaggregate correspondence table",
+                "description": "Path to disaggregated correspondence table",
                 "identifier": "breakdown_correspondence_data",
                 "name": "breakdown_correspondence_data",
                 "type": "string",

@@ -15,3 +15,4 @@ testing/*
 **__pycache__
 .env
 tester.py
+pipeline.log

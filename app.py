@@ -1,30 +1,32 @@
 from src.pipeline import clean, process, indic
 from src.helpers import INDICATORS, make_note, get_unique_indics
 import os
-import pandas as pd
-import numpy as np
 from datetime import datetime
 import json
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
+
 from src.db import adpter as db  # NOQA: E402
+from src.api.ddi_dhis2 import Dhis  # NOQA: E402
 
 START_TIME = datetime.now()
-with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
+
+with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
 if __name__ == "__main__":
 
+    # init
+    # db.pg_recreate_tables()
+
     make_note("Starting the pipeline", START_TIME)
 
-    # Adding any new indiactors/facilities to the lookup table
+    # Adding any new indicators / facilities to the lookup table
 
-    db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
-
-    # Not referencing any fucntion for now
-    # db.pg_update_location(file_path=INDICATORS['name_district_map'])
+    db.pg_update_indicator(dataelements=VAR_CORR)
+    db.pg_update_location(file_path=INDICATORS["name_district_map"])
 
     # Adding the population data
 
@@ -57,28 +59,26 @@ if __name__ == "__main__":
             year=year, month=month, file_path=temp_csv_path, table_name=table
         )
 
-        # Move orginal data from the 'raw' to the 'prcessed' folder
+        # Move original data from the 'raw' to the 'processed' folder
 
         clean.move_csv_files(raw_path, processed_path)
 
-        make_note(
-            f"Cleaning and database insertion done for file {f}", START_TIME)
+        make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
+
 
     # Processing the data (creating outliers excluded and report tables)
 
     process.process(
         main=db.pg_read_table_by_indicator("main"),
         report=db.pg_read_table_by_indicator("report"),
-        location=db.pg_read("location", getdict=False),
-    )
+        location=db.pg_read("location"),
 
-    # # Writing to the database
 
-    db.pg_final_table(
-        file_path=INDICATORS["rep_data"], table_name="report_output")
+    # Writing to the database
 
-    db.pg_final_table(
-        file_path=INDICATORS["out_data"], table_name="outlier_output")
+    db.pg_final_table(file_path=INDICATORS["rep_data"], table_name="report_output")
+
+    db.pg_final_table(file_path=INDICATORS["out_data"], table_name="outlier_output")
 
     db.pg_final_table(
         file_path=INDICATORS["std_data"], table_name="std_no_outlier_output"
@@ -91,20 +91,40 @@ if __name__ == "__main__":
     # recording measured time
     make_note("Pipeline done", START_TIME)
 
-    # Optional transformation to indicators (sealed from the rest on purpose)
+    # Send off to DHIS2
 
-    pop = db.pg_read("pop", getdict=False)
+    for output in [
+        "outlier_output",
+        "std_no_outlier_output",
+        "iqr_no_outlier_output",
+        "report_output"
+    ]:
+        df = db.pg_read(output)
+        df = indic.transform_for_dhis2(df=df,
+                                       map=db.pg_read("indicator"),
+                                       outtype=output[:3])
+        filepath = f"data/temp/{output}_dhis.csv"
+        df.to_csv(filepath, index=False)
 
-    outlier = db.pg_read("outlier_output", getdict=False)
-    indic.transform_to_indic(outlier, pop, "out")
+        api = Dhis(os.environ.get("API_USERNAME"),
+                   os.environ.get("API_PASSWORD"),
+                   "https://repo.hispuganda.org/repo/api")
 
-    std = db.pg_read("std_no_outlier_output", getdict=False)
-    indic.transform_to_indic(std, pop, "std")
+        api.post([filepath])
 
-    iqr = db.pg_read("iqr_no_outlier_output", getdict=False)
-    indic.transform_to_indic(iqr, pop, "iqr")
+        print('pause')
 
-    report = db.pg_read("report_output", getdict=False)
-    indic.transform_to_indic(report, pop, "rep")
+    # Transformation to indicators (sealed from the rest)
+
+    pop = db.pg_read("pop")
+
+    for output in [
+        ("outlier_output", "out"),
+        ("std_no_outlier_output", "std"),
+        ("iqr_no_outlier_output", "iqr"),
+        ("report_output", "rep"),
+    ]:
+        data = db.pg_read(output[0])
+        indic.transform_to_indic(data, pop, output[1])
 
     indic.pass_on_config()
