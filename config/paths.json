@@ -1,5 +1,13 @@
 [
     {
+        "logs": [
+            {
+                "identifier": "log_file",
+                "name": "log_file",
+                "type": "string",
+                "value": "./pipeline.log"
+            }
+        ],
         "input": [
             {
                 "description": "Path to raw  data",
