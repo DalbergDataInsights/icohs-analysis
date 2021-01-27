@@ -30,7 +30,7 @@ from src.db import adpter as db  # NOQA: E402
 
 # Get user-input data
 
-with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
+with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
 BREAK_CORR = pd.read_csv(INDICATORS["breakdown_correspondence_data"])
@@ -418,7 +418,9 @@ def map_to_temp(raw_path, map, clean_df):
     f_short = f[:-4]
     instance, table, year, month = f_short.split("_")
 
-    clean_df["dataElement"] = clean_df["dataElement"].map(map)
+    map_dict = dict(zip(map.loc[:, 'indicatorname'], map.loc[:, 'indicatorcode_out']))
+
+    clean_df["dataElement"] = clean_df["dataElement"].map(map_dict)
 
     f_path = f"data/temp/{f_short}_clean.csv"
 

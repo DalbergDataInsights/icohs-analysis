@@ -8,7 +8,11 @@
             "105-2.1 A1:ANC 1st Visit for women"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "KfDQ64Ds6KM",
+        "SD": "Rlb6ggIBcON",
+        "ICR": "r5dNrFREQLs",
+        "Report": "pkh0jFmw2Dm"
     },
     {
         "identifier": "4th_anc_visits",
@@ -19,7 +23,11 @@
             "105-2.1 A2:ANC 4th Visit for women"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "eViD0YEMaYD",
+        "SD": "b62c2L2t9TD",
+        "ICR": "aeEchiveNXZ",
+        "Report": "TnzZPzsEIOh"
     },
     {
         "identifier": "abortions_gbv",
@@ -30,7 +38,11 @@
             "105-1.3 OPD Abortions Due To Gender Based Violence (GBV) "
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "A1RBXjPqaxd",
+        "SD": "da6p0bjxfjs",
+        "ICR": "WcuzDsDP2i4",
+        "Report": "OqcEI9cFX81"
     },
     {
         "identifier": "abortions_other",
@@ -41,7 +53,11 @@
             "105-1.3 OPD Abortions Due To Other Causes "
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "mIik9RS9fP9",
+        "SD": "AR66Oyr079V",
+        "ICR": "K1rjxvkX7s6",
+        "Report": "degZvgZVSKO"
     },
     {
         "identifier": "actual_105_1_reporting",
@@ -52,7 +68,11 @@
             "HMIS 105:1 Actual reports"
         ],
         "breakdown": [],
-        "domain": "REPORT"
+        "domain": "REPORT",
+        "Keep outliers": "RtEYsASU7PG.ACTUAL_REPORTS",
+        "SD": "",
+        "ICR": "",
+        "Report": ""
     },
     {
         "identifier": "anc_initiated_hiv",
@@ -63,7 +83,11 @@
             "105-2.1 HIV+ Pregnant Women initiated on ART for EMTCT (ART)"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "EA6szilkhpX",
+        "SD": "srLiKgNihE8",
+        "ICR": "Pl3AzjlaCyz",
+        "Report": "CQrzhk2ZsTJ"
     },
     {
         "identifier": "anc_tested_hiv",
@@ -74,7 +98,11 @@
             "105-2.1 Pregnant Women newly tested for HIV this pregnancy(TR & TRR)"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "tztMhj8prOq",
+        "SD": "tFxvDaePoq2",
+        "ICR": "kMFumF6Qc7R",
+        "Report": "wOu9eL4aebi"
     },
     {
         "identifier": "anc_tested_hiv_positive",
@@ -85,7 +113,11 @@
             "105-2.1 Pregnant Women tested HIV+ for 1st time this pregnancy (TRR) at any visit"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "VTiDtpV3CZl",
+        "SD": "auRWCNpNr73",
+        "ICR": "rpKaOH5Oahv",
+        "Report": "DtwBOQSRclD"
     },
     {
         "identifier": "bcg",
@@ -96,7 +128,11 @@
             "105-2.11 BCG"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "AwU42pnHxza",
+        "SD": "dsDfX1oijjE",
+        "ICR": "UzOt0yVurwY",
+        "Report": "Cc699XuyQ70"
     },
     {
         "identifier": "bcg__u1_outreach",
@@ -109,7 +145,11 @@
         "breakdown": [
             "u1_outreach"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "mcq2oWACqDk",
+        "SD": "tdHvL4GYT3x",
+        "ICR": "XCUssMihKX7",
+        "Report": "tbgRmze4qPQ"
     },
     {
         "identifier": "bcg__u1_static",
@@ -122,7 +162,11 @@
         "breakdown": [
             "u1_static"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "Pt3F4xndNAq",
+        "SD": "RYasUZhbW2q",
+        "ICR": "RIfa9WWxesh",
+        "Report": "MF9UC1YxuwN"
     },
     {
         "identifier": "births",
@@ -133,7 +177,11 @@
             "105-2.2a Deliveries in unit"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "eukK4tTDt4Y",
+        "SD": "yfxQQoq26Q3",
+        "ICR": "SnnK6W5Iacq",
+        "Report": "AFU2aCbPs8f"
     },
     {
         "identifier": "births_fresh_stillbirth",
@@ -144,7 +192,11 @@
             "105-2.2b Deliveries in unit(Fresh Still births)"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "EiXrL99WYjc",
+        "SD": "CQ2VU2d8Brg",
+        "ICR": "hP4EiGzRAuA",
+        "Report": "k2z6BNWEGWt"
     },
     {
         "identifier": "births_live",
@@ -155,7 +207,11 @@
             "105-2.2d Deliveries in unit(Live Births)"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "tz7Q6c42rO6",
+        "SD": "IyWp6ofScCD",
+        "ICR": "lTrTl5pa4nB",
+        "Report": "DzN5Dw2v7Pc"
     },
     {
         "identifier": "births_macerated_stillbirth",
@@ -166,7 +222,11 @@
             "105-2.2c Deliveries in unit(Macerated still births)"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "iWZEIQ28AOF",
+        "SD": "K0An20QZvpq",
+        "ICR": "jtLr0iqwQ6R",
+        "Report": "lwNL1aPyeqC"
     },
     {
         "identifier": "breastfed_1st_hour",
@@ -177,7 +237,11 @@
             "105-2.2 No. of mothers who initiated breastfeeding within the 1st hour after delivery (Total)"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "PqsxNfudLW6",
+        "SD": "FbXL3AjwBEP",
+        "ICR": "WtJe7spCxpO",
+        "Report": "n6QJ1vEtSuM"
     },
     {
         "identifier": "contraceptives_emergency__fp_emergency_all",
@@ -190,20 +254,11 @@
         "breakdown": [
             "fp_emergency_all"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_female_condom__fp_contraception_a20",
-        "new": [
-            "105-FP19. Female Condoms"
-        ],
-        "old": [
-            "105-2.5 Female Condom"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "wdAba5SyKuC",
+        "SD": "Pp4GOtPUwY6",
+        "ICR": "KK8AGBpOQ2r",
+        "Report": "AXDnGd4m2AG"
     },
     {
         "identifier": "contraceptives_female_condom",
@@ -214,7 +269,11 @@
             "105-2.5 Female Condom"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "TzorFgp4mKs",
+        "SD": "iwYZfCDARlV",
+        "ICR": "RvEYU9hmqBK",
+        "Report": "yYVQ6PMbXt2"
     },
     {
         "identifier": "contraceptives_female_condom__fp_contraception_u20",
@@ -227,23 +286,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_injectable__fp_contraception_a20",
-        "new": [
-            "105-FP06. Injectable DMPA(IM)3 months",
-            "105-FP07. Injectable DMPA(SC) 3 months",
-            "105-FP08. Injection 2 months",
-            "105-FP09. Injection 1 month"
-        ],
-        "old": [
-            "105-2.5 Injectable"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "KcLJW1hEjl3",
+        "SD": "bNla6pKtj66",
+        "ICR": "GboGtewrwhP",
+        "Report": "TzgyU1xB7DB"
     },
     {
         "identifier": "contraceptives_injectable",
@@ -257,7 +304,11 @@
             "105-2.5 Injectable"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "YIES0BdF2qy",
+        "SD": "MXXHYYam5sE",
+        "ICR": "KRd2g2p6DeA",
+        "Report": "B0S1TKOC1Vb"
     },
     {
         "identifier": "contraceptives_injectable__fp_contraception_u20",
@@ -273,21 +324,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_iuds__fp_contraception_a20",
-        "new": [
-            "105-FP13. IUD-Copper-T",
-            "105-FP14. IUD-Hormonal"
-        ],
-        "old": [
-            "105-2.5 IUDs "
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "WR7k2Kdjxa9",
+        "SD": "g9OYYhippal",
+        "ICR": "sk5vBPPciuo",
+        "Report": "hD1FXSOF7JA"
     },
     {
         "identifier": "contraceptives_iuds",
@@ -299,7 +340,11 @@
             "105-2.5 IUDs "
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "ziCMFr8Xafn",
+        "SD": "BwCifuDmqSn",
+        "ICR": "qamZv2FiLjC",
+        "Report": "wGXMgHu0TNV"
     },
     {
         "identifier": "contraceptives_iuds__fp_contraception_u20",
@@ -313,20 +358,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_male_condom__fp_contraception_a20",
-        "new": [
-            "105-FP20. Male Condoms"
-        ],
-        "old": [
-            "105-2.5 Male Condom"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "qf0TdJ72hrL",
+        "SD": "gipYGPShv9a",
+        "ICR": "fnRaE8g81as",
+        "Report": "Dmgt8ZJhKxG"
     },
     {
         "identifier": "contraceptives_male_condom",
@@ -337,7 +373,11 @@
             "105-2.5 Male Condom"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "KCQpte0G6h2",
+        "SD": "Kbn63adlI0O",
+        "ICR": "Zwo6aATWDc2",
+        "Report": "Dzt3HrUayXZ"
     },
     {
         "identifier": "contraceptives_male_condom__fp_contraception_u20",
@@ -350,22 +390,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_natural__fp_contraception_a20",
-        "new": [
-            "105-FP15. FAM-SDM method",
-            "105-FP16. FAM-LAM",
-            "105-FP17. FAM-Two Days Method"
-        ],
-        "old": [
-            "105-2.5 Natural"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "hDESYu0OkOH",
+        "SD": "l5W3csIoO8l",
+        "ICR": "ELYu8JAZCZP",
+        "Report": "gfld7V2vDUl"
     },
     {
         "identifier": "contraceptives_natural",
@@ -378,7 +407,11 @@
             "105-2.5 Natural"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "s72cLueI9CA",
+        "SD": "HKKouisy2Yr",
+        "ICR": "s8q2qQiY7gn",
+        "Report": "z2gkDcVSbET"
     },
     {
         "identifier": "contraceptives_natural__fp_contraception_u20",
@@ -393,20 +426,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_oral_lofemenal__fp_contraception_a20",
-        "new": [
-            "105-FP01. Oral. Lo-Femenal"
-        ],
-        "old": [
-            "105-2.5 Oral: Lo-Feminal"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "LB7c1xndtoL",
+        "SD": "d5EZN78gPg3",
+        "ICR": "Yb3HrSWeKw9",
+        "Report": "bzs78FUS7uD"
     },
     {
         "identifier": "contraceptives_oral_lofemenal",
@@ -417,7 +441,11 @@
             "105-2.5 Oral: Lo-Feminal"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "AaEe4ZRXm1L",
+        "SD": "B5MnllOyRlt",
+        "ICR": "R3E4lD9PrXV",
+        "Report": "zCxkN6bzXaj"
     },
     {
         "identifier": "contraceptives_oral_lofemenal__fp_contraception_u20",
@@ -430,20 +458,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_oral_microgynon__fp_contraception_a20",
-        "new": [
-            "105-FP02. Oral. Microgynon"
-        ],
-        "old": [
-            "105-2.5 Oral: Microgynon"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "Zp7paaXDBIz",
+        "SD": "mNANnRYJ5nq",
+        "ICR": "svP9yWURO1M",
+        "Report": "eywnUn5klyX"
     },
     {
         "identifier": "contraceptives_oral_microgynon",
@@ -454,7 +473,11 @@
             "105-2.5 Oral: Microgynon"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "QHZPPCLE0Z4",
+        "SD": "gWGOCGlK8iR",
+        "ICR": "EH2r5dMWTNC",
+        "Report": "ZCox3u3uuYD"
     },
     {
         "identifier": "contraceptives_oral_microgynon__fp_contraception_u20",
@@ -467,20 +490,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_oral_other__fp_contraception_a20",
-        "new": [
-            "105-FP05. Oral. Others"
-        ],
-        "old": [
-            "105-2.5 Oral : Other"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "LiudKLE2WTf",
+        "SD": "NwWwd12rCfc",
+        "ICR": "jfYzvv06oLa",
+        "Report": "u2VPdjFGnFW"
     },
     {
         "identifier": "contraceptives_oral_other",
@@ -491,7 +505,11 @@
             "105-2.5 Oral : Other"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "Y17RTZZgzMy",
+        "SD": "Ww6kAhZK6FQ",
+        "ICR": "V0IxBSVJVBv",
+        "Report": "FYZKNnL6sqo"
     },
     {
         "identifier": "contraceptives_oral_other__fp_contraception_u20",
@@ -504,20 +522,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
-    },
-    {
-        "identifier": "contraceptives_oral_ovrette__fp_contraception_a20",
-        "new": [
-            "105-FP03. Oral. Ovrette or another POP"
-        ],
-        "old": [
-            "105-2.5 Oral : Ovrette or Another POP"
-        ],
-        "breakdown": [
-            "fp_contraception_a20"
-        ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "DoAHVV9mdjJ",
+        "SD": "I3jGNyDcs2D",
+        "ICR": "zQNL8HQob73",
+        "Report": "pt7OM9rhLAt"
     },
     {
         "identifier": "contraceptives_oral_ovrette",
@@ -528,7 +537,11 @@
             "105-2.5 Oral : Ovrette or Another POP"
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "EbDRzEz4z04",
+        "SD": "wfPOyCs99jG",
+        "ICR": "PmYvGOZhiap",
+        "Report": "myt564sGwNy"
     },
     {
         "identifier": "contraceptives_oral_ovrette__fp_contraception_u20",
@@ -541,7 +554,11 @@
         "breakdown": [
             "fp_contraception_u20"
         ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "aVrf8SvKsPo",
+        "SD": "CeQSlBEsw0O",
+        "ICR": "t9ywPuRUjaU",
+        "Report": "BmnuYsIlb0f"
     },
     {
         "identifier": "dpt1",
@@ -552,7 +569,11 @@
             "105-2.11 DPT-HepB+Hib 1"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "oC7FyDwnr4Q",
+        "SD": "WfjdyK4HDFy",
+        "ICR": "oHnIBwQRP9i",
+        "Report": "Sgcv4wRjOvy"
     },
     {
         "identifier": "dpt1__u1_outreach",
@@ -565,7 +586,11 @@
         "breakdown": [
             "u1_outreach"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "AGc6L46NriF",
+        "SD": "j3nYw7VOZ4F",
+        "ICR": "gr4aJFdjEaM",
+        "Report": "WEsLfzBUQhE"
     },
     {
         "identifier": "dpt1__u1_static",
@@ -578,7 +603,11 @@
         "breakdown": [
             "u1_static"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "LLMgwz9alWf",
+        "SD": "RU0YpSFHjCK",
+        "ICR": "ukAH5TKy3pk",
+        "Report": "kjCVNDnEpHw"
     },
     {
         "identifier": "dpt3",
@@ -589,7 +618,11 @@
             "105-2.11 DPT-HepB+Hib 3"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "TSOy1xPkAoB",
+        "SD": "nMGhuXJ2nBL",
+        "ICR": "iKJf4xFQ1Hi",
+        "Report": "PGH8dHGX5jB"
     },
     {
         "identifier": "dpt3__u1_outreach",
@@ -602,7 +635,11 @@
         "breakdown": [
             "u1_outreach"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "JRqdmOZAc21",
+        "SD": "ev3flz8vq6h",
+        "ICR": "TiGIgQd1FK0",
+        "Report": "nn5D4ZeFG07"
     },
     {
         "identifier": "dpt3__u1_static",
@@ -615,7 +652,11 @@
         "breakdown": [
             "u1_static"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "a1DGVUgA4Hq",
+        "SD": "vY0cd3IEkNg",
+        "ICR": "EjwW9kn7yG9",
+        "Report": "zu0wlVILKGj"
     },
     {
         "identifier": "expected_105_1_reporting",
@@ -626,7 +667,11 @@
             "HMIS 105:1 Expected reports"
         ],
         "breakdown": [],
-        "domain": "REPORT"
+        "domain": "REPORT",
+        "Keep outliers": "RtEYsASU7PG.EXPECTED_REPORTS",
+        "SD": "",
+        "ICR": "",
+        "Report": ""
     },
     {
         "identifier": "hei_given_arv",
@@ -637,7 +682,11 @@
             "105-2.2 M9: HIV-exposed babies given ARVs"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "ZI2TCMq5RVE",
+        "SD": "rShQcVXoNsf",
+        "ICR": "u5k4MuJgvZJ",
+        "Report": "w79JbEC1xP8"
     },
     {
         "identifier": "hiv_positive_linked",
@@ -648,7 +697,11 @@
             "105-4 Number of clients who have been linked to care"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "D3NopJNYPJd",
+        "SD": "yiJpgQmv70F",
+        "ICR": "Ggle522Ssh4",
+        "Report": "la8sD0jOPSl"
     },
     {
         "identifier": "hiv_positive_mother_before_anc",
@@ -659,7 +712,11 @@
             "105-2.1b Pregnant Women who knew status before 1st ANC (HIV+(TRRK))"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "iHYEOyd2mfB",
+        "SD": "asxdmPDZj2I",
+        "ICR": "W860yiFo0P4",
+        "Report": "ZSeJJh94Ofe"
     },
     {
         "identifier": "hpv1",
@@ -670,7 +727,11 @@
             "105-2.10 HPV1-Dose 1"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "acUYW7iCKkN",
+        "SD": "NZJgNAMnTko",
+        "ICR": "CL9NIcu2Q5F",
+        "Report": "ppl54SaHWhq"
     },
     {
         "identifier": "hpv1__community",
@@ -683,7 +744,11 @@
         "breakdown": [
             "community"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "JMoS7sRS8TV",
+        "SD": "ypqYRsCReLr",
+        "ICR": "K6ndlMJl55f",
+        "Report": "Bw8wXaoBzWH"
     },
     {
         "identifier": "hpv1__school",
@@ -696,7 +761,11 @@
         "breakdown": [
             "school"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "wd2jJl3snue",
+        "SD": "acrN8e2MigO",
+        "ICR": "BqCsjWQHpvJ",
+        "Report": "w8FPUCm4dFx"
     },
     {
         "identifier": "hpv2",
@@ -707,7 +776,11 @@
             "105-2.10 HPV2-Dose 2"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "OWlozg7071f",
+        "SD": "cpy7g0sJaMi",
+        "ICR": "zEYiRiyAUYF",
+        "Report": "Kw4KVdPaoUh"
     },
     {
         "identifier": "hpv2__community",
@@ -720,7 +793,11 @@
         "breakdown": [
             "community"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "UVprF3OwYWO",
+        "SD": "VVSRpobSXG5",
+        "ICR": "MSC9AhU5TKx",
+        "Report": "CkfNjcJrO2D"
     },
     {
         "identifier": "hpv2__school",
@@ -733,7 +810,11 @@
         "breakdown": [
             "school"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "VtVHN1HOpnt",
+        "SD": "xjwAmXBai8F",
+        "ICR": "dny6Axblwll",
+        "Report": "bAVdrmcqifj"
     },
     {
         "identifier": "injuries_gbv",
@@ -744,7 +825,11 @@
             "105-1.3 OPD Injuries Due To Gender Based Violence "
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "R9bc4O2SmUv",
+        "SD": "pvQnmCukZGI",
+        "ICR": "CGIhPNYNhGy",
+        "Report": "nFJGXkR0psY"
     },
     {
         "identifier": "ipd_attendance",
@@ -755,7 +840,11 @@
             "108-1 Admissions"
         ],
         "breakdown": [],
-        "domain": "GENERAL"
+        "domain": "GENERAL",
+        "Keep outliers": "WERgTk18dN6",
+        "SD": "fp3yswvIODe",
+        "ICR": "lacZXEY07Yj",
+        "Report": "lUHCKxUEC64"
     },
     {
         "identifier": "low_weight_births",
@@ -768,7 +857,11 @@
             "105-2.2 Babies Born with low birth weight (<2.5Kgs)"
         ],
         "breakdown": [],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "tmKNs7oX1fh",
+        "SD": "JQoSgLe5I4G",
+        "ICR": "TxlrAPixVDj",
+        "Report": "WLnbNoqXzTU"
     },
     {
         "identifier": "malaria_cases",
@@ -779,7 +872,11 @@
             "Malaria Cases - WEP"
         ],
         "breakdown": [],
-        "domain": "MAL"
+        "domain": "MAL",
+        "Keep outliers": "tpRElmfmKRf",
+        "SD": "xdFDBWsOzO6",
+        "ICR": "lXHOrjUchnv",
+        "Report": "NOL7MSY4Wjj"
     },
     {
         "identifier": "malaria_cases_treated",
@@ -794,7 +891,11 @@
             "Malaria treated - WEP"
         ],
         "breakdown": [],
-        "domain": "MAL"
+        "domain": "MAL",
+        "Keep outliers": "o8HZazXY3ul",
+        "SD": "vlHm2Cu7Gqg",
+        "ICR": "C9kgLz0azNE",
+        "Report": "fUCy6tdZ2X6"
     },
     {
         "identifier": "malaria_deaths",
@@ -805,7 +906,11 @@
             "Malaria Deaths - WEP"
         ],
         "breakdown": [],
-        "domain": "MAL"
+        "domain": "MAL",
+        "Keep outliers": "J3Le8foIDt1",
+        "SD": "jOMJUx8AHLI",
+        "ICR": "HpdSUAJgUAj",
+        "Report": "OQOkGdyH6XJ"
     },
     {
         "identifier": "malaria_tests",
@@ -817,7 +922,11 @@
             "Malaria tests - WEP"
         ],
         "breakdown": [],
-        "domain": "MAL"
+        "domain": "MAL",
+        "Keep outliers": "bylRx8gEhzE",
+        "SD": "R8rnuJ6JnfT",
+        "ICR": "CDoA17nz1X4",
+        "Report": "ObUlwCtAeQ2"
     },
     {
         "identifier": "mam_identified",
@@ -829,7 +938,11 @@
             "105-1.3 OPD Moderate Acute Malnutrition (MAM)"
         ],
         "breakdown": [],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "VQaqPUETysf",
+        "SD": "Eg2QRqfKIo0",
+        "ICR": "UxAJywazz68",
+        "Report": "mOfE5xHCP5s"
     },
     {
         "identifier": "mat_initiated_hiv",
@@ -840,7 +953,11 @@
             "105-2.2 HIV+ women initiating ART in maternity"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "xGG1Uf1hvrZ",
+        "SD": "uSNAZHuZ4ha",
+        "ICR": "OmRUhgzxGjP",
+        "Report": "VJBUxPnxKZH"
     },
     {
         "identifier": "mat_tested_hiv",
@@ -853,7 +970,11 @@
             "105-2.2b Women tested for HIV in labour (Retest this Pregnancy)"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "isbr9JgVfDL",
+        "SD": "lTzobrTnAZN",
+        "ICR": "Qd6EDr1mAtQ",
+        "Report": "Gk8RuNcN7yR"
     },
     {
         "identifier": "mat_tested_hiv_positive",
@@ -866,7 +987,11 @@
             "105-2.2b Women testing HIV+ in labour (Retest this Pregnancy)"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "WAENoWY2oiv",
+        "SD": "lTQC2AE6gOX",
+        "ICR": "EbI7Ltiohlm",
+        "Report": "b1nutm6qc2l"
     },
     {
         "identifier": "maternal_deaths__a20",
@@ -879,7 +1004,11 @@
         "breakdown": [
             "a20"
         ],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "XQtqg7Adrny",
+        "SD": "LnMXh14QGh8",
+        "ICR": "RxhRYhfE5cj",
+        "Report": "svnHU0e9AqK"
     },
     {
         "identifier": "maternal_deaths",
@@ -890,7 +1019,11 @@
             "105-2.2 OPD Maternal deaths"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "uRGiqd14LCO",
+        "SD": "ozlXHrngdfT",
+        "ICR": "rwcXXyR2UtW",
+        "Report": "tVyI1ahTs9d"
     },
     {
         "identifier": "maternal_deaths__u20",
@@ -903,7 +1036,11 @@
         "breakdown": [
             "u20"
         ],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "m5tGJxnABwo",
+        "SD": "c0MCKCXeFcK",
+        "ICR": "TYZ3DJ6Wt6I",
+        "Report": "yoQpwzxAzsO"
     },
     {
         "identifier": "maternity_admissions",
@@ -914,7 +1051,11 @@
             "105-2.2 Admissions"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "Y1PtvdlewTi",
+        "SD": "ApjN7gtEMhQ",
+        "ICR": "ecAjuNp30H3",
+        "Report": "Zj38u0JHxE9"
     },
     {
         "identifier": "mr1",
@@ -925,7 +1066,11 @@
             "105-2.11 Measles"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "SvFN3hScei9",
+        "SD": "Ji2kQnnPK8W",
+        "ICR": "gkJpf1pXPsK",
+        "Report": "ltmH7TOkpRy"
     },
     {
         "identifier": "mr1__u1_outreach",
@@ -938,7 +1083,11 @@
         "breakdown": [
             "u1_outreach"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "ZzNID35i0LL",
+        "SD": "BpsV3SecVvr",
+        "ICR": "dxMJHzzUV8J",
+        "Report": "DptTxtX13eN"
     },
     {
         "identifier": "mr1__u1_static",
@@ -951,7 +1100,11 @@
         "breakdown": [
             "u1_static"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "K7UkjTiDt4u",
+        "SD": "F9pyBzUiI3T",
+        "ICR": "W1UUiSwMpmg",
+        "Report": "f5l5RLAV8w6"
     },
     {
         "identifier": "newborn_deaths",
@@ -962,7 +1115,11 @@
             "105-2.2 Newborn deaths (0-7days)"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "rDp1JPURZK4",
+        "SD": "EkS5OgYSR0D",
+        "ICR": "WWSoBjVmKia",
+        "Report": "cxfCe7i6pyS"
     },
     {
         "identifier": "opd_attendance",
@@ -975,7 +1132,11 @@
             "105-1.1 OPD Re-Attendance"
         ],
         "breakdown": [],
-        "domain": "GENERAL"
+        "domain": "GENERAL",
+        "Keep outliers": "Nl6EVorAmFJ",
+        "SD": "xMks9tp9rat",
+        "ICR": "iPgeddwb5Pk",
+        "Report": "BhOJKuzfejn"
     },
     {
         "identifier": "pcv1",
@@ -986,7 +1147,11 @@
             "105-2.11 PCV 1"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "motun1Jq9Ak",
+        "SD": "SCO8rxL1Am9",
+        "ICR": "cP9iNVMLVWG",
+        "Report": "wXWJI5YBTVC"
     },
     {
         "identifier": "pcv1__u1_outreach",
@@ -999,7 +1164,11 @@
         "breakdown": [
             "u1_outreach"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "RLfBZD4ManP",
+        "SD": "YuKuRNDwMTx",
+        "ICR": "VMCUgmHHPC8",
+        "Report": "Tn0MniEHbF9"
     },
     {
         "identifier": "pcv1__u1_static",
@@ -1012,7 +1181,11 @@
         "breakdown": [
             "u1_static"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "mSHbyhyPXeT",
+        "SD": "rRyn4jdCkJe",
+        "ICR": "lMNz5FYTYbZ",
+        "Report": "ttFf7F6YjHV"
     },
     {
         "identifier": "pcv3",
@@ -1023,7 +1196,11 @@
             "105-2.11 PCV 3"
         ],
         "breakdown": [],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "nC4tzVis1YF",
+        "SD": "Wi1h6CUVFty",
+        "ICR": "FFh8A628S8l",
+        "Report": "PLKrUPHgSGe"
     },
     {
         "identifier": "pcv3__u1_outreach",
@@ -1036,7 +1213,11 @@
         "breakdown": [
             "u1_outreach"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "DNkSk4vPtzJ",
+        "SD": "D4sCfRWISlY",
+        "ICR": "TdJaqFaNq7l",
+        "Report": "rI4qyF8HOqn"
     },
     {
         "identifier": "pcv3__u1_static",
@@ -1049,7 +1230,11 @@
         "breakdown": [
             "u1_static"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "oN11TwaMnRy",
+        "SD": "D5wAUAXSj0v",
+        "ICR": "UeWUHsZ2BAj",
+        "Report": "qLofamaGr2o"
     },
     {
         "identifier": "pnc_initiated_hiv",
@@ -1060,7 +1245,11 @@
             "105-2.3 HIV+ women initiating ART in PNC"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "trFiiP83egT",
+        "SD": "QPShDPMM9hh",
+        "ICR": "f08w5uldbUm",
+        "Report": "Of6ZvYTPhoO"
     },
     {
         "identifier": "pnc_tested_hiv",
@@ -1071,7 +1260,11 @@
             "105-2.3a Breastfeeding mothers tested for HIV(1st test)"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "BNGHNuLYzSS",
+        "SD": "PDC8BLUs0Aw",
+        "ICR": "F4uIfvHP9X0",
+        "Report": "ympxTWZWJZN"
     },
     {
         "identifier": "pnc_tested_hiv_positive",
@@ -1083,7 +1276,11 @@
             "105-2.3b Breastfeeding mothers newly testing HIV+(retest)"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "yH1bClI0FYA",
+        "SD": "nnYO12b6x5u",
+        "ICR": "C5JfB4nA02H",
+        "Report": "IuPDCgtoLtW"
     },
     {
         "identifier": "postnatal_visits",
@@ -1094,7 +1291,11 @@
             "105-2.3 Postnatal Attendances"
         ],
         "breakdown": [],
-        "domain": "MNCH"
+        "domain": "MNCH",
+        "Keep outliers": "rkqO8CZuqJL",
+        "SD": "wGvocUUdR9a",
+        "ICR": "HGr0Nmrwumi",
+        "Report": "RUD9uWvWTx5"
     },
     {
         "identifier": "sam_identified",
@@ -1108,7 +1309,11 @@
             "105-1.3 OPD Severe Acute Malnutrition With Oedema"
         ],
         "breakdown": [],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "qsL1vGYYAR8",
+        "SD": "NLNzcVzLZSd",
+        "ICR": "fOmPAWY9bbi",
+        "Report": "BETIyGJxRON"
     },
     {
         "identifier": "sti_gbv",
@@ -1119,7 +1324,11 @@
             "105-1.3 OPD Sexually Transmitted Infection Due To SGBV "
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "ms9leVpNzcn",
+        "SD": "jTsywZBDXn0",
+        "ICR": "WvZMaCELqvl",
+        "Report": "AuQSp7PMXVs"
     },
     {
         "identifier": "sti_gbv__fp_stds_female",
@@ -1132,7 +1341,11 @@
         "breakdown": [
             "fp_stds_female"
         ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "I913sXFyM8b",
+        "SD": "MsZKURdwuop",
+        "ICR": "MKv7sCwLXvr",
+        "Report": "KOQVRZ1T4lU"
     },
     {
         "identifier": "sti_gbv__fp_stds_male",
@@ -1145,7 +1358,11 @@
         "breakdown": [
             "fp_stds_male"
         ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "ZOTVYzXtHES",
+        "SD": "Op9Plm7EXA2",
+        "ICR": "VUck2OowNq3",
+        "Report": "AHrEDCSDYcC"
     },
     {
         "identifier": "sti_other",
@@ -1156,7 +1373,11 @@
             "105-1.3 OPD Other Sexually Transmitted Infections "
         ],
         "breakdown": [],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "bmf84RLuPR4",
+        "SD": "g9Af942PyI5",
+        "ICR": "v83HaSpyW81",
+        "Report": "jmMrPKXggNB"
     },
     {
         "identifier": "sti_other__fp_stds_female",
@@ -1169,7 +1390,11 @@
         "breakdown": [
             "fp_stds_female"
         ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "aYKvZGtJGni",
+        "SD": "MUoJm6sIg5D",
+        "ICR": "C85UdC7Tski",
+        "Report": "G5Oejsue26I"
     },
     {
         "identifier": "sti_other__fp_stds_male",
@@ -1182,7 +1407,11 @@
         "breakdown": [
             "fp_stds_male"
         ],
-        "domain": "FP"
+        "domain": "FP",
+        "Keep outliers": "hTM6Lw130HL",
+        "SD": "G8H3j2Mv6mI",
+        "ICR": "iXZcxGxmrIk",
+        "Report": "IB1JpWSQMOM"
     },
     {
         "identifier": "tb_cases_registered",
@@ -1195,7 +1424,11 @@
             "105-1.3 OPD New TB cases (EPTB)"
         ],
         "breakdown": [],
-        "domain": "TB"
+        "domain": "TB",
+        "Keep outliers": "dUVs5eHkvAM",
+        "SD": "ZHd2zYozvRM",
+        "ICR": "y2eHwzwb4P0",
+        "Report": "eY1aFEZfIPL"
     },
     {
         "identifier": "tb_cases_registered__tb_female_a5",
@@ -1210,7 +1443,11 @@
         "breakdown": [
             "tb_female_a5"
         ],
-        "domain": "TB"
+        "domain": "TB",
+        "Keep outliers": "iQ66WQsi6Ft",
+        "SD": "h9PkjjeUuZG",
+        "ICR": "tYSL1I5wjwI",
+        "Report": "yt77GIExUZQ"
     },
     {
         "identifier": "tb_cases_registered__tb_female_u5",
@@ -1225,7 +1462,11 @@
         "breakdown": [
             "tb_female_u5"
         ],
-        "domain": "TB"
+        "domain": "TB",
+        "Keep outliers": "aty1rdontOy",
+        "SD": "yJgFzYICxsv",
+        "ICR": "q8BYirFsgDN",
+        "Report": "F2y9tF2i1u4"
     },
     {
         "identifier": "tb_cases_registered__tb_male_a5",
@@ -1240,7 +1481,11 @@
         "breakdown": [
             "tb_male_a5"
         ],
-        "domain": "TB"
+        "domain": "TB",
+        "Keep outliers": "e4usifRmXPs",
+        "SD": "YoulaxliHTX",
+        "ICR": "OtvteoGPnG6",
+        "Report": "C12MEQnH8Fy"
     },
     {
         "identifier": "tb_cases_registered__tb_male_u5",
@@ -1255,7 +1500,11 @@
         "breakdown": [
             "tb_male_u5"
         ],
-        "domain": "TB"
+        "domain": "TB",
+        "Keep outliers": "QxDPgj1HFKZ",
+        "SD": "GtDx6R4FZhZ",
+        "ICR": "zrtQTZVx26u",
+        "Report": "H7kAiI3Uval"
     },
     {
         "identifier": "td1__nonpregnant",
@@ -1268,7 +1517,11 @@
         "breakdown": [
             "nonpregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "q7M88VTuZHf",
+        "SD": "K593H8RWJBV",
+        "ICR": "L082bx6pHJS",
+        "Report": "oZzDkKPx0D6"
     },
     {
         "identifier": "td1__pregnant",
@@ -1281,7 +1534,11 @@
         "breakdown": [
             "pregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "T8rb6tcFXgN",
+        "SD": "eEH6fG0J95C",
+        "ICR": "iZNeyldIcnQ",
+        "Report": "JTDMo1i83QB"
     },
     {
         "identifier": "td2__nonpregnant",
@@ -1294,7 +1551,11 @@
         "breakdown": [
             "nonpregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "RXP7JY4G7SK",
+        "SD": "s6Cer7M67Cw",
+        "ICR": "jPzdjYpR7vD",
+        "Report": "z5tCWNhDg3B"
     },
     {
         "identifier": "td2__pregnant",
@@ -1307,7 +1568,11 @@
         "breakdown": [
             "pregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "MVRJ6Dl1krP",
+        "SD": "PW4lUOalaLf",
+        "ICR": "YMwijFKXZ0x",
+        "Report": "VjiUKM1LonZ"
     },
     {
         "identifier": "td3__nonpregnant",
@@ -1320,7 +1585,11 @@
         "breakdown": [
             "nonpregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "OzA4xJdYSxs",
+        "SD": "oPgAheO4KfH",
+        "ICR": "atX2pY82Uou",
+        "Report": "sgUvN2oO0oX"
     },
     {
         "identifier": "td3__pregnant",
@@ -1333,7 +1602,11 @@
         "breakdown": [
             "pregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "tAWJCN5LMJF",
+        "SD": "zWGMj45BWHR",
+        "ICR": "MWyldBWPMYI",
+        "Report": "x9t2HqD005X"
     },
     {
         "identifier": "td4_5__nonpregnant",
@@ -1348,7 +1621,11 @@
         "breakdown": [
             "nonpregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "LlS0KFZyldh",
+        "SD": "PfIEkhiYOnw",
+        "ICR": "q682TP38Lbw",
+        "Report": "EbkPscTFjL6"
     },
     {
         "identifier": "td4_5__pregnant",
@@ -1363,7 +1640,11 @@
         "breakdown": [
             "pregnant"
         ],
-        "domain": "EPI"
+        "domain": "EPI",
+        "Keep outliers": "ps7QHQqEFTW",
+        "SD": "lw4JAJ5cvxI",
+        "ICR": "Rvvs3X1OkqK",
+        "Report": "xz9M3YykDsM"
     },
     {
         "identifier": "tested_hiv",
@@ -1374,7 +1655,11 @@
             "105-4 Number of Individuals Tested"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "tGMYYq5vE5A",
+        "SD": "Wj2cJjpX4HF",
+        "ICR": "TvWeTDFTrIE",
+        "Report": "IZWfaViqQAt"
     },
     {
         "identifier": "tested_hiv_positive",
@@ -1385,7 +1670,11 @@
             "105-4 Number of Individuals who tested HIV positive"
         ],
         "breakdown": [],
-        "domain": "HIV"
+        "domain": "HIV",
+        "Keep outliers": "rVTuIU3NwOi",
+        "SD": "MOBEj75zgwf",
+        "ICR": "TXuRYB7klBM",
+        "Report": "FAnVi10jxRj"
     },
     {
         "identifier": "vitamin_a1",
@@ -1396,7 +1685,11 @@
             "105-2.8 Vit A Suplement 1st Dose in Year"
         ],
         "breakdown": [],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "JmFP0BAWh6z",
+        "SD": "RFYfQRw8HjA",
+        "ICR": "fdhghOCKcqs",
+        "Report": "gcYUEEnTSs6"
     },
     {
         "identifier": "vitamin_a1__nutrition_female",
@@ -1409,7 +1702,11 @@
         "breakdown": [
             "nutrition_female"
         ],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "WP2xlKEFujk",
+        "SD": "Pod3dhPjlgX",
+        "ICR": "KUE34zIaZ5Z",
+        "Report": "tTYyZ6ISNKy"
     },
     {
         "identifier": "vitamin_a1__nutrition_male",
@@ -1422,7 +1719,11 @@
         "breakdown": [
             "nutrition_male"
         ],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "gwhVKQ3j5D9",
+        "SD": "bLxD42G2aXE",
+        "ICR": "xS0UFUBlVqQ",
+        "Report": "Qpz611vbB0W"
     },
     {
         "identifier": "vitamin_a2",
@@ -1433,7 +1734,11 @@
             "105-2.8 Vit A Suplement 2nd Dose in theYear"
         ],
         "breakdown": [],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "TaBZ4g51Gco",
+        "SD": "JaGX8xt05JP",
+        "ICR": "BEKKGSTHDVH",
+        "Report": "JZLsfoX43xu"
     },
     {
         "identifier": "vitamin_a2__nutrition_female",
@@ -1446,7 +1751,11 @@
         "breakdown": [
             "nutrition_female"
         ],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "tHK4CcEONy7",
+        "SD": "G4Z56f3lXqk",
+        "ICR": "hfAxcju1FIR",
+        "Report": "awCHXpVOy0U"
     },
     {
         "identifier": "vitamin_a2__nutrition_male",
@@ -1459,6 +1768,10 @@
         "breakdown": [
             "nutrition_male"
         ],
-        "domain": "NUT"
+        "domain": "NUT",
+        "Keep outliers": "yNGwuyFVVsi",
+        "SD": "x8oVoN9vH2U",
+        "ICR": "YrxXSkPNzc6",
+        "Report": "RDjffT1kXDV"
     }
 ]

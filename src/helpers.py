@@ -44,7 +44,9 @@ def make_note(statement, start_time):
 INDICATORS = parse_config()
 
 
-def get_unique_indics(var_corr, excl_domain=None):
+def get_unique_indics(var_corr, excl_report=False):
+
+    #
 
     indics = []
 
@@ -52,6 +54,10 @@ def get_unique_indics(var_corr, excl_domain=None):
         indics.append(el.get("identifier"))
 
     out = list(set(indics))
+
+    if excl_report:
+        report_list = ["expected_105_1_reporting","actual_105_1_reporting"]
+        out = [ele for ele in out if ele not in report_list]
 
     return out
 

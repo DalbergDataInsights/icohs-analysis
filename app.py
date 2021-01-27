@@ -12,19 +12,19 @@ from src.db import adpter as db  # NOQA: E402
 from src.api.ddi_dhis2 import Dhis  # NOQA: E402
 
 START_TIME = datetime.now()
-with open(INDICATORS["var_correspondence_data"], "r", encoding="utf-8") as f:
+with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
 if __name__ == "__main__":
 
-    # # init
-    # # # db.pg_recreate_tables()
+    # init
+    # db.pg_recreate_tables()
 
-    # make_note("Starting the pipeline", START_TIME)
+    # # make_note("Starting the pipeline", START_TIME)
 
     # # Adding any new indicators / facilities to the lookup table
 
-    # db.pg_update_indicator(dataelements=get_unique_indics(VAR_CORR))
+    # db.pg_update_indicator(dataelements=VAR_CORR)
 
     # # Not referencing any function for now
     # db.pg_update_location(file_path=INDICATORS["name_district_map"])
@@ -71,10 +71,10 @@ if __name__ == "__main__":
     # process.process(
     #     main=db.pg_read_table_by_indicator("main"),
     #     report=db.pg_read_table_by_indicator("report"),
-    #     location=db.pg_read("location", getdict=False),
+    #     location=db.pg_read("location"),
     # )
 
-    # # # Writing to the database
+    # # Writing to the database
 
     # db.pg_final_table(file_path=INDICATORS["rep_data"], table_name="report_output")
 
@@ -97,7 +97,19 @@ if __name__ == "__main__":
 
     # Send off to DHIS2
 
-    data_element_map = db.pg_read("indicator")
+    # for output in ["outlier_output",
+    #     "std_no_outlier_output",
+    #     "iqr_no_outlier_output",
+    #    "report_output"
+    # ]:
+    #     df = db.pg_read(output, getdict=False)
+    #     df = indic.transform_for_dhis2(df=df,
+    #                                    map=db.pg_read("indicator"),
+    #                                    outtype = output[:3])
+
+    # Transformation to indicators (sealed from the rest)
+
+    pop = db.pg_read("pop")
 
     for output in [
         ("outlier_output", "out"),
@@ -105,23 +117,7 @@ if __name__ == "__main__":
         ("iqr_no_outlier_output", "iqr"),
         ("report_output", "rep"),
     ]:
-        df = db.pg_read(output[0], getdict=False)
-        df = indic.transform_for_dhis2(df=df,
-                                       map=db.pg_read("indicator"))
+        data = db.pg_read(output[0])
+        indic.transform_to_indic(data, pop, output[1])
 
-        print('pquse')
-
-        # # Transformation to indicators (sealed from the rest)
-
-        # pop = db.pg_read("pop", getdict=False)
-
-        # for output in [
-        #     ("outlier_output", "out"),
-        #     ("std_no_outlier_output", "std"),
-        #     ("iqr_no_outlier_output", "iqr"),
-        #     ("report_output", "rep"),
-        # ]:
-        #     data = db.pg_read(output[0], getdict=False)
-        #     indic.transform_to_indic(data, pop, output[1])
-
-        # indic.pass_on_config()
+    indic.pass_on_config()

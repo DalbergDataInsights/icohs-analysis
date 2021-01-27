@@ -76,35 +76,30 @@ def get_indicators(df, report=False):
             value = df[i.get("elements")[0]]
             df[i.get("indicator")] = value
 
-        if report == False:
+        if i.get("function") == "nansum":
+            value = get_value_indic(df, i)
+            df[i.get("indicator")] = value
 
-            if i.get("function") == "nansum":
+        if report == False and i.get("function") == "ratio":
 
-                value = get_value_indic(df, i)
-                df[i.get("indicator")] = value
+            formula = i.get("elements")
 
-            elif i.get("function") == "ratio":
+            denominator = get_value_indic(df, formula.get("denominator"))
+            value = get_value_indic(df, formula.get("numerator")) / denominator
+            total = np.nansum(get_value_indic(df, formula.get("denominator")))
 
-                print(i.get("indicator"))
+            weight = denominator / total
+            weighted_ratio = value * weight
 
-                formula = i.get("elements")
+            df[f'{cap_string(i.get("indicator"),58)}__wr'] = weighted_ratio * int(10e6)
 
-                denominator = get_value_indic(df, formula.get("denominator"))
-                value = get_value_indic(df, formula.get("numerator")) / denominator
-                total = np.nansum(get_value_indic(df, formula.get("denominator")))
+            weight_name = cap_string('_'.join(formula
+                                              .get("denominator")
+                                              .get("elements")),
+                                     58)
 
-                weight = denominator / total
-                weighted_ratio = value * weight
-
-                df[f'{cap_string(i.get("indicator"),60)}__wr'] = weighted_ratio * int(10e6)
-
-                weight_name = cap_string('_'.join(formula
-                                                  .get("denominator")
-                                                  .get("elements")),
-                                         60)
-
-                if f"{weight_name}__w" not in df.columns:
-                    df[f"{weight_name}__w"] = weight * int(10e9)
+            if f"{weight_name}__w" not in df.columns:
+                df[f"{weight_name}__w"] = weight * int(10e9)
 
     df = df.drop(columns=cols)
 
@@ -154,7 +149,7 @@ def pass_on_config():
     df.to_csv(INDICATORS["viz_config"], index=False)
 
 
-def transform_for_dhis2(df, map):
+def transform_for_dhis2(df, map, outtype):
 
     # stack in a tall format and renaming
 
@@ -175,7 +170,9 @@ def transform_for_dhis2(df, map):
 
     # replace with codes and reorder columns
 
-    stack['dataelement'] = stack.dataelement.map(map)
+    map_dict = dict(zip(map.loc[:, 'indicatorname'], map.loc[:, f'indicatorcode_{outtype}']))
+
+    stack['dataelement'] = stack.dataelement.map(map_dict)
     stack["catoptcombo"] = 'HllvX50cXC0'
     stack["attroptcombo"] = 'HllvX50cXC0'
 
