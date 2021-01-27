@@ -99,7 +99,7 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
                        value
                 FROM (SELECT *
                     FROM {table_name}) as "tempdata"
-			        LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode_out;
+			          LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode_out;
                 """
     df = pd.read_sql(query, con=conn)
 
@@ -272,11 +272,11 @@ def pg_update_pop(file_path, cols, param_dic=param_dic):
 
     create_query = f"""CREATE table pop (
         id serial NOT NULL,
-	    district_name varchar(255) NOT NULL,
-	    "year" int2 NULL,
-	    male int4 NULL,
-	    female int4 NULL,
-	    total int4 NULL,
+        district_name varchar(255) NOT NULL,
+        "year" int2 NULL,
+        male int4 NULL,
+        female int4 NULL,
+        total int4 NULL,
         {col_string} float8 NULL);"""
 
     cur.execute(create_query)

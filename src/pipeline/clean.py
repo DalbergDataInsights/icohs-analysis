@@ -7,21 +7,15 @@
 
 # engine sample path
 
+import json
 import os
-import sys
 from datetime import datetime
 
-import numpy as np
 import pandas as pd
-import json
-
-from src.helpers import make_note, INDICATORS, get_flat_list_json
-
-from dotenv import load_dotenv, find_dotenv  # NOQA: E402
+from dotenv import find_dotenv, load_dotenv  # NOQA: E402
+from src.helpers import INDICATORS, get_flat_list_json, make_note
 
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
-from src.db import adpter as db  # NOQA: E402
-
 
 ###################################
 #     Define functions used       #
@@ -55,6 +49,7 @@ FACILITY_IDS = (
 )
 
 START_TIME = datetime.now()
+
 
 # Extracting reporting data
 
@@ -437,7 +432,7 @@ def move_csv_files(raw_path, processed_path):
 
     try:
         os.remove(processed_path)
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
 
     os.rename(raw_path, processed_path)
