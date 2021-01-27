@@ -1,7 +1,10 @@
 CREATE TABLE public."indicator" (
-	indicatorcode varchar(32) NOT NULL,
+	indicatorcode_out varchar(32) NOT NULL,
+	indicatorcode_std varchar(32) NOT NULL,
+	indicatorcode_iqr varchar(32) NOT NULL,
+	indicatorcode_rep varchar(32) NOT NULL,
 	indicatorname varchar(255) NOT NULL,
-	CONSTRAINT indicator_pk PRIMARY KEY (indicatorcode)
+	CONSTRAINT indicator_pk PRIMARY KEY (indicatorcode_out)
 );
 CREATE TABLE public."location" (
 	facilitycode varchar(32) NOT NULL,
@@ -18,7 +21,7 @@ CREATE TABLE public.main (
 	value float8 NULL,
 	CONSTRAINT main_pk PRIMARY KEY (id),
 	CONSTRAINT main_fk1 FOREIGN KEY (facilitycode) REFERENCES location(facilitycode),
-	CONSTRAINT main_fk2 FOREIGN KEY (indicatorcode) REFERENCES indicator(indicatorcode)
+	CONSTRAINT main_fk2 FOREIGN KEY (indicatorcode) REFERENCES indicator(indicatorcode_out)
 );
 CREATE TABLE public.pop (
 	id serial NOT NULL,
@@ -49,5 +52,5 @@ CREATE TABLE public.report (
 	value int2 NULL,
 	CONSTRAINT report_pk PRIMARY KEY (id),
 	CONSTRAINT report_fk1 FOREIGN KEY (facilitycode) REFERENCES location(facilitycode),
-	CONSTRAINT report_fk2 FOREIGN KEY (indicatorcode) REFERENCES indicator(indicatorcode)
+	CONSTRAINT report_fk2 FOREIGN KEY (indicatorcode) REFERENCES indicator(indicatorcode_out)
 );

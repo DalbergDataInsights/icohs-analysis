@@ -5,6 +5,7 @@ import sys
 import pandas.io.sql as sqlio
 from sqlalchemy import types, create_engine
 import os
+from src.helpers import get_unique_indics
 
 param_dic = {
     "host": os.environ.get("HOST"),
@@ -55,7 +56,7 @@ def pg_recreate_tables():
         queries = stream.split(";")
     conn = pg_connect()
     curr = conn.cursor()
-    for q in queries:
+    for q in queries[:-1]:
         try:
             print(q)
             curr.execute(q)
@@ -70,7 +71,7 @@ def pg_recreate_tables():
 # READ
 
 
-def pg_read(table_name, getdict=True, param_dic=param_dic):
+def pg_read(table_name, param_dic=param_dic):
     """
     Read data from the lookup tables
     """
@@ -78,9 +79,6 @@ def pg_read(table_name, getdict=True, param_dic=param_dic):
     query = "select * from {}".format(table_name)
     df = sqlio.read_sql_query(query, conn)
     df = pd.DataFrame(df)
-
-    if getdict is True:
-        df = dict(zip(df.iloc[:, 1], df.iloc[:, 0]))
 
     return df
 
@@ -101,7 +99,7 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
                        value
                 FROM (SELECT *
                     FROM {table_name}) as "tempdata"
-                    LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode;
+			          LEFT JOIN indicator on tempdata.indicatorcode = indicator.indicatorcode_out;
                 """
     df = pd.read_sql(query, con=conn)
 
@@ -113,12 +111,27 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 
 
 def pg_create_indicator(dataelements):
-    df = (
-        pd.DataFrame(dataelements)
-        .sort_values(0, ignore_index=True)
-        .reset_index()
-        .rename(columns={"index": "indicatorcode", 0: "indicatorname"})
-    )
+
+    rename_dict = {"identifier": "indicatorname",
+                   "Keep outliers": "indicatorcode_out",
+                   "SD": "indicatorcode_std",
+                   "ICR": "indicatorcode_iqr",
+                   "Report": "indicatorcode_rep"}
+
+    df = pd.DataFrame.from_dict(dataelements, orient='columns').rename(columns=rename_dict)
+
+    df = df[["indicatorcode_out",
+             "indicatorcode_std",
+             "indicatorcode_iqr",
+             "indicatorcode_rep",
+             "indicatorname"]]
+
+    # (
+    #     pd.DataFrame(dataelements)
+    #     .sort_values(0, ignore_index=True)
+    #     .reset_index()
+    #     .rename(columns={"index": "indicatorcode", 0: "indicatorname"})
+    # )
 
     df.to_sql("indicator", con=engine, if_exists="append", index=False)
 
@@ -138,7 +151,9 @@ def pg_update_indicator(dataelements, param_dic=param_dic):
         )
         current = {"indicatorname": []}
 
-    changed = set(current["indicatorname"]).symmetric_difference(set(dataelements))
+    unique_list = get_unique_indics(dataelements)
+
+    changed = set(current["indicatorname"]).symmetric_difference(set(unique_list))
 
     if len(changed) > 0:
 
