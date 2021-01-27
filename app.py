@@ -65,14 +65,12 @@ if __name__ == "__main__":
 
         make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
 
-
     # Processing the data (creating outliers excluded and report tables)
 
     process.process(
         main=db.pg_read_table_by_indicator("main"),
         report=db.pg_read_table_by_indicator("report"),
-        location=db.pg_read("location"),
-
+        location=db.pg_read("location"))
 
     # Writing to the database
 
