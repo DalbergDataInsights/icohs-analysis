@@ -98,6 +98,7 @@ def get_indicators(df, report=False):
                                               .get("elements")),
                                      58)
 
+
             if f"{weight_name}__w" not in df.columns:
                 df[f"{weight_name}__w"] = weight * int(10e9)
 

@@ -266,7 +266,6 @@ def clean_add_indicators(file_path, instance):
     df = pd.DataFrame(columns=dhis_df.columns)
 
     for indicator in add_dict.keys():
-
         df = compute_indicators(dhis_df, df, indicator, add_dict.get(indicator))
 
     df = process_date(df)

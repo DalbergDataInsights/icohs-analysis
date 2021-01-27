@@ -12,6 +12,7 @@ from src.db import adpter as db  # NOQA: E402
 from src.api.ddi_dhis2 import Dhis  # NOQA: E402
 
 START_TIME = datetime.now()
+
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
@@ -64,13 +65,14 @@ if __name__ == "__main__":
 
         make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
 
+
     # Processing the data (creating outliers excluded and report tables)
 
     process.process(
         main=db.pg_read_table_by_indicator("main"),
         report=db.pg_read_table_by_indicator("report"),
         location=db.pg_read("location"),
-    )
+
 
     # Writing to the database
 
