@@ -176,4 +176,6 @@ def transform_for_dhis2(df, map, outtype):
     stack["catoptcombo"] = 'HllvX50cXC0'
     stack["attroptcombo"] = 'HllvX50cXC0'
 
+    print(f"{outtype} formatting for DHIS export done")
+
     return stack[["dataelement", "period", "orgunit", "catoptcombo", "attroptcombo", "value"]]
