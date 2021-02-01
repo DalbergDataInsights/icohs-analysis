@@ -70,7 +70,8 @@ if __name__ == "__main__":
     process.process(
         main=db.pg_read_table_by_indicator("main"),
         report=db.pg_read_table_by_indicator("report"),
-        location=db.pg_read("location"))
+        location=db.pg_read("location"),
+    )
 
     # Writing to the database
 
@@ -95,22 +96,28 @@ if __name__ == "__main__":
         "outlier_output",
         "std_no_outlier_output",
         "iqr_no_outlier_output",
-        "report_output"
+        "report_output",
     ]:
+
+        make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
+
         df = db.pg_read(output)
-        df = indic.transform_for_dhis2(df=df,
-                                       map=db.pg_read("indicator"),
-                                       outtype=output[:3])
+        df = indic.transform_for_dhis2(
+            df=df, map=db.pg_read("indicator"), outtype=output[:3]
+        )
         filepath = f"data/temp/{output}_dhis.csv"
         df.to_csv(filepath, index=False)
+        make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
 
-        api = Dhis(os.environ.get("API_USERNAME"),
-                   os.environ.get("API_PASSWORD"),
-                   "https://repo.hispuganda.org/repo/api")
+        api = Dhis(
+            os.environ.get("API_USERNAME"),
+            os.environ.get("API_PASSWORD"),
+            "https://repo.hispuganda.org/repo/api",
+        )
 
         api.post([filepath])
 
-        print('pause')
+        print("pause")
 
     # Transformation to indicators (sealed from the rest)
 
