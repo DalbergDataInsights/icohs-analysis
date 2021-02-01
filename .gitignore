@@ -12,7 +12,7 @@ config/cred.json
 testing/*
 
 *.vscode
-**__pycache__
+*/__pycache__
 .env
 tester.py
 pipeline.log
