@@ -90,7 +90,13 @@ if __name__ == "__main__":
     # recording measured time
     make_note("Pipeline done", START_TIME)
 
-    # Send off to DHIS2
+    Send off to DHIS2
+
+    api = Dhis(
+        os.environ.get("API_USERNAME"),
+        os.environ.get("API_PASSWORD"),
+        "https://repo.hispuganda.org/repo/api",
+    )
 
     for output in [
         "outlier_output",
@@ -109,15 +115,7 @@ if __name__ == "__main__":
         df.to_csv(filepath, index=False)
         make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
 
-        api = Dhis(
-            os.environ.get("API_USERNAME"),
-            os.environ.get("API_PASSWORD"),
-            "https://repo.hispuganda.org/repo/api",
-        )
-
         api.post([filepath])
-
-        print("pause")
 
     # Transformation to indicators (sealed from the rest)
 

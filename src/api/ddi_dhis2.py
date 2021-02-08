@@ -27,6 +27,8 @@ class Dhis:
         )
         stdout, stderr = process.communicate()
 
+        print(stdout)
+
         return stdout
 
     def to_list(self, file):
