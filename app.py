@@ -90,7 +90,7 @@ if __name__ == "__main__":
     # recording measured time
     make_note("Pipeline done", START_TIME)
 
-    Send off to DHIS2
+    # Send off to DHIS2
 
     api = Dhis(
         os.environ.get("API_USERNAME"),
