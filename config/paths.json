@@ -14,14 +14,14 @@
                 "identifier": "raw_data",
                 "name": "raw_data",
                 "type": "string",
-                "value": "data/input_raw"
+                "value": "data/input"
             },
             {
                 "description": "Path to processed  data",
                 "identifier": "processed_data",
                 "name": "processed_data",
                 "type": "string",
-                "value": "data/input_cleaned"
+                "value": "data/cleaned"
             },
             {
                 "description": "Path to variable correspondence table",
@@ -145,29 +145,6 @@
                 "name": "viz_config",
                 "type": "string",
                 "value": "data/output/viz_config.csv"
-            }
-        ],
-        "to_classify": [
-            {
-                "description": "Path to health facility from database",
-                "identifier": "facility database mapping",
-                "name": "facility database mapping",
-                "type": "string",
-                "value": "data/facility.csv"
-            },
-            {
-                "description": "Path to districts from database",
-                "identifier": "districts database mapping",
-                "name": "districts database mapping",
-                "type": "string",
-                "value": "data/Districts.csv"
-            },
-            {
-                "description": "path to Indicators database mapping",
-                "identifier": "indicators_map",
-                "name": "indicators_map",
-                "type": "string",
-                "value": "data/temp/indicator.csv"
             }
         ]
     }
