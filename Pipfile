@@ -20,6 +20,8 @@ argparse="*"
 sqlalchemy = "*"
 python-dotenv = "*"
 pg8000 = "*"
+apscheduler = "*"
+tenacity = "*"
 
 [requires]
 python_version = "3.7"
