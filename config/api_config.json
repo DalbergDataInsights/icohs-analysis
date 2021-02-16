@@ -21,7 +21,6 @@
                 "name": "All Data Elements: HMIS 033b",
                 "value": "a8zBKLRQJqX"
             }
-            
         ],
         "old_dataElementsGroups":
         [
@@ -49,8 +48,6 @@
                 "name": "HMIS 108 IPD all Data Elements",
                 "value": "MC1K9mGfHS5"
             }
-            
-            
         ],
         "new_datasetIDs":
         [
@@ -84,8 +81,6 @@
                 "name": "HMIS 033b - Weekly Epidemiological Surveillance Report",
                 "value": "C4oUitImBPK"
             }
-            
-            
         ],
         "old_datasetIDs":
         [
@@ -136,37 +131,37 @@
                 "identifier": "HMIS 108:1",
                 "name": "HMIS 108:1",
                 "value": "lWHckpTax5e"
-            }   
+            }
         ],
-        "data": 
+        "data":
         [
             {
                 "description": "Path to new instance data",
                 "identifier": "new_instance_data",
                 "name": "new_instance_data",
                 "type": "string",
-                "value": "data/new_main"
+                "value": "data/input/new_main"
             },
             {
                 "description": "Path to old instance data",
                 "identifier": "old_instance_data",
                 "name": "old_instance_data",
                 "type": "string",
-                "value": "data/new_old"
+                "value": "data/input/old_main"
             },
             {
                 "description": "Path to new instance reports",
                 "identifier": "new_instance_report",
                 "name": "new_instance_report",
                 "type": "string",
-                "value": "data/new_report"
+                "value": "data/input/new_report"
             },
             {
                 "description": "Path to old instance reports",
                 "identifier": "old_instance_report",
                 "name": "old_instance_report",
                 "type": "string",
-                "value": "data/old_report"
+                "value": "data/input/old_report"
             }
         ],
         "report_Ids":

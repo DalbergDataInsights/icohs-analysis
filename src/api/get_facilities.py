@@ -1,12 +1,12 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import pandas as pd
-import dhis_api
+from src.api import api_pull
 
 
 facilitiesPath = 'all_facilities.pid'
-ENGINE = dhis_api.get_engine("config/cred.json", "credentialsEngine")
-FacilitiesENGINE = dhis_api.get_engine(
+ENGINE = api_pull.get_engine("config/cred.json", "credentialsEngine")
+FacilitiesENGINE = api_pull.get_engine(
     "config/api_config.json", "facilities_id")
 
 new_username = ENGINE['new_DHIS2_uname']

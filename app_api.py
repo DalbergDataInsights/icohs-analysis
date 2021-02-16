@@ -7,32 +7,33 @@ from datetime import timedelta
 import datetime
 import pandas as pd
 import os
-import dhis_api
+from src.api import api_pull
 
+# TODO check cred.json is not engine
 
-ENGINE = dhis_api.get_engine("config/cred.json", "credentialsEngine")
-FacilitiesENGINE = dhis_api.get_engine(
+ENGINE = api_pull.get_engine("config/cred.json", "credentialsEngine")
+FacilitiesENGINE = api_pull.get_engine(
     "config/api_config.json", "facilities_id")
 
-ReportsENGINE = dhis_api.get_engine(
+ReportsENGINE = api_pull.get_engine(
     "config/api_config.json", "report_Ids")
 
-new_instance_element_groups = [id_ for name, id_ in dhis_api.get_engine(
+new_instance_element_groups = [id_ for name, id_ in api_pull.get_engine(
     "config/api_config.json", "new_dataElementsGroups").items()]
-old_instance_element_groups = [id_ for name, id_ in dhis_api.get_engine(
+old_instance_element_groups = [id_ for name, id_ in api_pull.get_engine(
     "config/api_config.json", "old_dataElementsGroups").items()]
 
-new_instance_dataset_id = [id_ for name, id_ in dhis_api.get_engine(
+new_instance_dataset_id = [id_ for name, id_ in api_pull.get_engine(
     "config/api_config.json", "new_datasetIDs").items()]
-old_instance_dataset_id = [id_ for name, id_ in dhis_api.get_engine(
+old_instance_dataset_id = [id_ for name, id_ in api_pull.get_engine(
     "config/api_config.json", "old_datasetIDs").items()]
 
-new_instance_report = [id_ for name, id_ in dhis_api.get_engine(
+new_instance_report = [id_ for name, id_ in api_pull.get_engine(
     "config/api_config.json", "report_new").items()]
-old_instance_report = [id_ for name, id_ in dhis_api.get_engine(
+old_instance_report = [id_ for name, id_ in api_pull.get_engine(
     "config/api_config.json", "report_old").items()]
 
-data_path = dhis_api.get_engine("config/api_config.json", "data")
+data_path = api_pull.get_engine("config/api_config.json", "data")
 
 new_username = ENGINE['new_DHIS2_uname']
 new_password = ENGINE['new_DHIS2_password']
@@ -42,7 +43,7 @@ old_username = ENGINE['old_DHIS2_uname']
 old_password = ENGINE['old_DHIS2_password']
 old_ENTRY = ENGINE['old_DHIS2_url']
 
-download_period = dhis_api.\
+download_period = api_pull.\
     get_engine('config/api_config.json', 'download_period')
 
 bulk_months = download_period['months_bulk']
@@ -55,21 +56,22 @@ num_facilities = "facility.pid"
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('instance')
+    parser.add_argument('instance') #app
     parser.add_argument('duration')
     parser.add_argument('months')
+    parser.add_argument('-m','--months',default=3,choices=)
     args = parser.parse_args()
 
     if args.instance == "old":
 
         auth = HTTPBasicAuth(old_username, old_password)
-        dataset_ids = dhis_api.\
+        dataset_ids = api_pull.\
             get_resourceID_string("dataSet", old_instance_dataset_id)
-        elements_groups_string = dhis_api.\
+        elements_groups_string = api_pull.\
             get_resourceID_string(
                 "dataElementGroup", old_instance_element_groups)
 
-        report_ids = dhis_api.\
+        report_ids = api_pull.\
             get_resourceID_string("dataSet", old_instance_report)
         actual_id = ReportsENGINE['oldReportId']
         expect_id = ReportsENGINE['oldReportId']
@@ -93,12 +95,12 @@ if __name__ == "__main__":
     elif args.instance == "new":
 
         auth = HTTPBasicAuth(new_username, new_password)
-        dataset_ids = dhis_api.get_resourceID_string(
+        dataset_ids = api_pull.get_resourceID_string(
             "dataSet", new_instance_dataset_id)
-        elements_groups_string = dhis_api.get_resourceID_string(
+        elements_groups_string = api_pull.get_resourceID_string(
             "dataElementGroup", new_instance_element_groups)
 
-        report_ids = dhis_api.get_resourceID_string(
+        report_ids = api_pull.get_resourceID_string(
             "dataSet", new_instance_report)
         facilities = FacilitiesENGINE['newFacilitiesId']
 
@@ -121,16 +123,16 @@ if __name__ == "__main__":
                 replace(day=1) + dateutil.relativedelta.\
                 relativedelta(months=-int(args.months))
     try:
-        org_group_list = dhis_api.\
+        org_group_list = api_pull.\
             processes_facility(auth, url, facilities)
         print(len(org_group_list))
 
-        categoryOption = dhis_api.get_dhis_index_table(
+        categoryOption = api_pull.get_dhis_index_table(
             auth, url, table='categoryOptionCombos')
 
-        org_unit_index = dhis_api.get_dhis_index_table(
+        org_unit_index = api_pull.get_dhis_index_table(
             auth, url, table='organisationUnits')
-        categoryOption = dhis_api.get_dhis_index_table(
+        categoryOption = api_pull.get_dhis_index_table(
             auth, url, table='categoryOptionCombos')
 
         batchsize = 50
@@ -141,7 +143,7 @@ if __name__ == "__main__":
 
         while start_date <= end_date:
 
-            delta = timedelta(dhis_api.days_in_month(
+            delta = timedelta(api_pull.days_in_month(
                 start_date.year, start_date.month))
             print(delta)
             startDate = start_date.strftime("%Y-%m-%d")
@@ -157,13 +159,13 @@ if __name__ == "__main__":
             main_path = \
                 data_loc+"_"+filename_year+"_"+filename_month+".csv"
 
-            dhis_api.download_report_url(
+            api_pull.download_report_url(
                 url, date_resource, report_path, auth,
                 actual_id, expect_id, id_)
             facilities = 0
 
             for i in range(0, len(org_group_list), batchsize):
-                org_units_string = dhis_api.get_resourceID_string(
+                org_units_string = api_pull.get_resourceID_string(
                     'orgUnit', org_group_list[i:i+batchsize])
 
                 open(num_facilities, 'w+').write(str(total_facilities))
@@ -174,10 +176,10 @@ if __name__ == "__main__":
                             {endDate}&{elements_groups_string}',
                     auth=auth).json().get('dataValues'))
 
-                df = dhis_api.set_name_from_index(
+                df = api_pull.set_name_from_index(
                     df, url, 'dataElement', auth=auth, fetch_index=True)
 
-                df = dhis_api.set_name_from_index(
+                df = api_pull.set_name_from_index(
                     df, url, 'categoryOptionCombo', index_table=categoryOption)
 
                 facilities = facilities + i  # sum facilities
