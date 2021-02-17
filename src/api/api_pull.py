@@ -107,7 +107,7 @@ def get_previous_month():
 
 @retry(stop=stop_after_attempt(5))
 def download_report_url(url, date_resource, file_name,
-                        auth_, actual_id, expect_id, id_):
+                        auth_, actual_id, expect_id):
     report_url = url + f"29/analytics.csv?dimension=dx:{actual_id}.\
         ACTUAL_REPORTS;{expect_id}.\
             EXPECTED_REPORTS&dimension=ICjKVP3jwYl:l4UMmqvSBe5&dimension=ou:\

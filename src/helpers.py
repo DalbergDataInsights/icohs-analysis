@@ -67,3 +67,7 @@ def get_flat_list_json(json_dict, key):
             l.append(x)
 
     return l
+
+def get_from_config(identifier):
+    return [id_ for name, id_ in api_pull.get_engine(
+    "config/api_config.json", identifier).items()]
