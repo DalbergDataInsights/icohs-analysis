@@ -6,7 +6,6 @@ import datetime
 import pandas as pd
 import os
 from src.api import api_pull
-from src.helpers import get_from_config
 
 
 # Declaring global variables
@@ -14,10 +13,12 @@ from src.helpers import get_from_config
 # TODO check cred.json is not engine
 
 ENGINE = api_pull.get_engine("config/cred.json", "credentialsEngine")
-FacilitiesENGINE = api_pull.get_engine("config/api_config.json", "facilities_id")
-ReportsENGINE = api_pull.get_engine("config/api_config.json", "report_Ids")
-data_path = api_pull.get_engine("config/api_config.json", "data")
-download_period = api_pull.get_engine("config/api_config.json", "download_period")
+api_config_path = "config/api_config.json"
+
+FacilitiesENGINE = api_pull.get_engine(api_config_path, "facilities_id")
+ReportsENGINE = api_pull.get_engine(api_config_path, "report_Ids")
+data_path = api_pull.get_engine(api_config_path, "data")
+download_period = api_pull.get_engine(api_config_path, "download_period")
 
 bulk_months = download_period["months_bulk"]
 current_months = download_period["months_curent"]
@@ -33,14 +34,14 @@ def get_set_up_dict(instance, duration, months):
 
         auth = HTTPBasicAuth(ENGINE["old_DHIS2_uname"], ENGINE["old_DHIS2_password"])
         dataset_ids = api_pull.get_resourceID_string(
-            "dataSet", get_from_config("old_datasetIDs")
+            "dataSet", api_pull.get_from_config("old_datasetIDs")
         )
         elements_groups_string = api_pull.get_resourceID_string(
-            "dataElementGroup", get_from_config("old_dataElementsGroups")
+            "dataElementGroup", api_pull.get_from_config("old_dataElementsGroups")
         )
 
         report_ids = api_pull.get_resourceID_string(
-            "dataSet", get_from_config("report_old")
+            "dataSet", api_pull.get_from_config("report_old")
         )
         actual_id = ReportsENGINE["oldReportId"]
         expect_id = ReportsENGINE["oldReportId"]
@@ -62,14 +63,14 @@ def get_set_up_dict(instance, duration, months):
 
         auth = HTTPBasicAuth(ENGINE["new_DHIS2_uname"], ENGINE["new_DHIS2_password"])
         dataset_ids = api_pull.get_resourceID_string(
-            "dataSet", get_from_config("new_datasetIDs")
+            "dataSet", api_pull.get_from_config("new_datasetIDs")
         )
         elements_groups_string = api_pull.get_resourceID_string(
-            "dataElementGroup", get_from_config("new_dataElementsGroups")
+            "dataElementGroup", api_pull.get_from_config("new_dataElementsGroups")
         )
 
         report_ids = api_pull.get_resourceID_string(
-            "dataSet", get_from_config("report_new")
+            "dataSet", api_pull.get_from_config("report_new")
         )
         facilities = FacilitiesENGINE["newFacilitiesId"]
 

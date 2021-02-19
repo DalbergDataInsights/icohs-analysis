@@ -49,20 +49,20 @@
 
 <br>
 
-| File/folder | Description |
-|-------------|-------|
-|**./data/input**|Where the data to be processed by the pipeline is stored after import by the API |
-|**./data/cleaned**||
-|**./data/output**||
-|**./app.py**||
-|**./src/api**||
-|**./src/db**||
-|**./src/pipeline/clean.py**||
-|**./src/pipeline/process.py**||
-|||
-|||
-|||
-|||
+| File/folder                   | Description                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| **./data/input**              | Where the data to be processed by the pipeline is stored after import by the API |
+| **./data/cleaned**            |                                                                                  |
+| **./data/output**             |                                                                                  |
+| **./app.py**                  |                                                                                  |
+| **./src/api**                 |                                                                                  |
+| **./src/db**                  |                                                                                  |
+| **./src/pipeline/clean.py**   |                                                                                  |
+| **./src/pipeline/process.py** |                                                                                  |
+|                               |                                                                                  |
+|                               |                                                                                  |
+|                               |                                                                                  |
+|                               |                                                                                  |
 
 ## Workflow
 
@@ -74,6 +74,9 @@
 
 #### Set-up
 
+Docker
+.env
+set-up command 
 #### Full run
 
 #### Standard run
