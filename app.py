@@ -47,7 +47,5 @@ if __name__ == "__main__":
 
     # Running the pipeline
 
-    if any(
-        args.action in s for s in ["bulk", "apibulk", "latest", "apilatest", "pipeline"]
-    ):
+    if any(args.action in s for s in ["bulk", "latest", "pipeline"]):
         pipeline.run()

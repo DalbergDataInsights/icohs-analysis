@@ -24,7 +24,7 @@ bulk_months = download_period["months_bulk"]
 current_months = download_period["months_curent"]
 
 pid = str(os.getpid())
-pidfile = "/tmp/mydaemon.pid"
+pidfile = "mydaemon.pid"
 num_facilities = "facility.pid"
 
 
@@ -69,9 +69,6 @@ def get_set_up_dict(instance, duration, months):
             "dataElementGroup", api_pull.get_from_config("new_dataElementsGroups")
         )
 
-        report_ids = api_pull.get_resourceID_string(
-            "dataSet", api_pull.get_from_config("report_new")
-        )
         facilities = FacilitiesENGINE["newFacilitiesId"]
 
         actual_id = ReportsENGINE["newReportId"]
@@ -96,7 +93,7 @@ def get_set_up_dict(instance, duration, months):
         "auth": auth,
         "dataset_ids": dataset_ids,
         "elements_groups_string": elements_groups_string,
-        "report_ids": report_ids,
+        # "report_ids": report_ids,
         "actual_id": actual_id,
         "expect_id": expect_id,
         "url": url,
@@ -234,5 +231,5 @@ def run(instance, duration, months):
 
     # TODO specify except
     except Exception as e:
-        print(e)
+        print("Here", e)
         os.unlink(pidfile)
