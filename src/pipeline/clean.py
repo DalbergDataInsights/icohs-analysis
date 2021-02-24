@@ -292,8 +292,6 @@ def get_renaming_dict():
 def clean_raw_file(raw_path):
     """Take one file, checks whether it fits expected format, and clean it"""
 
-    # TODO check what is up with that renaming thing - I thinkI don't need it
-
     # Check file name format
 
     f = raw_path.split("/")[-1][:-4]

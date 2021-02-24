@@ -180,8 +180,6 @@ def add_report_to_pivot(data_pivot, report, location):
 
 def add_report_columns(data):
 
-    # TODO review the rationale for this, as 17,7, 8 and 1 should not exist
-
     value_dict = {18: 3,
                   11: 2,
                   10: 1,
