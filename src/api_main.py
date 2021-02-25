@@ -40,9 +40,6 @@ def get_set_up_dict(instance, duration, months):
             "dataElementGroup", api_pull.get_from_config("old_dataElementsGroups")
         )
 
-        report_ids = api_pull.get_resourceID_string(
-            "dataSet", api_pull.get_from_config("report_old")
-        )
         actual_id = ReportsENGINE["oldReportId"]
         expect_id = ReportsENGINE["oldReportId"]
 
@@ -93,7 +90,6 @@ def get_set_up_dict(instance, duration, months):
         "auth": auth,
         "dataset_ids": dataset_ids,
         "elements_groups_string": elements_groups_string,
-        # "report_ids": report_ids,
         "actual_id": actual_id,
         "expect_id": expect_id,
         "url": url,
@@ -115,7 +111,7 @@ def run(instance, duration, months):
         org_group_list = api_pull.processes_facility(
             param_dict.get("auth"), param_dict.get("url"), param_dict.get("facilities")
         )
-        org_group_list = org_group_list[:3]  # TODO Remove once test done
+        org_group_list = org_group_list[:300]  # TODO Remove once test done
         print(len(org_group_list))
 
         categoryOption = api_pull.get_dhis_index_table(
@@ -131,7 +127,6 @@ def run(instance, duration, months):
         )
 
         batchsize = 50
-        batchsize = 3  # TODO Remove once test done
         i = 0
         writeHeader = True
         open(pidfile, "w+").write(pid)  # write processs ID
@@ -169,7 +164,6 @@ def run(instance, duration, months):
                 + ".csv"
             )
 
-            # TODO check the _id arg I deleted made sense to delete
             api_pull.download_report_url(
                 param_dict.get("url"),
                 date_resource,
@@ -190,9 +184,7 @@ def run(instance, duration, months):
                 df = pd.DataFrame(
                     requests.get(
                         param_dict.get("url")
-                        + f'dataValueSets?{param_dict.get("dataset_ids")}&{org_units_string}\
-                        &startDate={startDate}&endDate=\
-                            {endDate}&{param_dict.get("elements_groups_string")}',
+                        + f'dataValueSets?{param_dict.get("dataset_ids")}&{org_units_string}&startDate={startDate}&endDate={endDate}&{param_dict.get("elements_groups_string")}',
                         auth=param_dict.get("auth"),
                     )
                     .json()
@@ -225,7 +217,7 @@ def run(instance, duration, months):
             start_date += delta
             writeHeader = True
             total_facilities = total_facilities + facilities
-            open(num_facilities, "w+").write(total_facilities)
+            open(num_facilities, "w+").write(str(total_facilities))
 
         os.unlink(pidfile)
 

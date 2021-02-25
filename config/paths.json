@@ -14,14 +14,14 @@
                 "identifier": "raw_data",
                 "name": "raw_data",
                 "type": "string",
-                "value": "data/input"
+                "value": "data/input/"
             },
             {
                 "description": "Path to processed  data",
                 "identifier": "processed_data",
                 "name": "processed_data",
                 "type": "string",
-                "value": "data/cleaned"
+                "value": "data/cleaned/"
             },
             {
                 "description": "Path to variable correspondence table",

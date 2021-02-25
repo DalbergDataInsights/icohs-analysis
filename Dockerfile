@@ -16,9 +16,10 @@ FROM app as environment
 
 WORKDIR /app
 RUN pipenv install
+RUN pipenv shell
+RUN pip install python-dateutil
 
 FROM environment as run
 
-RUN pipenv shell
-RUN /automate/crontab_ -e
+RUN crontab -e
 

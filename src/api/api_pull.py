@@ -123,13 +123,9 @@ def get_previous_month():
 def download_report_url(url, date_resource, file_name, auth_, actual_id, expect_id):
     report_url = (
         url
-        + f"29/analytics.csv?dimension=dx:{actual_id}.\
-        ACTUAL_REPORTS;{expect_id}.\
-            EXPECTED_REPORTS&dimension=ICjKVP3jwYl:l4UMmqvSBe5&dimension=ou:\
-                LEVEL-5;akV6429SUqu&dimension=pe:{date_resource}\
-                    &displayProperty=NAME&tableLayout=true&columns=dx;\
-                    ICjKVP3jwYl&rows=ou;pe&showHierarchy=true"
+        + f"29/analytics.csv?dimension=dx:{actual_id}.ACTUAL_REPORTS;{expect_id}.EXPECTED_REPORTS&dimension=ICjKVP3jwYl:l4UMmqvSBe5&dimension=ou:LEVEL-5;akV6429SUqu&dimension=pe:{date_resource}&displayProperty=NAME&tableLayout=true&columns=dx;ICjKVP3jwYl&rows=ou;pe&showHierarchy=true"
     )
+
     response = requests.get(report_url, auth=auth_)
     dset = pd.DataFrame(pd.read_csv(StringIO(response.text)))
     dset.to_csv(file_name, header=True)

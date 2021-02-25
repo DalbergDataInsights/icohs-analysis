@@ -3,7 +3,6 @@ from src.helpers import INDICATORS, make_note, get_unique_indics
 import os
 from datetime import datetime
 import json
-import argparse
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 
@@ -16,6 +15,7 @@ START_TIME = datetime.now()
 
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
+
 
 def run():
 
@@ -40,6 +40,8 @@ def run():
 
         raw_path = INDICATORS["raw_data"] + f
         processed_path = INDICATORS["processed_data"] + f
+
+        print(f, raw_path)
 
         # Clean the data
 

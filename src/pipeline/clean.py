@@ -72,6 +72,7 @@ def get_reporting_data(path, instance):
     }
 
     cols = [
+        "Unnamed: 0",
         "orgunitlevel1",
         "orgunitlevel2",
         "orgunitlevel3",
@@ -302,11 +303,11 @@ def clean_raw_file(raw_path):
     assert table in [
         "main",
         "report",
-    ], f"Unexpected data type in file name for {f}: correct format is [instance_datatype_YYYYMmm], e.g. new_main_2020Apr"
+    ], f"Unexpected data type in file name for {f}: correct format is [instance_datatype_YYYY_Mmm], e.g. new_main_2020_Apr"
     assert instance in [
         "new",
         "old",
-    ], f"Unexpected dhis2 instance in file name for {f}: correct format is [instance_datatype_YYYYMmm], e.g. new_main_2020Apr"
+    ], f"Unexpected dhis2 instance in file name for {f}: correct format is [instance_datatype_YYYY_Mmm], e.g. new_main_2020_Apr"
 
     # import file and get to standard format
 
@@ -412,7 +413,7 @@ def map_to_temp(raw_path, map, clean_df):
     f_short = f[:-4]
     instance, table, year, month = f_short.split("_")
 
-    map_dict = dict(zip(map.loc[:, 'indicatorname'], map.loc[:, 'indicatorcode_out']))
+    map_dict = dict(zip(map.loc[:, "indicatorname"], map.loc[:, "indicatorcode_out"]))
 
     clean_df["dataElement"] = clean_df["dataElement"].map(map_dict)
 

@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # Checking for 'special' commands
 
     if args.action == "setupdb":
-        pipeline.pg_recreate_tables()
+        pipeline.db.pg_recreate_tables()
 
     if args.action == "checkconfig":
         print("TBC")  # TODO Create the function
