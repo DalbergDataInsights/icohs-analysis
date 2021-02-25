@@ -76,7 +76,8 @@
 
 Docker
 .env
-set-up command 
+set-up command
+scheduling 
 #### Full run
 
 #### Standard run

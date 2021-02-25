@@ -27,7 +27,7 @@ load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
-BREAK_CORR = pd.read_csv(INDICATORS["breakdown_correspondence_data"])
+# BREAK_CORR = pd.read_csv(INDICATORS["breakdown_correspondence_data"])
 
 USECOLS = list(range(0, 9))
 
@@ -144,41 +144,19 @@ def get_data(path, instance):
 # Adding composite indicators
 
 
-def get_variable_breakdown_dict(instance):
-    """build a dict nested dictionnary matching identifiers to variables and breakdown"""
-
-    corr = {}
-
-    brk = BREAK_CORR[BREAK_CORR["instance"] == instance][["identifier", "breakdown"]]
-
-    for el in VAR_CORR:
-
-        breakdown = []
-
-        if len(el.get("breakdown")) > 0:
-            breakdown = brk[brk["identifier"].isin(el.get("breakdown"))][
-                "breakdown"
-            ].tolist()
-
-        corr[el.get("identifier")] = {
-            "indics": el.get(instance),
-            "breakdown": breakdown,
-        }
-
-    return corr
-
-
-def compute_indicators(df_in, df_out, indic_name, group_dict):
+def compute_indicators(df_in, df_out, instance, el):
     """Compute new vars by summing original vars, and drop original vars """
 
-    df_new = df_in[df_in["dataElement"].isin(group_dict["indics"])]
+    df_new = df_in[df_in["dataElement"].isin(el.get(instance))]
 
-    if group_dict.get("breakdown") != []:
-        df_new = df_new[df_new["categoryOptionCombo"].isin(group_dict.get("breakdown"))]
+    bkd = el.get("breakdown")
+
+    if bkd != []:
+        df_new = df_new[df_new["categoryOptionCombo"].isin(bkd)]
 
     df_new = df_new.groupby(["period", "orgUnit"], as_index=False).agg({"value": "sum"})
 
-    df_new["dataElement"] = indic_name
+    df_new["dataElement"] = el.get("identifier")
 
     df = pd.concat([df_out, df_new])
     df.reset_index(drop=True, inplace=True)
@@ -260,14 +238,12 @@ def clean_add_indicators(file_path, instance):
 
     make_note(f"Creating additional indicators for {instance}", START_TIME)
 
-    add_dict = get_variable_breakdown_dict(instance)
-
     dhis_df = get_data(file_path, instance)
 
     df = pd.DataFrame(columns=dhis_df.columns)
 
-    for indicator in add_dict.keys():
-        df = compute_indicators(dhis_df, df, indicator, add_dict.get(indicator))
+    for el in VAR_CORR:
+        df = compute_indicators(dhis_df, df, instance, el)
 
     df = process_date(df)
 
