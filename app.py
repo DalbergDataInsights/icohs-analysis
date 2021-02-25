@@ -12,13 +12,11 @@ commands = {
     "pipeline": "Run or rerun the pipeline for all data in input and clean",
 }
 
-# TODO add a help
-
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=list(commands.keys()), default="standardrun")
-    parser.add_argument("months", choices=[str(i) for i in range(1, 10)], default=3)
+    parser.add_argument("--months", choices=[str(i) for i in range(1, 10)], default=3)
 
     args = parser.parse_args()
 

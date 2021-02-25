@@ -10,8 +10,6 @@ from src.api import api_pull
 
 # Declaring global variables
 
-# TODO check cred.json is not engine
-
 ENGINE = api_pull.get_engine("config/cred.json", "credentialsEngine")
 api_config_path = "config/api_config.json"
 
@@ -221,7 +219,6 @@ def run(instance, duration, months):
 
         os.unlink(pidfile)
 
-    # TODO specify except
     except Exception as e:
-        print("Here", e)
+        print(e)
         os.unlink(pidfile)

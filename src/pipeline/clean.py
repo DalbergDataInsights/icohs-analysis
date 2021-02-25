@@ -129,7 +129,9 @@ def get_data(path, instance):
 
     new_df["value"] = pd.to_numeric(new_df["value"], errors="coerce")
 
-    # TODO Check this groupby for breakdown addition
+    # drop potential duplication of attribute combo, explictely excluding TFRceXDkJ95 and HqSHzyweG3W
+
+    new_df = new_df[new_df.attributeOptionCombo.isin(["Lf2Axb9E6B4", "HllvX50cXC0"])]
 
     new_df = new_df.groupby(
         ["dataElement", "orgUnit", "period", "categoryOptionCombo"], as_index=False
@@ -269,8 +271,6 @@ def get_renaming_dict():
 def clean_raw_file(raw_path):
     """Take one file, checks whether it fits expected format, and clean it"""
 
-    # TODO check what is up with that renaming thing - I thinkI don't need it
-
     # Check file name format
 
     f = raw_path.split("/")[-1][:-4]
@@ -309,8 +309,6 @@ def clean_raw_file(raw_path):
     # cleaning formatted table
 
     df.reset_index(drop=True, inplace=True)
-
-    # TODO Check this groupby for breakdown addition
 
     df = df.groupby(["dataElement", "orgUnit", "year", "month"], as_index=False).agg(
         {"value": "sum"}
