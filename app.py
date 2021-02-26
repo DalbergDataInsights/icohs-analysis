@@ -18,9 +18,6 @@ with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
 
 if __name__ == "__main__":
 
-    # init
-    # db.pg_recreate_tables()
-
     make_note("Starting the pipeline", START_TIME)
 
     # Adding any new indicators / facilities to the lookup table
