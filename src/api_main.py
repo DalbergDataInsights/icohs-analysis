@@ -110,7 +110,7 @@ def run(instance, duration, months):
         org_group_list = api_pull.processes_facility(
             param_dict.get("auth"), param_dict.get("url"), param_dict.get("facilities")
         )
-        org_group_list = org_group_list[:50]  # TODO Remove once test done
+        org_group_list = org_group_list
         print(len(org_group_list))
 
         categoryOption = api_pull.get_dhis_index_table(
