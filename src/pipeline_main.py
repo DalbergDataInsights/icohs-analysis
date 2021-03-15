@@ -41,8 +41,6 @@ def run():
         raw_path = INDICATORS["raw_data"] + f
         processed_path = INDICATORS["processed_data"] + f
 
-        print(f, raw_path)
-
         # Clean the data
 
         df = clean.clean(raw_path=raw_path)

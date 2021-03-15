@@ -24,6 +24,7 @@ current_months = download_period["months_curent"]
 pid = str(os.getpid())
 pidfile = "mydaemon.pid"
 num_facilities = "facility.pid"
+open(pidfile, "w+").write(pid)
 
 
 def get_set_up_dict(instance, duration, months):
@@ -109,7 +110,7 @@ def run(instance, duration, months):
         org_group_list = api_pull.processes_facility(
             param_dict.get("auth"), param_dict.get("url"), param_dict.get("facilities")
         )
-        org_group_list = org_group_list[:300]  # TODO Remove once test done
+        org_group_list = org_group_list[:50]  # TODO Remove once test done
         print(len(org_group_list))
 
         categoryOption = api_pull.get_dhis_index_table(
@@ -127,7 +128,6 @@ def run(instance, duration, months):
         batchsize = 50
         i = 0
         writeHeader = True
-        open(pidfile, "w+").write(pid)  # write processs ID
         total_facilities = 0
 
         start_date = param_dict.get("start_date")
