@@ -3,6 +3,8 @@ data/input/*
 data/postgres/*
 data/output/*
 data/temp/*
+!*.gitkeep
+
 *.csv
 !config/*
 *old*
