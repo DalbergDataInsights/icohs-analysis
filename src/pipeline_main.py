@@ -34,7 +34,8 @@ def run():
 
     # cleaning the data and writing it to the database file by file
 
-    files = os.listdir(INDICATORS["raw_data"])
+    allfiles = os.listdir(INDICATORS["raw_data"])
+    files = [f for f in allfiles if f.endswith(".csv")]
 
     for f in files:
 

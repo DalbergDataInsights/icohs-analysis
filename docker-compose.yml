@@ -13,11 +13,6 @@ services:
       driver: json-file
     volumes:
       - ./:/app
-    environment:
-      HOST: localhost
-      DB_PASSWORD: mysecretpassword
-      DB_USERNAME: postgres
-      DB: postgres
 
   postgres:
     container_name: postgres
