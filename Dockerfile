@@ -14,7 +14,7 @@ RUN apt-get install -y python3.9 &&\
     apt-get install -y python3-pip
 
 FROM python as app
-
+ARG DUMMY=unknown
 COPY . /app
 
 FROM app as environment

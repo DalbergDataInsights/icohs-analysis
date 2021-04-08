@@ -9,14 +9,15 @@ commands = {
     "latest": "Run the API download and the pipeline for the latest months",
     "apibulk": "Run the API download for all months since Jan 2018",
     "apilatest": "Run the API download and the pipeline for the latest months",
-    "pipeline": "Run or rerun the pipeline for all data in input and clean",
+    "pipeline": "Run the pipeline for all data using already cleaned files",
+    "pipelinebulk": "Run the pipeline for all data using, recleaning all files",
 }
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=list(commands.keys()), default="standardrun")
-    parser.add_argument("--months", choices=[str(i) for i in range(1, 10)], default=3)
+    parser.add_argument("action", choices=list(commands.keys()), default="latest")
+    parser.add_argument("--months", choices=[str(i) for i in range(1, 25)], default=3)
 
     args = parser.parse_args()
 
@@ -33,17 +34,19 @@ if __name__ == "__main__":
     if any(args.action in s for s in ["bulk", "apibulk"]):
         api.run("new", "bulk", int(args.months))
         api.run("old", "bulk", int(args.months))
+        # TODO Chec that ths works for the old instance
 
     if any(args.action in s for s in ["latest", "apilatest"]):
         api.run("new", "current", args.months)
 
     # Checking if files needs to be moved
 
-    if args.action == "pipeline":
+    if args.action == "pipelinebulk":
         print("TBC")
         # TODO Create the function that moves all processed files back to input
+        # TODO Also add something that only keeps the files in the three years before 
 
     # Running the pipeline
 
-    if any(args.action in s for s in ["bulk", "latest", "pipeline"]):
+    if any(args.action in s for s in ["bulk", "latest", "pipeline","pipelinebulk"]):
         pipeline.run()
