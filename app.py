@@ -16,8 +16,12 @@ commands = {
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=list(commands.keys()), default="latest")
-    parser.add_argument("--months", choices=[str(i) for i in range(1, 25)], default=3)
+    parser.add_argument(
+        "-a", "--action", choices=list(commands.keys()), default="pipeline"
+    )  # TODO Change default once testing is done
+    parser.add_argument(
+        "-m", "--months", choices=[str(i) for i in range(1, 25)], default=3
+    )
 
     args = parser.parse_args()
 
@@ -44,9 +48,9 @@ if __name__ == "__main__":
     if args.action == "pipelinebulk":
         print("TBC")
         # TODO Create the function that moves all processed files back to input
-        # TODO Also add something that only keeps the files in the three years before 
+        # TODO Also add something that only keeps the files in the three years before
 
     # Running the pipeline
 
-    if any(args.action in s for s in ["bulk", "latest", "pipeline","pipelinebulk"]):
+    if any(args.action in s for s in ["bulk", "latest", "pipeline", "pipelinebulk"]):
         pipeline.run()

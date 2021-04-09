@@ -27,8 +27,6 @@ load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
-# BREAK_CORR = pd.read_csv(INDICATORS["breakdown_correspondence_data"])
-
 USECOLS = list(range(0, 9))
 
 DTYPES = {
@@ -108,7 +106,8 @@ def get_reporting_data(path, instance):
     df.set_index(["orgUnit", "year", "month"], drop=True, inplace=True)
 
     # Dropping unused columns and renaming
-    df.drop(cols, axis=1, inplace=True)
+    cols_df = [e for e in cols if e in list(df.columns)]
+    df.drop(cols_df, axis=1, inplace=True)
     df1 = df.copy().stack(dropna=False).reset_index()
     df1.rename(columns={0: "value", "level_3": "dataElement"}, inplace=True)
     df1["value"] = df1["value"].fillna(0).astype(int)
@@ -131,7 +130,7 @@ def get_data(path, instance):
 
     # drop potential duplication of attribute combo, explictely excluding TFRceXDkJ95 and HqSHzyweG3W
 
-    new_df = new_df[new_df.attributeOptionCombo.isin(["Lf2Axb9E6B4", "HllvX50cXC0"])]
+    new_df = new_df[~new_df.attributeOptionCombo.isin(["TFRceXDkJ95", "HqSHzyweG3W"])]
 
     new_df = new_df.groupby(
         ["dataElement", "orgUnit", "period", "categoryOptionCombo"], as_index=False
