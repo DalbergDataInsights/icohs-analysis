@@ -4,7 +4,6 @@ import src.pipeline_main as pipeline
 
 commands = {
     "setupdb": "Set up the postgres SQL database on the very first run",
-    "checkconfig": "Check coherence of the data_config file before running the pipeline",
     "bulk": "Run the API download and the pipeline for all months since Jan 2018",
     "latest": "Run the API download and the pipeline for the latest months",
     "apibulk": "Run the API download for all months since Jan 2018",
@@ -29,9 +28,6 @@ if __name__ == "__main__":
 
     if args.action == "setupdb":
         pipeline.db.pg_recreate_tables()
-
-    if args.action == "checkconfig":
-        print("TBC")  # TODO Create the function
 
     # Running the API
 
