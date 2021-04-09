@@ -419,6 +419,5 @@ def move_csv_files_to_input():
     for f in files:
         try:
             os.rename(f"{p_path}{f}", f"{r_path}{f}")
-            # os.remove(f"{p_path}{f}")
         except Exception as e:
             print(e)

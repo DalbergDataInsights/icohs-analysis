@@ -9,7 +9,7 @@ commands = {
     "apibulk": "Run the API download for all months since Jan 2018",
     "apilatest": "Run the API download and the pipeline for the latest months",
     "pipeline": "Run the pipeline for all data using already cleaned files",
-    "pipelinebulk": "Run the pipeline for all data, recleaning all files",
+    "pipelinebulkclean": "Run the pipeline for all data, recleaning all files",
 }
 
 if __name__ == "__main__":
@@ -36,16 +36,18 @@ if __name__ == "__main__":
         api.run("old", "bulk", int(args.months))
 
     if any(args.action in s for s in ["latest", "apilatest"]):
-        api.run("new", "current", args.months)
+        api.run("new", "current", int(args.months))
 
     # Checking if files needs to be moved
 
-    if args.action == "pipelinebulk":
-        print("TBC")
-        # TODO Create the function that moves all processed files back to input
-        # TODO Also add something that only keeps the files in the three years before
+    if args.action == "pipelinebulkclean":
+        pipeline.clean.move_csv_files_to_input()
+
+    # TODO Also add something that only keeps the files in the three years before
 
     # Running the pipeline
 
-    if any(args.action in s for s in ["bulk", "latest", "pipeline", "pipelinebulk"]):
+    if any(
+        args.action in s for s in ["bulk", "latest", "pipeline", "pipelinebulkclean"]
+    ):
         pipeline.run()
