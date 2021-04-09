@@ -17,8 +17,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-a", "--action", choices=list(commands.keys()), default="pipeline"
-    )  # TODO Change default once testing is done
+        "-a", "--action", choices=list(commands.keys()), default="latest"
+    )
     parser.add_argument(
         "-m", "--months", choices=[str(i) for i in range(1, 25)], default=3
     )
