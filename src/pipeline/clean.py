@@ -409,3 +409,16 @@ def move_csv_files(raw_path, processed_path):
         print(e)
 
     os.rename(raw_path, processed_path)
+
+
+def move_csv_files_to_input():
+    p_path = INDICATORS["processed_data"]
+    r_path = INDICATORS["raw_data"]
+    allfiles = os.listdir(p_path)
+    files = [f for f in allfiles if f.endswith(".csv")]
+    for f in files:
+        try:
+            os.rename(f"{p_path}{f}", f"{r_path}{f}")
+            # os.remove(f"{p_path}{f}")
+        except Exception as e:
+            print(e)
