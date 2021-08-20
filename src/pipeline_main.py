@@ -91,30 +91,30 @@ def run():
 
     # Send off to DHIS2
 
-    api = Dhis(
-        os.environ.get("API_USERNAME"),
-        os.environ.get("API_PASSWORD"),
-        "https://repo.hispuganda.org/repo/api",
-    )
+    # api = Dhis(
+    #     os.environ.get("API_USERNAME"),
+    #     os.environ.get("API_PASSWORD"),
+    #     "https://repo.hispuganda.org/repo/api",
+    # )
 
-    for output in [
-        "outlier_output",
-        "std_no_outlier_output",
-        "iqr_no_outlier_output",
-        "report_output",
-    ]:
+    # for output in [
+    #     "outlier_output",
+    #     "std_no_outlier_output",
+    #     "iqr_no_outlier_output",
+    #     "report_output",
+    # ]:
 
-        make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
+    #     make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
 
-        df = db.pg_read(output)
-        df = indic.transform_for_dhis2(
-            df=df, map=db.pg_read("indicator"), outtype=output[:3]
-        )
-        filepath = f"data/temp/{output}_dhis.csv"
-        df.to_csv(filepath, index=False)
-        make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
+    #     df = db.pg_read(output)
+    #     df = indic.transform_for_dhis2(
+    #         df=df, map=db.pg_read("indicator"), outtype=output[:3]
+    #     )
+    #     filepath = f"data/temp/{output}_dhis.csv"
+    #     df.to_csv(filepath, index=False)
+    #     make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
 
-        api.post([filepath])
+    #     api.post([filepath])
 
     # Transformation to indicators (sealed from the rest)
 
