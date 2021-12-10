@@ -1,5 +1,5 @@
 from src.pipeline import clean, process, indic
-from src.helpers import INDICATORS, make_note, get_unique_indics
+from src.helpers import INDICATORS, make_note, get_unique_indics, get_engine
 import os
 from datetime import datetime
 import json
@@ -90,13 +90,17 @@ if __name__ == "__main__":
     # recording measured time
     make_note("Pipeline done", START_TIME)
 
-    Send off to DHIS2
-
+    #Send off to DHIS2
+    
     api = Dhis(
         os.environ.get("API_USERNAME"),
         os.environ.get("API_PASSWORD"),
         "https://repo.hispuganda.org/repo/api",
     )
+    # downloading from dhis2
+    new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
+    api.get(new_instance_dataset_id, "startDate", "endDate", rename=True, filename="data.csv", orgUnit=None)
+    api.get_report()
 
     for output in [
         "outlier_output",
@@ -107,7 +111,7 @@ if __name__ == "__main__":
 
         make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
 
-        df = db.pg_read(output)
+        df = db.pg_read(output) # read from csv
         df = indic.transform_for_dhis2(
             df=df, map=db.pg_read("indicator"), outtype=output[:3]
         )
@@ -115,7 +119,7 @@ if __name__ == "__main__":
         df.to_csv(filepath, index=False)
         make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
 
-        api.post([filepath])
+        api.post([filepath]) # post to dhis2
 
     # Transformation to indicators (sealed from the rest)
 

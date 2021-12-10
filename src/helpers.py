@@ -67,3 +67,11 @@ def get_flat_list_json(json_dict, key):
             l.append(x)
 
     return l
+
+
+def get_engine(json_file, sec):
+    with open(json_file) as f:
+        ENGINE = dict((
+            p['identifier'],
+            p['value']) for section in json.load(f) for p in section[sec])
+        return ENGINE

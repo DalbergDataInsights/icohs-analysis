@@ -51,11 +51,11 @@ class Dhis:
             {}/api/analytics.csv?dimension=dx:{}.ACTUAL_REPORTS;{}.EXPECTED_REPORTS&dimension=ou:LEVEL-5&dimension=pe:{}\
                 &displayProperty=NAME&tableLayout=true&columns=dx&rows=ou;pe&showHierarchy=true\
             """.format(self.url, report_id, report_id, period)
-        print(cmd)
+
         auth = HTTPBasicAuth(self.username, self.password)
         response = requests.get(cmd, auth=auth)
         dset = pd.DataFrame(pd.read_csv(StringIO(response.text)))
-        print(dset)
+        
         if filepath is None:
             return dset
         else:
@@ -79,7 +79,7 @@ class Dhis:
                 "orgUnit", orgUnit[i: i + 50]
             )
 
-            cmd = """ curl -k "{}/dataValueSets?{}&{}&startDate={}&endDate={}" -H "Accept:application/json" -u {}:{}
+            cmd = """ curl -k "{}/api/dataValueSets?{}&{}&startDate={}&endDate={}" -H "Accept:application/json" -u {}:{}
             """.format(
                 self.url,
                 datasetID,
@@ -89,6 +89,7 @@ class Dhis:
                 self.username,
                 self.password,
             )
+            print(cmd)
 
             pool.apply_async(self.__run, args=(cmd,), callback=self.log_result)
 
@@ -102,6 +103,7 @@ class Dhis:
                 continue
 
             else:
+                print(i)
                 df = pd.DataFrame(json.loads(i).get("dataValues"))
                 if filename != None:
                     if rename is False:
@@ -172,14 +174,16 @@ class Dhis:
     def get_facilities(self, table="organisationUnits"):
         auth = HTTPBasicAuth(self.username, self.password)
         orgs = self.get_index_table(auth, table="organisationUnits")
+        print(orgs)
 
         orgs = orgs["id"]
         return list(orgs)
 
     def get_index_table(self, auth, table):
-
         page_size = 100000
+        print(self.url + f"/api/{table}?pageSize={page_size}")
         response = requests.get(self.url + f"/api/{table}?pageSize={page_size}", auth=auth)
+    
         df = pd.DataFrame(response.json().get(table))
         return df
 
@@ -219,3 +223,5 @@ class Dhis:
             date = datetime.strptime(date, "%Y-%m-%d")
         date = date.strftime("%Y-%m-%d")
         return date
+    
+    

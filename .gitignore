@@ -16,3 +16,4 @@ testing/*
 .env
 tester.py
 pipeline.log
+run.py
