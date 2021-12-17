@@ -20,9 +20,12 @@ argparse="*"
 sqlalchemy = "*"
 python-dotenv = "*"
 pg8000 = "*"
+apscheduler = "*"
+tenacity = "*"
+python-dateutil = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"
 
 [pipenv]
 allow_prereleases = true

@@ -143,7 +143,9 @@
             "105-2.11 BCG"
         ],
         "breakdown": [
-            "u1_outreach"
+            "<1Yr, Outreach",
+            "Under 1, Outreach, Female",
+            "Under 1, Outreach, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "mcq2oWACqDk",
@@ -160,7 +162,9 @@
             "105-2.11 BCG"
         ],
         "breakdown": [
-            "u1_static"
+            "<1Yr, Static",
+            "Under 1, Static, Female",
+            "Under 1, Static, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "Pt3F4xndNAq",
@@ -252,7 +256,12 @@
             "105-2.6 Emergency contraceptives "
         ],
         "breakdown": [
-            "fp_emergency_all"
+            "CBDs",
+            "Outreach",
+            "Unit",
+            "No. Dispensed by CBD",
+            "No. Disp. At Outreach",
+            "No. Dispensed at Unit"
         ],
         "domain": "FP",
         "Keep outliers": "wdAba5SyKuC",
@@ -284,7 +293,12 @@
             "105-2.5 Female Condom"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "KcLJW1hEjl3",
@@ -322,7 +336,12 @@
             "105-2.5 Injectable"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "WR7k2Kdjxa9",
@@ -356,7 +375,12 @@
             "105-2.5 IUDs "
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "qf0TdJ72hrL",
@@ -388,7 +412,12 @@
             "105-2.5 Male Condom"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "hDESYu0OkOH",
@@ -424,7 +453,12 @@
             "105-2.5 Natural"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "LB7c1xndtoL",
@@ -456,7 +490,12 @@
             "105-2.5 Oral: Lo-Feminal"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "Zp7paaXDBIz",
@@ -488,7 +527,12 @@
             "105-2.5 Oral: Microgynon"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "LiudKLE2WTf",
@@ -520,7 +564,12 @@
             "105-2.5 Oral : Other"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "DoAHVV9mdjJ",
@@ -552,7 +601,12 @@
             "105-2.5 Oral : Ovrette or Another POP"
         ],
         "breakdown": [
-            "fp_contraception_u20"
+            "15-19Yrs, New",
+            "15-19Yrs, Revisits",
+            "<15Yrs, New",
+            "<15Yrs, Revisits",
+            "New Users, 10-19 Years",
+            "Revisits, 10-19 Years"
         ],
         "domain": "FP",
         "Keep outliers": "aVrf8SvKsPo",
@@ -584,7 +638,9 @@
             "105-2.11 DPT-HepB+Hib 1"
         ],
         "breakdown": [
-            "u1_outreach"
+            "<1Yr, Outreach",
+            "Under 1, Outreach, Female",
+            "Under 1, Outreach, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "AGc6L46NriF",
@@ -601,7 +657,9 @@
             "105-2.11 DPT-HepB+Hib 1"
         ],
         "breakdown": [
-            "u1_static"
+            "<1Yr, Static",
+            "Under 1, Static, Female",
+            "Under 1, Static, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "LLMgwz9alWf",
@@ -633,7 +691,9 @@
             "105-2.11 DPT-HepB+Hib 3"
         ],
         "breakdown": [
-            "u1_outreach"
+            "<1Yr, Outreach",
+            "Under 1, Outreach, Female",
+            "Under 1, Outreach, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "JRqdmOZAc21",
@@ -650,7 +710,9 @@
             "105-2.11 DPT-HepB+Hib 3"
         ],
         "breakdown": [
-            "u1_static"
+            "<1Yr, Static",
+            "Under 1, Static, Female",
+            "Under 1, Static, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "a1DGVUgA4Hq",
@@ -742,7 +804,9 @@
             "105-2.10 HPV1-Dose 1"
         ],
         "breakdown": [
-            "community"
+            "Community",
+            "Community, 15 Years and above",
+            "Community, 9-14 Years"
         ],
         "domain": "EPI",
         "Keep outliers": "JMoS7sRS8TV",
@@ -759,7 +823,13 @@
             "105-2.10 HPV1-Dose 1"
         ],
         "breakdown": [
-            "school"
+            "School",
+            "School, 10 Years",
+            "School, 11 Years",
+            "School, 12 Years",
+            "School, 13 Years",
+            "School, 14 Years",
+            "School, 9 Years"
         ],
         "domain": "EPI",
         "Keep outliers": "wd2jJl3snue",
@@ -791,7 +861,9 @@
             "105-2.10 HPV2-Dose 2"
         ],
         "breakdown": [
-            "community"
+            "Community",
+            "Community, 15 Years and above",
+            "Community, 9-14 Years"
         ],
         "domain": "EPI",
         "Keep outliers": "UVprF3OwYWO",
@@ -808,7 +880,13 @@
             "105-2.10 HPV2-Dose 2"
         ],
         "breakdown": [
-            "school"
+            "School",
+            "School, 10 Years",
+            "School, 11 Years",
+            "School, 12 Years",
+            "School, 13 Years",
+            "School, 14 Years",
+            "School, 9 Years"
         ],
         "domain": "EPI",
         "Keep outliers": "VtVHN1HOpnt",
@@ -1002,7 +1080,11 @@
             "105-2.2 OPD Maternal deaths"
         ],
         "breakdown": [
-            "a20"
+            "20-24Yrs",
+            "25-49Yrs",
+            "50+Yrs",
+            "20-24 Years",
+            ">=25 Years"
         ],
         "domain": "MNCH",
         "Keep outliers": "XQtqg7Adrny",
@@ -1034,7 +1116,9 @@
             "105-2.2 OPD Maternal deaths"
         ],
         "breakdown": [
-            "u20"
+            "15-19Yrs",
+            "<15Yrs",
+            "10-19 Years"
         ],
         "domain": "MNCH",
         "Keep outliers": "m5tGJxnABwo",
@@ -1081,7 +1165,9 @@
             "105-2.11 Measles"
         ],
         "breakdown": [
-            "u1_outreach"
+            "<1Yr, Outreach",
+            "Under 1, Outreach, Female",
+            "Under 1, Outreach, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "ZzNID35i0LL",
@@ -1098,7 +1184,9 @@
             "105-2.11 Measles"
         ],
         "breakdown": [
-            "u1_static"
+            "<1Yr, Static",
+            "Under 1, Static, Female",
+            "Under 1, Static, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "K7UkjTiDt4u",
@@ -1162,7 +1250,9 @@
             "105-2.11 PCV 1"
         ],
         "breakdown": [
-            "u1_outreach"
+            "<1Yr, Outreach",
+            "Under 1, Outreach, Female",
+            "Under 1, Outreach, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "RLfBZD4ManP",
@@ -1179,7 +1269,9 @@
             "105-2.11 PCV 1"
         ],
         "breakdown": [
-            "u1_static"
+            "<1Yr, Static",
+            "Under 1, Static, Female",
+            "Under 1, Static, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "mSHbyhyPXeT",
@@ -1211,7 +1303,9 @@
             "105-2.11 PCV 3"
         ],
         "breakdown": [
-            "u1_outreach"
+            "<1Yr, Outreach",
+            "Under 1, Outreach, Female",
+            "Under 1, Outreach, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "DNkSk4vPtzJ",
@@ -1228,7 +1322,9 @@
             "105-2.11 PCV 3"
         ],
         "breakdown": [
-            "u1_static"
+            "<1Yr, Static",
+            "Under 1, Static, Female",
+            "Under 1, Static, Male"
         ],
         "domain": "EPI",
         "Keep outliers": "oN11TwaMnRy",
@@ -1339,7 +1435,14 @@
             "105-1.3 OPD Sexually Transmitted Infection Due To SGBV "
         ],
         "breakdown": [
-            "fp_stds_female"
+            "10-19Yrs, Female",
+            "20+Yrs, Female",
+            "29Dys-4Yrs, Female",
+            "5-9Yrs, Female",
+            "0-28 Days, Female",
+            "29 Days-4 Years, Female",
+            "5-59 Years, Female",
+            "60andAbove Years, Female"
         ],
         "domain": "FP",
         "Keep outliers": "I913sXFyM8b",
@@ -1356,7 +1459,14 @@
             "105-1.3 OPD Sexually Transmitted Infection Due To SGBV "
         ],
         "breakdown": [
-            "fp_stds_male"
+            "10-19Yrs, Male",
+            "20+Yrs, Male",
+            "29Dys-4Yrs, Male",
+            "5-9Yrs, Male",
+            "0-28 Days, Male",
+            "29 Days-4 Years, Male",
+            "5-59 Years, Male",
+            "60andAbove Years, Male"
         ],
         "domain": "FP",
         "Keep outliers": "ZOTVYzXtHES",
@@ -1388,7 +1498,14 @@
             "105-1.3 OPD Other Sexually Transmitted Infections "
         ],
         "breakdown": [
-            "fp_stds_female"
+            "10-19Yrs, Female",
+            "20+Yrs, Female",
+            "29Dys-4Yrs, Female",
+            "5-9Yrs, Female",
+            "0-28 Days, Female",
+            "29 Days-4 Years, Female",
+            "5-59 Years, Female",
+            "60andAbove Years, Female"
         ],
         "domain": "FP",
         "Keep outliers": "aYKvZGtJGni",
@@ -1405,7 +1522,14 @@
             "105-1.3 OPD Other Sexually Transmitted Infections "
         ],
         "breakdown": [
-            "fp_stds_male"
+            "10-19Yrs, Male",
+            "20+Yrs, Male",
+            "29Dys-4Yrs, Male",
+            "5-9Yrs, Male",
+            "0-28 Days, Male",
+            "29 Days-4 Years, Male",
+            "5-59 Years, Male",
+            "60andAbove Years, Male"
         ],
         "domain": "FP",
         "Keep outliers": "hTM6Lw130HL",
@@ -1441,7 +1565,12 @@
             "105-1.3 OPD New TB cases (EPTB)"
         ],
         "breakdown": [
-            "tb_female_a5"
+            "20+Yrs, Female",
+            "5-9Yrs, Female",
+            "15-19Yrs, Female",
+            "10-14Yrs, Female",
+            "60andAbove Years, Female",
+            "5-59 Years, Female"
         ],
         "domain": "TB",
         "Keep outliers": "iQ66WQsi6Ft",
@@ -1460,7 +1589,9 @@
             "105-1.3 OPD New TB cases (EPTB)"
         ],
         "breakdown": [
-            "tb_female_u5"
+            "<5Yrs, Female",
+            "0-28 Days, Female",
+            "29 Days-4 Years, Female"
         ],
         "domain": "TB",
         "Keep outliers": "aty1rdontOy",
@@ -1479,7 +1610,12 @@
             "105-1.3 OPD New TB cases (EPTB)"
         ],
         "breakdown": [
-            "tb_male_a5"
+            "20+Yrs, Male",
+            "5-9Yrs, Male",
+            "15-19Yrs, Male",
+            "10-14Yrs, Male",
+            "60andAbove Years, Male",
+            "5-59 Years, Male"
         ],
         "domain": "TB",
         "Keep outliers": "e4usifRmXPs",
@@ -1498,7 +1634,9 @@
             "105-1.3 OPD New TB cases (EPTB)"
         ],
         "breakdown": [
-            "tb_male_u5"
+            "<5Yrs, Male",
+            "0-28 Days, Male",
+            "29 Days-4 Years, Male"
         ],
         "domain": "TB",
         "Keep outliers": "QxDPgj1HFKZ",
@@ -1515,7 +1653,10 @@
             "105-2.9 Tetanus Immunization Dose 1"
         ],
         "breakdown": [
-            "nonpregnant"
+            "Non-Pregnant Women, Outreach",
+            "Non-Pregnant Women, Static",
+            "Non Pregnant Women, Outreach",
+            "Non Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "q7M88VTuZHf",
@@ -1532,7 +1673,8 @@
             "105-2.9 Tetanus Immunization Dose 1"
         ],
         "breakdown": [
-            "pregnant"
+            "Pregnant Women, Outreach",
+            "Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "T8rb6tcFXgN",
@@ -1549,7 +1691,10 @@
             "105-2.9 Tetanus Immunization Dose 2"
         ],
         "breakdown": [
-            "nonpregnant"
+            "Non-Pregnant Women, Outreach",
+            "Non-Pregnant Women, Static",
+            "Non Pregnant Women, Outreach",
+            "Non Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "RXP7JY4G7SK",
@@ -1566,7 +1711,8 @@
             "105-2.9 Tetanus Immunization Dose 2"
         ],
         "breakdown": [
-            "pregnant"
+            "Pregnant Women, Outreach",
+            "Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "MVRJ6Dl1krP",
@@ -1583,7 +1729,10 @@
             "105-2.9 Tetanus Immunization Dose 3"
         ],
         "breakdown": [
-            "nonpregnant"
+            "Non-Pregnant Women, Outreach",
+            "Non-Pregnant Women, Static",
+            "Non Pregnant Women, Outreach",
+            "Non Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "OzA4xJdYSxs",
@@ -1600,7 +1749,8 @@
             "105-2.9 Tetanus Immunization Dose 3"
         ],
         "breakdown": [
-            "pregnant"
+            "Pregnant Women, Outreach",
+            "Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "tAWJCN5LMJF",
@@ -1619,7 +1769,10 @@
             "105-2.9 Tetanus Immunization Dose 5"
         ],
         "breakdown": [
-            "nonpregnant"
+            "Non-Pregnant Women, Outreach",
+            "Non-Pregnant Women, Static",
+            "Non Pregnant Women, Outreach",
+            "Non Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "LlS0KFZyldh",
@@ -1638,7 +1791,8 @@
             "105-2.9 Tetanus Immunization Dose 5"
         ],
         "breakdown": [
-            "pregnant"
+            "Pregnant Women, Outreach",
+            "Pregnant Women, Static"
         ],
         "domain": "EPI",
         "Keep outliers": "ps7QHQqEFTW",
@@ -1700,7 +1854,14 @@
             "105-2.8 Vit A Suplement 1st Dose in Year"
         ],
         "breakdown": [
-            "nutrition_female"
+            "Outreach, Female, 12-59Mths",
+            "Outreach, Female, 6-11Mths",
+            "School, Female, 12-59Mths",
+            "School, Female, 6-11Mths",
+            "Static, Female, 12-59Mths",
+            "Static, Female, 6-11Mths",
+            "12-59 Months, Female",
+            "6-11 Months, Female"
         ],
         "domain": "NUT",
         "Keep outliers": "WP2xlKEFujk",
@@ -1717,7 +1878,14 @@
             "105-2.8 Vit A Suplement 1st Dose in Year"
         ],
         "breakdown": [
-            "nutrition_male"
+            "Outreach, Male, 12-59Mths",
+            "Outreach, Male, 6-11Mths",
+            "School, Male, 12-59Mths",
+            "School, Male, 6-11Mths",
+            "Static, Male, 12-59Mths",
+            "Static, Male, 6-11Mths",
+            "12-59 Months, Male",
+            "6-11 Months, Male"
         ],
         "domain": "NUT",
         "Keep outliers": "gwhVKQ3j5D9",
@@ -1749,7 +1917,14 @@
             "105-2.8 Vit A Suplement 2nd Dose in theYear"
         ],
         "breakdown": [
-            "nutrition_female"
+            "Outreach, Female, 12-59Mths",
+            "Outreach, Female, 6-11Mths",
+            "School, Female, 12-59Mths",
+            "School, Female, 6-11Mths",
+            "Static, Female, 12-59Mths",
+            "Static, Female, 6-11Mths",
+            "12-59 Months, Female",
+            "6-11 Months, Female"
         ],
         "domain": "NUT",
         "Keep outliers": "tHK4CcEONy7",
@@ -1766,7 +1941,14 @@
             "105-2.8 Vit A Suplement 2nd Dose in theYear"
         ],
         "breakdown": [
-            "nutrition_male"
+            "Outreach, Male, 12-59Mths",
+            "Outreach, Male, 6-11Mths",
+            "School, Male, 12-59Mths",
+            "School, Male, 6-11Mths",
+            "Static, Male, 12-59Mths",
+            "Static, Male, 6-11Mths",
+            "12-59 Months, Male",
+            "6-11 Months, Male"
         ],
         "domain": "NUT",
         "Keep outliers": "yNGwuyFVVsi",

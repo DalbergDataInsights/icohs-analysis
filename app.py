@@ -15,80 +15,31 @@ START_TIME = datetime.now()
 
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
+import argparse
+import src.api_main as api
+import src.pipeline_main as pipeline
+
+commands = {
+    "setupdb": "Set up the postgres SQL database on the very first run",
+    "bulk": "Run the API download and the pipeline for all months since Jan 2018",
+    "latest": "Run the API download and the pipeline for the latest months",
+    "apibulk": "Run the API download for all months since Jan 2018",
+    "apilatest": "Run the API download and the pipeline for the latest months",
+    "pipeline": "Run the pipeline for all data using already cleaned files",
+    "pipelinebulkclean": "Run the pipeline for all data, recleaning all files",
+}
 
 if __name__ == "__main__":
 
-    # init
-    # db.pg_recreate_tables()
-
-    make_note("Starting the pipeline", START_TIME)
-
-    # Adding any new indicators / facilities to the lookup table
-
-    db.pg_update_indicator(dataelements=VAR_CORR)
-    db.pg_update_location(file_path=INDICATORS["name_district_map"])
-
-    # Adding the population data
-
-    cols = clean.clean_pop_to_temp(INDICATORS["pop"], INDICATORS["pop_perc"])
-
-    db.pg_update_pop("data/temp/pop.csv", cols)
-
-    # cleaning the data and writing it to the database file by file
-
-    files = os.listdir(INDICATORS["raw_data"])
-
-    for f in files:
-
-        raw_path = INDICATORS["raw_data"] + f
-        processed_path = INDICATORS["processed_data"] + f
-
-        # Clean the data
-
-        df = clean.clean(raw_path=raw_path)
-
-        # Send it to a temporary csv
-
-        (temp_csv_path, year, month, table) = clean.map_to_temp(
-            raw_path=raw_path, map=db.pg_read("indicator"), clean_df=df
-        )
-
-        # Write the clean data to the database
-
-        db.pg_update_write(
-            year=year, month=month, file_path=temp_csv_path, table_name=table
-        )
-
-        # Move original data from the 'raw' to the 'processed' folder
-
-        clean.move_csv_files(raw_path, processed_path)
-
-        make_note(f"Cleaning and database insertion done for file {f}", START_TIME)
-
-    # Processing the data (creating outliers excluded and report tables)
-
-    process.process(
-        main=db.pg_read_table_by_indicator("main"),
-        report=db.pg_read_table_by_indicator("report"),
-        location=db.pg_read("location"),
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-a", "--action", choices=list(commands.keys()), default="latest"
+    )
+    parser.add_argument(
+        "-m", "--months", choices=[str(i) for i in range(1, 25)], default=3
     )
 
-    # Writing to the database
-
-    db.pg_final_table(file_path=INDICATORS["rep_data"], table_name="report_output")
-
-    db.pg_final_table(file_path=INDICATORS["out_data"], table_name="outlier_output")
-
-    db.pg_final_table(
-        file_path=INDICATORS["std_data"], table_name="std_no_outlier_output"
-    )
-
-    db.pg_final_table(
-        file_path=INDICATORS["iqr_data"], table_name="iqr_no_outlier_output"
-    )
-
-    # recording measured time
-    make_note("Pipeline done", START_TIME)
+    args = parser.parse_args()
 
     #Send off to DHIS2
     
@@ -101,15 +52,16 @@ if __name__ == "__main__":
     new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
     api.get(new_instance_dataset_id, "startDate", "endDate", rename=True, filename="data.csv", orgUnit=None)
     api.get_report()
+    # Checking for 'special' commands
 
-    for output in [
-        "outlier_output",
-        "std_no_outlier_output",
-        "iqr_no_outlier_output",
-        "report_output",
-    ]:
+    if args.action == "setupdb":
+        pipeline.db.pg_recreate_tables()
 
-        make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
+    # Running the API
+
+    if any(args.action in s for s in ["bulk", "apibulk"]):
+        api.run("new", "bulk", int(args.months))
+        api.run("old", "bulk", int(args.months))
 
         df = db.pg_read(output) # read from csv
         df = indic.transform_for_dhis2(
@@ -120,18 +72,19 @@ if __name__ == "__main__":
         make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
 
         api.post([filepath]) # post to dhis2
+    if any(args.action in s for s in ["latest", "apilatest"]):
+        api.run("new", "current", int(args.months))
 
-    # Transformation to indicators (sealed from the rest)
+    # Checking if files needs to be moved
 
-    pop = db.pg_read("pop")
+    if args.action == "pipelinebulkclean":
+        pipeline.clean.move_csv_files_to_input()
 
-    for output in [
-        ("outlier_output", "out"),
-        ("std_no_outlier_output", "std"),
-        ("iqr_no_outlier_output", "iqr"),
-        ("report_output", "rep"),
-    ]:
-        data = db.pg_read(output[0])
-        indic.transform_to_indic(data, pop, output[1])
+    # TODO Also add something that only keeps the files in the three years before
 
-    indic.pass_on_config()
+    # Running the pipeline
+
+    if any(
+        args.action in s for s in ["bulk", "latest", "pipeline", "pipelinebulkclean"]
+    ):
+        pipeline.run()

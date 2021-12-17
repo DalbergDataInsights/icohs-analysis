@@ -27,8 +27,6 @@ load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
     VAR_CORR = json.load(f)
 
-BREAK_CORR = pd.read_csv(INDICATORS["breakdown_correspondence_data"])
-
 USECOLS = list(range(0, 9))
 
 DTYPES = {
@@ -72,6 +70,7 @@ def get_reporting_data(path, instance):
     }
 
     cols = [
+        "Unnamed: 0",
         "orgunitlevel1",
         "orgunitlevel2",
         "orgunitlevel3",
@@ -107,7 +106,8 @@ def get_reporting_data(path, instance):
     df.set_index(["orgUnit", "year", "month"], drop=True, inplace=True)
 
     # Dropping unused columns and renaming
-    df.drop(cols, axis=1, inplace=True)
+    cols_df = [e for e in cols if e in list(df.columns)]
+    df.drop(cols_df, axis=1, inplace=True)
     df1 = df.copy().stack(dropna=False).reset_index()
     df1.rename(columns={0: "value", "level_3": "dataElement"}, inplace=True)
     df1["value"] = df1["value"].fillna(0).astype(int)
@@ -128,7 +128,9 @@ def get_data(path, instance):
 
     new_df["value"] = pd.to_numeric(new_df["value"], errors="coerce")
 
-    # TODO Check this groupby for breakdown addition
+    # drop potential duplication of attribute combo, explictely excluding TFRceXDkJ95 and HqSHzyweG3W
+
+    new_df = new_df[~new_df.attributeOptionCombo.isin(["TFRceXDkJ95", "HqSHzyweG3W"])]
 
     new_df = new_df.groupby(
         ["dataElement", "orgUnit", "period", "categoryOptionCombo"], as_index=False
@@ -143,41 +145,19 @@ def get_data(path, instance):
 # Adding composite indicators
 
 
-def get_variable_breakdown_dict(instance):
-    """build a dict nested dictionnary matching identifiers to variables and breakdown"""
-
-    corr = {}
-
-    brk = BREAK_CORR[BREAK_CORR["instance"] == instance][["identifier", "breakdown"]]
-
-    for el in VAR_CORR:
-
-        breakdown = []
-
-        if len(el.get("breakdown")) > 0:
-            breakdown = brk[brk["identifier"].isin(el.get("breakdown"))][
-                "breakdown"
-            ].tolist()
-
-        corr[el.get("identifier")] = {
-            "indics": el.get(instance),
-            "breakdown": breakdown,
-        }
-
-    return corr
-
-
-def compute_indicators(df_in, df_out, indic_name, group_dict):
+def compute_indicators(df_in, df_out, instance, el):
     """Compute new vars by summing original vars, and drop original vars """
 
-    df_new = df_in[df_in["dataElement"].isin(group_dict["indics"])]
+    df_new = df_in[df_in["dataElement"].isin(el.get(instance))]
 
-    if group_dict.get("breakdown") != []:
-        df_new = df_new[df_new["categoryOptionCombo"].isin(group_dict.get("breakdown"))]
+    bkd = el.get("breakdown")
+
+    if bkd != []:
+        df_new = df_new[df_new["categoryOptionCombo"].isin(bkd)]
 
     df_new = df_new.groupby(["period", "orgUnit"], as_index=False).agg({"value": "sum"})
 
-    df_new["dataElement"] = indic_name
+    df_new["dataElement"] = el.get("identifier")
 
     df = pd.concat([df_out, df_new])
     df.reset_index(drop=True, inplace=True)
@@ -259,14 +239,12 @@ def clean_add_indicators(file_path, instance):
 
     make_note(f"Creating additional indicators for {instance}", START_TIME)
 
-    add_dict = get_variable_breakdown_dict(instance)
-
     dhis_df = get_data(file_path, instance)
 
     df = pd.DataFrame(columns=dhis_df.columns)
 
-    for indicator in add_dict.keys():
-        df = compute_indicators(dhis_df, df, indicator, add_dict.get(indicator))
+    for el in VAR_CORR:
+        df = compute_indicators(dhis_df, df, instance, el)
 
     df = process_date(df)
 
@@ -292,8 +270,6 @@ def get_renaming_dict():
 def clean_raw_file(raw_path):
     """Take one file, checks whether it fits expected format, and clean it"""
 
-    # TODO check what is up with that renaming thing - I thinkI don't need it
-
     # Check file name format
 
     f = raw_path.split("/")[-1][:-4]
@@ -302,11 +278,11 @@ def clean_raw_file(raw_path):
     assert table in [
         "main",
         "report",
-    ], f"Unexpected data type in file name for {f}: correct format is [instance_datatype_YYYYMmm], e.g. new_main_2020Apr"
+    ], f"Unexpected data type in file name for {f}: correct format is [instance_datatype_YYYY_Mmm], e.g. new_main_2020_Apr"
     assert instance in [
         "new",
         "old",
-    ], f"Unexpected dhis2 instance in file name for {f}: correct format is [instance_datatype_YYYYMmm], e.g. new_main_2020Apr"
+    ], f"Unexpected dhis2 instance in file name for {f}: correct format is [instance_datatype_YYYY_Mmm], e.g. new_main_2020_Apr"
 
     # import file and get to standard format
 
@@ -332,8 +308,6 @@ def clean_raw_file(raw_path):
     # cleaning formatted table
 
     df.reset_index(drop=True, inplace=True)
-
-    # TODO Check this groupby for breakdown addition
 
     df = df.groupby(["dataElement", "orgUnit", "year", "month"], as_index=False).agg(
         {"value": "sum"}
@@ -412,7 +386,7 @@ def map_to_temp(raw_path, map, clean_df):
     f_short = f[:-4]
     instance, table, year, month = f_short.split("_")
 
-    map_dict = dict(zip(map.loc[:, 'indicatorname'], map.loc[:, 'indicatorcode_out']))
+    map_dict = dict(zip(map.loc[:, "indicatorname"], map.loc[:, "indicatorcode_out"]))
 
     clean_df["dataElement"] = clean_df["dataElement"].map(map_dict)
 
@@ -435,3 +409,15 @@ def move_csv_files(raw_path, processed_path):
         print(e)
 
     os.rename(raw_path, processed_path)
+
+
+def move_csv_files_to_input():
+    p_path = INDICATORS["processed_data"]
+    r_path = INDICATORS["raw_data"]
+    allfiles = os.listdir(p_path)
+    files = [f for f in allfiles if f.endswith(".csv")]
+    for f in files:
+        try:
+            os.rename(f"{p_path}{f}", f"{r_path}{f}")
+        except Exception as e:
+            print(e)

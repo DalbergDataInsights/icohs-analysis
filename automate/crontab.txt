@@ -1,0 +1,4 @@
+# runs twice a month, on the 18th and 30th
+
+0 2 */18 * * /automate/automate.sh  | ts "\%F \%T" >> chron_date.txt 2>&1
+

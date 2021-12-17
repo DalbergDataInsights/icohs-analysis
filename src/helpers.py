@@ -5,7 +5,7 @@ import calendar
 
 def parse_config(
     config_path="config/paths.json",
-    config_section=["input", "static", "to_classify", "output", "logs"],
+    config_section=["input", "static", "output", "logs"],
 ):
 
     with open(config_path) as f:

@@ -90,8 +90,6 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 
     conn = pg_connect(param_dic)
 
-    # TODO : change name to code  and clarify bug
-
     query = f"""SELECT facilitycode,
                        indicatorname,
                        year,
@@ -112,19 +110,27 @@ def pg_read_table_by_indicator(table_name, param_dic=param_dic):
 
 def pg_create_indicator(dataelements):
 
-    rename_dict = {"identifier": "indicatorname",
-                   "Keep outliers": "indicatorcode_out",
-                   "SD": "indicatorcode_std",
-                   "ICR": "indicatorcode_iqr",
-                   "Report": "indicatorcode_rep"}
+    rename_dict = {
+        "identifier": "indicatorname",
+        "Keep outliers": "indicatorcode_out",
+        "SD": "indicatorcode_std",
+        "ICR": "indicatorcode_iqr",
+        "Report": "indicatorcode_rep",
+    }
 
-    df = pd.DataFrame.from_dict(dataelements, orient='columns').rename(columns=rename_dict)
+    df = pd.DataFrame.from_dict(dataelements, orient="columns").rename(
+        columns=rename_dict
+    )
 
-    df = df[["indicatorcode_out",
-             "indicatorcode_std",
-             "indicatorcode_iqr",
-             "indicatorcode_rep",
-             "indicatorname"]]
+    df = df[
+        [
+            "indicatorcode_out",
+            "indicatorcode_std",
+            "indicatorcode_iqr",
+            "indicatorcode_rep",
+            "indicatorname",
+        ]
+    ]
 
     # (
     #     pd.DataFrame(dataelements)
