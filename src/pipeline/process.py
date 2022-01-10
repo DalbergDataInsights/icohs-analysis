@@ -296,7 +296,7 @@ def process(main, report, location):
     outliers.to_csv(INDICATORS["out_data"])
 
     # std
-
+    
     std_stack = compute_outliers_stack(pivot_outliers, "std", location)
     std = full_pivot_for_export(std_stack)
     stack = add_to_final_stack(stack, std_stack, "std")

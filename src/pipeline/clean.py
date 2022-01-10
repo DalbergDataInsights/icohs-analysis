@@ -215,24 +215,26 @@ def process_date_weekly(df):
     }
 
     df["weekly"] = df.period.str.find("W")
-
     df_w = df[df["weekly"] != -1].copy()
-    df_w[["year", "week"]] = df_w.period.str.split("W", expand=True)
-    df_w["datetime"] = pd.to_datetime(
-        df_w.year + "/" + df_w.week + "/1", format="%G/%V/%u"
-    )
-    df_w["month"] = df_w["datetime"].dt.month.replace(month_dict)
-    df_w.drop(["week", "weekly", "datetime", "period"], inplace=True, axis=1)
-    df_w["year"] = df_w.year.astype("str")
-
+    if df_w.empty:
+        df_w = pd.DataFrame(columns=["orgUnit", "value", "dataElement", "categoryOptionCombo", "year", "month"])
+    else:
+        df_w[["year", "week"]] = df_w.period.str.split("W", expand=True)
+        df_w["datetime"] = pd.to_datetime(
+            df_w.year + "/" + df_w.week + "/1", format="%G/%V/%u"
+        )
+        df_w["month"] = df_w["datetime"].dt.month.replace(month_dict)
+        df_w.drop(["week", "weekly", "datetime", "period"], inplace=True, axis=1)
+        df_w["year"] = df_w.year.astype("str")
     return df_w
 
 
 def process_date(df):
     df_m = process_date_monthly(df)
-    df_w = process_date_weekly(df)
-    df_new = pd.concat([df_m, df_w])
-    return df_new
+    #df_w = process_date_weekly(df)
+    #print(df_w)
+    #df_new = pd.concat([df_m, df_w])
+    return df_m
 
 
 def clean_add_indicators(file_path, instance):
@@ -271,7 +273,6 @@ def clean_raw_file(raw_path):
     """Take one file, checks whether it fits expected format, and clean it"""
 
     # Check file name format
-
     f = raw_path.split("/")[-1][:-4]
     instance, table, year, month = f.split("_")
 

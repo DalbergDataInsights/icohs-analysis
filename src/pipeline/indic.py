@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 from src.helpers import INDICATORS, cap_string
 
+
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
@@ -126,7 +127,7 @@ def transform_to_indic(df, pop, name):
     for col in df.columns[4:]:
         df[col] = round(df[col]).astype(int)
 
-    db.output_to_test_sqlite(df, name, os.environ.get("SQLITE_URL"))
+    # db.output_to_test_sqlite(df, name, os.environ.get("SQLITE_URL"))
 
     df.to_csv(INDICATORS[f"{name}_indic"], index=False)
 
@@ -146,7 +147,7 @@ def pass_on_config():
 
     df = df.drop(columns="elements")
 
-    db.config_to_test_sqlite(df, os.environ.get("SQLITE_URL"))
+    #db.config_to_test_sqlite(df, os.environ.get("SQLITE_URL"))
     df.to_csv(INDICATORS["viz_config"], index=False)
 
 

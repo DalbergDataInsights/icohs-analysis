@@ -57,6 +57,8 @@ def run():
         db.pg_update_write(
             year=year, month=month, file_path=temp_csv_path, table_name=table
         )
+        print(df)
+        print("0000000000000000")
 
         # Move original data from the 'raw' to the 'processed' folder
 
@@ -91,33 +93,26 @@ def run():
 
     # Send off to DHIS2
 
-    # api = Dhis(
-    #     os.environ.get("API_USERNAME"),
-    #     os.environ.get("API_PASSWORD"),
-    #     "https://repo.hispuganda.org/repo/api",
-    # )
+    api = Dhis(
+        os.environ.get("API_USERNAME"),
+        os.environ.get("API_PASSWORD"),
+        "https://repo.hispuganda.org/repo/api",)
 
-    # for output in [
-    #     "outlier_output",
-    #     "std_no_outlier_output",
-    #     "iqr_no_outlier_output",
-    #     "report_output",
-    # ]:
-
-    #     make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
-
-    #     df = db.pg_read(output)
-    #     df = indic.transform_for_dhis2(
-    #         df=df, map=db.pg_read("indicator"), outtype=output[:3]
-    #     )
-    #     filepath = f"data/temp/{output}_dhis.csv"
-    #     df.to_csv(filepath, index=False)
-    #     make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
-
-    #     api.post([filepath])
+    for output in [
+         "outlier_output",
+         "std_no_outlier_output",
+         "iqr_no_outlier_output",
+         "report_output"]:
+        make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
+        df = db.pg_read(output)
+        df = indic.transform_for_dhis2(df=df, map=db.pg_read("indicator"), outtype=output[:3])
+        print(df.head())
+        filepath = f"data/temp/{output}_dhis.csv"
+        df.to_csv(filepath, index=False)
+        make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
+        # api.post([filepath]) #-- uncoment to push to dhis2
 
     # Transformation to indicators (sealed from the rest)
-
     pop = db.pg_read("pop")
 
     for output in [

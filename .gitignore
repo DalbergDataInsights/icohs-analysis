@@ -3,7 +3,10 @@ data/input/*
 data/postgres/*
 data/output/*
 data/temp/*
+data/static/demographics/*
+data/static/lookup_facilities.csv
 !*.gitkeep
+
 
 *.csv
 !config/*
