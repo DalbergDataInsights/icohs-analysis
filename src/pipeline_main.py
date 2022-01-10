@@ -57,9 +57,7 @@ def run():
         db.pg_update_write(
             year=year, month=month, file_path=temp_csv_path, table_name=table
         )
-        print(df)
-        print("0000000000000000")
-
+        
         # Move original data from the 'raw' to the 'processed' folder
 
         clean.move_csv_files(raw_path, processed_path)
@@ -94,9 +92,7 @@ def run():
     # Send off to DHIS2
 
     api = Dhis(
-        os.environ.get("API_USERNAME"),
-        os.environ.get("API_PASSWORD"),
-        "https://repo.hispuganda.org/repo/api",)
+        os.environ.get("API_USERNAME"),os.environ.get("API_PASSWORD"),"https://repo.hispuganda.org/repo/api")
 
     for output in [
          "outlier_output",

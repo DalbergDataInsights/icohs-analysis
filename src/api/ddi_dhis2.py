@@ -115,8 +115,8 @@ class Dhis:
                     else:
                         auth = HTTPBasicAuth(self.username, self.password)
                         df = self.set_name_from_index(df, "dataElement", auth=auth)
-                        #df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                        #df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                        # df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
 
                         if writeHeader is True:
                             df.to_csv(filename, header=writeHeader)
@@ -128,8 +128,8 @@ class Dhis:
                     if rename:
                         auth = HTTPBasicAuth(self.username, self.password)
                         df = self.set_name_from_index(df, "dataElement", auth=auth)
-                        #df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                        #df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                        # df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
                         data.append(df)
                     else:
                         data.append(df)
