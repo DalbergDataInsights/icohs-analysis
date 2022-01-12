@@ -55,11 +55,10 @@ if __name__ == "__main__":
 
     )
     # downloading from dhis2
-    #new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
-    #api.get(new_instance_dataset_id, "Jan 01 2021", "Feb 01 2021", rename=True, filename="data_v2.csv", orgUnit=None)
+    new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
+    api.get(new_instance_dataset_id, "Jan 01 2021", "Feb 01 2021", rename=True, filename="data_v2.csv", orgUnit=None)
     new_instance_report = [id_ for name, id_ in get_engine("config/data_elements.json", "report_new").items()]
     api.get_report(new_instance_report[0], "2020-01-01", filepath="report.csv")
-    #get_report(self, report_id, period, filepath=None)
 
     # if any(args.action in s for s in ["bulk", "apibulk"]):
     #    api.run("new", "bulk", int(args.months))
