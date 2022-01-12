@@ -34,6 +34,28 @@
                 "value": "C4oUitImBPK"
             }
         ],
+        "new_dataElementsGroups":
+        [
+            {
+                "description": "All Data Elements: HMIS 105 form",
+                "identifier": "HMIS_105",
+                "name": "All Data Elements: HMIS 105",
+                "value": "vPvLSIPrfnb"
+            },
+            {
+                "description": "All Data Elements: HMIS 108 form",
+                "identifier": "HMIS_108",
+                "name": "All Data Elements: HMIS 108",
+                "value": "NMFTigF3Xkt"
+            },
+            {
+                "description": "All Data Elements: HMIS 033b form",
+                "identifier": "HMIS_033b",
+                "name": "All Data Elements: HMIS 033b",
+                "value": "a8zBKLRQJqX"
+            }
+            
+        ],
         "report_new":
         [
             {

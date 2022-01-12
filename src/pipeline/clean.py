@@ -231,10 +231,9 @@ def process_date_weekly(df):
 
 def process_date(df):
     df_m = process_date_monthly(df)
-    #df_w = process_date_weekly(df)
-    #print(df_w)
-    #df_new = pd.concat([df_m, df_w])
-    return df_m
+    df_w = process_date_weekly(df)
+    df_new = pd.concat([df_m, df_w])
+    return df_new
 
 
 def clean_add_indicators(file_path, instance):
@@ -242,14 +241,12 @@ def clean_add_indicators(file_path, instance):
     make_note(f"Creating additional indicators for {instance}", START_TIME)
 
     dhis_df = get_data(file_path, instance)
-
     df = pd.DataFrame(columns=dhis_df.columns)
 
     for el in VAR_CORR:
         df = compute_indicators(dhis_df, df, instance, el)
 
     df = process_date(df)
-
     return df
 
 
@@ -289,6 +286,7 @@ def clean_raw_file(raw_path):
 
     if table == "main":
         df = clean_add_indicators(raw_path, instance)
+        
     else:
         df = get_reporting_data(raw_path, instance)
         renaming_dict = get_renaming_dict()
@@ -319,6 +317,7 @@ def clean_raw_file(raw_path):
 
     if table == "report":
         df["value"] = (df["value"] > 0).astype("int")
+    
 
     return df
 

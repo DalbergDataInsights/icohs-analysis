@@ -45,7 +45,6 @@ def run():
         # Clean the data
 
         df = clean.clean(raw_path=raw_path)
-
         # Send it to a temporary csv
 
         (temp_csv_path, year, month, table) = clean.map_to_temp(
@@ -103,6 +102,7 @@ def run():
         df = db.pg_read(output)
         df = indic.transform_for_dhis2(df=df, map=db.pg_read("indicator"), outtype=output[:3])
         print(df.head())
+        print(output + "==================>")
         filepath = f"data/temp/{output}_dhis.csv"
         df.to_csv(filepath, index=False)
         make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)

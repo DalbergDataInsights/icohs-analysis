@@ -62,7 +62,7 @@
     {
         "identifier": "actual_105_1_reporting",
         "new": [
-            "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Actual reports 1. National"
+            "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) - Actual reports 1. National"
         ],
         "old": [
             "HMIS 105:1 Actual reports"
@@ -73,6 +73,89 @@
         "SD": "",
         "ICR": "",
         "Report": ""
+    },
+    {
+        "identifier": "tested_hiv",
+        "new": [
+            "105-HT03a1. Total Tested for HIV"
+        ],
+        "old": [
+            "105-4 Number of Individuals Tested"
+        ],
+        "breakdown": [],
+        "domain": "HIV",
+        "Keep outliers": "tGMYYq5vE5A",
+        "SD": "Wj2cJjpX4HF",
+        "ICR": "TvWeTDFTrIE",
+        "Report": "IZWfaViqQAt"
+    },
+    {
+        "identifier": "tested_hiv_positive",
+        "new": [
+            "105-HT02d2. Community testing - Hotspots - New HIV+",
+            "105-HT18a2. Special Category(Prisoners) - New HIV+",
+            "105-HT04a2. PITC at Health Facilty - New HIV+",
+            "105-HT01m2. Facility testing at EID - New HIV+",
+            "105-HT01a2. Facility testing at IPD - New HIV+",
+            "105-HT01c2. Facility testing at ART Clinic - New HIV+",
+            "105-HT01e2. Facility testing at Nutrition Unit - New HIV+",
+            "105-HT01n2. Facility testing at Other Facility based points - New HIV+",
+            "105-HT18e2. Special Category(Truckers) - New HIV+",
+            "105-HT01g2. Facility testing at Young Child clinic - New HIV+",
+            "105-HT01i2. Facility testing at Maternity - New HIV+",
+            "105-HT18g2. Special Category(Refugees) - New HIV+",
+            "105-HT18i2. Special Category(Breastfeeding Women) - New HIV+",
+            "105-HT18j2. Special Category(AGYW) - New HIV+",
+            "105-HT05a2. CICT/VICT at Health Facilty - New HIV+",
+            "105-HT01l2. Facility testing at SMC - New HIV+",
+            "105-HT02b2. Community testing - Home Based Testing - New HIV+",
+            "105-HT05b2. CICT/VICT at Community - New HIV+",
+            "105-HT04b2. PITC at Community - New HIV+",
+            "105-HT18h2. Special Category(Pregnant Women) - New HIV+",
+            "105-HT18f2. Special Category(Fisher Folks) - New HIV+",
+            "105-HT01f2. Facility testing at STI Clinic - New HIV+",
+            "105-HT01j2. Facility testing at PNC - New HIV+",
+            "105-HT01k2. Facility testing at Family Planning - New HIV+",
+            "105-HT01d2. Facility testing at TB Clinic - New HIV+",
+            "105-HT01b2. Facility testing at OPD - New HIV+",
+            "105-HT18k2. Special Category(PWD) - New HIV+",
+            "105-HT18b2. Special Category(PWID) - New HIV+",
+            "105-HT02a2. Community testing - Workplace - New HIV+",
+            "105-HT02c2. Community testing - Drop in Center - New HIV+",
+            "105-HT01h2. Facility testing at ANC - New HIV+",
+            "105-HT02e2. Community testing  - Other Community Testing - New HIV+",
+            "105-HT18c2. Special Category(Uniformed Men) - New HIV+"
+        ],
+        "old": [
+            "105-4 Number of Individuals who tested HIV positive"
+        ],
+        "breakdown": [],
+        "domain": "HIV",
+        "Keep outliers": "rVTuIU3NwOi",
+        "SD": "MOBEj75zgwf",
+        "ICR": "TXuRYB7klBM",
+        "Report": "FAnVi10jxRj"
+    },
+    {
+        "identifier": "tb_cases_registered__tb_female_u5",
+        "new": [
+            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
+        ],
+        "old": [
+            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
+            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
+            "105-1.3 OPD New TB cases (EPTB)"
+        ],
+        "breakdown": [
+            "<5Yrs, Female",
+            "0-28 Days, Female",
+            "29 Days-4 Years, Female"
+        ],
+        "domain": "TB",
+        "Keep outliers": "aty1rdontOy",
+        "SD": "yJgFzYICxsv",
+        "ICR": "q8BYirFsgDN",
+        "Report": "F2y9tF2i1u4"
     },
     {
         "identifier": "anc_initiated_hiv",
@@ -143,7 +226,7 @@
             "105-2.11 BCG"
         ],
         "breakdown": [
-            "<1Yr, Outreach",
+            "<1Yr, Outreach, unCatSex",
             "Under 1, Outreach, Female",
             "Under 1, Outreach, Male"
         ],
@@ -162,7 +245,7 @@
             "105-2.11 BCG"
         ],
         "breakdown": [
-            "<1Yr, Static",
+            "<1Yr, Static, unCatSex",
             "Under 1, Static, Female",
             "Under 1, Static, Male"
         ],
@@ -639,6 +722,7 @@
         ],
         "breakdown": [
             "<1Yr, Outreach",
+            "<1Yr, Outreach, unCatSex",
             "Under 1, Outreach, Female",
             "Under 1, Outreach, Male"
         ],
@@ -658,6 +742,7 @@
         ],
         "breakdown": [
             "<1Yr, Static",
+            "<1Yr, Static, unCatSex",
             "Under 1, Static, Female",
             "Under 1, Static, Male"
         ],
@@ -692,6 +777,7 @@
         ],
         "breakdown": [
             "<1Yr, Outreach",
+            "<1Yr, Outreach, unCatSex",
             "Under 1, Outreach, Female",
             "Under 1, Outreach, Male"
         ],
@@ -711,6 +797,7 @@
         ],
         "breakdown": [
             "<1Yr, Static",
+            "<1Yr, Static, unCatSex",
             "Under 1, Static, Female",
             "Under 1, Static, Male"
         ],
@@ -723,7 +810,7 @@
     {
         "identifier": "expected_105_1_reporting",
         "new": [
-            "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) Expected reports 1. National"
+            "HMIS 105:01 - OPD Monthly Report (Attendance, Referrals, Conditions,TB, Nutrition) - Expected reports 1. National"
         ],
         "old": [
             "HMIS 105:1 Expected reports"
@@ -753,7 +840,32 @@
     {
         "identifier": "hiv_positive_linked",
         "new": [
-            "105-HT03a3. Total Linked to HIV Care"
+            "105-HT01n3. Facility testing at Other Facility based points - Linked to HIV Care",
+            "105-HT18e3. Special Category(Truckers) - Linked to HIV Care",
+            "105-HT01d3. Facility testing at TB Clinic - Linked to HIV Care",
+            "105-HT18a3. Special Category(Prisoners) - Linked to HIV Care",
+            "105-HT02d3. Community testing  - Hotspots - Linked to HIV Care",
+            "105-HT02e3. Community testing - Other Community - Linked to HIV Care",
+            "105-HT01g3. Facility testing Young Child Clinic - Linked to HIV Care",
+            "105-HT18h3. Special Category(Pregnant Women) - Linked to HIV Care",
+            "105-HT01b3. Facility testing at OPD - Linked to HIV Care",
+            "105-HT18f3. Special Category(Fisher Folk) - Linked to HIV Care",
+            "105-HT01f3. Facility testing at STI Clinic - Linked to HIV Care",
+            "105-HT02c3. Community testing - Drop in Center - Linked to HIV Care",
+            "105-HT18b3. Special Category(PWID) - Linked to HIV Care",
+            "105-HT18g3. Special Category(Refugees) - Linked to HIV Care",
+            "105-HT18c3. Special Category(Uniformed Men) - Linked to HIV Care",
+            "105-HT01e3. Facility testing at Nutrition Unit - Linked to HIV Care",
+            "105-HT01h3. Facility testing at ANC - Linked to HIV Care",
+            "105-HT18i3. Special Category(Breastfeeding Women) - Linked to HIV Care",
+            "105-HT01c3. Facility testing at ART clinic - Linked to HIV Care",
+            "105-HT01j3. Facility testing at PNC - Linked to HIV Care",
+            "105-HT01a3. Facility testing at IPD - Linked to HIV Care",
+            "105-HT02b3. Community testing - Home Based Testing - Linked to HIV Care",
+            "105-HT01i3. Facility testing at Maternity - Linked to HIV Care",
+            "105-HT02a3. Community testing - Workplace - Linked to HIV Care",
+            "105-HT18k3. Special Category(PWD) - Linked to HIV Care",
+            "105-HT18j3. Special Category(AGYW) - Linked to HIV Care"
         ],
         "old": [
             "105-4 Number of clients who have been linked to care"
@@ -944,7 +1056,7 @@
     {
         "identifier": "malaria_cases",
         "new": [
-            "033B-CD01a. Malaria (diagnosed)  - Cases"
+            "105-EP01b. Malaria Total"
         ],
         "old": [
             "Malaria Cases - WEP"
@@ -959,6 +1071,7 @@
     {
         "identifier": "malaria_cases_treated",
         "new": [
+            "105-EP01d. Malaria cases treated",
             "033B-MA06. Not tested cases treated",
             "033B-MA07. RDT Negative Cases Treated",
             "033B-MA08. RDT Positive Cases Treated",
@@ -978,7 +1091,7 @@
     {
         "identifier": "malaria_deaths",
         "new": [
-            "033B-CD01b. Malaria (diagnosed) - Deaths"
+            "108-EP01a.2. Malaria Total (Deaths)"
         ],
         "old": [
             "Malaria Deaths - WEP"
@@ -994,7 +1107,8 @@
         "identifier": "malaria_tests",
         "new": [
             "033B-MA02. Cases Tested with RDT",
-            "033B-MA04. Cases Tested with Microscopy"
+            "033B-MA04. Cases Tested with Microscopy",
+            "108-EP01b.1. Malaria Confirmed (Microscopic &RDT) (Cases)"
         ],
         "old": [
             "Malaria tests - WEP"
@@ -1166,6 +1280,7 @@
         ],
         "breakdown": [
             "<1Yr, Outreach",
+            "<1Yr, Outreach, unCatSex",
             "Under 1, Outreach, Female",
             "Under 1, Outreach, Male"
         ],
@@ -1185,6 +1300,7 @@
         ],
         "breakdown": [
             "<1Yr, Static",
+            "<1Yr, Static, unCatSex",
             "Under 1, Static, Female",
             "Under 1, Static, Male"
         ],
@@ -1251,6 +1367,7 @@
         ],
         "breakdown": [
             "<1Yr, Outreach",
+            "<1Yr, Outreach, unCatSex",
             "Under 1, Outreach, Female",
             "Under 1, Outreach, Male"
         ],
@@ -1270,6 +1387,7 @@
         ],
         "breakdown": [
             "<1Yr, Static",
+            "<1Yr, Static, unCatSex",
             "Under 1, Static, Female",
             "Under 1, Static, Male"
         ],
@@ -1304,6 +1422,7 @@
         ],
         "breakdown": [
             "<1Yr, Outreach",
+            "<1Yr, Outreach, unCatSex",
             "Under 1, Outreach, Female",
             "Under 1, Outreach, Male"
         ],
@@ -1322,7 +1441,7 @@
             "105-2.11 PCV 3"
         ],
         "breakdown": [
-            "<1Yr, Static",
+            "<1Yr, Static, unCatSex",
             "Under 1, Static, Female",
             "Under 1, Static, Male"
         ],
@@ -1578,27 +1697,7 @@
         "ICR": "tYSL1I5wjwI",
         "Report": "yt77GIExUZQ"
     },
-    {
-        "identifier": "tb_cases_registered__tb_female_u5",
-        "new": [
-            "105-TP04. Total New and relapse TB cases registered in TB treatment unit"
-        ],
-        "old": [
-            "105-1.3 OPD New TB cases (Bacteriologically confirmed)",
-            "105-1.3 OPD New TB cases (Clinically Diagnosed)",
-            "105-1.3 OPD New TB cases (EPTB)"
-        ],
-        "breakdown": [
-            "<5Yrs, Female",
-            "0-28 Days, Female",
-            "29 Days-4 Years, Female"
-        ],
-        "domain": "TB",
-        "Keep outliers": "aty1rdontOy",
-        "SD": "yJgFzYICxsv",
-        "ICR": "q8BYirFsgDN",
-        "Report": "F2y9tF2i1u4"
-    },
+    
     {
         "identifier": "tb_cases_registered__tb_male_a5",
         "new": [
@@ -1800,36 +1899,7 @@
         "ICR": "Rvvs3X1OkqK",
         "Report": "xz9M3YykDsM"
     },
-    {
-        "identifier": "tested_hiv",
-        "new": [
-            "105-HT03a1. Total Tested for HIV"
-        ],
-        "old": [
-            "105-4 Number of Individuals Tested"
-        ],
-        "breakdown": [],
-        "domain": "HIV",
-        "Keep outliers": "tGMYYq5vE5A",
-        "SD": "Wj2cJjpX4HF",
-        "ICR": "TvWeTDFTrIE",
-        "Report": "IZWfaViqQAt"
-    },
-    {
-        "identifier": "tested_hiv_positive",
-        "new": [
-            "105-HT03a2. Total New HIV+"
-        ],
-        "old": [
-            "105-4 Number of Individuals who tested HIV positive"
-        ],
-        "breakdown": [],
-        "domain": "HIV",
-        "Keep outliers": "rVTuIU3NwOi",
-        "SD": "MOBEj75zgwf",
-        "ICR": "TXuRYB7klBM",
-        "Report": "FAnVi10jxRj"
-    },
+    
     {
         "identifier": "vitamin_a1",
         "new": [

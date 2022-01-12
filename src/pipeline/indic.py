@@ -120,6 +120,8 @@ def transform_to_indic(df, pop, name):
     if name == "rep":
         df = get_indicators(df, report=True)
     else:
+        #print(df)
+        #print(df.columns)
         df = get_indicators(df)
 
     df = df.fillna(0)

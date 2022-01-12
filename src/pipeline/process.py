@@ -241,6 +241,7 @@ def create_reporting_pivot(pivot, report, location):
         full_pivot[c] = (full_pivot[c] > 0).astype("int")
 
     report = add_report_columns(full_pivot)
+    
     report.drop(
         columns=["expected_105_1_reporting", "actual_105_1_reporting"], inplace=True
     )
@@ -278,10 +279,12 @@ def add_to_final_stack(final_stack, input_stack, policy):
 
 def process(main, report, location):
     make_note("Starting the data processing", START_TIME)
-
+    
     pivot_outliers = pivot_stack(main)
+    print(pivot_outliers)
 
     make_note("data pivot for outlier exclusion done", START_TIME)
+    print(main)
 
     # outlier computations
 

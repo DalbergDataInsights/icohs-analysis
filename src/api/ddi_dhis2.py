@@ -10,8 +10,7 @@ from requests.auth import HTTPBasicAuth
 import re
 from datetime import datetime
 from io import StringIO
-
-
+from src.helpers import get_engine
 
 
 class Dhis:
@@ -29,7 +28,7 @@ class Dhis:
         )
         stdout, stderr = process.communicate()
 
-        print(stdout)
+        #print(stdout)
 
         return stdout
 
@@ -63,6 +62,8 @@ class Dhis:
 
     def get(self, datasetID, startDate, endDate, rename=True, filename=None, orgUnit=None):
         data = []
+        new_instance_datasetElements_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_dataElementsGroups").items()]
+        new_instance_element_groups = self.get_resourceID_string("new_dataElementsGroups", new_instance_datasetElements_id)
         writeHeader = True
         if orgUnit == None:
             orgUnit = self.get_facilities()
@@ -71,68 +72,45 @@ class Dhis:
         datasetID = self.get_resourceID_string("dataSet", self.to_list(datasetID))
         startDate = self.format_date(startDate)
         endDate = self.format_date(endDate)
+        elements_groups_string = self.get_resourceID_string(
+            "dataElementGroup", new_instance_element_groups)
 
-        pool = ThreadPool(multiprocessing.cpu_count())
         for i in range(0, len(orgUnit), 50):
             org_units_string = self.get_resourceID_string(
                 "orgUnit", orgUnit[i: i + 50]
             )
-
-            cmd = """ curl -k "{}/api/dataValueSets?{}&{}&startDate={}&endDate={}" -H "Accept:application/json" -u {}:{}
-            """.format(
-                self.url,
-                datasetID,
-                org_units_string,
-                startDate,
-                endDate,
-                self.username,
-                self.password,
-            )
-            print(cmd)
-
-            pool.apply_async(self.__run, args=(cmd,), callback=self.log_result)
-
-        pool.close()
-        pool.join()
-
-        # TOD DO: move this part to threading
-        for i in self.log_list:
-            print(i)
-            if len(i) == 0:
-                continue
-
-            else:
-                print(i)
-                df = pd.DataFrame(json.loads(i).get("dataValues"))
-                if filename != None:
-                    if rename is False:
-                        if writeHeader is True:
-                            df.to_csv(filename, header=writeHeader)
-                            writeHeader = False
-                        else:
-                            df.to_csv(filename, mode="a", header=writeHeader)
+            auth = HTTPBasicAuth(self.username, self.password)
+            print(self.url + f'/api/dataValueSets?{datasetID}&{org_units_string}&startDate={startDate}&endDate={endDate}&{elements_groups_string}')
+            df = pd.DataFrame(requests.get(self.url + f'/api/dataValueSets?{datasetID}&{org_units_string}&startDate={startDate}&endDate={endDate}&{elements_groups_string}', auth=auth).json().get('dataValues'))
+            if filename != None:
+                if rename is False:
+                    if writeHeader is True:
+                        df.to_csv(filename, header=writeHeader)
+                        writeHeader = False
                     else:
-                        auth = HTTPBasicAuth(self.username, self.password)
-                        df = self.set_name_from_index(df, "dataElement", auth=auth)
-                        # df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
-
-                        if writeHeader is True:
-                            df.to_csv(filename, header=writeHeader)
-                            writeHeader = False
-                        else:
-                            df.to_csv(filename, mode="a", header=writeHeader)
-                    return None
+                        df.to_csv(filename, mode="a", header=writeHeader)
                 else:
-                    if rename:
-                        auth = HTTPBasicAuth(self.username, self.password)
-                        df = self.set_name_from_index(df, "dataElement", auth=auth)
-                        # df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
-                        data.append(df)
+                    auth = HTTPBasicAuth(self.username, self.password)
+                    df = self.set_name_from_index(df, "dataElement", auth=auth)
+                    df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                    # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+
+                    if writeHeader is True:
+                        df.to_csv(filename, header=writeHeader)
+                        writeHeader = False
                     else:
-                        data.append(df)
-            return pd.concat(data)
+                        df.to_csv(filename, mode="a", header=writeHeader)
+                return None
+            else:
+                if rename:
+                    auth = HTTPBasicAuth(self.username, self.password)
+                    df = self.set_name_from_index(df, "dataElement", auth=auth)
+                    df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                    # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                    data.append(df)
+                else:
+                    data.append(df)
+        return pd.concat(data)
 
     def post(self, files):
         files = self.to_list(files)
