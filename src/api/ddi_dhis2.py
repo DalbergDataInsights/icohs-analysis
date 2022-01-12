@@ -12,6 +12,8 @@ from datetime import datetime
 from io import StringIO
 
 
+
+
 class Dhis:
     def __init__(self, username, password, url, log_list=None):
         self.username = username
@@ -47,15 +49,12 @@ class Dhis:
         return resource_id_string
 
     def get_report(self, report_id, period, filepath=None):
-        cmd = """
-            {}/api/analytics.csv?dimension=dx:{}.ACTUAL_REPORTS;{}.EXPECTED_REPORTS&dimension=ou:LEVEL-5&dimension=pe:{}\
-                &displayProperty=NAME&tableLayout=true&columns=dx&rows=ou;pe&showHierarchy=true\
-            """.format(self.url, report_id, report_id, period)
-
+        start_date = datetime.strptime(period, '%Y-%m-%d').date()
+        date_resource = start_date.strftime("%Y%m")
+        cmd = self.url + f"/api/analytics.csv?dimension=dx:{report_id}.ACTUAL_REPORTS;{report_id}.EXPECTED_REPORTS&dimension=ICjKVP3jwYl:l4UMmqvSBe5&dimension=ou:LEVEL-5;akV6429SUqu&dimension=pe:{date_resource}&displayProperty=NAME&tableLayout=true&columns=dx;ICjKVP3jwYl&rows=ou;pe&showHierarchy=true"
         auth = HTTPBasicAuth(self.username, self.password)
         response = requests.get(cmd, auth=auth)
         dset = pd.DataFrame(pd.read_csv(StringIO(response.text)))
-        
         if filepath is None:
             return dset
         else:
