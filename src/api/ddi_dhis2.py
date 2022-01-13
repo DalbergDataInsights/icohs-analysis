@@ -27,9 +27,6 @@ class Dhis:
             args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
         stdout, stderr = process.communicate()
-
-        #print(stdout)
-
         return stdout
 
     def to_list(self, file):
@@ -70,8 +67,8 @@ class Dhis:
         else:
             orgUnit = self.to_list(orgUnit)
         datasetID = self.get_resourceID_string("dataSet", self.to_list(datasetID))
-        startDate = self.format_date(startDate)
-        endDate = self.format_date(endDate)
+        # startDate = self.format_date(startDate)
+        # endDate = self.format_date(endDate)
         elements_groups_string = self.get_resourceID_string(
             "dataElementGroup", new_instance_element_groups)
 
@@ -80,7 +77,6 @@ class Dhis:
                 "orgUnit", orgUnit[i: i + 50]
             )
             auth = HTTPBasicAuth(self.username, self.password)
-            print(self.url + f'/api/dataValueSets?{datasetID}&{org_units_string}&startDate={startDate}&endDate={endDate}&{elements_groups_string}')
             df = pd.DataFrame(requests.get(self.url + f'/api/dataValueSets?{datasetID}&{org_units_string}&startDate={startDate}&endDate={endDate}&{elements_groups_string}', auth=auth).json().get('dataValues'))
             if filename != None:
                 if rename is False:
@@ -91,9 +87,10 @@ class Dhis:
                         df.to_csv(filename, mode="a", header=writeHeader)
                 else:
                     auth = HTTPBasicAuth(self.username, self.password)
-                    df = self.set_name_from_index(df, "dataElement", auth=auth)
-                    df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                    # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                    if not df.empty:
+                        df = self.set_name_from_index(df, "dataElement", auth=auth)
+                        df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
 
                     if writeHeader is True:
                         df.to_csv(filename, header=writeHeader)
@@ -104,10 +101,11 @@ class Dhis:
             else:
                 if rename:
                     auth = HTTPBasicAuth(self.username, self.password)
-                    df = self.set_name_from_index(df, "dataElement", auth=auth)
-                    df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                    # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
-                    data.append(df)
+                    if not df.empty:
+                        df = self.set_name_from_index(df, "dataElement", auth=auth)
+                        df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                        data.append(df)
                 else:
                     data.append(df)
         return pd.concat(data)
