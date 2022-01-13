@@ -281,10 +281,7 @@ def process(main, report, location):
     make_note("Starting the data processing", START_TIME)
     
     pivot_outliers = pivot_stack(main)
-    print(pivot_outliers)
-
     make_note("data pivot for outlier exclusion done", START_TIME)
-    print(main)
 
     # outlier computations
 

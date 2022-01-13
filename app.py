@@ -8,7 +8,7 @@ import src.pipeline.indic as indic
 from src.db.adpter import (pg_recreate_tables, pg_read)
 from src.db import adpter as db  # NOQA: E402
 import src.pipeline_main as pipeline
-
+from dateutil.relativedelta import relativedelta
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 
@@ -54,20 +54,21 @@ if __name__ == "__main__":
         "https://hmis-repo.health.go.ug",
 
     )
-    # downloading from dhis2
+    # start_date = datetime.today()
+    start_date = '2021-05-01'
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
     new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
-    api.get(new_instance_dataset_id, "Jan 01 2021", "Feb 01 2021", rename=True, filename="data_v2.csv", orgUnit=None)
     new_instance_report = [id_ for name, id_ in get_engine("config/data_elements.json", "report_new").items()]
-    api.get_report(new_instance_report[0], "2021-01-01", filepath="new_report_2021_Jan.csv")
+    for i in range(3):
+        end_date = start_date - relativedelta(months=1)
+        filename_month = format(end_date, '%b %Y').split()[0]
+        filename_year = format(end_date, '%b %Y').split()[1]
+        data_path = "new_main" + "_" + filename_year + "_" + filename_month + ".csv"
+        report_path = "new_report" + "_" + filename_year + "_" + filename_month + ".csv"
 
-    # if any(args.action in s for s in ["bulk", "apibulk"]):
-    #    api.run("new", "bulk", int(args.months))
-    #    api.run("old", "bulk", int(args.months))
-
-    # if any(args.action in s for s in ["latest", "apilatest"]):
-    #    api.run("new", "current", int(args.months))
-        
-    # Checking if files needs to be moved
+        api.get(new_instance_dataset_id, end_date.strftime('%Y-%m-%d'), start_date.strftime('%Y-%m-%d'), rename=True, filename="data/input/" + data_path, orgUnit=None)
+        api.get_report(new_instance_report[0], end_date.strftime('%Y-%m-%d'), filepath="data/input/" + report_path)
+        start_date = end_date
 
     if args.action == "pipelinebulkclean":
         pipeline.clean.move_csv_files_to_input()

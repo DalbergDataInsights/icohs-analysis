@@ -9,7 +9,7 @@ from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 
 from src.db import adpter as db  # NOQA: E402
-from src.api.api_push import Dhis  # NOQA: E402
+from src.api.ddi_dhis2 import Dhis  # NOQA: E402
 
 START_TIME = datetime.now()
 
@@ -101,8 +101,8 @@ def run():
         make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
         df = db.pg_read(output)
         df = indic.transform_for_dhis2(df=df, map=db.pg_read("indicator"), outtype=output[:3])
-        print(df.head())
-        print(output + "==================>")
+        print(df)
+        print(output + "=======================================>>>")
         filepath = f"data/temp/{output}_dhis.csv"
         df.to_csv(filepath, index=False)
         make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
