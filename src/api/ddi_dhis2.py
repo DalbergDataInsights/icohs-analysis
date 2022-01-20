@@ -60,7 +60,6 @@ class Dhis:
         return None
 
     def get(self, datasetID, startDate, endDate, rename=True, filename=None, orgUnit=None):
-        data = []
         new_instance_datasetElements_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_dataElementsGroups").items()]
         new_instance_element_groups = self.get_resourceID_string("new_dataElementsGroups", new_instance_datasetElements_id)
         writeHeader = True
@@ -69,48 +68,24 @@ class Dhis:
         else:
             orgUnit = self.to_list(orgUnit)
         datasetID = self.get_resourceID_string("dataSet", self.to_list(datasetID))
-        # startDate = self.format_date(startDate)
-        # endDate = self.format_date(endDate)
         elements_groups_string = self.get_resourceID_string(
             "dataElementGroup", new_instance_element_groups)
-
         for i in range(0, len(orgUnit), 50):
             org_units_string = self.get_resourceID_string(
-                "orgUnit", orgUnit[i: i + 50]
-            )
+                "orgUnit", orgUnit[i: i + 50])
+            # i = i + 50
             auth = HTTPBasicAuth(self.username, self.password)
             df = pd.DataFrame(requests.get(self.url + f'/api/dataValueSets?{datasetID}&{org_units_string}&startDate={startDate}&endDate={endDate}&{elements_groups_string}', auth=auth).json().get('dataValues'))
             if filename != None:
-                if rename is False:
-                    if writeHeader is True:
-                        df.to_csv(filename, header=writeHeader)
-                        writeHeader = False
-                    else:
-                        df.to_csv(filename, mode="a", header=writeHeader)
+                if not df.empty:
+                    df = self.set_name_from_index(df, "dataElement", auth=auth)
+                    df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
+                    # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
+                if writeHeader is True:
+                    df.to_csv(filename, header=True)
+                    writeHeader = False
                 else:
-                    auth = HTTPBasicAuth(self.username, self.password)
-                    if not df.empty:
-                        df = self.set_name_from_index(df, "dataElement", auth=auth)
-                        df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
-
-                    if writeHeader is True:
-                        df.to_csv(filename, header=writeHeader)
-                        writeHeader = False
-                    else:
-                        df.to_csv(filename, mode="a", header=writeHeader)
-                return None
-            else:
-                if rename:
-                    auth = HTTPBasicAuth(self.username, self.password)
-                    if not df.empty:
-                        df = self.set_name_from_index(df, "dataElement", auth=auth)
-                        df = self.set_name_from_index(df, "categoryOptionCombo", auth=auth)
-                        # df = self.set_name_from_index(df, "organisationUnit", auth=auth)
-                        data.append(df)
-                else:
-                    data.append(df)
-        return pd.concat(data)
+                    df.to_csv(filename, mode="a", header=False)
 
     def post(self, files):
         files = self.to_list(files)
