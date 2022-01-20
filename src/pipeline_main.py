@@ -11,6 +11,8 @@ load_dotenv(find_dotenv(), verbose=True)  # NOQA: E402
 from src.db import adpter as db  # NOQA: E402
 from src.api.ddi_dhis2 import Dhis  # NOQA: E402
 
+import pandas as pd # breaking the csv into smaller chunks 
+
 START_TIME = datetime.now()
 
 with open(INDICATORS["data_config"], "r", encoding="utf-8") as f:
@@ -89,25 +91,9 @@ def run():
     make_note("Pipeline done", START_TIME)
 
     # Send off to DHIS2
+    # https://repo.hispuganda.org/repo/api
 
-    api = Dhis(
-        os.environ.get("API_USERNAME"), os.environ.get("API_PASSWORD"),"https://repo.hispuganda.org/repo/api")
-
-    for output in [
-         "outlier_output",
-         "std_no_outlier_output",
-         "iqr_no_outlier_output",
-         "report_output"]:
-        make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
-        df = db.pg_read(output)
-        df = indic.transform_for_dhis2(df=df, map=db.pg_read("indicator"), outtype=output[:3])
-        print(df)
-        print(output + "=======================================>>>")
-        filepath = f"data/temp/{output}_dhis.csv"
-        df.to_csv(filepath, index=False)
-        make_note(f"Publishing {output} to the DHIS2 repo", START_TIME)
-        # api.post([filepath]) #-- uncoment to push to dhis2
-
+   
     # Transformation to indicators (sealed from the rest)
     pop = db.pg_read("pop")
 

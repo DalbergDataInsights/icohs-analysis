@@ -9,6 +9,7 @@ from src.db.adpter import (pg_recreate_tables, pg_read)
 from src.db import adpter as db  # NOQA: E402
 import src.pipeline_main as pipeline
 from dateutil.relativedelta import relativedelta
+from tenacity import retry, stop_after_attempt
 
 from dotenv import load_dotenv, find_dotenv  # NOQA: E402
 
@@ -35,6 +36,26 @@ commands = {
     "pipelinebulkclean": "Run the pipeline for all data, recleaning all files",
 }
 
+def split_data(table_names, path="data/temp", chunk_size=100000):
+    files_to_push = []
+    for output in table_names:
+        make_note(f"Reformatting data for the DHIS2 repo", START_TIME)
+        df = db.pg_read(output)
+        df = indic.transform_for_dhis2(df=df, map=db.pg_read("indicator"), outtype=output[:3])
+        print(df)
+        print(output + "=======================================>>>")
+        filepath = f"{path}/{output}_dhis.csv"
+        chunks_filepath = f"{path}/chunk_{output}"
+        df.to_csv(filepath, index=False)
+        for index, chunk in enumerate(pd.read_csv(filepath, chunksize=chunk_size)):
+            chunk_filename = chunks_filepath + str(index) + '.csv'
+            chunk.to_csv(chunk_filename, index=False)
+            files_to_push.append(chunk_filename)
+    return files_to_push
+    
+    
+
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
@@ -44,7 +65,7 @@ if __name__ == "__main__":
         "-m", "--months", choices=[str(i) for i in range(1, 25)], default=3)
 
     args = parser.parse_args()
-    pipeline.db.pg_recreate_tables()
+    # pipeline.db.pg_recreate_tables()
 
     #Send off to DHIS2
 
@@ -54,27 +75,8 @@ if __name__ == "__main__":
         "https://hmis-repo.health.go.ug",
 
     )
-<<<<<<< HEAD
-    # downloading from dhis2
-    # new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
-    # api.get(new_instance_dataset_id, "Jan 01 2021", "Feb 01 2021", rename=True, filename="new_main_2021_Jan.csv", orgUnit=None)
-    # new_instance_report = [id_ for name, id_ in get_engine("config/data_elements.json", "report_new").items()]
-    # api.get_report(new_instance_report[0], "2021-01-01", filepath="new_report_2021_Jan.csv")
-
-    # downloading new instances from dhis2
-
-
-    # if any(args.action in s for s in ["bulk", "apibulk"]):
-    #    api.run("new", "bulk", int(args.months))
-    #    api.run("old", "bulk", int(args.months))
-
-    # if any(args.action in s for s in ["latest", "apilatest"]):
-    #    api.run("new", "current", int(args.months))
-        
-    # Checking if files needs to be moved
-=======
-    # start_date = datetime.today()
-    start_date = '2021-05-01'
+    start_date = datetime.today()
+    start_date = '2021-04-01'
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
     new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
     new_instance_report = [id_ for name, id_ in get_engine("config/data_elements.json", "report_new").items()]
@@ -88,7 +90,6 @@ if __name__ == "__main__":
         api.get(new_instance_dataset_id, end_date.strftime('%Y-%m-%d'), start_date.strftime('%Y-%m-%d'), rename=True, filename="data/input/" + data_path, orgUnit=None)
         api.get_report(new_instance_report[0], end_date.strftime('%Y-%m-%d'), filepath="data/input/" + report_path)
         start_date = end_date
->>>>>>> afd760d5b61d332050dfebc2204e9a588f80b894
 
     if args.action == "pipelinebulkclean":
         pipeline.clean.move_csv_files_to_input()
@@ -97,3 +98,13 @@ if __name__ == "__main__":
         args.action in s for s in ["bulk", "latest", "pipeline", "pipelinebulkclean"]
     ):
         pipeline.run()
+
+    files_to_push = split_data(["outlier_output",
+    "std_no_outlier_output",
+    "iqr_no_outlier_output",
+    "report_output"])
+  
+
+    # api.post(files_to_push) #-- uncoment to push to dhis2
+
+   

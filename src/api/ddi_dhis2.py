@@ -27,6 +27,8 @@ class Dhis:
             args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
         stdout, stderr = process.communicate()
+        print(stdout) # Print out to check fail/success status of pipeline
+        print(stderr) # Print out to check fail/success status of pipeline
         return stdout
 
     def to_list(self, file):

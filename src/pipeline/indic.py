@@ -19,7 +19,6 @@ from src.db import adpter as db  # NOQA: E402
 with open(INDICATORS["indic_config"], "r") as f:
     CONFIG = json.load(f)
 
-
 def add_pop(pop, df):
 
     pop = pop[pop.columns[1:]]
