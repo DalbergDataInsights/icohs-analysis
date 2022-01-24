@@ -94,7 +94,7 @@ class Dhis:
         for filename in files:
             print(filename)
 
-            cmd = """ curl -k -H "Content-Type: application/csv" --data-binary @{} "{}/dataValueSets" -u {}:{} -v \n
+            cmd = """ curl -k -H "Content-Type: application/csv" --data-binary @{} "{}/api/dataValueSets" -u {}:{} -v \n
             """.format(
                 filename, self.url, self.username, self.password
             )

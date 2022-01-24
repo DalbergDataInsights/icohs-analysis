@@ -53,8 +53,6 @@ def split_data(table_names, path="data/temp", chunk_size=100000):
             files_to_push.append(chunk_filename)
     return files_to_push
     
-    
-
 
 if __name__ == "__main__":
 
@@ -75,8 +73,9 @@ if __name__ == "__main__":
         "https://hmis-repo.health.go.ug",
 
     )
+
     start_date = datetime.today()
-    start_date = '2021-04-01'
+    start_date = '2020-04-01'
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
     new_instance_dataset_id = [id_ for name, id_ in get_engine("config/data_elements.json", "new_datasetIDs").items()]
     new_instance_report = [id_ for name, id_ in get_engine("config/data_elements.json", "report_new").items()]
@@ -107,4 +106,4 @@ if __name__ == "__main__":
 
     # api.post(files_to_push) #-- uncoment to push to dhis2
 
-   
+
